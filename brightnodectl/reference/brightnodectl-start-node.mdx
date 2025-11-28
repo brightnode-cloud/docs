@@ -1,0 +1,37 @@
+---
+title: "start node"
+sidebarTitle: "start node"
+---
+
+Start a stopped Node, resuming compute and billing. Use this to restart Nodes that were previously stopped.
+
+<RequestExample>
+```sh Command
+brightnodectl start node <nodeId> [flags]
+```
+</RequestExample>
+
+## Example
+
+Start a stopped Node with a custom bid price for spot instances:
+
+```sh
+brightnodectl start node abc123xyz456 --bid 0.50
+```
+
+## Arguments
+
+<ResponseField name="<nodeId>" type="string" required>
+The ID of the Node to start. You can find Node IDs using the `brightnodectl get node` command.
+</ResponseField>
+
+## Flags
+
+<ResponseField name="--bid" type="float">
+The bid price per GPU in dollars per hour for spot instance pricing. This only applies to Community Cloud Nodes.
+</ResponseField>
+
+## Related commands
+
+- [`brightnodectl stop node`](/brightnodectl/reference/brightnodectl-stop-node)
+- [`brightnodectl get node`](/brightnodectl/reference/brightnodectl-get-node)

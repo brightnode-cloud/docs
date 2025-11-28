@@ -1,0 +1,31 @@
+---
+title: "stop node"
+sidebarTitle: "stop node"
+---
+
+Stop a running Node to pause compute operations. The Node's persistent storage will be retained, but you'll continue to be charged for storage until the Node is removed.
+
+<RequestExample>
+```sh Command
+brightnodectl stop node <nodeId> [flags]
+```
+</RequestExample>
+
+## Example
+
+Stop a running Node.
+
+```sh
+brightnodectl stop node abc123xyz456
+```
+
+## Arguments
+
+<ResponseField name="<nodeId>" type="string" required>
+The ID of the Node to stop. You can find Node IDs using the `brightnodectl get node` command.
+</ResponseField>
+
+## Related commands
+
+- [`brightnodectl start node`](/brightnodectl/reference/brightnodectl-start-node)
+- [`brightnodectl get node`](/brightnodectl/reference/brightnodectl-get-node)

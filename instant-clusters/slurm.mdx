@@ -17,27 +17,27 @@ Follow the steps below to deploy a cluster and start running distributed Slurm w
 
 * You've created a [Brightnode account](https://www.console.brightnode.cloud/home) and funded it with sufficient credits.
 * You have basic familiarity with Linux command line.
-* You're comfortable working with [Pods](/pods/overview) and understand the basics of [Slurm](https://slurm.schedmd.com/).
+* You're comfortable working with [Nodes](/nodes/overview) and understand the basics of [Slurm](https://slurm.schedmd.com/).
 
 ## Step 1: Deploy an Instant Cluster
 
 1. Open the [Instant Clusters page](https://www.console.brightnode.cloud/cluster) on the Brightnode web interface.
 2. Click **Create Cluster**.
-3. Use the UI to name and configure your cluster. For this walkthrough, keep **Pod Count** at **2** and select the option for **16x H100 SXM** GPUs. Keep the **Pod Template** at its default setting (Brightnode PyTorch).
+3. Use the UI to name and configure your cluster. For this walkthrough, keep **Node Count** at **2** and select the option for **16x H100 SXM** GPUs. Keep the **Node Template** at its default setting (Brightnode PyTorch).
 4. Click **Deploy Cluster**. You should be redirected to the Instant Clusters page after a few seconds.
 
-## Step 2: Clone demo and install Slurm on each Pod
+## Step 2: Clone demo and install Slurm on each Node
 
-To connect to a Pod:
+To connect to a Node:
 
-1. On the Instant Clusters page, click on the cluster you created to expand the list of Pods.
-2. Click on a Pod, for example `CLUSTERNAME-pod-0`, to expand the Pod.
+1. On the Instant Clusters page, click on the cluster you created to expand the list of Nodes.
+2. Click on a Node, for example `CLUSTERNAME-node-0`, to expand the Node.
 
-**On each Pod:**
+**On each Node:**
 
 1. Click **Connect**, then click **Web Terminal**.
 
-2. In the terminal that opens, run this command to clone the Slurm demo files into the Pod's main directory:
+2. In the terminal that opens, run this command to clone the Slurm demo files into the Node's main directory:
 
    ```bash
    git clone https://github.com/pandyamarut/slurm_example.git && cd slurm_example
@@ -58,9 +58,9 @@ The repository contains several essential scripts for setting up Slurm. Let's ex
 * `install.sh`: The primary installation script that sets up MUNGE authentication, configures Slurm, and prepares the environment.
 * `test_batch.sh`: A sample Slurm job script for testing cluster functionality.
 
-## Step 4: Install Slurm on each Pod
+## Step 4: Install Slurm on each Node
 
-Now run the installation script **on each Pod**, replacing `[MUNGE_SECRET_KEY]` with any secure random string (like a password). The secret key is used for authentication between nodes, and must be identical across all Pods in your cluster.
+Now run the installation script **on each Node**, replacing `[MUNGE_SECRET_KEY]` with any secure random string (like a password). The secret key is used for authentication between nodes, and must be identical across all Nodes in your cluster.
 
 ```bash
 ./install.sh "[MUNGE_SECRET_KEY]" node-0 node-1 10.65.0.2 10.65.0.3
@@ -72,7 +72,7 @@ This script automates the complex process of configuring a two-node Slurm cluste
 
 <Tip>
 
-If you're not sure which Pod is the primary node, run the command `echo $HOSTNAME` on the web terminal of each Pod and look for `node-0`.
+If you're not sure which Node is the primary node, run the command `echo $HOSTNAME` on the web terminal of each Node and look for `node-0`.
 
 </Tip>
 
@@ -139,6 +139,6 @@ You can monitor your cluster usage and spending using the **Billing Explorer** a
 Now that you've successfully deployed and tested a Slurm cluster on Brightnode, you can:
 
 * **Adapt your own distributed workloads** to run using Slurm job scripts.
-* **Scale your cluster** by adjusting the number of Pods to handle larger models or datasets.
+* **Scale your cluster** by adjusting the number of Nodes to handle larger models or datasets.
 * **Try different frameworks** like [Axolotl](/instant-clusters/axolotl) for fine-tuning large language models.
 * **Optimize performance** by experimenting with different distributed training strategies.

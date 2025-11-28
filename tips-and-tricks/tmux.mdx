@@ -4,7 +4,7 @@ sidebarTitle: "Persistent sessions with TMUX"
 icon: "square-terminal"
 ---
 
-TMUX is a terminal multiplexer that creates persistent terminal sessions on your Pod.
+TMUX is a terminal multiplexer that creates persistent terminal sessions on your Node.
 
 ## Why use TMUX
 
@@ -12,7 +12,7 @@ While you can run long-running tasks in JupyterLab notebooks, the kernel can cra
 
 ## Requirements
 
-To use TMUX, you need terminal access to your Brightnode Pod (SSH, web terminal, or JupyterLab terminal).
+To use TMUX, you need terminal access to your Brightnode Node (SSH, web terminal, or JupyterLab terminal).
 
 ## Video tutorial
 
@@ -20,7 +20,7 @@ For a comprehensive video guide on using TMUX, check out this excellent tutorial
 
 ## Installing TMUX
 
-TMUX is not installed by default on Brightnode Pods. To install it, run:
+TMUX is not installed by default on Brightnode Nodes. To install it, run:
 
 ```bash Install TMUX
 apt-get update && apt-get install -y tmux
@@ -45,9 +45,9 @@ cd /workspace/my_project
 python train.py --epochs 100 --batch-size 32
 
 # Detach from the session with Ctrl+B, then D
-# You can now safely disconnect from the Pod
+# You can now safely disconnect from the Node
 
-# Later, reconnect to the Pod and reattach
+# Later, reconnect to the Node and reattach
 tmux attach -t model_training
 ```
 
@@ -69,7 +69,7 @@ To detach from a session and leave it running in the background, press:
 Ctrl+B, then D
 ```
 
-Your processes will continue running even if you disconnect from the Pod.
+Your processes will continue running even if you disconnect from the Node.
 
 ### Listing active sessions
 
@@ -139,14 +139,14 @@ To scroll through terminal output:
 
 ## Best practices
 
-When using TMUX on Brightnode Pods, keep these tips in mind:
+When using TMUX on Brightnode Nodes, keep these tips in mind:
 
 - Always name your sessions descriptively to easily identify them later.
 - Regularly check on long-running processes by reattaching to sessions.
 - Clean up finished sessions to avoid confusion.
 - Use TMUX for any process that takes longer than a few minutes to complete.
-- Consider creating a TMUX session immediately when connecting to a Pod for important work.
+- Consider creating a TMUX session immediately when connecting to a Node for important work.
 
 ## Troubleshooting
 
-If you can't reattach to a session after reconnecting to a Pod, the Pod may have been restarted. TMUX sessions don't persist across Pod restarts, so ensure you save your work regularly and use network volumes for persistent storage.
+If you can't reattach to a session after reconnecting to a Node, the Node may have been restarted. TMUX sessions don't persist across Node restarts, so ensure you save your work regularly and use network volumes for persistent storage.

@@ -3,11 +3,11 @@ title: "Overview"
 sidebarTitle: "Overview"
 ---
 
-Brightnode CLI is an [open source](https://github.com/Brightnode/brightnodectl) command-line interface tool for managing your Brightnode resources remotely from your local machine. You can transfer files and data between your local system and Brightnode, execute code on remote Pods, and automate Pod deployment workflows.
+Brightnode CLI is an [open source](https://github.com/Brightnode/brightnodectl) command-line interface tool for managing your Brightnode resources remotely from your local machine. You can transfer files and data between your local system and Brightnode, execute code on remote Nodes, and automate Node deployment workflows.
 
 ## Install Brightnode CLI locally
 
-Every Pod you deploy comes preinstalled with the `brightnodectl` command and a Pod-scoped API key. You can also install it on your local machine to manage your Pods remotely from your own system.
+Every Node you deploy comes preinstalled with the `brightnodectl` command and a Node-scoped API key. You can also install it on your local machine to manage your Nodes remotely from your own system.
 
 ### Step 1: Choose an installation method
 
@@ -35,7 +35,7 @@ wget --quiet --show-progress https://github.com/Brightnode/brightnodectl/release
 
 <Tab title="Linux">
 ```sh
-wget --quiet --show-progress https://github.com/Run-Pod/brightnodectl/releases/download/v1.14.3/brightnodectl-linux-amd64 -O brightnodectl && chmod +x brightnodectl && sudo cp brightnodectl /usr/bin/brightnodectl
+wget --quiet --show-progress https://github.com/Run-Node/brightnodectl/releases/download/v1.14.3/brightnodectl-linux-amd64 -O brightnodectl && chmod +x brightnodectl && sudo cp brightnodectl /usr/bin/brightnodectl
 ```
 
 </Tab>
@@ -49,7 +49,7 @@ wget https://github.com/Brightnode/brightnodectl/releases/download/v1.14.3/brigh
 
 <Tab title="Google Colab / Jupyter Notebook">
 ```sh
-!wget --quiet --show-progress https://github.com/Run-Pod/brightnodectl/releases/download/v1.14.3/brightnodectl-linux-amd -O brightnodectl
+!wget --quiet --show-progress https://github.com/Run-Node/brightnodectl/releases/download/v1.14.3/brightnodectl-linux-amd -O brightnodectl
 !chmod +x brightnodectl
 !cp brightnodectl /usr/bin/brightnodectl
 ```

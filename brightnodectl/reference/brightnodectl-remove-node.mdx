@@ -1,0 +1,31 @@
+---
+title: "remove node"
+sidebarTitle: "remove node"
+---
+
+Permanently delete a Node and all its associated data. This action cannot be undone.
+
+<RequestExample>
+```sh Command
+brightnodectl remove node <nodeId>
+```
+</RequestExample>
+
+## Example
+
+Terminate a Node by its ID.
+
+```sh
+brightnodectl remove node abc123xyz456
+```
+
+## Arguments
+
+<ResponseField name="<nodeId>" type="string" required>
+The ID of the Node to terminate. You can find Node IDs using the `brightnodectl get node` command.
+</ResponseField>
+
+## Related commands
+
+- [`brightnodectl remove nodes`](/brightnodectl/reference/brightnodectl-remove-nodes)
+- [`brightnodectl get node`](/brightnodectl/reference/brightnodectl-get-node)

@@ -6,7 +6,7 @@ icon: "arrows-rotate"
 
 ## What are these tools?
 
-These are simple bash and Python scripts that solve a critical problem: **migrating data between Brightnode instances when you need to move Pods** (e.g., when your Pod gets stuck with zero GPUs or you need to switch to a different instance).
+These are simple bash and Python scripts that solve a critical problem: **migrating data between Brightnode instances when you need to move Nodes** (e.g., when your Node gets stuck with zero GPUs or you need to switch to a different instance).
 
 <Note>
 Check the repository for additional features, updates, and documentation: [github.com/justinwlin/Brightnode-SSH-Password](https://github.com/justinwlin/Brightnode-SSH-Password)
@@ -15,12 +15,12 @@ Check the repository for additional features, updates, and documentation: [githu
 ## The problem it solves
 
 When Brightnode users encounter issues like:
-- Pod stuck with **zero GPUs allocated**.
+- Node stuck with **zero GPUs allocated**.
 - Need to **migrate to a different GPU type**.
-- Want to **transfer data between Pods**.
-- Need to **backup data before terminating a Pod**.
+- Want to **transfer data between Nodes**.
+- Need to **backup data before terminating a Node**.
 
-This tool provides a simple solution for transferring your files to a new Pod.
+This tool provides a simple solution for transferring your files to a new Node.
 
 ## Requirements
 
@@ -30,12 +30,12 @@ Before using these tools, make sure you have:
    - Web Terminal in Brightnode's interface, or
    - Terminal in Jupyter Notebook/Lab
 
-2. **Port 22 exposed** on destination Pod / source Pod:
-   - Go to: **Pod > Edit Pod > TCP Ports**
+2. **Port 22 exposed** on destination Node / source Node:
+   - Go to: **Node > Edit Node > TCP Ports**
    - Add port `22` if not present
    
    <Warning>
-   **Important**: Changing TCP ports will restart your Pod and **erase all data outside of `/workspace`**. Make sure all important files are stored in `/workspace` (the default persistent directory) before making port changes.
+   **Important**: Changing TCP ports will restart your Node and **erase all data outside of `/workspace`**. Make sure all important files are stored in `/workspace` (the default persistent directory) before making port changes.
    </Warning>
 
 3. **Linux-based template**: Works on Ubuntu/Debian images (most Brightnode templates)
@@ -43,8 +43,8 @@ Before using these tools, make sure you have:
 ## Quick migration workflow
 
 <Steps>
-  <Step title="Set up destination Pod">
-    On your **destination Pod** (where you're migrating to):
+  <Step title="Set up destination Node">
+    On your **destination Node** (where you're migrating to):
     ```bash
     wget https://raw.githubusercontent.com/justinwlin/Brightnode-SSH-Password/main/passwordbrightnode.sh && chmod +x passwordbrightnode.sh && ./passwordbrightnode.sh
     ```
@@ -58,8 +58,8 @@ Before using these tools, make sure you have:
     **Save these details** - you'll need them in Step 4.
   </Step>
   
-  <Step title="Transfer source Pod">
-    On your **source Pod** (where your files currently are):
+  <Step title="Transfer source Node">
+    On your **source Node** (where your files currently are):
     ```bash
     wget https://raw.githubusercontent.com/justinwlin/Brightnode-SSH-Password/refs/heads/main/SCPMigration -O scp_migration.py && python3 scp_migration.py
     ```
@@ -109,6 +109,6 @@ Before using these tools, make sure you have:
 
 ## Related resources
 
-- [Managing Pods](/pods/manage-pods)
-- [Pod storage overview](/pods/storage/types)
+- [Managing Nodes](/nodes/manage-nodes)
+- [Node storage overview](/nodes/storage/types)
 - [Network volumes](/storage/network-volumes)

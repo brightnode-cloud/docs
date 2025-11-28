@@ -6,7 +6,7 @@ icon: "rocket"
 
 ## What is OhMyBrightnode?
 
-OhMyBrightnode is a Python package that solves one of the most common Brightnode user challenges: **easily transferring files to and from your Pod**.
+OhMyBrightnode is a Python package that solves one of the most common Brightnode user challenges: **easily transferring files to and from your Node**.
 
 While OhMyBrightnode includes various features, **the SFTP setup functionality** is the one we want to highlight to help get you started with file transfer software such as FileZilla or similar tools.
 
@@ -29,9 +29,9 @@ Check the repository for additional features, updates, and documentation: [githu
 
 Before getting started with OhMyBrightnode, make sure you have:
 
-- An active Brightnode account with a running Pod.
+- An active Brightnode account with a running Node.
 - Python 3.6 or higher installed on your local machine.
-- Port 22 exposed in your Pod's TCP ports configuration (for SFTP transfers).
+- Port 22 exposed in your Node's TCP ports configuration (for SFTP transfers).
 
 ## Installation
 
@@ -47,16 +47,16 @@ The most common use case for OhMyBrightnode is transferring files between your l
 
 <Steps>
   <Step title="Ensure Port 22 is Exposed">
-    Before starting, make sure port 22 is exposed in your Pod. This is required for SFTP transfers.
+    Before starting, make sure port 22 is exposed in your Node. This is required for SFTP transfers.
     
     To expose port 22:
-    1. Go to your Pod in the Brightnode console
-    2. Click **Edit Pod**
+    1. Go to your Node in the Brightnode console
+    2. Click **Edit Node**
     3. Under the **TCP Ports** section, add port `22`
     4. Save the changes
     
     <Warning>
-    **Data loss warning**: Changing TCP ports will restart your pod and **erase all data outside of `/workspace`**. Ensure all important files are in `/workspace` (the default persistent directory) before making port changes.
+    **Data loss warning**: Changing TCP ports will restart your node and **erase all data outside of `/workspace`**. Ensure all important files are in `/workspace` (the default persistent directory) before making port changes.
     </Warning>
   </Step>
   
@@ -116,8 +116,8 @@ Once SFTP is configured, you can:
     **Problem:** Cannot connect via SFTP, getting "Connection refused" error
     
     **Solution:** 
-    1. Ensure port 22 is exposed in your Pod (Pod > Edit Pod > TCP Ports > Add 22)
-    2. Restart your Pod after adding the port
+    1. Ensure port 22 is exposed in your Node (Node > Edit Node > TCP Ports > Add 22)
+    2. Restart your Node after adding the port
     3. Re-run `OhMyBrightnode --file-transfer` to reconfigure SSH
   </Accordion>
   
@@ -134,7 +134,7 @@ Once SFTP is configured, you can:
     **Problem:** SFTP client cannot resolve the host address
     
     **Solution:** 
-    1. Verify your Pod is running and not stopped
+    1. Verify your Node is running and not stopped
     2. Check that you're using the correct IP address and port from the connection details
     3. Ensure your network allows outbound connections to the Brightnode IP range
   </Accordion>
@@ -151,6 +151,6 @@ Have a tool that solves common Brightnode problems? Community contributions are 
 
 ## Related Brightnode documentation
 
-- [SSH Configuration Guide](/pods/configuration/use-ssh)
-- [Managing Pods](/pods/manage-pods)
-- [Connecting to Pods](/pods/connect-to-a-pod)
+- [SSH Configuration Guide](/nodes/configuration/use-ssh)
+- [Managing Nodes](/nodes/manage-nodes)
+- [Connecting to Nodes](/nodes/connect-to-a-node)

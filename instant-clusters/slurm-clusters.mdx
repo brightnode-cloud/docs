@@ -32,11 +32,11 @@ If you prefer to manually configure your Slurm deployment, see [Deploy an Instan
 3. Select **Slurm Cluster** from the cluster type dropdown menu.
 4. Configure your cluster specifications:
    - **Cluster name**: Enter a descriptive name for your cluster.
-   - **Pod count**: Choose the number of Pods in your cluster.
+   - **Node count**: Choose the number of Nodes in your cluster.
    - **GPU type**: Select your preferred [GPU type](/references/gpu-types).
    - **Region**: Choose your deployment region.
    - **Network volume** (optional): Add a [network volume](/storage/network-volumes) for persistent/shared storage. If using a network volume, ensure the region matches your cluster region.
-   - **Pod template**: Select a [Pod template](/pods/templates/overview) or click **Edit Template** to customize start commands, environment variables, ports, or [container/volume disk](/pods/storage/types) capacity. 
+   - **Node template**: Select a [Node template](/nodes/templates/overview) or click **Edit Template** to customize start commands, environment variables, ports, or [container/volume disk](/nodes/storage/types) capacity. 
       <Warning>
       Slurm Clusters currently only support official Brightnode Pytorch images. If you deploy using a different image, the Slurm process will not start.
       </Warning>
@@ -48,7 +48,7 @@ Once deployment completes, you can access your cluster from the [Instant Cluster
 
 From this page you can select a cluster to view it's component nodes, including a label indicating the **Slurm controller** (primary node) and **Slurm agents** (secondary nodes). Expand a node to view details like availability, GPU/storage utilization, and options for connection and management.
 
-Connect to a node using the **Connect** button, or using any of the [connection methods supported by Pods](/pods/connect-to-a-pod).
+Connect to a node using the **Connect** button, or using any of the [connection methods supported by Nodes](/nodes/connect-to-a-node).
 
 ## Submit and manage jobs
 
@@ -82,7 +82,7 @@ You can find the output of Slurm agents in their individual container logs.
 
 ## Advanced configuration
 
-While Brightnode's Slurm Clusters work out-of-the-box, you can customize your configuration by connecting to the Slurm controller node using the [web terminal or SSH](/pods/connect-to-a-pod).
+While Brightnode's Slurm Clusters work out-of-the-box, you can customize your configuration by connecting to the Slurm controller node using the [web terminal or SSH](/nodes/connect-to-a-node).
 
 Access Slurm configuration files in their standard locations:
 - `/etc/slurm/slurm.conf` - Main configuration file.

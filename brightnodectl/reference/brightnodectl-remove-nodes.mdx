@@ -1,0 +1,37 @@
+---
+title: "remove nodes"
+sidebarTitle: "remove nodes"
+---
+
+Terminate multiple Nodes that share the same name. This is useful for cleaning up groups of Nodes created with the `create nodes` command.
+
+<RequestExample>
+```sh Command
+brightnodectl remove nodes <name> [flags]
+```
+</RequestExample>
+
+## Example
+
+Terminate all Nodes named "training-worker":
+
+```sh
+brightnodectl remove nodes training-worker
+```
+
+## Arguments
+
+<ResponseField name="<name>" type="string" required>
+The name of the Nodes to terminate. All Nodes with this exact name will be removed.
+</ResponseField>
+
+## Flags
+
+<ResponseField name="--nodeCount" type="integer">
+The number of Nodes with the specified name to terminate. This limits the removal to a specific count rather than removing all matching Nodes.
+</ResponseField>
+
+## Related commands
+
+- [`brightnodectl remove node`](/brightnodectl/reference/brightnodectl-remove-node)
+- [`brightnodectl get node`](/brightnodectl/reference/brightnodectl-get-node)

@@ -36,24 +36,24 @@
             ]
           },
           {
-            "group": "Pods",
+            "group": "Nodes",
             "pages": [
-              "pods/overview",
-              "pods/pricing",
-              "pods/choose-a-pod",
-              "pods/manage-pods",
+              "nodes/overview",
+              "nodes/pricing",
+              "nodes/choose-a-node",
+              "nodes/manage-nodes",
               {
-                "group": "Connect to Pods",
+                "group": "Connect to Nodes",
                 "pages": [
-                  "pods/connect-to-a-pod",
-                  "pods/configuration/use-ssh"
+                  "nodes/connect-to-a-node",
+                  "nodes/configuration/use-ssh"
                 ]
               },
               {
                 "group": "Storage",
                 "pages": [
-                  "pods/storage/types",
-                  "pods/storage/transfer-files"
+                  "nodes/storage/types",
+                  "nodes/storage/transfer-files"
                 ]
               }
             ]
@@ -80,14 +80,14 @@
             "pages": ["tutorials/introduction/overview"]
           },
           {
-            "group": "Pods",
+            "group": "Nodes",
             "pages": [
-              "tutorials/pods/run-your-first",
-              "tutorials/pods/comfyui",
-              "tutorials/pods/run-fooocus",
-              "tutorials/pods/run-ollama",
-              "tutorials/pods/build-docker-images",
-              "tutorials/pods/fine-tune-llm-axolotl"
+              "tutorials/nodes/run-your-first",
+              "tutorials/nodes/comfyui",
+              "tutorials/nodes/run-fooocus",
+              "tutorials/nodes/run-ollama",
+              "tutorials/nodes/build-docker-images",
+              "tutorials/nodes/fine-tune-llm-axolotl"
             ]
           }
         ]

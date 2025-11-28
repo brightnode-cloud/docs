@@ -25,8 +25,8 @@
       "description": "This documentation page."
     },
     {
-      "name": "pods",
-      "description": "Manage Pods."
+      "name": "nodes",
+      "description": "Manage Nodes."
     },
     {
       "name": "endpoints",
@@ -38,7 +38,7 @@
     },
     {
       "name": "templates",
-      "description": "Manage Pod and Serverless templates."
+      "description": "Manage Node and Serverless templates."
     },
     {
       "name": "container registry auths",
@@ -100,20 +100,20 @@
         "operationId": "GetDocs"
       }
     },
-    "/pods": {
+    "/nodes": {
       "post": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "Create a new Pod",
-        "description": "Creates a new [Pod](#/components/schemas/Pod) and optionally deploys it.",
-        "operationId": "CreatePod",
+        "summary": "Create a new Node",
+        "description": "Creates a new [Node](#/components/schemas/Node) and optionally deploys it.",
+        "operationId": "CreateNode",
         "requestBody": {
-          "description": "Input for Pod creation.",
+          "description": "Input for Node creation.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PodCreateInput"
+                "$ref": "#/components/schemas/NodeCreateInput"
               }
             }
           },
@@ -121,11 +121,11 @@
         },
         "responses": {
           "201": {
-            "description": "Pod successfully created.",
+            "description": "Node successfully created.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pod"
+                  "$ref": "#/components/schemas/Node"
                 }
               }
             }
@@ -137,11 +137,11 @@
       },
       "get": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "List Pods",
-        "description": "Returns a list of Pods.",
-        "operationId": "ListPods",
+        "summary": "List Nodes",
+        "description": "Returns a list of Nodes.",
+        "operationId": "ListNodes",
         "parameters": [
           {
             "name": "computeType",
@@ -153,7 +153,7 @@
                 "CPU"
               ],
               "example": "CPU",
-              "description": "Filter to only GPU or only CPU Pods."
+              "description": "Filter to only GPU or only CPU Nodes."
             }
           },
           {
@@ -168,7 +168,7 @@
                 "cpu3c",
                 "cpu5g"
               ],
-              "description": "Filter to CPU Pods with any of the listed CPU flavors."
+              "description": "Filter to CPU Nodes with any of the listed CPU flavors."
             }
           },
           {
@@ -182,7 +182,7 @@
               "example": [
                 "EU-RO-1"
               ],
-              "description": "Filter to Pods located in any of the provided Brightnode data centers."
+              "description": "Filter to Nodes located in any of the provided Brightnode data centers."
             }
           },
           {
@@ -196,7 +196,7 @@
                 "EXITED",
                 "TERMINATED"
               ],
-              "description": "Filter to Pods currently in the provided state."
+              "description": "Filter to Nodes currently in the provided state."
             }
           },
           {
@@ -221,7 +221,7 @@
                 "NVIDIA GeForce RTX 4090",
                 "NVIDIA RTX A5000"
               ],
-              "description": "Filter to Pods with any of the listed GPU types attached."
+              "description": "Filter to Nodes with any of the listed GPU types attached."
             }
           },
           {
@@ -230,7 +230,7 @@
             "schema": {
               "type": "string",
               "example": "xedezhzb9la3ye",
-              "description": "Filter to a specific Pod."
+              "description": "Filter to a specific Node."
             },
             "required": false
           },
@@ -240,7 +240,7 @@
             "schema": {
               "type": "string",
               "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-              "description": "Filter to Pods created with the provided image."
+              "description": "Filter to Nodes created with the provided image."
             },
             "required": false
           },
@@ -251,7 +251,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the machine the Pod is running on."
+              "description": "Include information about the machine the Node is running on."
             }
           },
           {
@@ -261,7 +261,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the network volume attached to the returned Pod, if any."
+              "description": "Include information about the network volume attached to the returned Node, if any."
             }
           },
           {
@@ -271,7 +271,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the savings plans applied to the Pod."
+              "description": "Include information about the savings plans applied to the Node."
             }
           },
           {
@@ -281,7 +281,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the template the Pod uses, if any."
+              "description": "Include information about the template the Node uses, if any."
             }
           },
           {
@@ -291,7 +291,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Set to true to also list Pods which are Serverless workers."
+              "description": "Set to true to also list Nodes which are Serverless workers."
             }
           },
           {
@@ -300,7 +300,7 @@
             "schema": {
               "type": "string",
               "maxLength": 191,
-              "description": "Filter to Pods with the provided name."
+              "description": "Filter to Nodes with the provided name."
             },
             "required": false
           },
@@ -310,7 +310,7 @@
             "schema": {
               "type": "string",
               "example": "agv6w2qcg7",
-              "description": "Filter to Pods with the provided network volume attached."
+              "description": "Filter to Nodes with the provided network volume attached."
             }
           },
           {
@@ -319,7 +319,7 @@
             "schema": {
               "type": "string",
               "example": "30zmvf89kd",
-              "description": "Filter to Pods created from the provided template."
+              "description": "Filter to Nodes created from the provided template."
             },
             "required": false
           }
@@ -330,7 +330,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pods"
+                  "$ref": "#/components/schemas/Nodes"
                 }
               }
             }
@@ -339,19 +339,19 @@
             "description": "Invalid ID supplied."
           },
           "404": {
-            "description": "Pod not found."
+            "description": "Node not found."
           }
         }
       }
     },
-    "/pods/{podId}": {
+    "/nodes/{nodeId}": {
       "get": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "Find a Pod by ID",
-        "description": "Returns a single Pod.",
-        "operationId": "GetPod",
+        "summary": "Find a Node by ID",
+        "description": "Returns a single Node.",
+        "operationId": "GetNode",
         "parameters": [
           {
             "name": "includeMachine",
@@ -360,7 +360,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the machine the Pod is running on."
+              "description": "Include information about the machine the Node is running on."
             }
           },
           {
@@ -370,7 +370,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the network volume attached to the returned Pod, if any."
+              "description": "Include information about the network volume attached to the returned Node, if any."
             }
           },
           {
@@ -380,7 +380,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the savings plans applied to the Pod."
+              "description": "Include information about the savings plans applied to the Node."
             }
           },
           {
@@ -390,7 +390,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the template the Pod uses, if any."
+              "description": "Include information about the template the Node uses, if any."
             }
           },
           {
@@ -400,13 +400,13 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Set to true to also list Pods which are Serverless workers."
+              "description": "Set to true to also list Nodes which are Serverless workers."
             }
           },
           {
-            "name": "podId",
+            "name": "nodeId",
             "in": "path",
-            "description": "ID of Pod to return.",
+            "description": "ID of Node to return.",
             "required": true,
             "schema": {
               "type": "string"
@@ -419,7 +419,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pod"
+                  "$ref": "#/components/schemas/Node"
                 }
               }
             }
@@ -428,23 +428,23 @@
             "description": "Invalid ID supplied."
           },
           "404": {
-            "description": "Pod not found."
+            "description": "Node not found."
           }
         }
       },
       "patch": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "Update a Pod",
-        "description": "Update a Pod, potentially triggering a reset.",
-        "operationId": "UpdatePod",
+        "summary": "Update a Node",
+        "description": "Update a Node, potentially triggering a reset.",
+        "operationId": "UpdateNode",
         "requestBody": {
-          "description": "Form data to update a Pod.",
+          "description": "Form data to update a Node.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PodUpdateInput"
+                "$ref": "#/components/schemas/NodeUpdateInput"
               }
             }
           },
@@ -452,9 +452,9 @@
         },
         "parameters": [
           {
-            "name": "podId",
+            "name": "nodeId",
             "in": "path",
-            "description": "ID of Pod that needs to be updated.",
+            "description": "ID of Node that needs to be updated.",
             "required": true,
             "schema": {
               "type": "string"
@@ -463,11 +463,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Pod successfully updated.",
+            "description": "Node successfully updated.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pod"
+                  "$ref": "#/components/schemas/Node"
                 }
               }
             }
@@ -479,16 +479,16 @@
       },
       "delete": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "Delete a Pod",
-        "description": "Delete a Pod.",
-        "operationId": "DeletePod",
+        "summary": "Delete a Node",
+        "description": "Delete a Node.",
+        "operationId": "DeleteNode",
         "parameters": [
           {
-            "name": "podId",
+            "name": "nodeId",
             "in": "path",
-            "description": "Pod ID to delete.",
+            "description": "Node ID to delete.",
             "required": true,
             "schema": {
               "type": "string"
@@ -497,10 +497,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Pod successfully deleted."
+            "description": "Node successfully deleted."
           },
           "400": {
-            "description": "Invalid Pod ID."
+            "description": "Invalid Node ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -508,20 +508,20 @@
         }
       }
     },
-    "/pods/{podId}/update": {
+    "/nodes/{nodeId}/update": {
       "post": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "Update a Pod",
-        "description": "Update a Pod - synonym for PATCH /pods/{podId}.",
-        "operationId": "UpdatePod",
+        "summary": "Update a Node",
+        "description": "Update a Node - synonym for PATCH /nodes/{nodeId}.",
+        "operationId": "UpdateNode",
         "requestBody": {
-          "description": "Form data to update a Pod.",
+          "description": "Form data to update a Node.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PodUpdateInput"
+                "$ref": "#/components/schemas/NodeUpdateInput"
               }
             }
           },
@@ -529,9 +529,9 @@
         },
         "parameters": [
           {
-            "name": "podId",
+            "name": "nodeId",
             "in": "path",
-            "description": "ID of Pod that needs to be updated.",
+            "description": "ID of Node that needs to be updated.",
             "required": true,
             "schema": {
               "type": "string"
@@ -540,11 +540,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Pod successfully updated.",
+            "description": "Node successfully updated.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Pod"
+                  "$ref": "#/components/schemas/Node"
                 }
               }
             }
@@ -555,19 +555,19 @@
         }
       }
     },
-    "/pods/{podId}/start": {
+    "/nodes/{nodeId}/start": {
       "post": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "Start or resume a Pod",
-        "description": "Start or resume a Pod.",
-        "operationId": "StartPod",
+        "summary": "Start or resume a Node",
+        "description": "Start or resume a Node.",
+        "operationId": "StartNode",
         "parameters": [
           {
-            "name": "podId",
+            "name": "nodeId",
             "in": "path",
-            "description": "Pod ID to start.",
+            "description": "Node ID to start.",
             "required": true,
             "schema": {
               "type": "string"
@@ -576,10 +576,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Pod successfully started."
+            "description": "Node successfully started."
           },
           "400": {
-            "description": "Invalid Pod ID."
+            "description": "Invalid Node ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -587,19 +587,19 @@
         }
       }
     },
-    "/pods/{podId}/stop": {
+    "/nodes/{nodeId}/stop": {
       "post": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "Stop a Pod",
-        "description": "Stop a Pod.",
-        "operationId": "StopPod",
+        "summary": "Stop a Node",
+        "description": "Stop a Node.",
+        "operationId": "StopNode",
         "parameters": [
           {
-            "name": "podId",
+            "name": "nodeId",
             "in": "path",
-            "description": "Pod ID to stop.",
+            "description": "Node ID to stop.",
             "required": true,
             "schema": {
               "type": "string"
@@ -608,10 +608,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Pod successfully stopped."
+            "description": "Node successfully stopped."
           },
           "400": {
-            "description": "Invalid Pod ID."
+            "description": "Invalid Node ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -619,19 +619,19 @@
         }
       }
     },
-    "/pods/{podId}/reset": {
+    "/nodes/{nodeId}/reset": {
       "post": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "Reset a Pod",
-        "description": "Reset a Pod.",
-        "operationId": "ResetPod",
+        "summary": "Reset a Node",
+        "description": "Reset a Node.",
+        "operationId": "ResetNode",
         "parameters": [
           {
-            "name": "podId",
+            "name": "nodeId",
             "in": "path",
-            "description": "Pod ID to reset.",
+            "description": "Node ID to reset.",
             "required": true,
             "schema": {
               "type": "string"
@@ -640,10 +640,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Pod successfully reset."
+            "description": "Node successfully reset."
           },
           "400": {
-            "description": "Invalid Pod ID."
+            "description": "Invalid Node ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -651,19 +651,19 @@
         }
       }
     },
-    "/pods/{podId}/restart": {
+    "/nodes/{nodeId}/restart": {
       "post": {
         "tags": [
-          "pods"
+          "nodes"
         ],
-        "summary": "Restart a Pod",
-        "description": "Restart a Pod.",
-        "operationId": "RestartPod",
+        "summary": "Restart a Node",
+        "description": "Restart a Node.",
+        "operationId": "RestartNode",
         "parameters": [
           {
-            "name": "podId",
+            "name": "nodeId",
             "in": "path",
-            "description": "Pod ID to restart.",
+            "description": "Node ID to restart.",
             "required": true,
             "schema": {
               "type": "string"
@@ -672,7 +672,7 @@
         ],
         "responses": {
           "400": {
-            "description": "Invalid Pod ID."
+            "description": "Invalid Node ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -1584,14 +1584,14 @@
         }
       }
     },
-    "/billing/pods": {
+    "/billing/nodes": {
       "get": {
         "tags": [
           "billing"
         ],
-        "summary": "Pod billing history",
-        "description": "Retrieve billing information about your Pods.",
-        "operationId": "PodBilling",
+        "summary": "Node billing history",
+        "description": "Retrieve billing information about your Nodes.",
+        "operationId": "NodeBilling",
         "parameters": [
           {
             "name": "bucketSize",
@@ -1665,7 +1665,7 @@
                 "NVIDIA B200"
               ],
               "example": "NVIDIA GeForce RTX 4090",
-              "description": "Filter to Pods with the provided GPU type attached."
+              "description": "Filter to Nodes with the provided GPU type attached."
             }
           },
           {
@@ -1674,7 +1674,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "podId",
+                "nodeId",
                 "gpuTypeId"
               ],
               "default": "gpuTypeId",
@@ -1682,12 +1682,12 @@
             }
           },
           {
-            "name": "podId",
+            "name": "nodeId",
             "in": "query",
             "schema": {
               "type": "string",
               "example": "xedezhzb9la3ye",
-              "description": "Filter to a specific Pod."
+              "description": "Filter to a specific Node."
             }
           },
           {
@@ -1808,7 +1808,7 @@
                   "US-GA-1"
                 ]
               },
-              "description": "Filter to endpoints located in any of the provided Brightnode data centers. The data center IDs are listed in the response of the /pods endpoint."
+              "description": "Filter to endpoints located in any of the provided Brightnode data centers. The data center IDs are listed in the response of the /nodes endpoint."
             }
           },
           {
@@ -1889,7 +1889,7 @@
               "type": "string",
               "enum": [
                 "endpointId",
-                "podId",
+                "nodeId",
                 "gpuTypeId"
               ],
               "default": "endpointId",
@@ -2018,19 +2018,19 @@
       }
     },
     "schemas": {
-      "Pods": {
+      "Nodes": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/Pod"
+          "$ref": "#/components/schemas/Node"
         }
       },
-      "Pod": {
+      "Node": {
         "type": "object",
         "properties": {
           "adjustedCostPerHr": {
             "type": "number",
             "example": 0.69,
-            "description": "The effective cost in Brightnode credits per hour of running a Pod, adjusted by active Savings Plans."
+            "description": "The effective cost in Brightnode credits per hour of running a Node, adjusted by active Savings Plans."
           },
           "aiApiId": {
             "type": "string",
@@ -2040,28 +2040,28 @@
           "consumerUserId": {
             "type": "string",
             "example": "user_2PyTJrLzeuwfZilRZ7JhCQDuSqo",
-            "description": "A unique string identifying the Brightnode user who rents a Pod."
+            "description": "A unique string identifying the Brightnode user who rents a Node."
           },
           "containerDiskInGb": {
             "type": "integer",
             "example": 50,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for a Pod. The data on the container disk is wiped when the Pod restarts. To persist data across Pod restarts, set volumeInGb to configure the Pod network volume."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for a Node. The data on the container disk is wiped when the Node restarts. To persist data across Node restarts, set volumeInGb to configure the Node network volume."
           },
           "containerRegistryAuthId": {
             "type": "string",
             "example": "clzdaifot0001l90809257ynb",
-            "description": "If a Pod is created with a container registry auth, the unique string identifying that container registry auth."
+            "description": "If a Node is created with a container registry auth, the unique string identifying that container registry auth."
           },
           "costPerHr": {
             "type": "number",
             "example": "0.74",
             "format": "currency",
-            "description": "The cost in Brightnode credits per hour of running a Pod. Note that the actual cost may be lower if Savings Plans are applied."
+            "description": "The cost in Brightnode credits per hour of running a Node. Note that the actual cost may be lower if Savings Plans are applied."
           },
           "cpuFlavorId": {
             "type": "string",
             "example": "cpu3c",
-            "description": "If the Pod is a CPU Pod, the unique string identifying the CPU flavor the Pod is running on."
+            "description": "If the Node is a CPU Node, the unique string identifying the CPU flavor the Node is running on."
           },
           "desiredStatus": {
             "type": "string",
@@ -2070,26 +2070,26 @@
               "EXITED",
               "TERMINATED"
             ],
-            "description": "The current expected status of a Pod."
+            "description": "The current expected status of a Node."
           },
           "dockerEntrypoint": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Pod. If [], uses the ENTRYPOINT defined in the image."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Node. If [], uses the ENTRYPOINT defined in the image."
           },
           "dockerStartCmd": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "If specified, overrides the start CMD for the Docker image run on the created Pod. If [], uses the start CMD defined in the image."
+            "description": "If specified, overrides the start CMD for the Docker image run on the created Node. If [], uses the start CMD defined in the image."
           },
           "endpointId": {
             "type": "string",
             "example": null,
-            "description": "If the Pod is a Serverless worker, a unique string identifying the associated endpoint."
+            "description": "If the Node is a Serverless worker, a unique string identifying the associated endpoint."
           },
           "env": {
             "type": "object",
@@ -2110,7 +2110,7 @@
               "count": {
                 "type": "integer",
                 "example": 1,
-                "description": "The number of GPUs attached to a Pod."
+                "description": "The number of GPUs attached to a Node."
               },
               "displayName": {
                 "type": "string"
@@ -2144,37 +2144,37 @@
           "id": {
             "type": "string",
             "example": "xedezhzb9la3ye",
-            "description": "A unique string identifying a [Pod](#/components/schema/Pod)."
+            "description": "A unique string identifying a [Node](#/components/schema/Node)."
           },
           "image": {
             "type": "string",
             "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-            "description": "The image tag for the container run on a Pod."
+            "description": "The image tag for the container run on a Node."
           },
           "interruptible": {
             "type": "boolean",
             "example": false,
-            "description": "Describes how a Pod is rented. An interruptible Pod can be rented at a lower cost but can be stopped at any time to free up resources for another Pod. A reserved Pod is rented at a higher cost but runs until it exits or is manually stopped."
+            "description": "Describes how a Node is rented. An interruptible Node can be rented at a lower cost but can be stopped at any time to free up resources for another Node. A reserved Node is rented at a higher cost but runs until it exits or is manually stopped."
           },
           "lastStartedAt": {
             "type": "string",
             "example": "2024-07-12T19:14:40.144Z",
-            "description": "The UTC timestamp when a Pod was last started."
+            "description": "The UTC timestamp when a Node was last started."
           },
           "lastStatusChange": {
             "type": "string",
             "example": "Rented by User: Fri Jul 12 2024 15:14:40 GMT-0400 (Eastern Daylight Time)",
-            "description": "A string describing the last lifecycle event on a Pod."
+            "description": "A string describing the last lifecycle event on a Node."
           },
           "locked": {
             "type": "boolean",
             "example": false,
-            "description": "Set to true to lock a Pod. Locking a Pod disables stopping or resetting the Pod."
+            "description": "Set to true to lock a Node. Locking a Node disables stopping or resetting the Node."
           },
           "machine": {
             "type": "object",
             "properties": {
-              "minPodGpuCount": {
+              "minNodeGpuCount": {
                 "type": "integer"
               },
               "gpuTypeId": {
@@ -2189,7 +2189,7 @@
                   "count": {
                     "type": "integer",
                     "example": 1,
-                    "description": "The number of GPUs attached to a Pod."
+                    "description": "The number of GPUs attached to a Node."
                   },
                   "displayName": {
                     "type": "string"
@@ -2292,22 +2292,22 @@
                 "type": "string"
               }
             },
-            "description": "Information about the machine a Pod is running on (see [Machine](#/components/schemas/Machine))."
+            "description": "Information about the machine a Node is running on (see [Machine](#/components/schemas/Machine))."
           },
           "machineId": {
             "type": "string",
             "example": "s194cr8pls2z",
-            "description": "A unique string identifying the host machine a Pod is running on."
+            "description": "A unique string identifying the host machine a Node is running on."
           },
           "memoryInGb": {
             "type": "number",
             "example": 62,
-            "description": "The amount of RAM, in gigabytes (GB), attached to a Pod."
+            "description": "The amount of RAM, in gigabytes (GB), attached to a Node."
           },
           "name": {
             "type": "string",
             "maxLength": 191,
-            "description": "A user-defined name for the created Pod. The name does not need to be unique."
+            "description": "A user-defined name for the created Node. The name does not need to be unique."
           },
           "networkVolume": {
             "type": "object",
@@ -2333,7 +2333,7 @@
                 "description": "The Brightnode data center ID where a network volume is located."
               }
             },
-            "description": "If a network volume is attached to a Pod, information about the network volume (see [network volume schema](#/components/schemas/NetworkVolume))."
+            "description": "If a network volume is attached to a Node, information about the network volume (see [network volume schema](#/components/schemas/NetworkVolume))."
           },
           "portMappings": {
             "type": "object",
@@ -2343,7 +2343,7 @@
             "example": {
               "22": 10341
             },
-            "description": "A mapping of internal ports to public ports on a Pod. For example, { \"22\": 10341 } means that port 22 on the Pod is mapped to port 10341 and is publicly accessible at [public ip]:10341. If the Pod is still initializing, this mapping is not yet determined and will be empty."
+            "description": "A mapping of internal ports to public ports on a Node. For example, { \"22\": 10341 } means that port 22 on the Node is mapped to port 10341 and is publicly accessible at [public ip]:10341. If the Node is still initializing, this mapping is not yet determined and will be empty."
           },
           "ports": {
             "type": "array",
@@ -2354,79 +2354,79 @@
               "8888/http",
               "22/tcp"
             ],
-            "description": "A list of ports exposed on a Pod. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on a Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "publicIp": {
             "type": "string",
             "example": "100.65.0.119",
             "format": "ipv4",
             "nullable": true,
-            "description": "The public IP address of a Pod. If the Pod is still initializing, this IP is not yet determined and will be empty."
+            "description": "The public IP address of a Node. If the Node is still initializing, this IP is not yet determined and will be empty."
           },
           "savingsPlans": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SavingsPlan"
             },
-            "description": "The list of active Savings Plans applied to a Pod (see [Savings Plans](#/components/schemas/SavingsPlan)). If none are applied, the list is empty."
+            "description": "The list of active Savings Plans applied to a Node (see [Savings Plans](#/components/schemas/SavingsPlan)). If none are applied, the list is empty."
           },
           "slsVersion": {
             "type": "integer",
             "example": 0,
-            "description": "If the Pod is a Serverless worker, the version of the associated endpoint (see [Endpoint Version](#/components/schemas/Endpoint/version))."
+            "description": "If the Node is a Serverless worker, the version of the associated endpoint (see [Endpoint Version](#/components/schemas/Endpoint/version))."
           },
           "templateId": {
             "type": "string",
             "example": null,
-            "description": "If a Pod is created with a template, the unique string identifying that template."
+            "description": "If a Node is created with a template, the unique string identifying that template."
           },
           "vcpuCount": {
             "type": "number",
             "example": 24,
-            "description": "The number of virtual CPUs attached to a Pod."
+            "description": "The number of virtual CPUs attached to a Node."
           },
           "volumeEncrypted": {
             "type": "boolean",
             "example": false,
-            "description": "Set to true if the local network volume of a Pod is encrypted. Can only be set when creating a Pod."
+            "description": "Set to true if the local network volume of a Node is encrypted. Can only be set when creating a Node."
           },
           "volumeInGb": {
             "type": "integer",
             "example": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Pod volume for a Pod. The data on the Pod volume is persisted across Pod restarts. To persist data so that future Pods can access it, create a network volume and set networkVolumeId to attach it to the Pod."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Node volume for a Node. The data on the Node volume is persisted across Node restarts. To persist data so that future Nodes can access it, create a network volume and set networkVolumeId to attach it to the Node."
           },
           "volumeMountPath": {
             "type": "string",
             "example": "/workspace",
-            "description": "If either a Pod volume or a network volume is attached to a Pod, the absolute path where the network volume is mounted in the filesystem."
+            "description": "If either a Node volume or a network volume is attached to a Node, the absolute path where the network volume is mounted in the filesystem."
           }
         }
       },
-      "PodUpdateInPlaceInput": {
+      "NodeUpdateInPlaceInput": {
         "type": "object",
         "properties": {
           "locked": {
             "type": "boolean",
             "default": false,
-            "description": "Set to true to lock a Pod. Locking a Pod disables stopping or resetting the Pod."
+            "description": "Set to true to lock a Node. Locking a Node disables stopping or resetting the Node."
           },
           "name": {
             "type": "string",
-            "default": "my pod",
-            "description": "A user-defined name for the created Pod. The name does not need to be unique.",
+            "default": "my node",
+            "description": "A user-defined name for the created Node. The name does not need to be unique.",
             "maxLength": 191
           }
         }
       },
-      "PodUpdateInput": {
+      "NodeUpdateInput": {
         "type": "object",
-        "description": "Input for updating a Pod which will trigger a reset.",
+        "description": "Input for updating a Node which will trigger a reset.",
         "properties": {
           "containerDiskInGb": {
             "type": "integer",
             "default": 50,
             "nullable": true,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for the created Pod. The data on the container disk is wiped when the Pod restarts. To persist data across Pod restarts, set volumeInGb to configure the Pod network volume."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for the created Node. The data on the container disk is wiped when the Node restarts. To persist data across Node restarts, set volumeInGb to configure the Node network volume."
           },
           "containerRegistryAuthId": {
             "type": "string",
@@ -2439,7 +2439,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Pod. If [], uses the ENTRYPOINT defined in the image."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Node. If [], uses the ENTRYPOINT defined in the image."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -2447,7 +2447,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on the created Pod. If [], uses the start CMD defined in the image."
+            "description": "If specified, overrides the start CMD for the Docker image run on the created Node. If [], uses the start CMD defined in the image."
           },
           "env": {
             "type": "object",
@@ -2463,22 +2463,22 @@
             "type": "boolean",
             "default": false,
             "example": true,
-            "description": "Set to true to enable global networking for the created Pod. Currently only available for On-Demand GPU Pods on some Secure Cloud data centers."
+            "description": "Set to true to enable global networking for the created Node. Currently only available for On-Demand GPU Nodes on some Secure Cloud data centers."
           },
           "imageName": {
             "type": "string",
             "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-            "description": "The image tag for the container run on the created Pod."
+            "description": "The image tag for the container run on the created Node."
           },
           "locked": {
             "type": "boolean",
             "default": false,
-            "description": "Set to true to lock a Pod. Locking a Pod disables stopping or resetting the Pod."
+            "description": "Set to true to lock a Node. Locking a Node disables stopping or resetting the Node."
           },
           "name": {
             "type": "string",
-            "default": "my pod",
-            "description": "A user-defined name for the created Pod. The name does not need to be unique.",
+            "default": "my node",
+            "description": "A user-defined name for the created Node. The name does not need to be unique.",
             "maxLength": 191
           },
           "ports": {
@@ -2491,27 +2491,27 @@
               "22/tcp"
             ],
             "default": "8888/http,22/tcp",
-            "description": "A list of ports exposed on the created Pod. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on the created Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "volumeInGb": {
             "type": "integer",
             "default": 20,
             "nullable": true,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Pod volume for the created Pod. The data on the Pod volume is persisted across Pod restarts. To persist data so that future Pods can access it, create a network volume and set networkVolumeId to attach it to the Pod."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Node volume for the created Node. The data on the Node volume is persisted across Node restarts. To persist data so that future Nodes can access it, create a network volume and set networkVolumeId to attach it to the Node."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If either a Pod volume or a network volume is attached to a Pod, the absolute path where the network volume will be mounted in the filesystem."
+            "description": "If either a Node volume or a network volume is attached to a Node, the absolute path where the network volume will be mounted in the filesystem."
           }
         }
       },
-      "PodCreateInput": {
+      "NodeCreateInput": {
         "type": "object",
         "properties": {
           "allowedCudaVersions": {
             "type": "array",
-            "description": "If the created Pod is a GPU Pod, a list of acceptable CUDA versions on the [Pod](#/components/schemas/Pod). If not set, any CUDA version is acceptable.",
+            "description": "If the created Node is a GPU Node, a list of acceptable CUDA versions on the [Node](#/components/schemas/Node). If not set, any CUDA version is acceptable.",
             "items": {
               "type": "string",
               "enum": [
@@ -2535,7 +2535,7 @@
               "SECURE",
               "COMMUNITY"
             ],
-            "description": "Set to SECURE to create the Pod in Secure Cloud. Set to COMMUNITY to create the Pod in Community Cloud. To determine which one suits your needs, see https://docs.brightnode.cloud/pods/overview#pod-types."
+            "description": "Set to SECURE to create the Node in Secure Cloud. Set to COMMUNITY to create the Node in Community Cloud. To determine which one suits your needs, see https://docs.brightnode.cloud/nodes/overview#node-types."
           },
           "computeType": {
             "type": "string",
@@ -2544,13 +2544,13 @@
               "GPU",
               "CPU"
             ],
-            "description": "Set to GPU to create a GPU Pod. Set to CPU to create a CPU Pod. If set to CPU, the Pod will not have a GPU attached and properties related to GPUs such as gpuTypeIds will be ignored. If set to GPU, the Pod will have a GPU attached and properties related to CPUs such as cpuFlavorIds will be ignored."
+            "description": "Set to GPU to create a GPU Node. Set to CPU to create a CPU Node. If set to CPU, the Node will not have a GPU attached and properties related to GPUs such as gpuTypeIds will be ignored. If set to GPU, the Node will have a GPU attached and properties related to CPUs such as cpuFlavorIds will be ignored."
           },
           "containerDiskInGb": {
             "type": "integer",
             "default": 50,
             "nullable": true,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for the created Pod. The data on the container disk is wiped when the Pod restarts. To persist data across Pod restarts, set volumeInGb to configure the Pod network volume."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for the created Node. The data on the container disk is wiped when the Node restarts. To persist data across Node restarts, set volumeInGb to configure the Node network volume."
           },
           "containerRegistryAuthId": {
             "type": "string",
@@ -2562,7 +2562,7 @@
             "items": {
               "type": "string"
             },
-            "description": "A list of country codes where the created Pod can be located. If not set, the Pod can be located in any country."
+            "description": "A list of country codes where the created Node can be located. If not set, the Node can be located in any country."
           },
           "cpuFlavorIds": {
             "type": "array",
@@ -2577,7 +2577,7 @@
                 "cpu5m"
               ]
             },
-            "description": "If the created Pod is a CPU Pod, a list of Brightnode CPU flavors which can be attached to the Pod. The order of the list determines the order to rent CPU flavors. See cpuFlavorPriority for how the order of the list affects Pod creation."
+            "description": "If the created Node is a CPU Node, a list of Brightnode CPU flavors which can be attached to the Node. The order of the list determines the order to rent CPU flavors. See cpuFlavorPriority for how the order of the list affects Node creation."
           },
           "cpuFlavorPriority": {
             "type": "string",
@@ -2586,7 +2586,7 @@
               "availability",
               "custom"
             ],
-            "description": "If the created Pod is a CPU Pod, set to availability to respond to current CPU flavor availability. Set to custom to always try to rent CPU flavors in the order specified in cpuFlavorIds."
+            "description": "If the created Node is a CPU Node, set to availability to respond to current CPU flavor availability. Set to custom to always try to rent CPU flavors in the order specified in cpuFlavorIds."
           },
           "dataCenterIds": {
             "type": "array",
@@ -2653,7 +2653,7 @@
                 "US-GA-1"
               ]
             },
-            "description": "A list of Brightnode data center IDs where the created Pod can be located. See `dataCenterPriority` for information on how the order of the list affects Pod creation."
+            "description": "A list of Brightnode data center IDs where the created Node can be located. See `dataCenterPriority` for information on how the order of the list affects Node creation."
           },
           "dataCenterPriority": {
             "type": "string",
@@ -2670,7 +2670,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Pod. If [], uses the ENTRYPOINT defined in the image."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Node. If [], uses the ENTRYPOINT defined in the image."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -2678,7 +2678,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on the created Pod. If [], uses the start CMD defined in the image."
+            "description": "If specified, overrides the start CMD for the Docker image run on the created Node. If [], uses the start CMD defined in the image."
           },
           "env": {
             "type": "object",
@@ -2694,12 +2694,12 @@
             "type": "boolean",
             "default": false,
             "example": true,
-            "description": "Set to true to enable global networking for the created Pod. Currently only available for On-Demand GPU Pods on some Secure Cloud data centers."
+            "description": "Set to true to enable global networking for the created Node. Currently only available for On-Demand GPU Nodes on some Secure Cloud data centers."
           },
           "gpuCount": {
             "type": "integer",
             "default": 1,
-            "description": "If the created Pod is a GPU Pod, the number of GPUs attached to the created Pod.",
+            "description": "If the created Node is a GPU Node, the number of GPUs attached to the created Node.",
             "minimum": 1
           },
           "gpuTypeIds": {
@@ -2747,7 +2747,7 @@
                 "NVIDIA B200"
               ]
             },
-            "description": "If the created Pod is a GPU Pod, a list of Brightnode GPU types which can be attached to the created Pod. The order of the list determines the order to rent GPU types. See `gpuTypePriority` for information on how the order of the list affects Pod creation."
+            "description": "If the created Node is a GPU Node, a list of Brightnode GPU types which can be attached to the created Node. The order of the list determines the order to rent GPU types. See `gpuTypePriority` for information on how the order of the list affects Node creation."
           },
           "gpuTypePriority": {
             "type": "string",
@@ -2756,54 +2756,54 @@
               "availability",
               "custom"
             ],
-            "description": "If the created Pod is a GPU Pod, set to availability to respond to current GPU type availability. Set to custom to always try to rent GPU types in the order specified in gpuTypeIds."
+            "description": "If the created Node is a GPU Node, set to availability to respond to current GPU type availability. Set to custom to always try to rent GPU types in the order specified in gpuTypeIds."
           },
           "imageName": {
             "type": "string",
             "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-            "description": "The image tag for the container run on the created Pod."
+            "description": "The image tag for the container run on the created Node."
           },
           "interruptible": {
             "type": "boolean",
             "default": false,
-            "description": "Set to true to create an interruptible or spot Pod. An interruptible Pod can be rented at a lower cost but can be stopped at any time to free up resources for another Pod. A reserved Pod is rented at a higher cost but runs until it exits or is manually stopped."
+            "description": "Set to true to create an interruptible or spot Node. An interruptible Node can be rented at a lower cost but can be stopped at any time to free up resources for another Node. A reserved Node is rented at a higher cost but runs until it exits or is manually stopped."
           },
           "locked": {
             "type": "boolean",
             "default": false,
-            "description": "Set to true to lock a Pod. Locking a Pod disables stopping or resetting the Pod."
+            "description": "Set to true to lock a Node. Locking a Node disables stopping or resetting the Node."
           },
           "minDiskBandwidthMBps": {
             "type": "number",
-            "description": "The minimum disk bandwidth, in megabytes per second (MBps), for the created Pod."
+            "description": "The minimum disk bandwidth, in megabytes per second (MBps), for the created Node."
           },
           "minDownloadMbps": {
             "type": "number",
-            "description": "The minimum download speed, in megabits per second (Mbps), for the created Pod."
+            "description": "The minimum download speed, in megabits per second (Mbps), for the created Node."
           },
           "minRAMPerGPU": {
             "type": "integer",
             "default": 8,
-            "description": "If the created Pod is a GPU Pod, the minimum amount of RAM, in gigabytes (GB), allocated to the created Pod for each GPU attached to the Pod."
+            "description": "If the created Node is a GPU Node, the minimum amount of RAM, in gigabytes (GB), allocated to the created Node for each GPU attached to the Node."
           },
           "minUploadMbps": {
             "type": "number",
-            "description": "The minimum upload speed, in megabits per second (Mbps), for the created Pod."
+            "description": "The minimum upload speed, in megabits per second (Mbps), for the created Node."
           },
           "minVCPUPerGPU": {
             "type": "integer",
             "default": 2,
-            "description": "If the created Pod is a GPU Pod, the minimum number of virtual CPUs allocated to the created Pod for each GPU attached to the Pod."
+            "description": "If the created Node is a GPU Node, the minimum number of virtual CPUs allocated to the created Node for each GPU attached to the Node."
           },
           "name": {
             "type": "string",
-            "default": "my pod",
-            "description": "A user-defined name for the created Pod. The name does not need to be unique.",
+            "default": "my node",
+            "description": "A user-defined name for the created Node. The name does not need to be unique.",
             "maxLength": 191
           },
           "networkVolumeId": {
             "type": "string",
-            "description": "The unique string identifying the network volume to attach to the created Pod. If attached, a network volume replaces the Pod network volume."
+            "description": "The unique string identifying the network volume to attach to the created Node. If attached, a network volume replaces the Node network volume."
           },
           "ports": {
             "type": "array",
@@ -2815,33 +2815,33 @@
               "22/tcp"
             ],
             "default": "8888/http,22/tcp",
-            "description": "A list of ports exposed on the created Pod. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on the created Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "supportPublicIp": {
             "type": "boolean",
             "example": true,
-            "description": "If the created Pod is on Community Cloud, set to true if you need the Pod to expose a public IP address. If null, the Pod might not have a public IP address. On Secure Cloud, the Pod will always have a public IP address."
+            "description": "If the created Node is on Community Cloud, set to true if you need the Node to expose a public IP address. If null, the Node might not have a public IP address. On Secure Cloud, the Node will always have a public IP address."
           },
           "templateId": {
             "type": "string",
             "example": null,
-            "description": "If the Pod is created with a template, the unique string identifying that template."
+            "description": "If the Node is created with a template, the unique string identifying that template."
           },
           "vcpuCount": {
             "type": "integer",
             "default": 2,
-            "description": "If the created Pod is a CPU Pod, the number of vCPUs allocated to the Pod."
+            "description": "If the created Node is a CPU Node, the number of vCPUs allocated to the Node."
           },
           "volumeInGb": {
             "type": "integer",
             "default": 20,
             "nullable": true,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Pod volume for the created Pod. The data on the Pod volume is persisted across Pod restarts. To persist data so that future Pods can access it, create a network volume and set networkVolumeId to attach it to the Pod."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Node volume for the created Node. The data on the Node volume is persisted across Node restarts. To persist data so that future Nodes can access it, create a network volume and set networkVolumeId to attach it to the Node."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If either a Pod volume or a network volume is attached to a Pod, the absolute path where the network volume will be mounted in the filesystem."
+            "description": "If either a Node volume or a network volume is attached to a Node, the absolute path where the network volume will be mounted in the filesystem."
           }
         }
       },
@@ -2959,7 +2959,7 @@
           "containerDiskInGb": {
             "type": "integer",
             "example": 50,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for a Pod or worker. The data on the container disk is wiped when the Pod or worker restarts. To persist data across restarts, set volumeInGb to configure the local network volume."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for a Node or worker. The data on the container disk is wiped when the Node or worker restarts. To persist data across restarts, set volumeInGb to configure the local network volume."
           },
           "containerRegistryAuthId": {
             "type": "string"
@@ -2970,7 +2970,7 @@
               "type": "string"
             },
             "example": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on a Pod or worker. If [], uses the ENTRYPOINT defined in the image."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on a Node or worker. If [], uses the ENTRYPOINT defined in the image."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -2978,12 +2978,12 @@
               "type": "string"
             },
             "example": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on a Pod or worker. If [], uses the start CMD defined in the image."
+            "description": "If specified, overrides the start CMD for the Docker image run on a Node or worker. If [], uses the start CMD defined in the image."
           },
           "earned": {
             "type": "number",
             "example": 100,
-            "description": "The amount of Brightnode credits earned by the creator of a template by all Pods or workers created from the template."
+            "description": "The amount of Brightnode credits earned by the creator of a template by all Nodes or workers created from the template."
           },
           "env": {
             "type": "object",
@@ -3003,7 +3003,7 @@
           "imageName": {
             "type": "string",
             "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-            "description": "The image tag for the container run on Pods or workers created from a template."
+            "description": "The image tag for the container run on Nodes or workers created from a template."
           },
           "isPublic": {
             "type": "boolean",
@@ -3018,7 +3018,7 @@
           "isServerless": {
             "type": "boolean",
             "example": true,
-            "description": "If true, instances created from a template are Serverless workers. If false, instances created from a template are Pods."
+            "description": "If true, instances created from a template are Serverless workers. If false, instances created from a template are Nodes."
           },
           "name": {
             "type": "string",
@@ -3034,7 +3034,7 @@
               "8888/http",
               "22/tcp"
             ],
-            "description": "A list of ports exposed on a Pod or worker. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on a Node or worker. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "readme": {
             "type": "string",
@@ -3046,12 +3046,12 @@
           "volumeInGb": {
             "type": "integer",
             "example": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the local network volume for a Pod or worker. The data on the local network volume is persisted across restarts. To persist data so that future Pods and workers can access it, create a network volume and set networkVolumeId to attach it to the Pod or worker."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the local network volume for a Node or worker. The data on the local network volume is persisted across restarts. To persist data so that future Nodes and workers can access it, create a network volume and set networkVolumeId to attach it to the Node or worker."
           },
           "volumeMountPath": {
             "type": "string",
             "example": "/workspace",
-            "description": "If a local network volume or network volume is attached to a Pod or worker, the absolute path where the network volume is mounted in the filesystem."
+            "description": "If a local network volume or network volume is attached to a Node or worker, the absolute path where the network volume is mounted in the filesystem."
           }
         }
       },
@@ -3087,7 +3087,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the Pods using this template. If [], uses the ENTRYPOINT defined in the DockerFile."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the Nodes using this template. If [], uses the ENTRYPOINT defined in the DockerFile."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -3095,7 +3095,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on the Pods using this template. If [], uses the start CMD defined in the DockerFile."
+            "description": "If specified, overrides the start CMD for the Docker image run on the Nodes using this template. If [], uses the start CMD defined in the DockerFile."
           },
           "env": {
             "type": "object",
@@ -3114,12 +3114,12 @@
           "isPublic": {
             "type": "boolean",
             "default": false,
-            "description": "If this is a Pod template, specifies whether the template is visible to other Brightnode users."
+            "description": "If this is a Node template, specifies whether the template is visible to other Brightnode users."
           },
           "isServerless": {
             "type": "boolean",
             "default": false,
-            "description": "Whether the template specifies a Serverless worker or a Pod."
+            "description": "Whether the template specifies a Serverless worker or a Node."
           },
           "name": {
             "type": "string",
@@ -3135,7 +3135,7 @@
               "22/tcp"
             ],
             "default": "8888/http,22/tcp",
-            "description": "A list of ports exposed on the created Pod. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on the created Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "readme": {
             "type": "string",
@@ -3145,12 +3145,12 @@
           "volumeInGb": {
             "type": "integer",
             "default": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Pods deployed with this template."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Nodes deployed with this template."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If a volume is attached to a Pod deployed with this template, the absolute path where the volume will be mounted in the filesystem."
+            "description": "If a volume is attached to a Node deployed with this template, the absolute path where the volume will be mounted in the filesystem."
           }
         }
       },
@@ -3160,7 +3160,7 @@
           "isPublic": {
             "type": "boolean",
             "default": false,
-            "description": "If this is a Pod template, specifies whether the template is visible to other Brightnode users."
+            "description": "If this is a Node template, specifies whether the template is visible to other Brightnode users."
           },
           "name": {
             "type": "string",
@@ -3174,12 +3174,12 @@
           "volumeInGb": {
             "type": "integer",
             "default": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Pods deployed with this template."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Nodes deployed with this template."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If a volume is attached to a Pod deployed with this template, the absolute path where the volume will be mounted in the filesystem."
+            "description": "If a volume is attached to a Node deployed with this template, the absolute path where the volume will be mounted in the filesystem."
           }
         }
       },
@@ -3202,7 +3202,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the Pods using this template. If [], uses the ENTRYPOINT defined in the DockerFile."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the Nodes using this template. If [], uses the ENTRYPOINT defined in the DockerFile."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -3210,7 +3210,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on the Pods using this template. If [], uses the start CMD defined in the DockerFile."
+            "description": "If specified, overrides the start CMD for the Docker image run on the Nodes using this template. If [], uses the start CMD defined in the DockerFile."
           },
           "env": {
             "type": "object",
@@ -3229,7 +3229,7 @@
           "isPublic": {
             "type": "boolean",
             "default": false,
-            "description": "If this is a Pod template, specifies whether the template is visible to other Brightnode users."
+            "description": "If this is a Node template, specifies whether the template is visible to other Brightnode users."
           },
           "name": {
             "type": "string",
@@ -3245,7 +3245,7 @@
               "22/tcp"
             ],
             "default": "8888/http,22/tcp",
-            "description": "A list of ports exposed on the created Pod. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on the created Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "readme": {
             "type": "string",
@@ -3255,12 +3255,12 @@
           "volumeInGb": {
             "type": "integer",
             "default": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Pods deployed with this template."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Nodes deployed with this template."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If a volume is attached to a Pod deployed with this template, the absolute path where the volume will be mounted in the filesystem."
+            "description": "If a volume is attached to a Node deployed with this template, the absolute path where the volume will be mounted in the filesystem."
           }
         }
       },
@@ -3502,7 +3502,7 @@
           "workers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Pod"
+              "$ref": "#/components/schemas/Node"
             },
             "description": "Information about current workers on a Serverless endpoint."
           },
@@ -4047,7 +4047,7 @@
             "type": "string",
             "example": "clkrb4qci0000mb09c7sualzo"
           },
-          "podId": {
+          "nodeId": {
             "type": "string",
             "example": "xedezhzb9la3ye"
           },
@@ -4113,7 +4113,7 @@
               "count": {
                 "type": "integer",
                 "example": 1,
-                "description": "The number of GPUs attached to a Pod."
+                "description": "The number of GPUs attached to a Node."
               },
               "displayName": {
                 "type": "string"
@@ -4165,7 +4165,7 @@
           "maxUploadSpeedMbps": {
             "type": "integer"
           },
-          "minPodGpuCount": {
+          "minNodeGpuCount": {
             "type": "integer"
           },
           "note": {
@@ -4312,9 +4312,9 @@
             "type": "string",
             "description": "If grouping by GPU type ID, the GPU type ID of the group."
           },
-          "podId": {
+          "nodeId": {
             "type": "string",
-            "description": "If grouping by Pod ID, the Pod ID of the group."
+            "description": "If grouping by Node ID, the Node ID of the group."
           },
           "time": {
             "type": "string",
@@ -4352,9 +4352,9 @@
               "type": "string",
               "description": "If grouping by GPU type ID, the GPU type ID of the group."
             },
-            "podId": {
+            "nodeId": {
               "type": "string",
-              "description": "If grouping by Pod ID, the Pod ID of the group."
+              "description": "If grouping by Node ID, the Node ID of the group."
             },
             "time": {
               "type": "string",
