@@ -5,7 +5,7 @@ description: "Learn how to deploy a custom vLLM server to a load balancing Serve
 tag: "NEW"
 ---
 
-This tutorial shows how to build a vLLM application using FastAPI and deploy it as a load balancing Serverless endpoint on Runpod.
+This tutorial shows how to build a vLLM application using FastAPI and deploy it as a load balancing Serverless endpoint on Brightnode.
 
 ## What you'll learn
 
@@ -26,7 +26,7 @@ In this tutorial you'll learn how to:
 
 Before you begin you'll need:
 
-- A Runpod account.
+- A Brightnode account.
 - Basic familiarity with Python, REST APIs, and vLLM.
 - Docker installed on your local machine.
 
@@ -34,7 +34,7 @@ Before you begin you'll need:
 
 <Tip>
 
-You can download a preconfigured repository containing the completed code for this tutorial [on GitHub](https://github.com/runpod-workers/vllm-loadbalancer-ep/).
+You can download a preconfigured repository containing the completed code for this tutorial [on GitHub](https://github.com/Brightnode-workers/vllm-loadbalancer-ep/).
 
 </Tip>
 
@@ -259,7 +259,7 @@ async def create_engine():
 
 @app.get("/ping")
 async def health_check():
-    """Health check endpoint required by Runpod load balancer"""
+    """Health check endpoint required by Brightnode load balancer"""
     if not engine_ready:
         logger.debug("Health check: Engine initializing")
         # Return 503 when initializing
@@ -471,7 +471,7 @@ With the application code complete, we still need to define its dependencies and
     ray
     pandas
     pyarrow
-    runpod~=1.7.0
+    Brightnode~=1.7.0
     huggingface-hub
     packaging
     typing-extensions==4.7.1
@@ -526,11 +526,11 @@ docker build --platform linux/amd64 -t YOUR_DOCKER_USERNAME/vllm-loadbalancer:v1
 docker push YOUR_DOCKER_USERNAME/vllm-loadbalancer:v1.0
 ```
 
-## Step 7: Deploy to Runpod
+## Step 7: Deploy to Brightnode
 
 Now, let's deploy our application to a Serverless endpoint:
 
-1. Go to the [Serverless page](https://www.runpod.io/console/serverless) in the Runpod console.
+1. Go to the [Serverless page](https://www.brightnode.cloud/console/serverless) in the Brightnode console.
 2. Click **New Endpoint**
 3. Click **Import from Docker Registry**.
 4. In the **Container Image** field, enter your Docker image URL:
@@ -547,36 +547,36 @@ Now, let's deploy our application to a Serverless endpoint:
 ## Step 8: Test your endpoints
 
 <Tip>
-You can find a Python script to test your vLLM load balancer locally [on GitHub](https://github.com/runpod-workers/vllm-loadbalancer-ep/blob/main/example.py).
+You can find a Python script to test your vLLM load balancer locally [on GitHub](https://github.com/Brightnode-workers/vllm-loadbalancer-ep/blob/main/example.py).
 </Tip>
 
 Once your endpoint has finished deploying, you can access your vLLM APIs at:
 
 ```
-https://ENDPOINT_ID.api.runpod.ai/PATH
+https://ENDPOINT_ID.api.brightnode.ai/PATH
 ```
 
 For example, the vLLM application we defined in step 4 exposes these endpoints:
 
-- Health check: `https://ENDPOINT_ID.api.runpod.ai/ping`
-- Generate text: `https://ENDPOINT_ID.api.runpod.ai/v1/completions`
-- Chat completions: `https://ENDPOINT_ID.api.runpod.ai/v1/chat/completions`
+- Health check: `https://ENDPOINT_ID.api.brightnode.ai/ping`
+- Generate text: `https://ENDPOINT_ID.api.brightnode.ai/v1/completions`
+- Chat completions: `https://ENDPOINT_ID.api.brightnode.ai/v1/chat/completions`
 
-Use the curl commands below to make test requests to your vLLM load balancer, replacing `ENDPOINT_ID` and `RUNPOD_API_KEY` with your actual values.
+Use the curl commands below to make test requests to your vLLM load balancer, replacing `ENDPOINT_ID` and `BRIGHTNODE_API_KEY` with your actual values.
 
 To run a health check:
 
 ```bash ping
-curl -X GET "https://ENDPOINT_ID.api.runpod.ai/ping" \
-    -H 'Authorization: Bearer RUNPOD_API_KEY' \
+curl -X GET "https://ENDPOINT_ID.api.brightnode.ai/ping" \
+    -H 'Authorization: Bearer BRIGHTNODE_API_KEY' \
     -H "Content-Type: application/json" \
 ```
 
 For text completions:
 
 ```bash
-curl -X POST "https://ENDPOINT_ID.api.runpod.ai/v1/completions" \
-     -H 'Authorization: Bearer RUNPOD_API_KEY' \
+curl -X POST "https://ENDPOINT_ID.api.brightnode.ai/v1/completions" \
+     -H 'Authorization: Bearer BRIGHTNODE_API_KEY' \
      -H 'Content-Type: application/json' \
      -d '{"prompt": "Once upon a time", "max_tokens": 50, "temperature": 0.8}'
 ```
@@ -584,8 +584,8 @@ curl -X POST "https://ENDPOINT_ID.api.runpod.ai/v1/completions" \
 For chat completions:
 
 ```bash
-curl -X POST "https://ENDPOINT_ID.api.runpod.ai/v1/chat/completions" \
-     -H 'Authorization: Bearer RUNPOD_API_KEY' \
+curl -X POST "https://ENDPOINT_ID.api.brightnode.ai/v1/chat/completions" \
+     -H 'Authorization: Bearer BRIGHTNODE_API_KEY' \
      -H 'Content-Type: application/json' \
      -d '{
        "messages": [

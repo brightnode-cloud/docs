@@ -2,16 +2,16 @@
 title: "Cleanup"
 ---
 
-When developing for Runpod serverless, it's crucial to manage resources efficiently. The Runpod SDK provides a `clean()` function to help you remove temporary files and folders after processing. This guide will show you how to use this cleanup utility effectively.
+When developing for Brightnode serverless, it's crucial to manage resources efficiently. The Brightnode SDK provides a `clean()` function to help you remove temporary files and folders after processing. This guide will show you how to use this cleanup utility effectively.
 
 ## The clean() Function
 
-The `clean()` function is part of Runpod's serverless utilities. It helps maintain a clean environment by removing specified folders and files after a job is completed.
+The `clean()` function is part of Brightnode's serverless utilities. It helps maintain a clean environment by removing specified folders and files after a job is completed.
 
-To use it, import the function from the Runpod serverless utilities:
+To use it, import the function from the Brightnode serverless utilities:
 
 ```python
-from runpod.serverless.utils.rp_cleanup import clean
+from brightnode.serverless.utils.rp_cleanup import clean
 ```
 
 ## Default Behavior
@@ -30,8 +30,8 @@ Here's an example of how to incorporate the `clean()` function in your AI model 
 <Tabs>
 <Tab title="Python">
 ```python
-import runpod
-from runpod.serverless.utils.rp_cleanup import clean
+import brightnode
+from brightnode.serverless.utils.rp_cleanup import clean
 import requests
 import os
 
@@ -78,7 +78,7 @@ def handler(event):
 
 
 # Start the serverless function
-runpod.serverless.start({"handler": handler})
+brightnode.serverless.start({"handler": handler})
 ```
 
 </Tab>

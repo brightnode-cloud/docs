@@ -2,11 +2,11 @@
 title: "Generate images with SDXL Turbo"
 ---
 
-When it comes to working with an AI image generator, the speed in which images are generated is often a compromise. Runpod's Serverless Workers allows you to host [SDXL Turbo](https://huggingface.co/stabilityai/sdxl-turbo) from Stability AI, which is a fast text-to-image model.
+When it comes to working with an AI image generator, the speed in which images are generated is often a compromise. Brightnode's Serverless Workers allows you to host [SDXL Turbo](https://huggingface.co/stabilityai/sdxl-turbo) from Stability AI, which is a fast text-to-image model.
 
-In this tutorial, you'll build a web application, where you'll leverage Runpod's Serverless Worker and Endpoint to return an image from a text-based input.
+In this tutorial, you'll build a web application, where you'll leverage Brightnode's Serverless Worker and Endpoint to return an image from a text-based input.
 
-By the end of this tutorial, you'll have an understanding of running a Serverless Worker on Runpod and sending requests to an Endpoint to receive a response.
+By the end of this tutorial, you'll have an understanding of running a Serverless Worker on Brightnode and sending requests to an Endpoint to receive a response.
 
 You can proceed with the tutorial by following the build steps outlined here or skip directly to [Deploy a Serverless Endpoint](#deploy-a-serverless-endpoint) section.
 
@@ -16,12 +16,12 @@ This section presumes you have an understanding of the terminal and can execute 
 
 Before starting this tutorial, you'll need access to:
 
-### Runpod
+### Brightnode
 
-To continue with this quick start, you'll need access to the following from Runpod:
+To continue with this quick start, you'll need access to the following from Brightnode:
 
-* Runpod account
-* Runpod API Key
+* Brightnode account
+* Brightnode API Key
 
 ### Docker
 
@@ -30,7 +30,7 @@ To build your Docker image, you'll need access to the following:
 * Docker installed
 * Docker account
 
-You can also use the prebuilt image from [runpod/sdxl-turbo](https://hub.docker.com/r/runpod/sdxl-turbo).
+You can also use the prebuilt image from [Brightnode/sdxl-turbo](https://hub.docker.com/r/Brightnode/sdxl-turbo).
 
 ### GitHub
 
@@ -43,14 +43,14 @@ With the prerequisites covered, get started by building and pushing a Docker ima
 
 ## Build and push your Docker image
 
-This step will walk you through building and pushing your Docker image to your container registry. This is useful to building custom images for your use case. If you prefer, you can use the prebuilt image from [runpod/sdxl-turbo](https://hub.docker.com/r/runpod/sdxl-turbo) instead of building your own.
+This step will walk you through building and pushing your Docker image to your container registry. This is useful to building custom images for your use case. If you prefer, you can use the prebuilt image from [Brightnode/sdxl-turbo](https://hub.docker.com/r/Brightnode/sdxl-turbo) instead of building your own.
 
-Building a Docker image allows you to specify the container when creating a Worker. The Docker image includes the [Runpod Handler](https://github.com/runpod-workers/worker-sdxl-turbo/blob/main/src/handler.py) which is how you provide instructions to Worker to perform some task. In this example, the Handler is responsible for taking a Job and returning a base 64 instance of the image.
+Building a Docker image allows you to specify the container when creating a Worker. The Docker image includes the [Brightnode Handler](https://github.com/Brightnode-workers/worker-sdxl-turbo/blob/main/src/handler.py) which is how you provide instructions to Worker to perform some task. In this example, the Handler is responsible for taking a Job and returning a base 64 instance of the image.
 
-1. Clone the [Runpod Worker SDXL Turbo](https://github.com/runpod-workers/worker-sdxl-turbo) repository:
+1. Clone the [Brightnode Worker SDXL Turbo](https://github.com/Brightnode-workers/worker-sdxl-turbo) repository:
 
 ```bash
-gh repo clone runpod-workers/worker-sdxl-turbo
+gh repo clone Brightnode-workers/worker-sdxl-turbo
 ```
 
 2. Navigate to the root of the cloned repo:
@@ -71,15 +71,15 @@ docker build --tag <username>/<repo>:<tag> .
 docker push <username>/<repo>:<tag>
 ```
 
-Now that you've pushed your container registry, you're ready to deploy your Serverless Endpoint to Runpod.
+Now that you've pushed your container registry, you're ready to deploy your Serverless Endpoint to Brightnode.
 
 ## Deploy a Serverless Endpoint
 
 The container you just built will run on the Worker you're creating. Here, you will configure and deploy the Endpoint. This will include the GPU and the storage needed for your Worker.
 
-This step will walk you through deploying a Serverless Endpoint to Runpod.
+This step will walk you through deploying a Serverless Endpoint to Brightnode.
 
-1. Log in to the [Runpod Serverless console](https://www.console.runpod.io/serverless).
+1. Log in to the [Brightnode Serverless console](https://www.console.brightnode.cloud/serverless).
 
 2. Select **+ New Endpoint**.
 
@@ -91,7 +91,7 @@ This step will walk you through deploying a Serverless Endpoint to Runpod.
    4. (optional) Select **FlashBoot**.
    5. (optional) Select a template.
    6. Enter the name of your Docker image.
-      * For example, `runpod/sdxl-turbo:dev`.
+      * For example, `Brightnode/sdxl-turbo:dev`.
    7. Specify enough memory for your Docker image.
 
 4. Select **Deploy**.
@@ -107,7 +107,7 @@ Run the following command:
 <Tabs>
 <Tab title="cURL">
 ```bash
-curl -X POST "https://api.runpod.ai/v2/${YOUR_ENDPOINT}/runsync" \
+curl -X POST "https://api.brightnode.ai/v2/${YOUR_ENDPOINT}/runsync" \
      -H "accept: application/json" \
      -H "content-type: application/json" \
      -H "authorization: ${YOUR_API_KEY}" \
@@ -170,7 +170,7 @@ The HTML file (`index.html`) sets up a user interface with an input box for the 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Runpod AI Image Generator</title>
+    <title>Brightnode AI Image Generator</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -184,7 +184,7 @@ The HTML file (`index.html`) sets up a user interface with an input box for the 
     </style>
 </head>
 <body>
-    <h1>Runpod AI Image Generator</h1>
+    <h1>Brightnode AI Image Generator</h1>
     <input type="text" id="promptInput" placeholder="Enter your image prompt" />
     <button onclick="generateImage()">Generate Image</button>
 
@@ -198,7 +198,7 @@ The HTML file (`index.html`) sets up a user interface with an input box for the 
 </Tab>
 
 <Tab title="JavaScript">
-The JavaScript file (`script.js`) contains the `generateImage` function. This function reads the user's input, makes a POST request to the Runpod serverless endpoint, and handles the response. The server's response is expected to contain the base64-encoded image, which is then displayed on the webpage.
+The JavaScript file (`script.js`) contains the `generateImage` function. This function reads the user's input, makes a POST request to the Brightnode serverless endpoint, and handles the response. The server's response is expected to contain the base64-encoded image, which is then displayed on the webpage.
 
 ```JavaScript script.js
 async function generateImage() {
@@ -232,7 +232,7 @@ async function generateImage() {
   try {
     const response = await fetch(
       // Replace with your actual Endpoint Id
-      "https://api.runpod.ai/v2/${process.env.REACT_APP_ENDPOINT_ID}/runsync",
+      "https://api.brightnode.ai/v2/${process.env.REACT_APP_ENDPOINT_ID}/runsync",
       options,
     );
     const data = await response.json();
@@ -259,7 +259,7 @@ async function generateImage() {
 2. Replace `${process.env.REACT_APP_ENDPOINT_ID}` with your specific Endpoint.
 3. Open `index.html` in a web browser, enter a prompt, and select **Generate Image** to see the result.
 
-This web application serves as a basic example of how to interact with your Runpod serverless endpoint from a client-side application. It can be expanded or modified to fit more complex use cases.
+This web application serves as a basic example of how to interact with your Brightnode serverless endpoint from a client-side application. It can be expanded or modified to fit more complex use cases.
 
 ## Run a server
 

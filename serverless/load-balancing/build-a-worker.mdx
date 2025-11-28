@@ -5,7 +5,7 @@ description: "Learn how to implement and deploy a load balancing worker with Fas
 tag: "NEW"
 ---
 
-This tutorial shows how to build a load balancing worker using FastAPI and deploy it as a Serverless endpoint on Runpod.
+This tutorial shows how to build a load balancing worker using FastAPI and deploy it as a Serverless endpoint on Brightnode.
 
 ## What you'll learn
 
@@ -20,7 +20,7 @@ In this tutorial you'll learn how to:
 
 Before you begin you'll need:
 
-- A Runpod account.
+- A Brightnode account.
 - Basic familiarity with Python and REST APIs.
 - Docker installed on your local machine.
 
@@ -28,7 +28,7 @@ Before you begin you'll need:
 
 <Tip>
 
-You can download a preconfigured repository containing the completed code for this tutorial [on GitHub](https://github.com/runpod-workers/worker-load-balancing/).
+You can download a preconfigured repository containing the completed code for this tutorial [on GitHub](https://github.com/Brightnode-workers/worker-load-balancing/).
 
 </Tip>
 
@@ -56,7 +56,7 @@ class GenerationResponse(BaseModel):
 # Global variable to track requests
 request_count = 0
 
-# Health check endpoint; required for Runpod to monitor worker health
+# Health check endpoint; required for Brightnode to monitor worker health
 @app.get("/ping")
 async def health_check():
     return {"status": "healthy"}
@@ -137,11 +137,11 @@ docker build --platform linux/amd64 -t YOUR_DOCKER_USERNAME/loadbalancer-example
 docker push YOUR_DOCKER_USERNAME/loadbalancer-example:v1.0
 ```
 
-## Step 4: Deploy to Runpod
+## Step 4: Deploy to Brightnode
 
 Now, let's deploy our application to a Serverless endpoint:
 
-1. Go to the [Serverless page](https://www.runpod.io/console/serverless) in the Runpod console.
+1. Go to the [Serverless page](https://www.brightnode.cloud/console/serverless) in the Brightnode console.
 2. Click **New Endpoint**
 3. Click **Import from Docker Registry**.
 4. In the **Container Image** field, enter your Docker image URL: 
@@ -160,35 +160,35 @@ Now, let's deploy our application to a Serverless endpoint:
 Once your endpoint is created, you can access your custom APIs at:
 
 ```
-https://ENDPOINT_ID.api.runpod.ai/PATH
+https://ENDPOINT_ID.api.brightnode.ai/PATH
 ```
 
 For example, the load balancing worker we defined in step 1 exposes these endpoints:
 
-- Health check: `https://ENDPOINT_ID.api.runpod.ai/ping`
-- Generate text: `https://ENDPOINT_ID.api.runpod.ai/generate`
-- Get request count: `https://ENDPOINT_ID.api.runpod.ai/stats`
+- Health check: `https://ENDPOINT_ID.api.brightnode.ai/ping`
+- Generate text: `https://ENDPOINT_ID.api.brightnode.ai/generate`
+- Get request count: `https://ENDPOINT_ID.api.brightnode.ai/stats`
 
-Try running one or more of these commands, replacing `ENDPOINT_ID` and `RUNPOD_API_KEY` with your actual endpoint ID and API key:
+Try running one or more of these commands, replacing `ENDPOINT_ID` and `BRIGHTNODE_API_KEY` with your actual endpoint ID and API key:
 
 <CodeGroup>
 
 ```bash generate
-curl -X POST "https://ENDPOINT_ID.api.runpod.ai/generate" \
-    -H 'Authorization: Bearer RUNPOD_API_KEY' \
+curl -X POST "https://ENDPOINT_ID.api.brightnode.ai/generate" \
+    -H 'Authorization: Bearer BRIGHTNODE_API_KEY' \
     -H "Content-Type: application/json" \
     -d '{"prompt": "Hello, world!"}'
 ```
 
 ```bash ping
-curl -X GET "https://ENDPOINT_ID.api.runpod.ai/ping" \
-    -H 'Authorization: Bearer RUNPOD_API_KEY' \
+curl -X GET "https://ENDPOINT_ID.api.brightnode.ai/ping" \
+    -H 'Authorization: Bearer BRIGHTNODE_API_KEY' \
     -H "Content-Type: application/json" \
 ```
 
 ```bash stats
-curl -X GET "https://ENDPOINT_ID.api.runpod.ai/stats" \
-    -H 'Authorization: Bearer RUNPOD_API_KEY' \
+curl -X GET "https://ENDPOINT_ID.api.brightnode.ai/stats" \
+    -H 'Authorization: Bearer BRIGHTNODE_API_KEY' \
     -H "Content-Type: application/json" \
 ```
 

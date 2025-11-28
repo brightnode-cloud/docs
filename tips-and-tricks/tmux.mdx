@@ -12,7 +12,7 @@ While you can run long-running tasks in JupyterLab notebooks, the kernel can cra
 
 ## Requirements
 
-To use TMUX, you need terminal access to your Runpod Pod (SSH, web terminal, or JupyterLab terminal).
+To use TMUX, you need terminal access to your Brightnode Pod (SSH, web terminal, or JupyterLab terminal).
 
 ## Video tutorial
 
@@ -20,14 +20,14 @@ For a comprehensive video guide on using TMUX, check out this excellent tutorial
 
 ## Installing TMUX
 
-TMUX is not installed by default on Runpod Pods. To install it, run:
+TMUX is not installed by default on Brightnode Pods. To install it, run:
 
 ```bash Install TMUX
 apt-get update && apt-get install -y tmux
 ```
 
 <Note>
-Most Runpod templates are based on Ubuntu/Debian images that support `apt-get`. If you're using Alpine Linux, use `apk add tmux` instead. Some minimal images may lack required dependencies.
+Most Brightnode templates are based on Ubuntu/Debian images that support `apt-get`. If you're using Alpine Linux, use `apk add tmux` instead. Some minimal images may lack required dependencies.
 </Note>
 
 ## Practical example: running model training
@@ -139,7 +139,7 @@ To scroll through terminal output:
 
 ## Best practices
 
-When using TMUX on Runpod Pods, keep these tips in mind:
+When using TMUX on Brightnode Pods, keep these tips in mind:
 
 - Always name your sessions descriptively to easily identify them later.
 - Regularly check on long-running processes by reattaching to sessions.

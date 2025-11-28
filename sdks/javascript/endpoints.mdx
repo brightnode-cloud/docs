@@ -2,25 +2,25 @@
 title: "Endpoints"
 ---
 
-Interacting with Runpod's endpoints is a core feature of the SDK, enabling the execution of tasks and the retrieval of results. This section covers the synchronous and asynchronous execution methods, along with checking the status of operations.
+Interacting with Brightnode's endpoints is a core feature of the SDK, enabling the execution of tasks and the retrieval of results. This section covers the synchronous and asynchronous execution methods, along with checking the status of operations.
 
 ## Prerequisites
 
-Before using the Runpod JavaScript, ensure that you have:
+Before using the Brightnode JavaScript, ensure that you have:
 
-* Installed the Runpod JavaScript SDK.
+* Installed the Brightnode JavaScript SDK.
 * Configured your API key.
 
 ## Set your Endpoint Id
 
-Set your Runpod API key and your Endpoint Id as environment variables.
+Set your Brightnode API key and your Endpoint Id as environment variables.
 
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
-const runpod = runpodSdk(RUNPOD_API_KEY);
-const endpoint = runpod.endpoint(ENDPOINT_ID);
+const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+const endpoint = brightnode.endpoint(ENDPOINT_ID);
 ```
 
 This allows all calls to pass through your Endpoint Id with a valid API key.
@@ -45,11 +45,11 @@ To execute an endpoint synchronously and wait for the result, use the `runSync` 
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
-const runpod = runpodSdk(RUNPOD_API_KEY);
-const endpoint = runpod.endpoint(ENDPOINT_ID);
+const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+const endpoint = brightnode.endpoint(ENDPOINT_ID);
 const result = await endpoint.runSync({
   "input": {
     "prompt": "Hello, World!",
@@ -88,11 +88,11 @@ For non-blocking operations, use the `run` method on the endpoint. This method a
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
-const runpod = runpodSdk(RUNPOD_API_KEY);
-const endpoint = runpod.endpoint(ENDPOINT_ID);
+const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+const endpoint = brightnode.endpoint(ENDPOINT_ID);
 const result = await endpoint.run({
   "input": {
     "prompt": "Hello, World!",
@@ -123,14 +123,14 @@ The following example shows how to get the results of an asynchronous run.
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function main() {
-  const runpod = runpodSdk(RUNPOD_API_KEY);
-  const endpoint = runpod.endpoint(ENDPOINT_ID);
+  const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+  const endpoint = brightnode.endpoint(ENDPOINT_ID);
   const result = await endpoint.run({
     input: {
       prompt: "Hello, World!",
@@ -209,21 +209,21 @@ Operation completed successfully.
 
 ### Poll the status of an asynchronous run
 
-Uses `await endpoint.status(id)` to check the status of the operation repeatedly until it either completes or fails. After each check, the function waits for 5 seconds (or any other suitable duration you choose) before checking the status again, using the sleep function. This approach ensures your application remains responsive and doesn't overwhelm the Runpod endpoint with status requests.
+Uses `await endpoint.status(id)` to check the status of the operation repeatedly until it either completes or fails. After each check, the function waits for 5 seconds (or any other suitable duration you choose) before checking the status again, using the sleep function. This approach ensures your application remains responsive and doesn't overwhelm the Brightnode endpoint with status requests.
 
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 // Function to pause execution for a specified time
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function main() {
   try {
-    const runpod = runpodSdk(RUNPOD_API_KEY);
-    const endpoint = runpod.endpoint(ENDPOINT_ID);
+    const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+    const endpoint = brightnode.endpoint(ENDPOINT_ID);
     const result = await endpoint.run({
       input: {
         prompt: "Hello, World!",
@@ -285,12 +285,12 @@ Stream allows you to stream the output of an Endpoint run. To enable streaming, 
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 async function main() {
-  const runpod = runpodSdk(RUNPOD_API_KEY);
-  const endpoint = runpod.endpoint(ENDPOINT_ID);
+  const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+  const endpoint = brightnode.endpoint(ENDPOINT_ID);
   const result = await endpoint.run({
     input: {
       prompt: "Hello, World!",
@@ -363,7 +363,7 @@ You must define your handler to support the `"return_aggregate_stream": True` op
 
 ```python
 from time import sleep
-import runpod
+import brightnode
 
 
 def handler(job):
@@ -374,7 +374,7 @@ def handler(job):
         yield i
 
 
-runpod.serverless.start(
+brightnode.serverless.start(
     {
         "handler": handler,
         "return_aggregate_stream": True,  # Ensures aggregated results are streamed back
@@ -399,11 +399,11 @@ Monitor the health of an endpoint by checking its status, including jobs complet
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
-const runpod = runpodSdk(RUNPOD_API_KEY);
-const endpoint = runpod.endpoint(ENDPOINT_ID);
+const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+const endpoint = brightnode.endpoint(ENDPOINT_ID);
 
 const health = await endpoint.health();
 console.log(health);
@@ -442,13 +442,13 @@ Use the `status` method and specify the `id` of the run to get the status of a r
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 async function main() {
   try {
-    const runpod = runpodSdk(RUNPOD_API_KEY);
-    const endpoint = runpod.endpoint(ENDPOINT_ID);
+    const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+    const endpoint = brightnode.endpoint(ENDPOINT_ID);
     const result = await endpoint.run({
       input: {
         prompt: "Hello, World!",
@@ -496,13 +496,13 @@ You can cancel a Job request by using the `cancel()` function on the run request
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 async function main() {
   try {
-    const runpod = runpodSdk(RUNPOD_API_KEY);
-    const endpoint = runpod.endpoint(ENDPOINT_ID);
+    const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+    const endpoint = brightnode.endpoint(ENDPOINT_ID);
     const result = await endpoint.run({
       input: {
         prompt: "Hello, World!",
@@ -546,11 +546,11 @@ To set a timeout on a run, pass a timeout value to the `run` method. Time is mea
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
-const runpod = runpodSdk(RUNPOD_API_KEY);
-const endpoint = runpod.endpoint(ENDPOINT_ID);
+const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+const endpoint = brightnode.endpoint(ENDPOINT_ID);
 const result = await endpoint.run({
   "input": {
     "prompt": "Hello, World!",
@@ -581,11 +581,11 @@ You can set the maximum time to wait for a response from the endpoint in the `po
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
-const runpod = runpodSdk(RUNPOD_API_KEY);
-const endpoint = runpod.endpoint(ENDPOINT_ID);
+const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+const endpoint = brightnode.endpoint(ENDPOINT_ID);
 const result = await endpoint.run({
   "input": {
     "prompt": "Hello, World!",
@@ -623,13 +623,13 @@ You can purge all jobs from a queue by using the `purgeQueue()` function.
 <Tabs>
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 async function main() {
   try {
-    const runpod = runpodSdk(RUNPOD_API_KEY);
-    const endpoint = runpod.endpoint(ENDPOINT_ID);
+    const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+    const endpoint = brightnode.endpoint(ENDPOINT_ID);
     await endpoint.run({
       input: {
         prompt: "Hello, World!",

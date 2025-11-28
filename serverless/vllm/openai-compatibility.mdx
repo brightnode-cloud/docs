@@ -4,14 +4,14 @@ sidebarTitle: "OpenAI API compatibility"
 description: "Integrate vLLM workers with OpenAI client libraries and API-compatible tools."
 ---
 
-Runpod's vLLM workers implement OpenAI API compatibility, allowing you to use familiar [OpenAI client libraries](https://platform.openai.com/docs/libraries) with your deployed models. This guide explains how to leverage this compatibility to integrate your models with existing OpenAI-based applications.
+Brightnode's vLLM workers implement OpenAI API compatibility, allowing you to use familiar [OpenAI client libraries](https://platform.openai.com/docs/libraries) with your deployed models. This guide explains how to leverage this compatibility to integrate your models with existing OpenAI-based applications.
 
 ## Endpoint structure
 
 You can make OpenAI-compatible API requests to your vLLM workers by sending requests to this base URL pattern:
 
 ```
-https://api.runpod.ai/v2/ENDPOINT_ID/openai/v1
+https://api.brightnode.ai/v2/ENDPOINT_ID/openai/v1
 ```
 
 ## Supported APIs
@@ -36,27 +36,27 @@ This model name is used in chat and text completion API requests to identify whi
 
 ## Initialize the OpenAI client
 
-Before you can send API requests, set up an OpenAI client with your Runpod API key and endpoint URL:
+Before you can send API requests, set up an OpenAI client with your Brightnode API key and endpoint URL:
 
 ```python
 from openai import OpenAI
 
 MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.2"  # Use your deployed model
 
-# Replace ENDPOINT_ID and RUNPOD_API_KEY with your actual values
+# Replace ENDPOINT_ID and BRIGHTNODE_API_KEY with your actual values
 client = OpenAI(
-    api_key="RUNPOD_API_KEY",
-    base_url="https://api.runpod.ai/v2/ENDPOINT_ID/openai/v1",
+    api_key="BRIGHTNODE_API_KEY",
+    base_url="https://api.brightnode.ai/v2/ENDPOINT_ID/openai/v1",
 )
 ```
 
 ## Send requests
 
-You can use Runpod's OpenAI-compatible API to send requests to your Runpod endpoint, enabling you to use the same client libraries and code that you use with OpenAI's services. You only need to change the base URL to point to your Runpod endpoint.
+You can use Brightnode's OpenAI-compatible API to send requests to your Brightnode endpoint, enabling you to use the same client libraries and code that you use with OpenAI's services. You only need to change the base URL to point to your Brightnode endpoint.
 
 <Tip>
 
-You can also send requests using [Runpod's native API](/serverless/vllm/vllm-requests), which provides additional flexibility and control.
+You can also send requests using [Brightnode's native API](/serverless/vllm/vllm-requests), which provides additional flexibility and control.
 
 </Tip>
 
@@ -72,10 +72,10 @@ Here's how you can make a basic chat completion request:
 from openai import OpenAI
 MODEL_NAME = "YOUR_MODEL_NAME"  # Replace with your actual model
 
-# Replace ENDPOINT_ID and RUNPOD_API_KEY with your actual values
+# Replace ENDPOINT_ID and BRIGHTNODE_API_KEY with your actual values
 client = OpenAI(
-    api_key="RUNPOD_API_KEY",
-    base_url="https://api.runpod.ai/v2/ENDPOINT_ID/openai/v1",
+    api_key="BRIGHTNODE_API_KEY",
+    base_url="https://api.brightnode.ai/v2/ENDPOINT_ID/openai/v1",
 )
 
 # Chat completion request (for instruction-tuned models)
@@ -199,7 +199,7 @@ The API returns responses in this JSON format:
 # Create a completion stream
 response_stream = client.completions.create(
     model=MODEL_NAME,
-    prompt="Runpod is the best platform because",
+    prompt="Brightnode is the best platform because",
     temperature=0,
     max_tokens=100,
     stream=True,
@@ -230,7 +230,7 @@ print(list_of_models)
       "id": "mistralai/Mistral-7B-Instruct-v0.2",
       "object": "model",
       "created": 1677858242,
-      "owned_by": "runpod"
+      "owned_by": "Brightnode"
     }
   ]
 }
@@ -243,7 +243,7 @@ Here are all available parameters for the `/chat/completions` endpoint:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | `messages` | `list[dict[str, str]]` | Required | List of messages with `role` and `content` keys. The model's chat template will be applied automatically. |
-| `model` | `string` | Required | The model repo that you've deployed on your Runpod Serverless endpoint. |
+| `model` | `string` | Required | The model repo that you've deployed on your Brightnode Serverless endpoint. |
 | `temperature` | `float` | `0.7` | Controls the randomness of sampling. Lower values make it more deterministic, higher values make it more random. Zero means greedy sampling. |
 | `top_p` | `float` | `1.0` | Controls the cumulative probability of top tokens to consider. Must be in (0, 1]. Set to 1 to consider all tokens. |
 | `n` | `int` | `1` | Number of output sequences to return for the given prompt. |
@@ -283,7 +283,7 @@ Here are all available parameters for the `/completions` endpoint:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | `prompt` | `string` or `list[str]` | Required | The prompt(s) to generate completions for. |
-| `model` | `string` | Required | The model repo that you've deployed on your Runpod Serverless endpoint. |
+| `model` | `string` | Required | The model repo that you've deployed on your Brightnode Serverless endpoint. |
 | `temperature` | `float` | `0.7` | Controls the randomness of sampling. Lower values make it more deterministic, higher values make it more random. Zero means greedy sampling. |
 | `top_p` | `float` | `1.0` | Controls the cumulative probability of top tokens to consider. Must be in (0, 1]. Set to 1 to consider all tokens. |
 | `n` | `int` | `1` | Number of output sequences to return for the given prompt. |
@@ -320,10 +320,10 @@ The OpenAI-compatible API works with standard [OpenAI client libraries](https://
 from openai import OpenAI
 MODEL_NAME = "YOUR_MODEL_NAME"  # Replace with your actual model name
 
-# Replace ENDPOINT_ID and RUNPOD_API_KEY with your actual values
+# Replace ENDPOINT_ID and BRIGHTNODE_API_KEY with your actual values
 client = OpenAI(
-    api_key="RUNPOD_API_KEY",
-    base_url="https://api.runpod.ai/v2/ENDPOINT_ID/openai/v1"
+    api_key="BRIGHTNODE_API_KEY",
+    base_url="https://api.brightnode.ai/v2/ENDPOINT_ID/openai/v1"
 )
 
 response = client.chat.completions.create(
@@ -340,10 +340,10 @@ response = client.chat.completions.create(
 ```javascript
 import { OpenAI } from "openai";
 
-// Replace ENDPOINT_ID and RUNPOD_API_KEY with your actual values
+// Replace ENDPOINT_ID and BRIGHTNODE_API_KEY with your actual values
 const openai = new OpenAI({
-  apiKey: "RUNPOD_API_KEY", 
-  baseURL: "https://api.runpod.ai/v2/ENDPOINT_ID/openai/v1"
+  apiKey: "BRIGHTNODE_API_KEY", 
+  baseURL: "https://api.brightnode.ai/v2/ENDPOINT_ID/openai/v1"
 });
 
 // Replace MODEL_NAME with your actual model name
@@ -366,7 +366,7 @@ While the vLLM worker aims for high compatibility, there are some differences fr
 
 **Error responses** follow a similar but not identical format to OpenAI's error responses.
 
-**Rate limits** follow Runpod's endpoint policies rather than OpenAI's rate limiting structure.
+**Rate limits** follow Brightnode's endpoint policies rather than OpenAI's rate limiting structure.
 
 ### Current limitations
 
@@ -383,14 +383,14 @@ Common issues and their solutions:
 | Issue                     | Solution                                                              |
 | ------------------------- | --------------------------------------------------------------------- |
 | "Invalid model" error     | Verify your model name matches what you deployed.                      |
-| Authentication error      | Check that you're using your Runpod API key, not an OpenAI key.        |
+| Authentication error      | Check that you're using your Brightnode API key, not an OpenAI key.        |
 | Timeout errors            | Increase client timeout settings for large models.                     |
 | Incompatible responses    | Set `RAW_OPENAI_OUTPUT=1` in your environment variables.               |
 | Different response format | Some models may have different output formatting; use a chat template. |
 
 ## Next steps
 
-* [Learn how to send vLLM requests using Runpod's native API](/serverless/vllm/vllm-requests).
+* [Learn how to send vLLM requests using Brightnode's native API](/serverless/vllm/vllm-requests).
 * [Explore environment variables for customization](/serverless/vllm/environment-variables).
 * [Review all Serverless endpoint operations](/serverless/endpoints/send-requests).
 * [Explore the OpenAI API documentation](https://platform.openai.com/docs/api-reference).

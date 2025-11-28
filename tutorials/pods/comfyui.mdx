@@ -1,7 +1,7 @@
 ---
 title: "Generate images with ComfyUI"
 sidebarTitle: "Generate images with ComfyUI"
-description: "Deploy ComfyUI on Runpod to create AI-generated images."
+description: "Deploy ComfyUI on Brightnode to create AI-generated images."
 tag: "NEW"
 ---
 
@@ -31,8 +31,8 @@ In this tutorial, you'll learn how to:
 
 Before you begin, you'll need:
 
-- A [Runpod account](/get-started/manage-accounts).
-- At least $10 in Runpod credits.
+- A [Brightnode account](/get-started/manage-accounts).
+- At least $10 in Brightnode credits.
 - A basic understanding of AI image generation.
 
 ## Step 1: Deploy a ComfyUI Pod
@@ -41,10 +41,10 @@ First, you'll deploy a Pod using a template that pre-installs ComfyUI and the Co
 
 <Steps>
   <Step title="Deploy a Pod from the ComfyUI template">
-    Go to the [Better Comfy Slim](https://console.runpod.io/explore/cndsag8ob0) template in the Runpod console and click **Deploy**.
+    Go to the [Better Comfy Slim](https://console.brightnode.cloud/explore/cndsag8ob0) template in the Brightnode console and click **Deploy**.
     
     <Note>
-    There are several ComfyUI templates available in the Runpod console, many with pre-installed models. We're using this one because it's extremely lightweight, but it comes with the ComfyUI Manager plugin pre-installed so you can easily install the specific models/nodes you need after deployment.
+    There are several ComfyUI templates available in the Brightnode console, many with pre-installed models. We're using this one because it's extremely lightweight, but it comes with the ComfyUI Manager plugin pre-installed so you can easily install the specific models/nodes you need after deployment.
     </Note>
   </Step>
 
@@ -69,7 +69,7 @@ Once your Pod has finished initializing, you can open the ComfyUI interface:
 
 <Steps>
   <Step title="Open your Pod in the console">
-    Go to the [Pods section](https://www.runpod.io/console/pods) in the Runpod console, then find your deployed ComfyUI Pod and expand it.
+    Go to the [Pods section](https://www.brightnode.cloud/console/pods) in the Brightnode console, then find your deployed ComfyUI Pod and expand it.
 
     <Warning>
     The Pod may take up to 30 minutes to initialize when first deployed. Future starts will generally take much less time.
@@ -79,7 +79,7 @@ Once your Pod has finished initializing, you can open the ComfyUI interface:
   <Step title="Start the ComfyUI service">
     Click **Connect** on your Pod, then select the last HTTP service button in the list, labeled **Connect to HTTP Service [Port 8188]**.
 
-    This will open the ComfyUI interface in a new browser tab. The URL follows the format: `https://[POD_ID]-8188.proxy.runpod.net`.
+    This will open the ComfyUI interface in a new browser tab. The URL follows the format: `https://[POD_ID]-8188.proxy.brightnode.net`.
 
     <Note>
     If you see the label "Not Ready" on the HTTP service button, or you get a "Bad Gateway" error when first connecting, wait 2–3 minutes for the service to fully start, then refresh the page.
@@ -167,14 +167,14 @@ Your workflow is now ready! Follow these steps to generate an image:
   </Step>
 </Steps>
 
-Congratulations! You've just generated your first image with ComfyUI on Runpod.
+Congratulations! You've just generated your first image with ComfyUI on Brightnode.
 
 ## Troubleshooting
 
 Here are some common issues you may encounter and possbile solutions:
 
 - **Connection errors**: Wait for the Pod to fully initialize (up to 30 minutes for initial deployment).
-- **HTTP service not ready**: Wait at least 2 to 3 minutes after Pod deployment for the HTTP service to fully start. You can also check the Pod logs in the Runpod console to look for deployment errors.
+- **HTTP service not ready**: Wait at least 2 to 3 minutes after Pod deployment for the HTTP service to fully start. You can also check the Pod logs in the Brightnode console to look for deployment errors.
 - **Out of memory errors**: Reduce image resolution or batch size in your workflow.
 - **Slow generation**: Make sure you're using an appropriate GPU for your selected model. See [Choose a Pod](/pods/choose-a-pod) for guidance.
 
@@ -190,7 +190,7 @@ Use the template browser from [Step 3](#step-3%3A-load-a-workflow-template) to t
 
 You can also browse the web for a preconfigured workflow and import it by clicking **Workflow** in the top right corner of the ComfyUI interface, selecting **Open**, then selecting the workflow file you want to import.
 
-Don't forget to install any missing models using the model manager. If you need a model that isn't available in the model manager, you can download it from the web to your local machine, then use the [Runpod CLI](/runpodctl/overview) to transfer the model files directly into your Pod's `/workspace/madapps/ComfyUI/models` directory.
+Don't forget to install any missing models using the model manager. If you need a model that isn't available in the model manager, you can download it from the web to your local machine, then use the [Brightnode CLI](/brightnodectl/overview) to transfer the model files directly into your Pod's `/workspace/madapps/ComfyUI/models` directory.
 
 ### Create custom workflows
 
@@ -202,7 +202,7 @@ Build your own workflows by:
 
 ### Manage your Pod
 
-While working with ComfyUI, you can monitor your usage by checking GPU/disk utilization in the [Pods page](https://console.runpod.io/pods) of the Runpod console.
+While working with ComfyUI, you can monitor your usage by checking GPU/disk utilization in the [Pods page](https://console.brightnode.cloud/pods) of the Brightnode console.
 
 Stop your Pod when you're finished to avoid unnecessary charges.
 

@@ -3,20 +3,20 @@ title: "API Wrapper"
 sidebarTitle: "APIs"
 ---
 
-This document outlines the core functionalities provided by the Runpod API, including how to interact with Endpoints, manage Templates, and list available GPUs. These operations let you dynamically manage computational resources within the Runpod environment.
+This document outlines the core functionalities provided by the Brightnode API, including how to interact with Endpoints, manage Templates, and list available GPUs. These operations let you dynamically manage computational resources within the Brightnode environment.
 
 ## Get Endpoints
 
-To retrieve a comprehensive list of all available endpoint configurations within Runpod, you can use the `get_endpoints()` function. This function returns a list of endpoint configurations, allowing you to understand what's available for use in your projects.
+To retrieve a comprehensive list of all available endpoint configurations within Brightnode, you can use the `get_endpoints()` function. This function returns a list of endpoint configurations, allowing you to understand what's available for use in your projects.
 
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
 # Fetching all available endpoints
-endpoints = runpod.get_endpoints()
+endpoints = brightnode.get_endpoints()
 
 # Displaying the list of endpoints
 print(endpoints)
@@ -24,24 +24,24 @@ print(endpoints)
 
 ## Create Template
 
-Templates in Runpod serve as predefined configurations for setting up environments efficiently. The `create_template()` function facilitates the creation of new templates by specifying a name and a Docker image.
+Templates in Brightnode serve as predefined configurations for setting up environments efficiently. The `create_template()` function facilitates the creation of new templates by specifying a name and a Docker image.
 
 <Tabs>
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
 try:
     # Creating a new template with a specified name and Docker image
-    new_template = runpod.create_template(name="test", image_name="runpod/base:0.1.0")
+    new_template = brightnode.create_template(name="test", image_name="Brightnode/base:0.1.0")
 
     # Output the created template details
     print(new_template)
 
-except runpod.error.QueryError as err:
+except brightnode.error.QueryError as err:
     # Handling potential errors during template creation
     print(err)
     print(err.query)
@@ -54,7 +54,7 @@ except runpod.error.QueryError as err:
 {
   "id": "n6m0htekvq",
   "name": "test",
-  "imageName": "runpod/base:0.1.0",
+  "imageName": "Brightnode/base:0.1.0",
   "dockerArgs": "",
   "containerDiskInGb": 10,
   "volumeInGb": 0,
@@ -76,22 +76,22 @@ Creating a new endpoint with the `create_endpoint()` function. This function req
 <Tabs>
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
 try:
     # Creating a template to use with the new endpoint
-    new_template = runpod.create_template(
-        name="test", image_name="runpod/base:0.4.4", is_serverless=True
+    new_template = brightnode.create_template(
+        name="test", image_name="Brightnode/base:0.4.4", is_serverless=True
     )
 
     # Output the created template details
     print(new_template)
 
     # Creating a new endpoint using the previously created template
-    new_endpoint = runpod.create_endpoint(
+    new_endpoint = brightnode.create_endpoint(
         name="test",
         template_id=new_template["id"],
         gpu_ids="AMPERE_16",
@@ -102,7 +102,7 @@ try:
     # Output the created endpoint details
     print(new_endpoint)
 
-except runpod.error.QueryError as err:
+except brightnode.error.QueryError as err:
     # Handling potential errors during endpoint creation
     print(err)
     print(err.query)
@@ -115,7 +115,7 @@ except runpod.error.QueryError as err:
 {
   "id": "Unique_Id",
   "name": "YourTemplate",
-  "imageName": "runpod/base:0.4.4",
+  "imageName": "Brightnode/base:0.4.4",
   "dockerArgs": "",
   "containerDiskInGb": 10,
   "volumeInGb": 0,
@@ -145,19 +145,19 @@ except runpod.error.QueryError as err:
 
 ## Get GPUs
 
-For understanding the computational resources available, the `get_gpus()` function lists all GPUs that can be allocated to endpoints in Runpod. This enables optimal resource selection based on your computational needs.
+For understanding the computational resources available, the `get_gpus()` function lists all GPUs that can be allocated to endpoints in Brightnode. This enables optimal resource selection based on your computational needs.
 
 <Tabs>
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 import json
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
 # Fetching all available GPUs
-gpus = runpod.get_gpus()
+gpus = brightnode.get_gpus()
 
 # Displaying the GPUs in a formatted manner
 print(json.dumps(gpus, indent=2))
@@ -193,13 +193,13 @@ Use `get_gpu()` and pass in a GPU Id to retrieve details about a specific GPU mo
 <Tabs>
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 import json
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
-gpus = runpod.get_gpu("NVIDIA A100 80GB PCIe")
+gpus = brightnode.get_gpu("NVIDIA A100 80GB PCIe")
 
 print(json.dumps(gpus, indent=2))
 ```
@@ -235,4 +235,4 @@ print(json.dumps(gpus, indent=2))
 
 </Tabs>
 
-Through these functionalities, the Runpod API enables efficient and flexible management of computational resources, catering to a wide range of project requirements.
+Through these functionalities, the Brightnode API enables efficient and flexible management of computational resources, catering to a wide range of project requirements.

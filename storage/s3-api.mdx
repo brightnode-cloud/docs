@@ -1,15 +1,15 @@
 ---
 title: "S3-compatible API"
 sidebarTitle: "S3-compatible API"
-description: "Use Runpod's S3-compatible API to access and manage your network volumes."
+description: "Use Brightnode's S3-compatible API to access and manage your network volumes."
 ---
 
-Runpod provides an S3-protocol compatible API for direct access to your [network volumes](/storage/network-volumes). This allows you to manage files on your network volumes without launching a Pod, reducing cost and operational friction.
+Brightnode provides an S3-protocol compatible API for direct access to your [network volumes](/storage/network-volumes). This allows you to manage files on your network volumes without launching a Pod, reducing cost and operational friction.
 
 Using the S3-compatible API does not affect pricing. Network volumes are billed hourly at \$0.07/GB/month for the first 1TB, and \$0.05/GB/month for additional storage.
 
 <Tip>
-[Watch this video](https://www.youtube.com/watch?v=XA01UEE4TYc) for a quickstart example demonstrating how to automatically sync a network volume with a local directory. You can download the syncing script on GitHub: [/runpod/examples/s3-api-downloader](https://github.com/runpod/examples/tree/main/s3-api-downloader).
+[Watch this video](https://www.youtube.com/watch?v=XA01UEE4TYc) for a quickstart example demonstrating how to automatically sync a network volume with a local directory. You can download the syncing script on GitHub: [/Brightnode/examples/s3-api-downloader](https://github.com/Brightnode/examples/tree/main/s3-api-downloader).
 </Tip>
 
 ## Datacenter availability
@@ -18,11 +18,11 @@ The S3-compatible API is available for network volumes in select datacenters. Ea
 
 | Datacenter | Endpoint URL |
 |------------|--------------|
-| `EUR-IS-1` | `https://s3api-eur-is-1.runpod.io/` |
-| `EU-RO-1`  | `https://s3api-eu-ro-1.runpod.io/`  |
-| `EU-CZ-1`  | `https://s3api-eu-cz-1.runpod.io/`  |
-| `US-KS-2`  | `https://s3api-us-ks-2.runpod.io/`  |
-| `US-CA-2` | `https://s3api-us-ca-2.runpod.io/`  |
+| `EUR-IS-1` | `https://s3api-eur-is-1.brightnode.cloud/` |
+| `EU-RO-1`  | `https://s3api-eu-ro-1.brightnode.cloud/`  |
+| `EU-CZ-1`  | `https://s3api-eu-cz-1.brightnode.cloud/`  |
+| `US-KS-2`  | `https://s3api-us-ks-2.brightnode.cloud/`  |
+| `US-CA-2` | `https://s3api-us-ca-2.brightnode.cloud/`  |
 
 Create your network volume in a supported datacenter to use the S3-compatible API.
 
@@ -34,16 +34,16 @@ Create your network volume in a supported datacenter to use the S3-compatible AP
 </Step>
 
 <Step title="Create an S3 API key">
-    Next, you'll need to generate a new key called an "S3 API key" (this is separate from your Runpod API key).
+    Next, you'll need to generate a new key called an "S3 API key" (this is separate from your Brightnode API key).
 
-    1. Go to the [Settings page](https://www.console.runpod.io/user/settings) in the Runpod console.
+    1. Go to the [Settings page](https://www.console.brightnode.cloud/user/settings) in the Brightnode console.
     2. Expand **S3 API Keys** and select **Create an S3 API key**.
     3. Name your key and select **Create**.
     4. Save the **access key** (e.g., `user_***...`) and **secret** (e.g., `rps_***...`) to use in the next step.
 
     <Warning>
 
-    For security, Runpod will show your API key secret only once, so you may wish to save it elsewhere (e.g., in your password manager, or in a GitHub secret). Treat your API key secret like a password and don't share it with anyone.
+    For security, Brightnode will show your API key secret only once, so you may wish to save it elsewhere (e.g., in your password manager, or in a GitHub secret). Treat your API key secret like a password and don't share it with anyone.
 
     </Warning>
     
@@ -51,17 +51,17 @@ Create your network volume in a supported datacenter to use the S3-compatible AP
 
   <Step title="Configure AWS CLI">
 
-    To use the S3-compatible API with your Runpod network volumes, you must configure your AWS CLI with the Runpod S3 API key you created.
+    To use the S3-compatible API with your Brightnode network volumes, you must configure your AWS CLI with the Brightnode S3 API key you created.
 
     1.  If you haven't already, [install the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) on your local machine.
     2.  Run the command `aws configure` in your terminal.
     3.  Provide the following when prompted:
-        *   **AWS Access Key ID**: Enter your Runpod user ID. You can find this in the [Secrets section](https://www.console.runpod.io/user/secrets) of the Runpod console, in the description of your S3 API key. By default, the description will look similar to: `Shared Secret for user_2f21CfO73Mm2Uq2lEGFiEF24IPw 1749176107073`. `user_2f21CfO73Mm2Uq2lEGFiEF24IPw` is the user ID (yours will be different).
-        *   **AWS Secret Access Key**: Enter your Runpod S3 API key's secret access key.
+        *   **AWS Access Key ID**: Enter your Brightnode user ID. You can find this in the [Secrets section](https://www.console.brightnode.cloud/user/secrets) of the Brightnode console, in the description of your S3 API key. By default, the description will look similar to: `Shared Secret for user_2f21CfO73Mm2Uq2lEGFiEF24IPw 1749176107073`. `user_2f21CfO73Mm2Uq2lEGFiEF24IPw` is the user ID (yours will be different).
+        *   **AWS Secret Access Key**: Enter your Brightnode S3 API key's secret access key.
         *   **Default Region name**: You can leave this blank.
         *   **Default output format**: You can leave this blank or set it to `json`.
 
-    This will configure the AWS CLI to use your Runpod S3 API key by storing these details in your AWS credentials file (typically at `~/.aws/credentials`).
+    This will configure the AWS CLI to use your Brightnode S3 API key by storing these details in your AWS credentials file (typically at `~/.aws/credentials`).
 
 <Accordion title="Managing credentials">
 
@@ -110,7 +110,7 @@ If you have environment variables set from a previous session, they will overrid
 
 ## Using the S3-compatible API
 
-You can use the S3-compatible API to interact with your Runpod network volumes using standard S3 tools:
+You can use the S3-compatible API to interact with your Brightnode network volumes using standard S3 tools:
 
 *   [AWS s3 CLI](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3/index.html).
 *   [AWS s3api CLI](https://docs.aws.amazon.com/cli/latest/reference/s3api/).
@@ -120,10 +120,10 @@ Standard AWS CLI operations such as `ls`, `cp`, `mv`, and `rm` work as expected 
 
 <Accordion title="Network volume path mapping">
 
-Network volumes are mounted to Serverless workers at `/runpod-volume` and to Pods at `/workspace` by default. The S3-compatible API maps file paths as follows:
+Network volumes are mounted to Serverless workers at `/Brightnode-volume` and to Pods at `/workspace` by default. The S3-compatible API maps file paths as follows:
 
 - **Pod filesystem path**: `/workspace/my-folder/file.txt`
-- **Serverless worker path**: `/runpod-volume/my-folder/file.txt`
+- **Serverless worker path**: `/Brightnode-volume/my-folder/file.txt`
 - **S3 API path**: `s3://NETWORK_VOLUME_ID/my-folder/file.txt`
 
 </Accordion>
@@ -132,7 +132,7 @@ Network volumes are mounted to Serverless workers at `/runpod-volume` and to Pod
 
 When using `aws s3` commands, you must pass in the [endpoint URL](#datacenter-availability) for your network volume using the `--endpoint-url` flag and the datacenter ID using the `--region` flag.
 
-Unlike traditional S3 key-value stores, object names in the Runpod S3-compatible API correspond to actual file paths on your network volume. Object names containing special characters (e.g., `#`) may need to be URL-encoded to ensure proper processing.
+Unlike traditional S3 key-value stores, object names in the Brightnode S3-compatible API correspond to actual file paths on your network volume. Object names containing special characters (e.g., `#`) may need to be URL-encoded to ensure proper processing.
 
 <AccordionGroup>
 
@@ -142,7 +142,7 @@ Use `ls` to list objects in a network volume directory:
 
 ```bash
 aws s3 ls --region DATACENTER \
-    --endpoint-url https://s3api-DATACENTER.runpod.io/ \ 
+    --endpoint-url https://s3api-DATACENTER.brightnode.cloud/ \ 
     s3://NETWORK_VOLUME_ID/REMOTE_DIR
 ```
 
@@ -160,7 +160,7 @@ Use `cp` to copy a file to a network volume:
 
 ```bash
 aws s3 cp --region DATACENTER \
-    --endpoint-url https://s3api-DATACENTER.runpod.io/ \
+    --endpoint-url https://s3api-DATACENTER.brightnode.cloud/ \
     LOCAL_FILE \
     s3://NETWORK_VOLUME_ID
 ```
@@ -169,7 +169,7 @@ Use `cp` to copy a file from a network volume to a local directory:
 
 ```bash
 aws s3 cp --region DATACENTER \
-    --endpoint-url https://s3api-DATACENTER.runpod.io/ \
+    --endpoint-url https://s3api-DATACENTER.brightnode.cloud/ \
     s3://NETWORK_VOLUME_ID/remote-file.txt LOCAL_DIR
 ```
 
@@ -181,7 +181,7 @@ Use `rm` to remove a file from a network volume:
 
 ```bash
 aws s3 rm --region DATACENTER \
-    --endpoint-url https://s3api-DATACENTER.runpod.io/ \
+    --endpoint-url https://s3api-DATACENTER.brightnode.cloud/ \
     s3://NETWORK_VOLUME_ID/remote-file.txt
 ```
 
@@ -204,7 +204,7 @@ This command syncs a local directory (source) to a network volume directory (des
 
 ```bash
 aws s3 sync --region DATACENTER \
-    --endpoint-url https://s3api-DATACENTER.runpod.io/ \
+    --endpoint-url https://s3api-DATACENTER.brightnode.cloud/ \
     LOCAL_DIR \
     s3://NETWORK_VOLUME_ID/REMOTE_DIR
 ```
@@ -223,7 +223,7 @@ For example, here's how you could use `aws s3api get-object` to download an obje
 aws s3api get-object --bucket NETWORK_VOLUME_ID \
     --key REMOTE_FILE \
     --region DATACENTER \
-    --endpoint-url https://s3api-DATACENTER.runpod.io/ \
+    --endpoint-url https://s3api-DATACENTER.brightnode.cloud/ \
     LOCAL_FILE
 ```
 
@@ -233,40 +233,40 @@ For a list of available `s3api` commands, see the [AWS s3api reference](https://
 
 ## Boto3 Python example
 
-You can also use the Boto3 library to interact with the S3-compatible API, using it to transfer files to and from a Runpod network volume.
+You can also use the Boto3 library to interact with the S3-compatible API, using it to transfer files to and from a Brightnode network volume.
 
-The script below demonstrates how to upload a file to a Runpod network volume using the Boto3 library. It takes command-line arguments for the network volume ID (as an S3 bucket), the datacenter-specific S3 endpoint URL, the local file path, the desired object (file path on the network volume), and the AWS Region (which corresponds to the Runpod datacenter ID).
+The script below demonstrates how to upload a file to a Brightnode network volume using the Boto3 library. It takes command-line arguments for the network volume ID (as an S3 bucket), the datacenter-specific S3 endpoint URL, the local file path, the desired object (file path on the network volume), and the AWS Region (which corresponds to the Brightnode datacenter ID).
 
 <AccordionGroup>
 
 <Accordion title="Boto3 script">
 
-To run this script, your Runpod S3 API key credentials must be set as environment variables using the values from the [Setup and authentication](#setup-and-authentication) step:
+To run this script, your Brightnode S3 API key credentials must be set as environment variables using the values from the [Setup and authentication](#setup-and-authentication) step:
 
-*   `AWS_ACCESS_KEY_ID`: Should be set to your Runpod S3 API key **access key** (e.g., `user_***...`).
-*   `AWS_SECRET_ACCESS_KEY`: Should be set to your Runpod S3 API key's **secret** (e.g., `rps_***...`).
+*   `AWS_ACCESS_KEY_ID`: Should be set to your Brightnode S3 API key **access key** (e.g., `user_***...`).
+*   `AWS_SECRET_ACCESS_KEY`: Should be set to your Brightnode S3 API key's **secret** (e.g., `rps_***...`).
 
 ```python
 #!/usr/bin/env python3
 
 import os
 import argparse
-import boto3 # AWS SDK for Python, used to interact with Runpod S3-compatible APIs
+import boto3 # AWS SDK for Python, used to interact with Brightnode S3-compatible APIs
 
 def create_s3_client(region: str, endpoint_url: str):
 
-    # Creates and returns an S3 client configured for Runpod network volume S3-compatible API.
+    # Creates and returns an S3 client configured for Brightnode network volume S3-compatible API.
     #
     # Args:
-    #   region (str): The Runpod datacenter ID, used as the AWS region
+    #   region (str): The Brightnode datacenter ID, used as the AWS region
     #                 (e.g., 'ca-qc-1').
-    #   endpoint_url (str): The S3 endpoint URL for the specific Runpod datacenter
-    #                       (e.g., 'https://ca-qc-1-s3api.runpod.io/').
+    #   endpoint_url (str): The S3 endpoint URL for the specific Brightnode datacenter
+    #                       (e.g., 'https://ca-qc-1-s3api.brightnode.cloud/').
 
     # Returns:
-    #   boto3.client: An S3 client object, configured for the Runpod S3 API.
+    #   boto3.client: An S3 client object, configured for the Brightnode S3 API.
 
-    # Retrieve Runpod S3 API key credentials from environment variables.
+    # Retrieve Brightnode S3 API key credentials from environment variables.
     aws_access_key_id = os.environ.get("AWS_ACCESS_KEY_ID")
     aws_secret_access_key = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
@@ -275,30 +275,30 @@ def create_s3_client(region: str, endpoint_url: str):
         raise EnvironmentError(
             "Please set AWS_ACCESS_KEY_ID (with S3 API Key Access Key) and "
             "AWS_SECRET_ACCESS_KEY (with S3 API Key Secret Access Key) environment variables. "
-            "These are obtained from 'S3 API Keys' in the Runpod console settings."
+            "These are obtained from 'S3 API Keys' in the Brightnode console settings."
         )
 
-    # Initialize and return the S3 client for Runpod's S3-compatible API
+    # Initialize and return the S3 client for Brightnode's S3-compatible API
     return boto3.client(
         "s3",
         aws_access_key_id=aws_access_key_id,
         aws_secret_access_key=aws_secret_access_key,
-        region_name=region, # Corresponds to the Runpod datacenter ID
+        region_name=region, # Corresponds to the Brightnode datacenter ID
         endpoint_url=endpoint_url, # Datacenter-specific S3 API endpoint
     )
 
 def put_object(s3_client, bucket_name: str, object_name: str, file_path: str):
 
-    # Uploads a local file to the specified Runpod network volume.
+    # Uploads a local file to the specified Brightnode network volume.
     #
     # Args:
     #   s3_client: The S3 client object (e.g., returned by create_s3_client).
-    #   bucket_name (str): The ID of the target Runpod network volume.
+    #   bucket_name (str): The ID of the target Brightnode network volume.
     #   object_name (str): The desired file path for the object on the network volume.
     #   file_path (str): The local path to the file (including the filename) that will be uploaded.
 
     try:
-        # Attempt to upload the file to the Runpod network volume.
+        # Attempt to upload the file to the Brightnode network volume.
         s3_client.upload_file(file_path, bucket_name, object_name)
         print(f"Successfully uploaded '{file_path}' to Network Volume '{bucket_name}' as '{object_name}'")
     except Exception as e:
@@ -309,23 +309,23 @@ def put_object(s3_client, bucket_name: str, object_name: str, file_path: str):
 def main():
 
     # Parses command-line arguments and orchestrates the file upload process
-    # to a Runpod network volume.
+    # to a Brightnode network volume.
 
     # Set up command-line argument parsing
     parser = argparse.ArgumentParser(
-        description="Upload a file to a Runpod Network Volume using its S3-compatible API. "
+        description="Upload a file to a Brightnode Network Volume using its S3-compatible API. "
                     "Requires AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY env vars to be set "
-                    "with your Runpod S3 API key credentials."
+                    "with your Brightnode S3 API key credentials."
     )
     parser.add_argument(
         "-b", "--bucket",
         required=True,
-        help="The ID of your Runpod Network Volume (acts as the S3 bucket name)."
+        help="The ID of your Brightnode Network Volume (acts as the S3 bucket name)."
     )
     parser.add_argument(
         "-e", "--endpoint",
         required=True,
-        help="The S3 endpoint URL for your Runpod datacenter (e.g., 'https://s3api-DATACENTER.runpod.io/')."
+        help="The S3 endpoint URL for your Brightnode datacenter (e.g., 'https://s3api-DATACENTER.brightnode.cloud/')."
     )
     parser.add_argument(
         "-f", "--file",
@@ -340,12 +340,12 @@ def main():
     parser.add_argument(
         "-r", "--region",
         required=True,
-        help="The Runpod datacenter ID, used as the AWS region (e.g., 'ca-qc-1'). Find this in the Runpod console's Storage section or endpoint URL."
+        help="The Brightnode datacenter ID, used as the AWS region (e.g., 'ca-qc-1'). Find this in the Brightnode console's Storage section or endpoint URL."
     )
 
     args = parser.parse_args()
 
-    # Create the S3 client using the parsed arguments, configured for Runpod.
+    # Create the S3 client using the parsed arguments, configured for Brightnode.
     client = create_s3_client(args.region, args.endpoint)
 
     # Upload the object to the specified network volume.
@@ -369,7 +369,7 @@ For example, for the `put_objects` method above, you must specify these argument
 With that in mind, here's an example of how to run the script above using command-line arguments:
 
 ```bash
-./s3_example_put.py --endpoint https://s3api-eur-is-1.runpod.io/ \
+./s3_example_put.py --endpoint https://s3api-eur-is-1.brightnode.cloud/ \
     --region 'EUR-IS-1' \
     --bucket 'network_volume_id' \
     --object 'remote_directory/file.txt' \
@@ -382,9 +382,9 @@ With that in mind, here's an example of how to run the script above using comman
 
 ## Uploading very large files
 
-You can upload large files to network volumes using S3 multipart upload operations (see the [compatibility reference](#s3-api-compatibility-reference) below). You can also download [this helper script](https://github.com/runpod/runpod-s3-examples/blob/main/upload_large_file.py), which dramatically improves reliability when uploading very large files (10GB+) by handling timeouts and retries automatically.
+You can upload large files to network volumes using S3 multipart upload operations (see the [compatibility reference](#s3-api-compatibility-reference) below). You can also download [this helper script](https://github.com/Brightnode/Brightnode-s3-examples/blob/main/upload_large_file.py), which dramatically improves reliability when uploading very large files (10GB+) by handling timeouts and retries automatically.
 
-[Click here to download the script on GitHub.](https://github.com/runpod/runpod-s3-examples/blob/main/upload_large_file.py)
+[Click here to download the script on GitHub.](https://github.com/Brightnode/Brightnode-s3-examples/blob/main/upload_large_file.py)
 
 Here's an example of how to run the script using command line arguments:
 
@@ -393,7 +393,7 @@ Here's an example of how to run the script using command line arguments:
      --bucket NETWORK_VOLUME_ID \
      --access_key YOUR_ACCESS_KEY_ID \
      --secret_key YOUR_SECRET_ACCESS_KEY \
-     --endpoint https://s3api-eur-is-1.runpod.io/ \
+     --endpoint https://s3api-eur-is-1.brightnode.cloud/ \
      --region EUR-IS-1
 ```
 
@@ -452,9 +452,9 @@ Files larger than 500MB must be uploaded using multipart uploads. The AWS CLI pe
 
 | Operation | Supported | CLI Command | Notes |
 |------------------|--------|-----------------|-------|
-| `CreateBucket` | ❌ | `aws s3api create-bucket` | Use the Runpod console to create network volumes |
-| `DeleteBucket` | ❌ | `aws s3api delete-bucket` | Use the Runpod console to delete network volumes |
-| `GetBucketLocation` | ❌ | `aws s3api get-bucket-location` | Datacenter info available in the Runpod console |
+| `CreateBucket` | ❌ | `aws s3api create-bucket` | Use the Brightnode console to create network volumes |
+| `DeleteBucket` | ❌ | `aws s3api delete-bucket` | Use the Brightnode console to delete network volumes |
+| `GetBucketLocation` | ❌ | `aws s3api get-bucket-location` | Datacenter info available in the Brightnode console |
 | `GetBucketVersioning` | ❌ | `aws s3api get-bucket-versioning` | Versioning is not supported |
 | `PutBucketVersioning` | ❌ | `aws s3api put-bucket-versioning` | Versioning is not supported |
 | `GeneratePresignedURL` | ❌ | `aws s3 presign` | Pre-signed URLs are not supported |
@@ -509,7 +509,7 @@ When running `aws s3 ls` or `ListObjects` on a directory with many files or larg
 "fatal error: Error during pagination: The same next token was received twice: ..."
 ```
 
-This occurs because Runpod must compute and cache the MD5 checksum (i.e., ETag) for files created without the S3-compatible API. This computation can take several minutes for large directories or files, as the `ListObjects` request must wait until the checksum is ready.
+This occurs because Brightnode must compute and cache the MD5 checksum (i.e., ETag) for files created without the S3-compatible API. This computation can take several minutes for large directories or files, as the `ListObjects` request must wait until the checksum is ready.
 
 Workarounds:
 * The operation will typically complete successfully if you wait for the process to finish.
@@ -521,7 +521,7 @@ Workarounds:
 
 -   **Storage capacity**: Network volumes have a fixed storage capacity, unlike the virtually unlimited storage of standard S3 buckets. The `CopyObject` and `UploadPart` actions do not check for available free space beforehand and may fail if the volume runs out of space.
 -   **Maximum file size**: 4TB (the maximum size of a network volume).
--   **Object names**: Unlike traditional S3 key-value stores, object names in the Runpod S3-compatible API correspond to actual file paths on your network volume. Object names containing special characters (e.g., `#`) may need to be URL encoded to ensure proper processing.
+-   **Object names**: Unlike traditional S3 key-value stores, object names in the Brightnode S3-compatible API correspond to actual file paths on your network volume. Object names containing special characters (e.g., `#`) may need to be URL encoded to ensure proper processing.
 -   **Time synchronization**: Requests that are out of time sync by 1 hour will be rejected. This is more lenient than the 15-minute window specified by the AWS SigV4 authentication specification.
 
 </Accordion>
@@ -536,7 +536,7 @@ Workarounds:
 
 <Accordion title="aws s3 sync limitations">
 
-The `aws s3 sync` command has limited support in Runpod's S3-compatible API. While it works for basic use cases (syncing small numbers of files and simple directory structures), you may encounter errors when syncing directories with very large numbers of files (over 10,000) or complex nested structures.
+The `aws s3 sync` command has limited support in Brightnode's S3-compatible API. While it works for basic use cases (syncing small numbers of files and simple directory structures), you may encounter errors when syncing directories with very large numbers of files (over 10,000) or complex nested structures.
 
 Common issues include:
 - EOF errors with 200 OK responses.
@@ -560,7 +560,7 @@ For `aws s3` and `aws s3api`, use the `--cli-read-timeout` parameter:
 
 ```bash
 # Sets the timeout to 7200 seconds (2 hours)
-aws s3 cp large-file.zip s3://your-volume-name/ --cli-read-timeout 7200 --endpoint-url https://storage.datacenter.runpod.io
+aws s3 cp large-file.zip s3://your-volume-name/ --cli-read-timeout 7200 --endpoint-url https://storage.datacenter.brightnode.cloud
 ```
 
 Or, configure timeout in `~/.aws/config`:

@@ -4,13 +4,13 @@ title: "Use environment variables"
 
 Incorporating environment variables into your Handler Functions is a key aspect of managing external resources like S3 buckets.
 
-This section focuses on how to use environment variables to facilitate the uploading of images to an S3 bucket using Runpod Handler Functions.
+This section focuses on how to use environment variables to facilitate the uploading of images to an S3 bucket using Brightnode Handler Functions.
 
 You will go through the process of writing Python code for the uploading and setting the necessary environment variables in the Web interface.
 
 ## Prerequisites
 
-* Ensure the Runpod Python library is installed: `pip install runpod`.
+* Ensure the Brightnode Python library is installed: `pip install brightnode`.
 * Have an image file named `image.png` in the Docker container's working directory.
 
 ## Python Code for S3 Uploads
@@ -20,8 +20,8 @@ Let's break down the steps to upload an image to an S3 bucket using Python:
 1. **Handler Function for S3 Upload**: Here's an example of a handler function that uploads `image.png` to an S3 bucket and returns the image URL:
 
    ```python
-   from runpod.serverless.utils import rp_upload
-   import runpod
+   from brightnode.serverless.utils import rp_upload
+   import brightnode
 
 
    def handler(job):
@@ -29,7 +29,7 @@ Let's break down the steps to upload an image to an S3 bucket using Python:
        return [image_url]
 
 
-   runpod.serverless.start({"handler": handler})
+   brightnode.serverless.start({"handler": handler})
    ```
 
 2. **Packaging Your Code**: Follow the guidelines in [Worker Image Creation](/serverless/workers/deploy) for packaging and deployment.
@@ -57,7 +57,7 @@ Finally, test the serverless function to confirm that it successfully uploads im
    ```java
    import requests
 
-   endpoint = "https://api.runpod.ai/v2/xxxxxxxxx/run"
+   endpoint = "https://api.brightnode.ai/v2/xxxxxxxxx/run"
    headers = {"Content-Type": "application/json", "Authorization": "Bearer XXXXXXXXXXXXX"}
    input_data = {"input": {"inp": "this is an example input"}}
 
@@ -68,7 +68,7 @@ Finally, test the serverless function to confirm that it successfully uploads im
 
    ```csharp
    response = requests.get(
-       "https://api.runpod.ai/v2/xxxxxxxxx/status/" + response.json()["id"],
+       "https://api.brightnode.ai/v2/xxxxxxxxx/status/" + response.json()["id"],
        headers=headers,
    )
    response.json()
@@ -88,4 +88,4 @@ Finally, test the serverless function to confirm that it successfully uploads im
    }
    ```
 
-By following these steps, you can effectively use environment variables to manage S3 bucket credentials and operations within your Runpod Handler Functions. This approach ensures secure, scalable, and efficient handling of external resources in your serverless applications.
+By following these steps, you can effectively use environment variables to manage S3 bucket credentials and operations within your Brightnode Handler Functions. This approach ensures secure, scalable, and efficient handling of external resources in your serverless applications.

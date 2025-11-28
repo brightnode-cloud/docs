@@ -1,20 +1,20 @@
 ---
 title: "SSH password setup & migration tools"
-description: "Simple tools for migrating data between Runpod instances"
+description: "Simple tools for migrating data between Brightnode instances"
 icon: "arrows-rotate"
 ---
 
 ## What are these tools?
 
-These are simple bash and Python scripts that solve a critical problem: **migrating data between Runpod instances when you need to move Pods** (e.g., when your Pod gets stuck with zero GPUs or you need to switch to a different instance).
+These are simple bash and Python scripts that solve a critical problem: **migrating data between Brightnode instances when you need to move Pods** (e.g., when your Pod gets stuck with zero GPUs or you need to switch to a different instance).
 
 <Note>
-Check the repository for additional features, updates, and documentation: [github.com/justinwlin/Runpod-SSH-Password](https://github.com/justinwlin/Runpod-SSH-Password)
+Check the repository for additional features, updates, and documentation: [github.com/justinwlin/Brightnode-SSH-Password](https://github.com/justinwlin/Brightnode-SSH-Password)
 </Note>
 
 ## The problem it solves
 
-When Runpod users encounter issues like:
+When Brightnode users encounter issues like:
 - Pod stuck with **zero GPUs allocated**.
 - Need to **migrate to a different GPU type**.
 - Want to **transfer data between Pods**.
@@ -26,8 +26,8 @@ This tool provides a simple solution for transferring your files to a new Pod.
 
 Before using these tools, make sure you have:
 
-1. **Terminal access** on your Runpod instances:
-   - Web Terminal in Runpod's interface, or
+1. **Terminal access** on your Brightnode instances:
+   - Web Terminal in Brightnode's interface, or
    - Terminal in Jupyter Notebook/Lab
 
 2. **Port 22 exposed** on destination Pod / source Pod:
@@ -38,7 +38,7 @@ Before using these tools, make sure you have:
    **Important**: Changing TCP ports will restart your Pod and **erase all data outside of `/workspace`**. Make sure all important files are stored in `/workspace` (the default persistent directory) before making port changes.
    </Warning>
 
-3. **Linux-based template**: Works on Ubuntu/Debian images (most Runpod templates)
+3. **Linux-based template**: Works on Ubuntu/Debian images (most Brightnode templates)
 
 ## Quick migration workflow
 
@@ -46,7 +46,7 @@ Before using these tools, make sure you have:
   <Step title="Set up destination Pod">
     On your **destination Pod** (where you're migrating to):
     ```bash
-    wget https://raw.githubusercontent.com/justinwlin/Runpod-SSH-Password/main/passwordrunpod.sh && chmod +x passwordrunpod.sh && ./passwordrunpod.sh
+    wget https://raw.githubusercontent.com/justinwlin/Brightnode-SSH-Password/main/passwordbrightnode.sh && chmod +x passwordbrightnode.sh && ./passwordbrightnode.sh
     ```
     
     The script will prompt you to set a password. After setup, it displays your connection details:
@@ -61,7 +61,7 @@ Before using these tools, make sure you have:
   <Step title="Transfer source Pod">
     On your **source Pod** (where your files currently are):
     ```bash
-    wget https://raw.githubusercontent.com/justinwlin/Runpod-SSH-Password/refs/heads/main/SCPMigration -O scp_migration.py && python3 scp_migration.py
+    wget https://raw.githubusercontent.com/justinwlin/Brightnode-SSH-Password/refs/heads/main/SCPMigration -O scp_migration.py && python3 scp_migration.py
     ```
   </Step>
   

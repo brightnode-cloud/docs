@@ -7,7 +7,7 @@ Create multiple Pods at once with identical configurations (useful for parallel 
 
 <RequestExample>
 ```sh Command
-runpodctl create pods [flags]
+brightnodectl create pods [flags]
 ```
 </RequestExample>
 
@@ -16,13 +16,13 @@ runpodctl create pods [flags]
 Create 3 identical Pods with the name "training-worker" in the Secure Cloud:
 
 ```sh
-runpodctl create pods \
+brightnodectl create pods \
   --name "training-worker" \
   --podCount 3 \
   --gpuType "NVIDIA GeForce RTX 3090" \
   --gpuCount 1 \
   --secureCloud \
-  --imageName "runpod/pytorch:2.0.1-py3.10-cuda11.8.0-devel"
+  --imageName "Brightnode/pytorch:2.0.1-py3.10-cuda11.8.0-devel"
 ```
 
 ## Flags
@@ -52,7 +52,7 @@ Create the Pods in the Community Cloud tier, which typically offers lower pricin
 </ResponseField>
 
 <ResponseField name="--imageName" type="string">
-The Docker container image to use for the Pods (e.g., `runpod/pytorch:latest`).
+The Docker container image to use for the Pods (e.g., `Brightnode/pytorch:latest`).
 </ResponseField>
 
 <ResponseField name="--templateId" type="string">
@@ -101,4 +101,4 @@ Ports to expose from the containers. Maximum of 1 HTTP port and 1 TCP port allow
 
 ## Related commands
 
-- [`runpodctl create pod`](/runpodctl/reference/runpodctl-create-pod)
+- [`brightnodectl create pod`](/brightnodectl/reference/brightnodectl-create-pod)

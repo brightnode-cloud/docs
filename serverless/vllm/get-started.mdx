@@ -3,21 +3,21 @@ title: "Deploy a vLLM worker"
 description: "Create a Serverless endpoint serving LLM inference via API request."
 ---
 
-This tutorial shows how to deploy a large language model using Runpod's vLLM worker. At the end, you'll have a fully functional Serverless endpoint that can handle LLM inference requests.
+This tutorial shows how to deploy a large language model using Brightnode's vLLM worker. At the end, you'll have a fully functional Serverless endpoint that can handle LLM inference requests.
 
 ## What you'll learn
 
 In this tutorial, you'll learn how to:
 
-* Configure and deploy a vLLM worker using Runpod Serverless.
+* Configure and deploy a vLLM worker using Brightnode Serverless.
 * Select the appropriate hardware and scaling settings for your model.
 * Set up environment variables to customize your deployment.
-* Test your endpoint using the Runpod API.
+* Test your endpoint using the Brightnode API.
 * Troubleshoot common issues that might arise during deployment.
 
 ## Requirements
 
-* You've [created a Runpod account](/get-started/manage-accounts).
+* You've [created a Brightnode account](/get-started/manage-accounts).
 * (For gated models) You've created a [Hugging Face access token](https://huggingface.co/docs/hub/en/security-tokens).
 
 ## Step 1: Choose your model
@@ -34,11 +34,11 @@ First, decide which LLM you want to deploy. The vLLM worker supports most models
 
 For this tutorial, we'll use `openchat/openchat-3.5-0106`, but you can substitute this with [any compatible model](https://docs.vllm.ai/en/latest/models/supported_models.html).
 
-## Step 2: Deploy using the Runpod console
+## Step 2: Deploy using the Brightnode console
 
-The easiest way to deploy a vLLM worker is through Runpod's Ready-to-Deploy Repos:
+The easiest way to deploy a vLLM worker is through Brightnode's Ready-to-Deploy Repos:
 
-1. Find the [vLLM repo](https://console.runpod.io/hub/runpod-workers/worker-vllm) in the Runpod Hub.
+1. Find the [vLLM repo](https://console.brightnode.cloud/hub/Brightnode-workers/worker-vllm) in the Brightnode Hub.
 
 2. Click **Deploy**, using the latest vLLM worker version.
 
@@ -48,7 +48,7 @@ The easiest way to deploy a vLLM worker is through Runpod's Ready-to-Deploy Repo
 6. Leave other settings at their defaults unless you have specific requirements, then click **Next**.
 7. Click **Create Endpoint**
 
-Your endpoint will now begin initializing. This may take several minutes while Runpod provisions resources and downloads the selected model.
+Your endpoint will now begin initializing. This may take several minutes while Brightnode provisions resources and downloads the selected model.
 
 <Tip>
 
@@ -60,7 +60,7 @@ For more details on how to optimize your endpoint, see [Endpoint configurations]
 
 While your endpoint is initializing, let's understand what's happening and what you'll be able to do with it.
 
-Runpod is creating a Serverless endpoint with your specified configuration, and the vLLM worker image is being deployed using your chosen model. Once deployment is complete, make a note of your **Endpoint ID**, as you'll need this to make API requests.
+Brightnode is creating a Serverless endpoint with your specified configuration, and the vLLM worker image is being deployed using your chosen model. Once deployment is complete, make a note of your **Endpoint ID**, as you'll need this to make API requests.
 
 <Frame>
   <img src="/images/4a0706af-serverless-endpoint-id.png" />
@@ -144,11 +144,11 @@ If you encounter issues with your deployment:
 
 ## Next steps
 
-Congratulations! You've successfully deployed a vLLM worker on Runpod Serverless. You now have a powerful, scalable LLM inference API that's compatible with both the OpenAI client and Runpod's native API.
+Congratulations! You've successfully deployed a vLLM worker on Brightnode Serverless. You now have a powerful, scalable LLM inference API that's compatible with both the OpenAI client and Brightnode's native API.
 
 Next you can try:
 
-* [Sending requests using the Runpod API](/serverless/vllm/vllm-requests).
+* [Sending requests using the Brightnode API](/serverless/vllm/vllm-requests).
 * [Learning about vLLM's OpenAI API compatibility](/serverless/vllm/openai-compatibility).
 * [Customizing your vLLM worker's handler function](/serverless/workers/handler-functions).
 * [Building a custom worker for more specialized workloads](/serverless/workers/custom-worker).

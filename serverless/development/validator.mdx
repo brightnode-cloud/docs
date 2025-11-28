@@ -2,12 +2,12 @@
 title: "Input validation"
 ---
 
-Runpod's validator utility ensures robust execution of serverless workers by validating input data against a defined schema.
+Brightnode's validator utility ensures robust execution of serverless workers by validating input data against a defined schema.
 
 To use it, import the following to your Python file:
 
 ```py
-from runpod.serverless.utils.rp_validator import validate
+from brightnode.serverless.utils.rp_validator import validate
 ```
 
 The `validate` function takes two arguments:
@@ -27,8 +27,8 @@ Define your schema as a nested dictionary with these possible rules for each inp
 ## Example Usage
 
 ```python
-import runpod
-from runpod.serverless.utils.rp_validator import validate
+import brightnode
+from brightnode.serverless.utils.rp_validator import validate
 
 schema = {
     "text": {
@@ -59,7 +59,7 @@ def handler(event):
         return {"error": str(e)}
 
 
-runpod.serverless.start({"handler": handler})
+brightnode.serverless.start({"handler": handler})
 ```
 
 ## Testing

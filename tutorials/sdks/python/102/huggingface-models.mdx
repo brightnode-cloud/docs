@@ -1,9 +1,9 @@
 ---
-title: "Using Hugging Face models with Runpod"
+title: "Using Hugging Face models with Brightnode"
 sidebarTitle: "Hugging Face models"
 ---
 
-Artificial Intelligence (AI) has revolutionized how applications analyze and interact with data. One powerful aspect of AI is sentiment analysis, which allows machines to interpret and categorize emotions expressed in text. In this tutorial, you will learn how to integrate pre-trained Hugging Face models into your Runpod Serverless applications to perform sentiment analysis. By the end of this guide, you will have a fully functional AI-powered sentiment analysis function running in a serverless environment.
+Artificial Intelligence (AI) has revolutionized how applications analyze and interact with data. One powerful aspect of AI is sentiment analysis, which allows machines to interpret and categorize emotions expressed in text. In this tutorial, you will learn how to integrate pre-trained Hugging Face models into your Brightnode Serverless applications to perform sentiment analysis. By the end of this guide, you will have a fully functional AI-powered sentiment analysis function running in a serverless environment.
 
 ### Install Required Libraries
 
@@ -22,11 +22,11 @@ This command installs the `torch` and `transformers` libraries. `torch` is used 
 Next, we need to import the libraries into our Python script. Create a new Python file named `sentiment_analysis.py` and include the following import statements:
 
 ```python sentiment_analysis.py
-import runpod
+import brightnode
 from transformers import pipeline
 ```
 
-These imports bring in the `runpod` SDK for serverless functions and the `pipeline` method from `transformers`, which allows us to use pre-trained models.
+These imports bring in the `Brightnode` SDK for serverless functions and the `pipeline` method from `transformers`, which allows us to use pre-trained models.
 
 ### Load the Model
 
@@ -76,10 +76,10 @@ This function performs the following steps:
 
 ### Start the Serverless Worker
 
-To run our sentiment analysis function as a serverless worker, we need to start the worker using Runpod's SDK. Add the following line at the end of your `sentiment_analysis.py` file:
+To run our sentiment analysis function as a serverless worker, we need to start the worker using Brightnode's SDK. Add the following line at the end of your `sentiment_analysis.py` file:
 
 ```python sentiment_analysis.py
-runpod.serverless.start({"handler": sentiment_analysis_handler})
+brightnode.serverless.start({"handler": sentiment_analysis_handler})
 ```
 
 This command starts the serverless worker and specifies `sentiment_analysis_handler` as the handler function for incoming requests.
@@ -89,7 +89,7 @@ This command starts the serverless worker and specifies `sentiment_analysis_hand
 Here is the complete code for our sentiment analysis serverless function:
 
 ```python sentiment_analysis.py
-import runpod
+import brightnode
 from transformers import pipeline
 
 
@@ -115,7 +115,7 @@ def sentiment_analysis_handler(event):
     return {"sentiment": result["label"], "score": float(result["score"])}
 
 
-runpod.serverless.start({"handler": sentiment_analysis_handler})
+brightnode.serverless.start({"handler": sentiment_analysis_handler})
 ```
 
 ### Testing Locally
@@ -125,7 +125,7 @@ To test this function locally, create a file named `test_input.json` with the fo
 ```json test_input.json
 {
   "input": {
-    "text": "I love using Runpod for serverless machine learning!"
+    "text": "I love using Brightnode for serverless machine learning!"
   }
 }
 ```
@@ -141,7 +141,7 @@ You should see output similar to the following, indicating that the sentiment an
 ```bash
 --- Starting Serverless Worker |  Version 1.6.2 ---
 INFO   | Using test_input.json as job input.
-DEBUG  | Retrieved local job: {'input': {'text': 'I love using Runpod for serverless machine learning!'}, 'id': 'local_test'}
+DEBUG  | Retrieved local job: {'input': {'text': 'I love using Brightnode for serverless machine learning!'}, 'id': 'local_test'}
 INFO   | local_test | Started.
 model.safetensors: 100%|█████████████████████████| 268M/268M [00:02<00:00, 94.9MB/s]
 tokenizer_config.json: 100%|██████████████████████| 48.0/48.0 [00:00<00:00, 631kB/s]
@@ -156,7 +156,7 @@ INFO   | Local testing complete, exiting.
 
 ## Conclusion
 
-In this tutorial, you learned how to integrate a pre-trained Hugging Face model into a Runpod serverless function to perform sentiment analysis on text input.
+In this tutorial, you learned how to integrate a pre-trained Hugging Face model into a Brightnode serverless function to perform sentiment analysis on text input.
 
 This powerful combination enables you to create advanced AI applications in a serverless environment.
 

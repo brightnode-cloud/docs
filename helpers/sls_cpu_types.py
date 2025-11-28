@@ -7,7 +7,7 @@ import requests
 from tabulate import tabulate
 
 response = requests.post(
-    "https://api.runpod.io/graphql", 
+    "https://api.brightnode.cloud/graphql", 
     headers={
         "content-type": "application/json"
     }, 
@@ -46,7 +46,7 @@ with open(file_path, "w") as file:
 title: Serverless CPU types
 ---
 
-The following list contains all CPU types available on Runpod.
+The following list contains all CPU types available on Brightnode.
 
 {{/* Table last generated: {date} */}}
 

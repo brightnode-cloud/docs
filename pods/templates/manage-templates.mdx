@@ -15,7 +15,7 @@ When creating a template, you'll configure several key components:
 - A public registry like Docker Hub (e.g., `ubuntu:latest`, `pytorch/pytorch:latest`).
 - Your own private registry (requires registry credentials).
 
-**Template visibility:** Choose whether your template is available to others. Public templates are available to all Runpod users in the Explore section of the console, while private template are only accessible to you or your team members.
+**Template visibility:** Choose whether your template is available to others. Public templates are available to all Brightnode users in the Explore section of the console, while private template are only accessible to you or your team members.
 
 **Compute type:** Templates are restricted to specific compute types and can only be used with matching hardware:
 - **NVIDIA GPU:** For GPU-accelerated workloads requiring CUDA support
@@ -30,7 +30,7 @@ When creating a template, you'll configure several key components:
 Most Docker images have built in start commands, so you can usually leave this blank. When customizing your start command, make sure you're not overriding existing commands that are critical for the image to run.
 </Note>
 
-**Registry credentials:** If using a private container image, provide authentication credentials to access your private registry. This ensures Runpod can pull your image during Pod deployment.
+**Registry credentials:** If using a private container image, provide authentication credentials to access your private registry. This ensures Brightnode can pull your image during Pod deployment.
 
 **Storage configuration:** Define the storage requirements for your template, including:
 - **Container disk size:** The amount of storage allocated for the container's filesystem, including the operating system and installed packages.
@@ -38,7 +38,7 @@ Most Docker images have built in start commands, so you can usually leave this b
 - **Volume mount path:** The directory path where the persistent volume will be mounted inside the container (commonly `/workspace`).
 
 **Network configuration:** Configure network access for your template:
-- **HTTP ports:** Ports that will be accessible via Runpod's HTTP proxy for web interfaces and APIs. These are automatically secured with HTTPS and accessible through Runpod's proxy URLs.
+- **HTTP ports:** Ports that will be accessible via Brightnode's HTTP proxy for web interfaces and APIs. These are automatically secured with HTTPS and accessible through Brightnode's proxy URLs.
 - **TCP ports:** Direct TCP port access for services that require raw TCP connections, such as SSH, databases, or custom protocols.
 
 **Environment variables:** Define key-value pairs that will be available as environment variables inside your Pod. These are useful for:
@@ -51,9 +51,9 @@ Most Docker images have built in start commands, so you can usually leave this b
 <Tabs>
 <Tab title="Web">
 
-The Runpod console provides an intuitive interface for template creation:
+The Brightnode console provides an intuitive interface for template creation:
 
-1. Navigate to the **[Templates](https://www.console.runpod.io/user/templates)** section.
+1. Navigate to the **[Templates](https://www.console.brightnode.cloud/user/templates)** section.
 2. Click **New Template**.
 3. Fill in the configuration options described above.
 4. Click **Save Template** to save it to your account.
@@ -62,11 +62,11 @@ The Runpod console provides an intuitive interface for template creation:
 </Tab>
 
 <Tab title="REST API">
-You can also create templates programmatically using the Runpod REST API. For example:
+You can also create templates programmatically using the Brightnode REST API. For example:
 
 ```bash
 curl --request POST \
-  --url https://rest.runpod.io/v1/templates \
+  --url https://rest.brightnode.cloud/v1/templates \
   --header 'Authorization: Bearer YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -114,19 +114,19 @@ Environment variables are particularly useful for:
 - **Integration credentials**: API keys, authentication tokens (consider using [Secrets](/pods/templates/secrets) for sensitive data).
 - **Application behavior**: Debug modes, logging levels, output formats.
 
-### Runpod system environment variables
+### Brightnode system environment variables
 
-Runpod automatically provides several [predefined environment variables](/pods/references/environment-variables) in every Pod, for example:
-- `RUNPOD_POD_ID`: Unique identifier for your Pod.
-- `RUNPOD_API_KEY`: API key for making Runpod API calls from within the Pod.
-- `RUNPOD_POD_HOSTNAME`: Hostname of the server running your Pod.
+Brightnode automatically provides several [predefined environment variables](/pods/references/environment-variables) in every Pod, for example:
+- `BRIGHTNODE_POD_ID`: Unique identifier for your Pod.
+- `BRIGHTNODE_API_KEY`: API key for making Brightnode API calls from within the Pod.
+- `BRIGHTNODE_POD_HOSTNAME`: Hostname of the server running your Pod.
 
 ### Using secrets in templates
 
-For sensitive information like passwords and API keys, use [Runpod secrets](/pods/templates/secrets) instead of plain environment variables. Secrets are encrypted and can be referenced in your templates using the format:
+For sensitive information like passwords and API keys, use [Brightnode secrets](/pods/templates/secrets) instead of plain environment variables. Secrets are encrypted and can be referenced in your templates using the format:
 
 ```
-{{ RUNPOD_SECRET_secret_name }}
+{{ BRIGHTNODE_SECRET_secret_name }}
 ```
 
 This approach ensures sensitive data is properly protected while still being accessible to your Pod.

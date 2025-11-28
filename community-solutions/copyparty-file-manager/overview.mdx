@@ -1,12 +1,12 @@
 ---
 title: CopyParty file manager
-description: Web-based GUI for easy file browsing, uploading, downloading, and media viewing on Runpod
+description: Web-based GUI for easy file browsing, uploading, downloading, and media viewing on Brightnode
 icon: "party-horn"
 ---
 
-# Setting up CopyParty on Runpod
+# Setting up CopyParty on Brightnode
 
-CopyParty provides a webbased GUI that makes file management simple on Runpod instances. With its intuitive interface, you can browse directories, upload/download files, preview images and videos, and manage your Pod's filesystem without complex command-line operations.
+CopyParty provides a webbased GUI that makes file management simple on Brightnode instances. With its intuitive interface, you can browse directories, upload/download files, preview images and videos, and manage your Pod's filesystem without complex command-line operations.
 
 ## About CopyParty
 
@@ -20,13 +20,13 @@ Check the repository for additional features, updates, and documentation: [githu
 
 ## Requirements
 
-To use CopyParty on Runpod, you need:
+To use CopyParty on Brightnode, you need:
 - **Terminal access to your Pod** - Either through web terminal or Jupyter Labs terminal.
 - An available HTTP port on your Pod.
 - A supported OS in the Docker base image.
 
 <Note>
-CopyParty has been tested on Ubuntu-based Docker images and Runpod Official templates. When using custom templates or alternative Docker bases (like Python Slim) you may encounter file system dependency errors. Refer to the [GitHub repository](https://github.com/9001/copyparty) for details on OS support.
+CopyParty has been tested on Ubuntu-based Docker images and Brightnode Official templates. When using custom templates or alternative Docker bases (like Python Slim) you may encounter file system dependency errors. Refer to the [GitHub repository](https://github.com/9001/copyparty) for details on OS support.
 </Note>
 
 ### Verifying terminal access
@@ -84,7 +84,7 @@ apt-get update && apt-get install tmux -y && tmux new-session -d -s copyparty 'c
 <Info>
 **What is tmux?**
 
-`tmux` (terminal multiplexer) is a tool that lets you run terminal sessions in the background. Think of it as a way to keep programs running even after you close your terminal window, like minimizing an app instead of closing it. This is particularly useful on Runpod where you want CopyParty to keep running even if you disconnect.
+`tmux` (terminal multiplexer) is a tool that lets you run terminal sessions in the background. Think of it as a way to keep programs running even after you close your terminal window, like minimizing an app instead of closing it. This is particularly useful on Brightnode where you want CopyParty to keep running even if you disconnect.
 
 For a more in-depth tmux tutorial, check out this [comprehensive video guide](https://youtu.be/nTqu6w2wc68?si=OcI3qbh2kGH7_3fh).
 </Info>
@@ -104,7 +104,7 @@ This command:
 
 ### Step 4: Access the CopyParty interface
 
-Once CopyParty is running, click on the port number in your Runpod dashboard:
+Once CopyParty is running, click on the port number in your Brightnode dashboard:
 ![Access Port](port.png)
 
 ## Using CopyParty
@@ -142,10 +142,10 @@ Use the tmux option (Option 2) to keep CopyParty running in the background
 
 ## Alternative file transfer methods
 
-While CopyParty provides an excellent web-based solution, Runpod also supports:
+While CopyParty provides an excellent web-based solution, Brightnode also supports:
 - Direct SSH/SCP transfers (if SSH is enabled)
 - JupyterLab file browser
-- [Runpod CLI](/runpodctl/overview) tool
+- [Brightnode CLI](/brightnodectl/overview) tool
 - [Cloud storage integration](/pods/storage/cloud-sync) (S3, Google Drive, etc.)
 
 Choose the method that best fits your workflow and security requirements.

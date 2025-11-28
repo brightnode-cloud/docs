@@ -3,12 +3,12 @@ title: "Overview"
 description: "Pay-as-you-go compute for AI models and compute-intensive workloads."
 ---
 
-Runpod Serverless is a cloud computing platform that lets you run AI models and compute-intensive workloads without managing servers. You only pay for the actual compute time you use, with no idle costs when your application isn't processing requests.
+Brightnode Serverless is a cloud computing platform that lets you run AI models and compute-intensive workloads without managing servers. You only pay for the actual compute time you use, with no idle costs when your application isn't processing requests.
 
 <iframe
   className="w-full aspect-video rounded-xl"
   src="https://www.youtube.com/embed/5jHMLDZ4_O4"
-  title="Runpod Serverless Made Simple - Introduction To Serverless Functions and Workers"
+  title="Brightnode Serverless Made Simple - Introduction To Serverless Functions and Workers"
   frameBorder="0"
   allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowFullScreen
@@ -30,14 +30,14 @@ The access point for your Serverless application. Endpoints provide a URL where 
 
 ### [Workers](/serverless/workers/overview)
 
-The container instances that execute your code when requests arrive at your endpoint. Runpod automatically manages worker lifecycle, starting them when needed and stopping them when idle to optimize resource usage.
+The container instances that execute your code when requests arrive at your endpoint. Brightnode automatically manages worker lifecycle, starting them when needed and stopping them when idle to optimize resource usage.
 
 ### [Handler functions](/serverless/workers/handler-functions)
 
 The core of your Serverless application. These functions define how a worker processes incoming requests and returns results. They follow a simple pattern:
 
 ```Python
-import runpod  # Required
+import brightnode  # Required
 
 def handler(event):
     # Extract input data from the request
@@ -49,7 +49,7 @@ def handler(event):
     # Return the result
     return result
 
-runpod.serverless.start({"handler": handler})  # Required
+brightnode.serverless.start({"handler": handler})  # Required
 ```
 
 ### [Requests](/serverless/endpoints/send-requests)
@@ -58,7 +58,7 @@ An HTTP request that you send to an endpoint, which can include parameters, payl
 
 When a user/client sends a request to your endpoint:
 
-1. If no workers are active, Runpod automatically starts one (cold start).
+1. If no workers are active, Brightnode automatically starts one (cold start).
 2. The request is queued until a worker is available.
 3. A worker processes the request using your handler function.
 4. The result is returned to the user/client after they call `/status` (or automatically if you used `/runsync`).
@@ -110,21 +110,21 @@ When using load balancing endpoints, you can define your own custom API endpoint
 
 ## Deployment options
 
-Runpod Serverless offers several ways to deploy your workloads, each designed for different use cases.
+Brightnode Serverless offers several ways to deploy your workloads, each designed for different use cases.
 
-### Runpod Hub
+### Brightnode Hub
 
 **Best for**: Instantly deploying preconfigured AI models.
 
-You can deploy a Serverless endpoint from a repo in the [Runpod Hub](/hub/overview) in seconds:
+You can deploy a Serverless endpoint from a repo in the [Brightnode Hub](/hub/overview) in seconds:
 
-1. Navigate to the [Hub page](https://www.console.runpod.io/hub) in the Runpod console.
+1. Navigate to the [Hub page](https://www.console.brightnode.cloud/hub) in the Brightnode console.
 2. Browse the collection and select a repo that matches your needs.
 3. Review the repo details, including hardware requirements and available configuration options to ensure compatibility with your use case.
 4. Click the **Deploy** button in the top-right of the repo page. You can also use the dropdown menu to deploy an older version.
 5. Click **Create Endpoint**
 
-[Deploy a repo from the Runpod Hub →](https://www.console.runpod.io/hub)
+[Deploy a repo from the Brightnode Hub →](https://www.console.brightnode.cloud/hub)
 
 ### Deploy a vLLM worker
 
@@ -143,11 +143,11 @@ vLLM workers are specifically optimized for running LLMs:
 
 **Best for**: Creating a custom worker using an existing template.
 
-Runpod maintains a collection of [worker templates](https://github.com/runpod-workers) on GitHub that you can use as a starting point:
+Brightnode maintains a collection of [worker templates](https://github.com/Brightnode-workers) on GitHub that you can use as a starting point:
 
-* [worker-basic](https://github.com/runpod-workers/worker-basic): A minimal template with essential functionality.
-* [worker-template](https://github.com/runpod-workers/worker-template): A more comprehensive template with additional features
-* [Model-specific templates](https://github.com/runpod-workers#worker-collection): Specialized templates for common AI tasks (image generation, audio processing, etc.)
+* [worker-basic](https://github.com/Brightnode-workers/worker-basic): A minimal template with essential functionality.
+* [worker-template](https://github.com/Brightnode-workers/worker-template): A more comprehensive template with additional features
+* [Model-specific templates](https://github.com/Brightnode-workers#worker-collection): Specialized templates for common AI tasks (image generation, audio processing, etc.)
 
 After you fork a worker you can learn how to:
 
@@ -155,7 +155,7 @@ After you fork a worker you can learn how to:
 2. Customize it with your own [handler function](/serverless/workers/handler-functions).
 3. Deploy it to an endpoint using [Docker](/serverless/workers/deploy) or [GitHub](/serverless/workers/github-integration).
 
-[Browse worker templates →](https://github.com/runpod-workers)
+[Browse worker templates →](https://github.com/Brightnode-workers)
 
 ### Build a custom worker
 
@@ -172,7 +172,7 @@ Creating a custom workers give you complete control over your application:
 
 ## Next steps
 
-Ready to get started with Runpod Serverless?
+Ready to get started with Brightnode Serverless?
 
 * [Build your first worker.](/serverless/workers/custom-worker)
 * [Learn more about endpoints.](/serverless/endpoints/overview)

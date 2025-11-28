@@ -1,6 +1,6 @@
 ---
 title: "Environment variables"
-description: "Learn how to use environment variables in Runpod Pods for configuration, security, and automation"
+description: "Learn how to use environment variables in Brightnode Pods for configuration, security, and automation"
 ---
 
 Environment variables in are key-value pairs that you can configure for your Pods. They are accessible within your containerized application and provide a flexible way to pass configuration settings, secrets, and runtime information to your application without hardcoding them into your code or container image.
@@ -13,7 +13,7 @@ Environment variables are dynamic values that exist in your Pod's operating syst
 - Pass sensitive information like API keys securely.
 - Access Pod metadata and system information.
 - Configure application behavior without modifying code.
-- Reference [Runpod secrets](/pods/templates/secrets) in your containers.
+- Reference [Brightnode secrets](/pods/templates/secrets) in your containers.
 
 When you set an environment variable in your Pod configuration, it becomes available to all processes running inside that Pod's container.
 
@@ -32,13 +32,13 @@ MAX_BATCH_SIZE=32
 
 **Security**: Sensitive information such as API keys, database passwords, or authentication tokens can be injected as environment variables, keeping them out of your codebase and container images. This prevents accidental exposure in version control or public repositories.
 
-**Pod metadata access**: Runpod provides [predefined environment variables](#runpod-provided-environment-variables) that give your application information about the Pod's environment, resources, and network configuration. This metadata helps your application adapt to its runtime environment automatically.
+**Pod metadata access**: Brightnode provides [predefined environment variables](#Brightnode-provided-environment-variables) that give your application information about the Pod's environment, resources, and network configuration. This metadata helps your application adapt to its runtime environment automatically.
 
 **Automation and scaling**: Environment variables make it easier to automate deployments and scale applications. You can use the same container image with different settings for development, staging, and production environments by simply changing the environment variables.
 
 ## Setting environment variables
 
-You can configure up to 50 environment variables per Pod through the Runpod interface when creating or editing a Pod or Pod template.
+You can configure up to 50 environment variables per Pod through the Brightnode interface when creating or editing a Pod or Pod template.
 
 ### During Pod creation
 
@@ -49,25 +49,25 @@ You can configure up to 50 environment variables per Pod through the Runpod inte
 
 ### In Pod templates
 
-1. Navigate to [My Templates](https://www.console.runpod.io/user/templates) in the console.
+1. Navigate to [My Templates](https://www.console.brightnode.cloud/user/templates) in the console.
 2. Create a new template or edit an existing one.
 3. Add environment variables in the **Environment Variables** section.
 4. Save the template for reuse across multiple Pods.
 
 ### Using secrets
 
-For sensitive data, you can reference [Runpod secrets](/pods/templates/secrets) in environment variables using the `RUNPOD_SECRET_` prefix. For example:
+For sensitive data, you can reference [Brightnode secrets](/pods/templates/secrets) in environment variables using the `BRIGHTNODE_SECRET_` prefix. For example:
 
 ```
-API_KEY={{ RUNPOD_SECRET_my_api_key }}
-DATABASE_PASSWORD={{ RUNPOD_SECRET_db_password }}
+API_KEY={{ BRIGHTNODE_SECRET_my_api_key }}
+DATABASE_PASSWORD={{ BRIGHTNODE_SECRET_db_password }}
 ```
 
 ## Updating environment variables
 
 To update environment variables in your Pod:
 
-1. Navigate to the [Pods](https://www.console.runpod.io/user/pods) section of the console.
+1. Navigate to the [Pods](https://www.console.brightnode.cloud/user/pods) section of the console.
 2. Click the three dots to the right of the Pod you want to update and select **Edit Pod**.
 3. Click the **Environment Variables** section to expand it.
 4. Add or update the environment variables.
@@ -93,7 +93,7 @@ echo $ENVIRONMENT_VARIABLE_KEY
 env
 
 # Search for specific variables
-env | grep RUNPOD
+env | grep BRIGHTNODE
 ```
 
 ### Accessing variables in your applications
@@ -121,22 +121,22 @@ MODEL_NAME=${MODEL_NAME:-"default-model"}
 echo "Using model: $MODEL_NAME"
 ```
 
-## Runpod-provided environment variables
+## Brightnode-provided environment variables
 
-Runpod automatically sets several environment variables that provide information about your Pod's environment and resources:
+Brightnode automatically sets several environment variables that provide information about your Pod's environment and resources:
 
 | Variable              | Description                                                                                      |
 | --------------------- | ------------------------------------------------------------------------------------------------ |
-| `RUNPOD_POD_ID`       | The unique identifier assigned to your Pod.                                                      |
-| `RUNPOD_DC_ID`        | The identifier of the data center where your Pod is located.                                     |
-| `RUNPOD_POD_HOSTNAME` | The hostname of the server where your Pod is running.                                            |
-| `RUNPOD_GPU_COUNT`    | The total number of GPUs available to your Pod.                                                  |
-| `RUNPOD_CPU_COUNT`    | The total number of CPUs available to your Pod.                                                  |
-| `RUNPOD_PUBLIC_IP`    | The publicly accessible IP address for your Pod, if available.                                   |
-| `RUNPOD_TCP_PORT_22`  | The public port mapped to SSH (port 22) for your Pod.                                            |
-| `RUNPOD_ALLOW_IP`     | A comma-separated list of IP addresses or ranges allowed to access your Pod.                     |
-| `RUNPOD_VOLUME_ID`    | The ID of the network volume attached to your Pod.                                               |
-| `RUNPOD_API_KEY`      | The API key for making Runpod API calls scoped specifically to this Pod.                         |
+| `BRIGHTNODE_POD_ID`       | The unique identifier assigned to your Pod.                                                      |
+| `BRIGHTNODE_DC_ID`        | The identifier of the data center where your Pod is located.                                     |
+| `BRIGHTNODE_POD_HOSTNAME` | The hostname of the server where your Pod is running.                                            |
+| `BRIGHTNODE_GPU_COUNT`    | The total number of GPUs available to your Pod.                                                  |
+| `BRIGHTNODE_CPU_COUNT`    | The total number of CPUs available to your Pod.                                                  |
+| `BRIGHTNODE_PUBLIC_IP`    | The publicly accessible IP address for your Pod, if available.                                   |
+| `BRIGHTNODE_TCP_PORT_22`  | The public port mapped to SSH (port 22) for your Pod.                                            |
+| `BRIGHTNODE_ALLOW_IP`     | A comma-separated list of IP addresses or ranges allowed to access your Pod.                     |
+| `BRIGHTNODE_VOLUME_ID`    | The ID of the network volume attached to your Pod.                                               |
+| `BRIGHTNODE_API_KEY`      | The API key for making Brightnode API calls scoped specifically to this Pod.                         |
 | `PUBLIC_KEY`          | The SSH public keys authorized to access your Pod over SSH.                                      |
 | `CUDA_VERSION`        | The version of CUDA installed in your Pod environment.                                           |
 | `PYTORCH_VERSION`     | The version of PyTorch installed in your Pod environment.                                        |
@@ -191,7 +191,7 @@ Follow these guidelines when working with environment variables:
 
 **Security considerations**:
 
-- **Never hardcode secrets**: Use [Runpod secrets](/pods/templates/secrets) for sensitive data.
+- **Never hardcode secrets**: Use [Brightnode secrets](/pods/templates/secrets) for sensitive data.
 - **Use descriptive names**: Choose clear, descriptive variable names like `DATABASE_PASSWORD` instead of `DB_PASS`.
 
 **Configuration management**:

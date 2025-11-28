@@ -3,11 +3,11 @@ title: "create pod"
 sidebarTitle: "create pod"
 ---
 
-Create and start a new Pod on Runpod with configuration options for GPU type, storage, networking, and cloud tier.
+Create and start a new Pod on Brightnode with configuration options for GPU type, storage, networking, and cloud tier.
 
 <RequestExample>
 ```sh Command
-runpodctl create pod [flags]
+brightnodectl create pod [flags]
 ```
 </RequestExample>
 
@@ -16,12 +16,12 @@ runpodctl create pod [flags]
 Create a Pod with 2 RTX 4090 GPUs in the Secure Cloud with a custom container image:
 
 ```sh
-runpodctl create pod \
+brightnodectl create pod \
   --name "my-training-pod" \
   --gpuType "NVIDIA GeForce RTX 3090" \
   --gpuCount 2 \
   --secureCloud \
-  --imageName "runpod/pytorch:2.0.1-py3.10-cuda11.8.0-devel" \
+  --imageName "Brightnode/pytorch:2.0.1-py3.10-cuda11.8.0-devel" \
   --containerDiskSize 50 \
   --volumeSize 100
 ```
@@ -49,7 +49,7 @@ Create the Pod in the Community Cloud tier, which typically offers lower pricing
 </ResponseField>
 
 <ResponseField name="--imageName" type="string">
-The Docker container image to use for the Pod (e.g., `runpod/pytorch:latest`).
+The Docker container image to use for the Pod (e.g., `Brightnode/pytorch:latest`).
 </ResponseField>
 
 <ResponseField name="--templateId" type="string">
@@ -98,4 +98,4 @@ Ports to expose from the container. Maximum of 1 HTTP port and 1 TCP port allowe
 
 ## Related commands
 
-- [`runpodctl create pods`](/runpodctl/reference/runpodctl-create-pods)
+- [`brightnodectl create pods`](/brightnodectl/reference/brightnodectl-create-pods)

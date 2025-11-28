@@ -4,15 +4,15 @@ sidebarTitle: "Overview"
 description: "Rapidly deploy scalable LLM inference endpoints using vLLM workers."
 ---
 
-vLLM workers make it easy to deploy and serve large language models on Runpod Serverless, delivering fast and efficient inference with automatic scaling.
+vLLM workers make it easy to deploy and serve large language models on Brightnode Serverless, delivering fast and efficient inference with automatic scaling.
 
-The vLLM worker image can be deployed directly from the [Runpod Hub](https://console.runpod.io/hub/runpod-workers/worker-vllm) or customized and built from the [GitHub repository](https://github.com/runpod-workers/worker-vllm).
+The vLLM worker image can be deployed directly from the [Brightnode Hub](https://console.brightnode.cloud/hub/Brightnode-workers/worker-vllm) or customized and built from the [GitHub repository](https://github.com/Brightnode-workers/worker-vllm).
 
 ## What is vLLM?
 
 vLLM is an open-source inference engine designed to serve large language models efficiently. It maximizes throughput and minimizes latency when running LLM inference workloads.
 
-The vLLM worker image includes the vLLM engine with GPU optimizations and support for both OpenAI's API and Runpod's native API. You can deploy any supported model from Hugging Face with minimal configuration and start serving requests immediately. The workers run on Runpod Serverless, which automatically scales based on demand.
+The vLLM worker image includes the vLLM engine with GPU optimizations and support for both OpenAI's API and Brightnode's native API. You can deploy any supported model from Hugging Face with minimal configuration and start serving requests immediately. The workers run on Brightnode Serverless, which automatically scales based on demand.
 
 * **Pre-built optimization**: vLLM workers come with the vLLM inference engine pre-configured, which includes [PagedAttention](https://docs.vllm.ai/en/latest/design/paged_attention.html) technology for optimized memory usage and faster inference.
 * **OpenAI API compatibility**: They provide a drop-in replacement for OpenAI's API, allowing you to use existing OpenAI client code by simply changing the endpoint URL and API key.
@@ -38,14 +38,14 @@ This keeps your GPU busy and reduces latency for individual requests, especially
 
 When you send a request to a vLLM worker endpoint:
 
-1. The request arrives at Runpod Serverless infrastructure.
+1. The request arrives at Brightnode Serverless infrastructure.
 2. If no worker is available, the request is queued and a worker starts automatically.
 3. The worker loads your model from Hugging Face (or from the pre-baked Docker image).
 4. vLLM processes the request using PagedAttention and continuous batching.
 5. The response is returned to your application.
 6. If there are no more requests, the worker scales down to zero after a configured timeout.
 
-vLLM endpoints use the same `/run` and `/runsync` operations as other Runpod Serverless endpoints. The only difference is the input format and the specialized LLM processing inside the worker.
+vLLM endpoints use the same `/run` and `/runsync` operations as other Brightnode Serverless endpoints. The only difference is the input format and the specialized LLM processing inside the worker.
 
 ## Why use vLLM workers?
 
@@ -57,7 +57,7 @@ vLLM's PagedAttention and continuous batching deliver significantly better throu
 
 ### OpenAI API compatibility
 
-vLLM workers provide a drop-in replacement for OpenAI's API. If you're already using the OpenAI Python client or any other OpenAI-compatible library, you can switch to your Runpod endpoint by changing just two lines of code: the API key and the base URL. Your existing prompts, parameters, and response handling code continue to work without modification.
+vLLM workers provide a drop-in replacement for OpenAI's API. If you're already using the OpenAI Python client or any other OpenAI-compatible library, you can switch to your Brightnode endpoint by changing just two lines of code: the API key and the base URL. Your existing prompts, parameters, and response handling code continue to work without modification.
 
 ### Model flexibility
 
@@ -65,7 +65,7 @@ You can deploy virtually any model available on Hugging Face, including popular 
 
 ### Auto-scaling and cost efficiency
 
-Runpod Serverless automatically scales your vLLM workers from zero to many based on demand. You only pay for the seconds when workers are actively processing requests. This makes vLLM workers ideal for workloads with variable traffic patterns or when you're getting started and don't want to pay for idle capacity.
+Brightnode Serverless automatically scales your vLLM workers from zero to many based on demand. You only pay for the seconds when workers are actively processing requests. This makes vLLM workers ideal for workloads with variable traffic patterns or when you're getting started and don't want to pay for idle capacity.
 
 ### Production-ready features
 
@@ -73,11 +73,11 @@ vLLM workers come with features that make them suitable for production deploymen
 
 ## Deployment options
 
-There are two ways to deploy vLLM workers on Runpod.
+There are two ways to deploy vLLM workers on Brightnode.
 
 ### Using pre-built Docker images
 
-This is the fastest and most common approach. Runpod provides pre-built vLLM worker images that you can deploy directly from the console. You specify your model name as an environment variable, and the worker downloads it from Hugging Face during initialization.
+This is the fastest and most common approach. Brightnode provides pre-built vLLM worker images that you can deploy directly from the console. You specify your model name as an environment variable, and the worker downloads it from Hugging Face during initialization.
 
 This method is ideal for getting started quickly, testing different models, or deploying models that change frequently. However, model download time adds to your cold start latency.
 
@@ -125,6 +125,6 @@ vLLM workers are ideal for several types of applications.
 
 Ready to deploy your first vLLM worker? Start with the [get started guide](/serverless/vllm/get-started) to deploy a model in minutes.
 
-Once your endpoint is running, learn how to send requests using [Runpod's native API](/serverless/vllm/vllm-requests) or the [OpenAI-compatible API](/serverless/vllm/openai-compatibility).
+Once your endpoint is running, learn how to send requests using [Brightnode's native API](/serverless/vllm/vllm-requests) or the [OpenAI-compatible API](/serverless/vllm/openai-compatibility).
 
 For advanced configuration options, see the [environment variables documentation](/serverless/vllm/environment-variables).

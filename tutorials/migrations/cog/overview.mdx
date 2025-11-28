@@ -1,24 +1,24 @@
 ---
 title: "Cog"
 sidebar_label: Cog
-description: Migrate your Cog model to Runpod
+description: Migrate your Cog model to Brightnode
 ---
 
-To get started with Runpod:
+To get started with Brightnode:
 
-* [Create a Runpod account](/get-started/manage-accounts)
+* [Create a Brightnode account](/get-started/manage-accounts)
 * [Add funds](/references/billing-information)
-* [Use the Runpod SDK](/serverless/overview) to build and connect with your Serverless Endpoints
+* [Use the Brightnode SDK](/serverless/overview) to build and connect with your Serverless Endpoints
 
-In this tutorial, you'll go through the process of migrating a model deployed via replicate.com or utilizing the Cog framework to a Runpod serverless worker.
+In this tutorial, you'll go through the process of migrating a model deployed via replicate.com or utilizing the Cog framework to a Brightnode serverless worker.
 
 This guide assumes you are operating within a Linux terminal environment and have Docker installed on your system.
 
 <Info>
 
-This method might occur a delay when working with Runpod Serverless Endpoints. This delay is due to the FastAPI server that is used to run the Cog model.
+This method might occur a delay when working with Brightnode Serverless Endpoints. This delay is due to the FastAPI server that is used to run the Cog model.
 
-To eliminate this delay, consider using [Runpod Handler](/serverless/workers/handler-functions) functions in a future iteration.
+To eliminate this delay, consider using [Brightnode Handler](/serverless/workers/handler-functions) functions in a future iteration.
 
 </Info>
 
@@ -29,14 +29,14 @@ By following this streamlined process, you'll be able to simplify the migration 
 * Docker installed on your system
 * Familiarity with the Cog framework
 * Existing model on Replicate.com
-* Runpod account
+* Brightnode account
 
 ## Clone and navigate the cog-worker repository
 
 Before we begin, let's set up the necessary environment. You will need to clone the `cog-worker` repository, which contains essential scripts and configuration files required for the migration process. To do this, run the following commands in your terminal:
 
 ```bash
-git clone https://github.com/runpod-workers/cog-worker.git
+git clone https://github.com/Brightnode-workers/cog-worker.git
 cd cog-worker/
 ```
 
@@ -58,7 +58,7 @@ Once you have collected the required information, you can move on to the next st
 
 ## Build and push docker image
 
-Now that you have identified the necessary information about your model, you can proceed to build and push your Docker image. This is a crucial step, as it prepares your model for deployment on the Runpod platform.
+Now that you have identified the necessary information about your model, you can proceed to build and push your Docker image. This is a crucial step, as it prepares your model for deployment on the Brightnode platform.
 
 Build the Docker image by providing the necessary arguments for your model. Once your Docker image is built, push it to a container repository such as DockerHub:
 
@@ -70,15 +70,15 @@ docker push <username>/<repo>:<tag>
 
 The `--tag` option allows you to specify a name and tag for your image, while the `--build-arg` options provide the necessary information for building the image.
 
-With your Docker image built and pushed, you're one step closer to deploying your Cog model on Runpod.
+With your Docker image built and pushed, you're one step closer to deploying your Cog model on Brightnode.
 
 ## Create and Deploy a Serverless Endpoint
 
-Now that your Docker image is ready, it's time to create and deploy a serverless endpoint on Runpod. This step will enable you to send requests to your new endpoint and use your Cog model in a serverless environment.
+Now that your Docker image is ready, it's time to create and deploy a serverless endpoint on Brightnode. This step will enable you to send requests to your new endpoint and use your Cog model in a serverless environment.
 
-To create and deploy a serverless endpoint on Runpod:
+To create and deploy a serverless endpoint on Brightnode:
 
-1. Log in to the [Runpod Serverless console](https://www.console.runpod.io/serverless).
+1. Log in to the [Brightnode Serverless console](https://www.console.brightnode.cloud/serverless).
 
 2. Select **+ New Endpoint**.
 
@@ -108,9 +108,9 @@ Once your endpoint is set up and deployed, you'll be able to start receiving req
 
 ## Conclusion
 
-Congratulations, you have successfully migrated your Cog model from Replicate to Runpod and set up a serverless endpoint. As you continue to develop your models and applications, consider exploring additional features and capabilities offered by Runpod to further enhance your projects.
+Congratulations, you have successfully migrated your Cog model from Replicate to Brightnode and set up a serverless endpoint. As you continue to develop your models and applications, consider exploring additional features and capabilities offered by Brightnode to further enhance your projects.
 
 Here are some resources to help you continue your journey:
 
-* [Learn more about Runpod serverless workers](/serverless/overview)
-* [Explore additional Runpod tutorials and examples](/tutorials/introduction/overview)
+* [Learn more about Brightnode serverless workers](/serverless/overview)
+* [Explore additional Brightnode tutorials and examples](/tutorials/introduction/overview)

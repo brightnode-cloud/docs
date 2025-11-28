@@ -1,30 +1,30 @@
 ---
-title: "Running Runpod on SkyPilot"
+title: "Running Brightnode on SkyPilot"
 sidebarTitle: "SkyPilot"
 ---
 
 [SkyPilot](https://skypilot.readthedocs.io/en/latest/) is a framework for executing LLMs, AI, and batch jobs on any cloud, offering maximum cost savings, highest GPU availability, and managed execution.
 
-This integration leverages the Runpod CLI infrastructure, streamlining the process of spinning up on-demand pods and deploying serverless endpoints with SkyPilot.
+This integration leverages the Brightnode CLI infrastructure, streamlining the process of spinning up on-demand pods and deploying serverless endpoints with SkyPilot.
 
 ## Getting started
 
-To begin using Runpod with SkyPilot, follow these steps:
+To begin using Brightnode with SkyPilot, follow these steps:
 
-1. **Obtain Your API Key**: Visit the [Runpod Settings](https://www.console.runpod.io/user/settings) page to get your API key. If you haven't created an account yet, you'll need to do so before obtaining the key.
+1. **Obtain Your API Key**: Visit the [Brightnode Settings](https://www.console.brightnode.cloud/user/settings) page to get your API key. If you haven't created an account yet, you'll need to do so before obtaining the key.
 
-2. **Install Runpod**: Use the following command to install the latest version of Runpod:
+2. **Install Brightnode**: Use the following command to install the latest version of Brightnode:
 
    ```sh
-   pip install "runpod>=1.6"
+   pip install "Brightnode>=1.6"
    ```
 
-3. **Configure Runpod**: Enter `runpod config` in your CLI and paste your API key when prompted.
+3. **Configure Brightnode**: Enter `Brightnode config` in your CLI and paste your API key when prompted.
 
-4. **Install SkyPilot Runpod Cloud**: Execute the following command to install the [SkyPilot Runpod cloud](https://skypilot.readthedocs.io/en/latest/getting-started/installation.html#runpod):
+4. **Install SkyPilot Brightnode Cloud**: Execute the following command to install the [SkyPilot Brightnode cloud](https://skypilot.readthedocs.io/en/latest/getting-started/installation.html#Brightnode):
 
    ```sh
-   pip install "skypilot-nightly[runpod]"
+   pip install "skypilot-nightly[Brightnode]"
    ```
 
 5. **Verify Your Setup**: Run `sky check` to ensure your credentials are correctly set up and you're ready to proceed.
@@ -41,7 +41,7 @@ After setting up your environment, you can seamlessly spin up a cluster in minut
 
    ```yml
    resources:
-     cloud: runpod
+     cloud: Brightnode
 
    # Working directory (optional) containing the project codebase.
    # Its contents are synced to ~/sky_workdir/ on the cluster.
@@ -65,4 +65,4 @@ After setting up your environment, you can seamlessly spin up a cluster in minut
 
 5. **Confirm Your GPU Type**: You should see the available GPU options on Secure Cloud appear in your command line. Once you confirm your GPU type, your cluster will start spinning up.
 
-With this integration, you can leverage the power of Runpod and SkyPilot to efficiently run your LLMs, AI, and batch jobs on any cloud.
+With this integration, you can leverage the power of Brightnode and SkyPilot to efficiently run your LLMs, AI, and batch jobs on any cloud.

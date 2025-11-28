@@ -4,11 +4,11 @@ title: "Manage Pods"
 
 ## Authentication
 
-Runpod uses API Keys for all API requests. Go to [Settings](https://www.console.runpod.io/user/settings) to manage your API keys.
+Brightnode uses API Keys for all API requests. Go to [Settings](https://www.console.brightnode.cloud/user/settings) to manage your API keys.
 
 ## GraphQL API spec
 
-If you need detailed queries, mutations, fields, and inputs, look at the [GraphQL spec](https://graphql-spec.runpod.io/).
+If you need detailed queries, mutations, fields, and inputs, look at the [GraphQL spec](https://graphql-spec.brightnode.cloud/).
 
 ## Create Pods
 
@@ -39,8 +39,8 @@ A Pod consists of the following resources:
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
-  --data '{"query": "mutation { podFindAndDeployOnDemand( input: { cloudType: ALL, gpuCount: 1, volumeInGb: 40, containerDiskInGb: 40, minVcpuCount: 2, minMemoryInGb: 15, gpuTypeId: \"NVIDIA RTX A6000\", name: \"Runpod Tensorflow\", imageName: \"runpod/tensorflow\", dockerArgs: \"\", ports: \"8888/http\", volumeMountPath: \"/workspace\", env: [{ key: \"JUPYTER_PASSWORD\", value: \"rn51hunbpgtltcpac3ol\" }] } ) { id imageName env machineId machine { podHostId } } }"}'
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
+  --data '{"query": "mutation { podFindAndDeployOnDemand( input: { cloudType: ALL, gpuCount: 1, volumeInGb: 40, containerDiskInGb: 40, minVcpuCount: 2, minMemoryInGb: 15, gpuTypeId: \"NVIDIA RTX A6000\", name: \"Brightnode Tensorflow\", imageName: \"Brightnode/tensorflow\", dockerArgs: \"\", ports: \"8888/http\", volumeMountPath: \"/workspace\", env: [{ key: \"JUPYTER_PASSWORD\", value: \"rn51hunbpgtltcpac3ol\" }] } ) { id imageName env machineId machine { podHostId } } }"}'
 ```
 
 </Tab>
@@ -57,8 +57,8 @@ mutation {
       minVcpuCount: 2
       minMemoryInGb: 15
       gpuTypeId: "NVIDIA RTX A6000"
-      name: "Runpod Tensorflow"
-      imageName: "runpod/tensorflow"
+      name: "Brightnode Tensorflow"
+      imageName: "Brightnode/tensorflow"
       dockerArgs: ""
       ports: "8888/http"
       volumeMountPath: "/workspace"
@@ -84,7 +84,7 @@ mutation {
   "data": {
     "podFindAndDeployOnDemand": {
       "id": "50qynxzilsxoey",
-      "imageName": "runpod/tensorflow",
+      "imageName": "Brightnode/tensorflow",
       "env": [
         "JUPYTER_PASSWORD=rn51hunbpgtltcpac3ol"
       ],
@@ -108,8 +108,8 @@ mutation {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
-  --data '{"query": "mutation { podRentInterruptable( input: { bidPerGpu: 0.2, cloudType: SECURE, gpuCount: 1, volumeInGb: 40, containerDiskInGb: 40, minVcpuCount: 2, minMemoryInGb: 15, gpuTypeId: \"NVIDIA RTX A6000\", name: \"Runpod Pytorch\", imageName: \"runpod/pytorch\", dockerArgs: \"\", ports: \"8888/http\", volumeMountPath: \"/workspace\", env: [{ key: \"JUPYTER_PASSWORD\", value: \"vunw9ybnzqwpia2795p2\" }] } ) { id imageName env machineId machine { podHostId } } }"}'
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
+  --data '{"query": "mutation { podRentInterruptable( input: { bidPerGpu: 0.2, cloudType: SECURE, gpuCount: 1, volumeInGb: 40, containerDiskInGb: 40, minVcpuCount: 2, minMemoryInGb: 15, gpuTypeId: \"NVIDIA RTX A6000\", name: \"Brightnode Pytorch\", imageName: \"Brightnode/pytorch\", dockerArgs: \"\", ports: \"8888/http\", volumeMountPath: \"/workspace\", env: [{ key: \"JUPYTER_PASSWORD\", value: \"vunw9ybnzqwpia2795p2\" }] } ) { id imageName env machineId machine { podHostId } } }"}'
 ```
 
 </Tab>
@@ -127,8 +127,8 @@ mutation {
       minVcpuCount: 2
       minMemoryInGb: 15
       gpuTypeId: "NVIDIA RTX A6000"
-      name: "Runpod Pytorch"
-      imageName: "runpod/pytorch"
+      name: "Brightnode Pytorch"
+      imageName: "Brightnode/pytorch"
       dockerArgs: ""
       ports: "8888/http"
       volumeMountPath: "/workspace"
@@ -154,7 +154,7 @@ mutation {
   "data": {
     "podRentInterruptable": {
       "id": "fkjbybgpwuvmhk",
-      "imageName": "runpod/pytorch",
+      "imageName": "Brightnode/pytorch",
       "env": [
         "JUPYTER_PASSWORD=vunw9ybnzqwpia2795p2"
       ],
@@ -182,7 +182,7 @@ This helps in specifying the compatible CUDA versions for your GPU setup.
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{
     "query": "mutation { podResume( input: { podId: \"inzk6tzuz833h5\", gpuCount: 1, allowedCudaVersions: [\"12.0\", \"12.1\", \"12.2\", \"12.3\"] } ) { id desiredStatus imageName env machineId machine { podHostId } } }"
   }'
@@ -219,7 +219,7 @@ mutation {
     "podResume": {
       "id": "inzk6tzuz833h5",
       "desiredStatus": "RUNNING",
-      "imageName": "runpod/tensorflow",
+      "imageName": "Brightnode/tensorflow",
       "env": [
         { "key": "JUPYTER_PASSWORD", "value": "ywm4c9r15j1x6gfrds5n" }
       ],
@@ -245,7 +245,7 @@ mutation {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { podResume( input: { podId: \"inzk6tzuz833h5\", gpuCount: 1 } ) { id desiredStatus imageName env machineId machine { podHostId } } }"}'
 ```
 
@@ -276,7 +276,7 @@ mutation {
     "podResume": {
       "id": "inzk6tzuz833h5",
       "desiredStatus": "RUNNING",
-      "imageName": "runpod/tensorflow",
+      "imageName": "Brightnode/tensorflow",
       "env": [
         "JUPYTER_PASSWORD=ywm4c9r15j1x6gfrds5n"
       ],
@@ -300,7 +300,7 @@ mutation {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { podBidResume( input: { podId: \"d62t7qg9n5vtan\", bidPerGpu: 0.2, gpuCount: 1 } ) { id desiredStatus imageName env machineId machine { podHostId } } }"}'
 ```
 
@@ -331,7 +331,7 @@ mutation {
     "podBidResume": {
       "id": "d62t7qg9n5vtan",
       "desiredStatus": "RUNNING",
-      "imageName": "runpod/tensorflow",
+      "imageName": "Brightnode/tensorflow",
       "env": [
         "JUPYTER_PASSWORD=vunw9ybnzqwpia2795p2"
       ],
@@ -359,9 +359,9 @@ This helps in specifying the compatible CUDA versions for your GPU setup.
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{
-    "query": "mutation { podRentInterruptable( input: { bidPerGpu: 0.2, cloudType: SECURE, gpuCount: 1, volumeInGb: 40, containerDiskInGb: 40, minVcpuCount: 2, minMemoryInGb: 15, gpuTypeId: \"NVIDIA RTX A6000\", name: \"Runpod Pytorch\", imageName: \"runpod/pytorch\", dockerArgs: \"\", ports: \"8888/http\", volumeMountPath: \"/workspace\", env: [{ key: \"JUPYTER_PASSWORD\", value: \"vunw9ybnzqwpia2795p2\" }], allowedCudaVersions: [\"12.0\", \"12.1\", \"12.2\", \"12.3\"] } ) { id imageName env machineId machine { podHostId } } }"
+    "query": "mutation { podRentInterruptable( input: { bidPerGpu: 0.2, cloudType: SECURE, gpuCount: 1, volumeInGb: 40, containerDiskInGb: 40, minVcpuCount: 2, minMemoryInGb: 15, gpuTypeId: \"NVIDIA RTX A6000\", name: \"Brightnode Pytorch\", imageName: \"Brightnode/pytorch\", dockerArgs: \"\", ports: \"8888/http\", volumeMountPath: \"/workspace\", env: [{ key: \"JUPYTER_PASSWORD\", value: \"vunw9ybnzqwpia2795p2\" }], allowedCudaVersions: [\"12.0\", \"12.1\", \"12.2\", \"12.3\"] } ) { id imageName env machineId machine { podHostId } } }"
   }'
 ```
 
@@ -379,8 +379,8 @@ mutation {
     minVcpuCount: 2,
     minMemoryInGb: 15,
     gpuTypeId: "NVIDIA RTX A6000",
-    name: "Runpod Pytorch",
-    imageName: "runpod/pytorch",
+    name: "Brightnode Pytorch",
+    imageName: "Brightnode/pytorch",
     dockerArgs: "",
     ports: "8888/http",
     volumeMountPath: "/workspace",
@@ -406,7 +406,7 @@ mutation {
   "data": {
     "podRentInterruptable": {
       "id": "your_pod_id",
-      "imageName": "runpod/pytorch",
+      "imageName": "Brightnode/pytorch",
       "env": [
         { "key": "JUPYTER_PASSWORD", "value": "vunw9ybnzqwpia2795p2" }
       ],
@@ -430,7 +430,7 @@ mutation {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { podStop(input: {podId: \"riixlu8oclhp\"}) { id desiredStatus } }"}'
 ```
 
@@ -473,7 +473,7 @@ mutation {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "query Pods { myself { pods { id name runtime { uptimeInSeconds ports { ip isIpPublic privatePort publicPort type } gpus { id gpuUtilPercent memoryUtilPercent } container { cpuPercent memoryPercent } } } } }"}'
 ```
 
@@ -520,7 +520,7 @@ query Pods {
       "pods": [
         {
           "id": "ldl1dxirsim64n",
-          "name": "Runpod Pytorch",
+          "name": "Brightnode Pytorch",
           "runtime": {
             "uptimeInSeconds": 3931,
             "ports": [
@@ -581,7 +581,7 @@ query Pods {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "query Pod { pod(input: {podId: \"ldl1dxirsim64n\"}) { id name runtime { uptimeInSeconds ports { ip isIpPublic privatePort publicPort type } gpus { id gpuUtilPercent memoryUtilPercent } container { cpuPercent memoryPercent } } } }"}'
 ```
 
@@ -624,7 +624,7 @@ query Pod {
   "data": {
     "pod": {
       "id": "ldl1dxirsim64n",
-      "name": "Runpod Pytorch",
+      "name": "Brightnode Pytorch",
       "runtime": {
         "uptimeInSeconds": 11,
         "ports": [
@@ -666,7 +666,7 @@ When creating a Pod, you will need to pass GPU type IDs. These queries can help 
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "query GpuTypes { gpuTypes { id displayName memoryInGb } }"}'
 ```
 
@@ -721,7 +721,7 @@ query GpuTypes {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "query GpuTypes { gpuTypes(input: {id: \"NVIDIA GeForce RTX 3090\"}) { id displayName memoryInGb secureCloud communityCloud lowestPrice(input: {gpuCount: 1}) { minimumBidPrice uninterruptablePrice } } }"}'
 ```
 
@@ -784,7 +784,7 @@ The `stockStatus` field can help you determine the likelihood that a particular 
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "query { gpuTypes(input: { id: \"NVIDIA RTX A4000\" }) { lowestPrice(input: { compliance: null, dataCenterId: null, globalNetwork: false, gpuCount: 1, minDisk: 0, minMemoryInGb: 8, minVcpuCount: 2, secureCloud: true }) { minimumBidPrice uninterruptablePrice minVcpu minMemory stockStatus compliance maxUnreservedGpuCount availableGpuCounts __typename } id displayName memoryInGb securePrice communityPrice oneMonthPrice oneWeekPrice threeMonthPrice sixMonthPrice secureSpotPrice __typename } }"}'
 ```
 </Tab>

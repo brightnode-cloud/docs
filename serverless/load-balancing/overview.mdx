@@ -12,7 +12,7 @@ Unlike traditional queue-based endpoints that process requests sequentially, loa
 When building a load balancer, you're no longer limited to the standard `/run` or `/runsync` endpoints. Instead, you can create custom REST endpoints that are accessible via a unique URL:
 
 ```
-https://ENDPOINT_ID.api.runpod.ai/YOUR_CUSTOM_PATH
+https://ENDPOINT_ID.api.brightnode.ai/YOUR_CUSTOM_PATH
 ```
 
 ## Get started
@@ -64,7 +64,7 @@ These endpoints are ideal for real-time applications and streaming, but provide 
 Traditional Serverless workers require a specific handler function structure:
 
 ```python
-import runpod
+import brightnode
 
 def handler(job):
     """Handler function that will be used to process jobs."""
@@ -76,19 +76,19 @@ def handler(job):
 
     return {"generated_text": result}
 
-runpod.serverless.start({"handler": handler})
+brightnode.serverless.start({"handler": handler})
 ```
 
 With traditional endpoints:
 
-- Requests are processed through Runpod's queueing system.
+- Requests are processed through Brightnode's queueing system.
 - Access is available via fixed the endpoints `/run` and `/runsync`.
 - You implement a single handler function.
 - You’re limited to JSON input/output.
 
 ### Load balancing worker
 
-Load balancing workers do not require standardized handlers, or use the Runpod SDK at all. Instead, you can create full REST APIs using frameworks like FastAPI:
+Load balancing workers do not require standardized handlers, or use the Brightnode SDK at all. Instead, you can create full REST APIs using frameworks like FastAPI:
 
 ```python
 from fastapi import FastAPI
@@ -121,8 +121,8 @@ if __name__ == "__main__":
 Once deployed, this example would expose two custom endpoints on each Serverless worker:
 
 ```
-https://ENDPOINT_ID.api.runpod.ai/ping
-https://ENDPOINT_ID.api.runpod.ai/generate
+https://ENDPOINT_ID.api.brightnode.ai/ping
+https://ENDPOINT_ID.api.brightnode.ai/generate
 ```
 
 With load balancing endpoints:
@@ -143,7 +143,7 @@ Consider using load balancing endpoints when you need:
 
 ## Worker health management
 
-Runpod continuously monitors worker health through a dedicated health check mechanism. Workers must expose a `/ping` endpoint on the port specified by the `PORT_HEALTH` environment variable. The load balancer periodically sends requests to this endpoint. Workers respond with appropriate HTTP status codes:
+Brightnode continuously monitors worker health through a dedicated health check mechanism. Workers must expose a `/ping` endpoint on the port specified by the `PORT_HEALTH` environment variable. The load balancer periodically sends requests to this endpoint. Workers respond with appropriate HTTP status codes:
 
 - `200` : healthy
 - `204` : initializing
@@ -153,7 +153,7 @@ Unhealthy workers are automatically removed from the routing pool.
 
 <Note>
 
-When calculating endpoint metrics, Runpod calculates the cold start time for load balancing workers by measuring the time it takes between  `/ping`  first returning `204` until it first returns `200`. 
+When calculating endpoint metrics, Brightnode calculates the cold start time for load balancing workers by measuring the time it takes between  `/ping`  first returning `204` until it first returns `200`. 
 
 </Note>
 
@@ -204,7 +204,7 @@ import requests
 import time
 
 def health_check_with_retry(base_url, api_key, max_retries=3, delay=2):
-    """Simple health check with retry logic for Runpod cold starts"""
+    """Simple health check with retry logic for Brightnode cold starts"""
     headers = {"Authorization": f"Bearer {api_key}"}
     
     for attempt in range(max_retries):
@@ -223,8 +223,8 @@ def health_check_with_retry(base_url, api_key, max_retries=3, delay=2):
     return False
 
 # Usage example
-base_url = "https://ENDPOINT_ID.api.runpod.ai"
-api_key = "RUNPOD_API_KEY"
+base_url = "https://ENDPOINT_ID.api.brightnode.ai"
+api_key = "BRIGHTNODE_API_KEY"
 
 # Ensures that a worker is ready (with retries)
 if health_check_with_retry(base_url, api_key):
@@ -250,7 +250,7 @@ Use at least 3 retries with 5-10 second delays between attempts. This gives work
 
 ## Technical details
 
-The load balancing system employs an HTTP load balancer that inspects application-level protocols to make routing decisions. When a request arrives at `https://ENDPOINT_ID.api.runpod.ai/PATH`, the system:
+The load balancing system employs an HTTP load balancer that inspects application-level protocols to make routing decisions. When a request arrives at `https://ENDPOINT_ID.api.brightnode.ai/PATH`, the system:
 
 1. Identifies available healthy workers within the endpoint's worker pool.
 2. Routes the request to a worker's exposed HTTP server.

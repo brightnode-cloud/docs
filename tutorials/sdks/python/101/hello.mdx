@@ -3,20 +3,20 @@ title: "Create a basic Serverless function"
 sidebarTitle: "Create a basic Serverless function"
 ---
 
-Runpod's serverless library enables you to create and deploy scalable functions without managing infrastructure. This tutorial will walk you through creating a simple serverless function that determines whether a number is even.
+Brightnode's serverless library enables you to create and deploy scalable functions without managing infrastructure. This tutorial will walk you through creating a simple serverless function that determines whether a number is even.
 
 ## Creating a Basic Serverless Function
 
 Let's start by building a function that checks if a given number is even.
 
-### Import the Runpod library
+### Import the Brightnode library
 
 Create a new python file called `is_even.py`.
 
-Import the Runpod library:
+Import the Brightnode library:
 
 ```python is_even.py
-import runpod
+import brightnode
 ```
 
 ### Define your function
@@ -43,10 +43,10 @@ This function:
 
 ### Start the Serverless function
 
-Wrap your function with `runpod.serverless.start()`:
+Wrap your function with `brightnode.serverless.start()`:
 
 ```python is_even.py
-runpod.serverless.start({"handler": is_even})
+brightnode.serverless.start({"handler": is_even})
 ```
 
 This line initializes the serverless function with your specified handler.
@@ -56,7 +56,7 @@ This line initializes the serverless function with your specified handler.
 Here's the full code for our serverless function:
 
 ```python is_even.py
-import runpod
+import brightnode
 
 
 def is_even(job):
@@ -69,7 +69,7 @@ def is_even(job):
     return the_number % 2 == 0
 
 
-runpod.serverless.start({"handler": is_even})
+brightnode.serverless.start({"handler": is_even})
 ```
 
 ## Testing your Serverless Function
@@ -103,12 +103,12 @@ This output indicates that:
 
 ## Conclusion
 
-You've now created a basic serverless function using Runpod's Python SDK. This approach allows for efficient, scalable deployment of functions without the need to manage infrastructure.
+You've now created a basic serverless function using Brightnode's Python SDK. This approach allows for efficient, scalable deployment of functions without the need to manage infrastructure.
 
-To further explore Runpod's serverless capabilities, consider:
+To further explore Brightnode's serverless capabilities, consider:
 
 * Creating more complex functions
 * Implementing error handling and input validation
-* Exploring Runpod's documentation for advanced features and best practices
+* Exploring Brightnode's documentation for advanced features and best practices
 
-Runpod's serverless library provides a powerful tool for a wide range of applications, from simple utilities to complex data processing tasks.
+Brightnode's serverless library provides a powerful tool for a wide range of applications, from simple utilities to complex data processing tasks.

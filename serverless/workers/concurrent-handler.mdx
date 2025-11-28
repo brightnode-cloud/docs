@@ -14,8 +14,8 @@ In this guide you will learn how to:
 
 ## Requirements
 
-* You've [created a Runpod account](/get-started/manage-accounts).
-* You've installed the Runpod SDK (`pip install runpod`).
+* You've [created a Brightnode account](/get-started/manage-accounts).
+* You've installed the Brightnode SDK (`pip install brightnode`).
 * You know how to build a [basic handler function](/serverless/workers/handler-functions).
 
 ## Step 1: Set up your environment
@@ -26,7 +26,7 @@ First, set up a virtual environment and install the necessary packages:
 # Create a Python virtual environment
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install runpod asyncio
+pip install brightnode asyncio
 ```
 
 ## Step 2: Create a concurrent handler file
@@ -34,7 +34,7 @@ pip install runpod asyncio
 Create a file named `concurrent_handler.py` and add the following code:
 
 ```python concurrent_handler.py
-import runpod
+import brightnode
 import asyncio
 import random
 
@@ -71,7 +71,7 @@ def update_request_rate():
 
 # Start the Serverless function when the script is run
 if __name__ == "__main__":
-    runpod.serverless.start({
+    brightnode.serverless.start({
         "handler": process_request,
         "concurrency_modifier": adjust_concurrency
     })

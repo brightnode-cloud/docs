@@ -1,16 +1,16 @@
 ---
-title: "Build Docker Images on Runpod with Bazel"
+title: "Build Docker Images on Brightnode with Bazel"
 ---
 
-Runpod's GPU Pods use custom Docker images to run your code. This means you can't directly spin up your own Docker instance or build Docker containers on a GPU Pod. Tools like Docker Compose are also unavailable.
+Brightnode's GPU Pods use custom Docker images to run your code. This means you can't directly spin up your own Docker instance or build Docker containers on a GPU Pod. Tools like Docker Compose are also unavailable.
 
-This limitation can be frustrating when you need to create custom Docker images for your Runpod templates.
+This limitation can be frustrating when you need to create custom Docker images for your Brightnode templates.
 
 Fortunately, many use cases can be addressed by creating a custom template with the desired Docker image.
 
-In this tutorial, you'll learn how to use the [Bazel](https://bazel.build) build tool to build and push Docker images from inside a Runpod container.
+In this tutorial, you'll learn how to use the [Bazel](https://bazel.build) build tool to build and push Docker images from inside a Brightnode container.
 
-By the end of this tutorial, you’ll be able to build custom Docker images on Runpod and push them to Docker Hub for use in your own templates.
+By the end of this tutorial, you’ll be able to build custom Docker images on Brightnode and push them to Docker Hub for use in your own templates.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ Before you begin this guide you'll need the following:
 
 ## Create a Pod
 
-1. Navigate to [Pods](https://www.console.runpod.io/pods) and select **+ Deploy**.
+1. Navigate to [Pods](https://www.console.brightnode.cloud/pods) and select **+ Deploy**.
 
 2. Choose between **GPU** and **CPU**.
 
@@ -29,7 +29,7 @@ Before you begin this guide you'll need the following:
 
    1. (optional) Specify a Network volume.
    2. Select an instance type. For example, **A40**.
-   3. (optional) Provide a template. For example, **Runpod Pytorch**.
+   3. (optional) Provide a template. For example, **Brightnode Pytorch**.
    4. (GPU only) Specify your compute count.
 
 4. Review your configuration and select **Deploy On-Demand**.
@@ -49,12 +49,12 @@ Now you can clone the example GitHub repository
 Clone the example code repository that demonstrates building Docker images with Bazel:
 
 ```bash
-git clone https://github.com/therealadityashankar/build-docker-in-runpod.git && cd build-docker-in-runpod
+git clone https://github.com/therealadityashankar/build-docker-in-brightnode.git && cd build-docker-in-Brightnode
 ```
 
 ## Install dependencies
 
-Install the required dependencies inside the Runpod container:
+Install the required dependencies inside the Brightnode container:
 
 Update packages and install sudo:
 
@@ -71,7 +71,7 @@ curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh
 Log in to Docker using an access token:
 
 1. Go to [https://hub.docker.com/settings/security](https://hub.docker.com/settings/security) and click "New Access Token".
-2. Enter a description like "Runpod Token" and select "Read/Write" permissions.
+2. Enter a description like "Brightnode Token" and select "Read/Write" permissions.
 3. Click "Generate" and copy the token that appears.
 4. In the terminal, run:
 
@@ -120,8 +120,8 @@ bazel run //:push_custom_image
 
 Once the command completes, go to [https://hub.docker.com/](https://hub.docker.com/) and log in. You should see a new repository called `custom_image` containing the Docker image you just built.
 
-You can now reference this custom image in your own Runpod templates.
+You can now reference this custom image in your own Brightnode templates.
 
 ## Conclusion
 
-In this tutorial, you learned how to use Bazel to build and push Docker images from inside Runpod containers. By following the steps outlined, you can now create and utilize custom Docker images for your Runpod templates. The techniques demonstrated can be further expanded to build more complex images, providing a flexible solution for your containerization needs on Runpod.
+In this tutorial, you learned how to use Bazel to build and push Docker images from inside Brightnode containers. By following the steps outlined, you can now create and utilize custom Docker images for your Brightnode templates. The techniques demonstrated can be further expanded to build more complex images, providing a flexible solution for your containerization needs on Brightnode.

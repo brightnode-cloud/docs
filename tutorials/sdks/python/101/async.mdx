@@ -3,7 +3,7 @@ title: "Building an async generator handler for weather data simulation"
 sidebarTitle: "Async generator"
 ---
 
-This tutorial will guide you through creating a serverless function using Runpod's Python SDK that simulates fetching weather data for multiple cities concurrently.
+This tutorial will guide you through creating a serverless function using Brightnode's Python SDK that simulates fetching weather data for multiple cities concurrently.
 
 Use asynchronous functions to handle multiple concurrent operations efficiently, especially when dealing with tasks that involve waiting for external resources, such as network requests or I/O operations. Asynchronous programming allows your code to perform other tasks while waiting, rather than blocking the entire program. This is particularly useful in a serverless environment where you want to maximize resource utilization and minimize response times.
 
@@ -18,7 +18,7 @@ Let's break down the process of creating our weather data simulator into steps.
 First, import the necessary libraries:
 
 ```python
-import runpod
+import brightnode
 import asyncio
 import random
 import json
@@ -98,20 +98,20 @@ if __name__ == "__main__":
     if "--test_input" in sys.argv:
         # Code for local testing (see full example)
     else:
-        runpod.serverless.start({
+        brightnode.serverless.start({
             "handler": async_generator_handler,
             "return_aggregate_stream": True
         })
 ```
 
-This block allows for both local testing and deployment as a Runpod serverless function.
+This block allows for both local testing and deployment as a Brightnode serverless function.
 
 ## Complete code example
 
 Here's the full code for our serverless weather data simulator:
 
 ```python fetch_weather_data.py
-import runpod
+import brightnode
 import asyncio
 import random
 import json
@@ -168,7 +168,7 @@ if __name__ == "__main__":
         else:
             print("Error: --test_input requires a JSON string argument")
     else:
-        runpod.serverless.start({
+        brightnode.serverless.start({
             "handler": async_generator_handler,
             "return_aggregate_stream": True
         })
@@ -213,12 +213,12 @@ This output demonstrates:
 
 ## Conclusion
 
-You've now created a serverless function using Runpod's Python SDK that simulates concurrent weather data fetching for multiple cities. This example showcases how to handle multiple asynchronous operations and stream results incrementally in a serverless environment.
+You've now created a serverless function using Brightnode's Python SDK that simulates concurrent weather data fetching for multiple cities. This example showcases how to handle multiple asynchronous operations and stream results incrementally in a serverless environment.
 
 To further enhance this application, consider:
 
 * Implementing real API calls to fetch actual weather data
 * Adding error handling for network failures or API limits
-* Exploring Runpod's documentation for advanced features like scaling for high-concurrency scenarios
+* Exploring Brightnode's documentation for advanced features like scaling for high-concurrency scenarios
 
-Runpod's serverless library provides a powerful foundation for building scalable, efficient applications that can process and stream data concurrently in real-time without the need to manage infrastructure.
+Brightnode's serverless library provides a powerful foundation for building scalable, efficient applications that can process and stream data concurrently in real-time without the need to manage infrastructure.

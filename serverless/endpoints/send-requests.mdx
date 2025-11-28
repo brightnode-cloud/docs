@@ -62,7 +62,7 @@ The exact parameters required in the `input` object depend on your specific work
 
 ## Send requests from the console
 
-The quickest way to test your endpoint is directly in the Runpod console. Navigate to the [Serverless section](https://www.console.runpod.io/serverless), select your endpoint, and click the **Requests** tab.
+The quickest way to test your endpoint is directly in the Brightnode console. Navigate to the [Serverless section](https://www.console.brightnode.cloud/serverless), select your endpoint, and click the **Requests** tab.
 
 <Frame>
   <img src="/images/8f34ba77-serverless-get-started-endpoint-details.png" />
@@ -104,30 +104,30 @@ If you need to create an endpoint that supports custom API paths, use [load bala
 
 ## Operation reference
 
-Below you'll find detailed explanations and examples for each operation using `cURL` and the Runpod SDK.
+Below you'll find detailed explanations and examples for each operation using `cURL` and the Brightnode SDK.
 
 <Tip>
 You can also send requests using standard HTTP request APIs and libraries, such as `fetch` (for JavaScript) and `requests` (for Python).
 </Tip>
 
 
-Before running these examples, you'll need to install the Runpod SDK:
+Before running these examples, you'll need to install the Brightnode SDK:
 
 ```bash
 # Python
-python -m pip install runpod
+python -m pip install brightnode
 
 # JavaScript
-npm install --save runpod-sdk
+npm install --save Brightnode-sdk
 
 # Go
-go get github.com/runpod/go-sdk && go mod tidy
+go get github.com/Brightnode/go-sdk && go mod tidy
 ```
 
-You should also set your [API key](/get-started/api-keys) and endpoint ID (found on the Overview tab for your endpoint in the Runpod console) as environment variables. Run the following commands in your local terminal, replacing `YOUR_API_KEY` and `YOUR_ENDPOINT_ID` with your actual API key and endpoint ID:
+You should also set your [API key](/get-started/api-keys) and endpoint ID (found on the Overview tab for your endpoint in the Brightnode console) as environment variables. Run the following commands in your local terminal, replacing `YOUR_API_KEY` and `YOUR_ENDPOINT_ID` with your actual API key and endpoint ID:
 
 ```bash
-export RUNPOD_API_KEY="YOUR_API_KEY"
+export BRIGHTNODE_API_KEY="YOUR_API_KEY"
 export ENDPOINT_ID="YOUR_ENDPOINT_ID"
 ```
 
@@ -142,7 +142,7 @@ Results are available for 1 minute by default, but you can append `?wait=x` to t
 For example, `?wait=120000` will keep your results available for 2 minutes:
 
 ```sh
-https://api.runpod.ai/v2/$ENDPOINT_ID/runsync?wait=120000
+https://api.brightnode.ai/v2/$ENDPOINT_ID/runsync?wait=120000
 ```
 
 <Note>
@@ -154,9 +154,9 @@ https://api.runpod.ai/v2/$ENDPOINT_ID/runsync?wait=120000
 
 ```sh
 curl --request POST \
-     --url https://api.runpod.ai/v2/$ENDPOINT_ID/runsync \
+     --url https://api.brightnode.ai/v2/$ENDPOINT_ID/runsync \
      -H "accept: application/json" \
-     -H "authorization: $RUNPOD_API_KEY" \
+     -H "authorization: $BRIGHTNODE_API_KEY" \
      -H "content-type: application/json" \
      -d '{ "input": {  "prompt": "Hello, world!" }}'
 ```
@@ -165,11 +165,11 @@ curl --request POST \
 <Tab title="Python">
 
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
-endpoint = runpod.Endpoint(os.getenv("ENDPOINT_ID"))
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
+endpoint = brightnode.Endpoint(os.getenv("ENDPOINT_ID"))
 
 try:
     run_request = endpoint.run_sync(
@@ -185,11 +185,11 @@ except TimeoutError:
 <Tab title="JavaScript">
 
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
-const runpod = runpodSdk(RUNPOD_API_KEY);
-const endpoint = runpod.endpoint(ENDPOINT_ID);
+const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+const endpoint = brightnode.endpoint(ENDPOINT_ID);
 
 const result = await endpoint.runSync({
   "input": {
@@ -214,14 +214,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com.runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com.Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -281,9 +281,9 @@ Job results are available for 30 minutes after completion.
 <Tab title="cURL">
 ```sh
 curl --request POST \
-     --url https://api.runpod.ai/v2/$ENDPOINT_ID/run \
+     --url https://api.brightnode.ai/v2/$ENDPOINT_ID/run \
      -H "accept: application/json" \
-     -H "authorization: $RUNPOD_API_KEY" \
+     -H "authorization: $BRIGHTNODE_API_KEY" \
      -H "content-type: application/json" \
     -d '{"input": {"prompt": "Hello, world!"}}'
 ```
@@ -291,11 +291,11 @@ curl --request POST \
 
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
-endpoint = runpod.Endpoint(os.getenv("ENDPOINT_ID"))
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
+endpoint = brightnode.Endpoint(os.getenv("ENDPOINT_ID"))
 
 # Submit asynchronous job
 run_request = endpoint.run({"prompt": "Hello, World!"})
@@ -315,11 +315,11 @@ print(f"Job output: {output}")
 
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
-const runpod = runpodSdk(RUNPOD_API_KEY);
-const endpoint = runpod.endpoint(ENDPOINT_ID);
+const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+const endpoint = brightnode.endpoint(ENDPOINT_ID);
 
 const result = await endpoint.run({
   "input": {
@@ -341,15 +341,15 @@ import (
 	"log"
 	"os"
 	
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
 	client := sdk.New(&config.Config{
-		ApiKey:  os.Getenv("RUNPOD_API_KEY"),
-		BaseURL: os.Getenv("RUNPOD_BASE_URL"),
+		ApiKey:  os.Getenv("BRIGHTNODE_API_KEY"),
+		BaseURL: os.Getenv("BRIGHTNODE_BASE_URL"),
 	})
 	
 	endpoint, err := client.NewEndpoint("YOUR_ENDPOINT_ID")
@@ -397,7 +397,7 @@ Check the current state, execution statistics, and results of previously submitt
 <Tip>
 You can configure time-to-live (TTL) for individual jobs by appending a TTL parameter to the request URL. 
 
-For example, `https://api.runpod.ai/v2/$ENDPOINT_ID/status/YOUR_JOB_ID?ttl=6000` sets the TTL to 6 seconds.
+For example, `https://api.brightnode.ai/v2/$ENDPOINT_ID/status/YOUR_JOB_ID?ttl=6000` sets the TTL to 6 seconds.
 </Tip>
 
 <Tabs>
@@ -406,8 +406,8 @@ Replace `YOUR_JOB_ID` with the actual job ID you received in the response to the
 
 ```sh
 curl --request GET \
-     --url https://api.runpod.ai/v2/$ENDPOINT_ID/status/YOUR_JOB_ID \
-     -H "authorization: $RUNPOD_API_KEY" \
+     --url https://api.brightnode.ai/v2/$ENDPOINT_ID/status/YOUR_JOB_ID \
+     -H "authorization: $BRIGHTNODE_API_KEY" \
 ```
 
 </Tab>
@@ -418,10 +418,10 @@ Check the status of a job using the `status` method on the `run_request` object:
 
 ```python
 
-import runpod
+import brightnode
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
-endpoint = runpod.Endpoint(os.getenv("ENDPOINT_ID"))
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
+endpoint = brightnode.Endpoint(os.getenv("ENDPOINT_ID"))
 
 input_payload = {"input": {"prompt": "Hello, World!"}}
 
@@ -447,13 +447,13 @@ print(f"An error occurred: {e}")
 Check the status of a job using the ID returned by `endpoint.run`:
 
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 async function main() {
   try {
-    const runpod = runpodSdk(RUNPOD_API_KEY);
-    const endpoint = runpod.endpoint(ENDPOINT_ID);
+    const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+    const endpoint = brightnode.endpoint(ENDPOINT_ID);
     const result = await endpoint.run({
       input: {
         prompt: "Hello, World!",
@@ -491,15 +491,15 @@ import (
 	"log"
 	"os"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
 
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -555,9 +555,9 @@ Replace `YOUR_JOB_ID` with the actual job ID you received in the response to the
 
 ```sh
 curl --request GET \
-     --url https://api.runpod.ai/v2/$ENDPOINT_ID/stream/YOUR_JOB_ID \
+     --url https://api.brightnode.ai/v2/$ENDPOINT_ID/stream/YOUR_JOB_ID \
      -H "accept: application/json" \
-     -H "authorization: $RUNPOD_API_KEY" \
+     -H "authorization: $BRIGHTNODE_API_KEY" \
 ```
 
 </Tab>
@@ -565,10 +565,10 @@ curl --request GET \
 <Tab title="Python">
 
 ```python
-import runpod
+import brightnode
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
-endpoint = runpod.Endpoint(os.getenv("ENDPOINT_ID"))
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
+endpoint = brightnode.Endpoint(os.getenv("ENDPOINT_ID"))
 
 run_request = endpoint.run(
     {
@@ -585,12 +585,12 @@ for output in run_request.stream():
 
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 async function main() {
-  const runpod = runpodSdk(RUNPOD_API_KEY);
-  const endpoint = runpod.endpoint(ENDPOINT_ID);
+  const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+  const endpoint = brightnode.endpoint(ENDPOINT_ID);
   const result = await endpoint.run({
     input: {
       prompt: "Hello, World!",
@@ -618,14 +618,14 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
 
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -713,8 +713,8 @@ Replace `YOUR_JOB_ID` with the actual job ID you received in the response to the
 
 ```sh
 curl --request POST \
-  --url https://api.runpod.ai/v2/$ENDPOINT_ID/cancel/YOUR_JOB_ID \
-  -H "authorization: $RUNPOD_API_KEY" \
+  --url https://api.brightnode.ai/v2/$ENDPOINT_ID/cancel/YOUR_JOB_ID \
+  -H "authorization: $BRIGHTNODE_API_KEY" \
 ```
 </Tab>
 
@@ -724,10 +724,10 @@ Cancel a job using the `cancel` method on the `run_request` object. The script b
 
 ```python
 import time
-import runpod
+import brightnode
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
-endpoint = runpod.Endpoint(os.getenv("ENDPOINT_ID"))
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
+endpoint = brightnode.Endpoint(os.getenv("ENDPOINT_ID"))
 
 run_request = endpoint.run(
   {
@@ -764,13 +764,13 @@ except KeyboardInterrupt:  # Catch KeyboardInterrupt
 Cancel a job by using the `cancel()` function on the run request.
 
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 async function main() {
   try {
-    const runpod = runpodSdk(RUNPOD_API_KEY);
-    const endpoint = runpod.endpoint(ENDPOINT_ID);
+    const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+    const endpoint = brightnode.endpoint(ENDPOINT_ID);
     const result = await endpoint.run({
       input: {
         prompt: "Hello, World!",
@@ -802,15 +802,15 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
 
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -856,8 +856,8 @@ Replace `YOUR_JOB_ID` with the actual job ID you received in the response to the
 
 ```sh
 curl --request POST \
-     --url https://api.runpod.ai/v2/$ENDPOINT_ID/retry/YOUR_JOB_ID \
-     -H "authorization: $RUNPOD_API_KEY"
+     --url https://api.brightnode.ai/v2/$ENDPOINT_ID/retry/YOUR_JOB_ID \
+     -H "authorization: $BRIGHTNODE_API_KEY"
 ```
 
 You'll see the job status updated to `IN_QUEUE` when the job is retried:
@@ -881,19 +881,19 @@ Remove all pending jobs from the queue when you need to reset or handle multiple
 <Tab title="cURL">
 ```sh
 curl --request POST \
-     --url https://api.runpod.ai/v2/$ENDPOINT_ID/purge-queue \
-     -H "authorization: $RUNPOD_API_KEY"
-    -H 'Authorization: Bearer RUNPOD_API_KEY'
+     --url https://api.brightnode.ai/v2/$ENDPOINT_ID/purge-queue \
+     -H "authorization: $BRIGHTNODE_API_KEY"
+    -H 'Authorization: Bearer BRIGHTNODE_API_KEY'
 ```
 </Tab>
 
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
-endpoint = runpod.Endpoint(os.getenv("ENDPOINT_ID"))
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
+endpoint = brightnode.Endpoint(os.getenv("ENDPOINT_ID"))
 
 endpoint.purge_queue(timeout=3)
 ```
@@ -901,13 +901,13 @@ endpoint.purge_queue(timeout=3)
 
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
 async function main() {
   try {
-    const runpod = runpodSdk(RUNPOD_API_KEY);
-    const endpoint = runpod.endpoint(ENDPOINT_ID);
+    const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+    const endpoint = brightnode.endpoint(ENDPOINT_ID);
     await endpoint.run({
       input: {
         prompt: "Hello, World!",
@@ -948,8 +948,8 @@ Get a quick overview of your endpoint's operational status including worker avai
 <Tab title="cURL">
 ```sh
 curl --request GET \
-     --url https://api.runpod.ai/v2/$ENDPOINT_ID/health \
-     -H "authorization: $RUNPOD_API_KEY"
+     --url https://api.brightnode.ai/v2/$ENDPOINT_ID/health \
+     -H "authorization: $BRIGHTNODE_API_KEY"
 ```
 
 </Tab>
@@ -957,12 +957,12 @@ curl --request GET \
 
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 import json
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
-endpoint = runpod.Endpoint(os.getenv("ENDPOINT_ID"))
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
+endpoint = brightnode.Endpoint(os.getenv("ENDPOINT_ID"))
 
 endpoint_health = endpoint.health()
 print(json.dumps(endpoint_health, indent=2))
@@ -971,11 +971,11 @@ print(json.dumps(endpoint_health, indent=2))
 
 <Tab title="JavaScript">
 ```javascript
-const { RUNPOD_API_KEY, ENDPOINT_ID } = process.env;
-import runpodSdk from "runpod-sdk";
+const { BRIGHTNODE_API_KEY, ENDPOINT_ID } = process.env;
+import brightnodeSdk from "Brightnode-sdk";
 
-const runpod = runpodSdk(RUNPOD_API_KEY);
-const endpoint = runpod.endpoint(ENDPOINT_ID);
+const Brightnode = BrightnodeSdk(BRIGHTNODE_API_KEY);
+const endpoint = brightnode.endpoint(ENDPOINT_ID);
 
 const health = await endpoint.health();
 console.log(health);
@@ -1004,7 +1004,7 @@ console.log(health);
 
 ## vLLM and OpenAI requests
 
-[vLLM workers](/serverless/vllm/overview) are specialized containers designed to efficiently deploy and serve large language models (LLMs) on Runpod Serverless.
+[vLLM workers](/serverless/vllm/overview) are specialized containers designed to efficiently deploy and serve large language models (LLMs) on Brightnode Serverless.
 
 [vLLM requests](/serverless/vllm/vllm-requests) use the standard format for endpoint operations, while providing additional flexibility and control over your requests compared to standard endpoints.
 
@@ -1017,7 +1017,7 @@ Beyond the required `input` object, you can include optional top-level parameter
 
 ### Webhook notifications
 
-Receive notifications when jobs complete by specifying a webhook URL. When your job completes, Runpod will send a `POST` request to your webhook URL containing the same information as the `/status/JOB_ID` endpoint.
+Receive notifications when jobs complete by specifying a webhook URL. When your job completes, Brightnode will send a `POST` request to your webhook URL containing the same information as the `/status/JOB_ID` endpoint.
 
 ```json
 {
@@ -1028,7 +1028,7 @@ Receive notifications when jobs complete by specifying a webhook URL. When your 
 }
 ```
 
-Your webhook should return a `200` status code to acknowledge receipt. If the call fails, Runpod will retry up to 2 more times with a 10-second delay between attempts.
+Your webhook should return a `200` status code to acknowledge receipt. If the call fails, Brightnode will retry up to 2 more times with a 10-second delay between attempts.
 
 ### Execution policies
 
@@ -1085,7 +1085,7 @@ S3 integration works with any S3-compatible provider including MinIO, Backblaze 
 
 ## Rate limits and quotas
 
-Runpod enforces rate limits to ensure fair platform usage. These limits apply per endpoint and operation:
+Brightnode enforces rate limits to ensure fair platform usage. These limits apply per endpoint and operation:
 
 | Operation                            | Method   | Rate Limit                   | Concurrent Limit |
 | ------------------------------------ | -------- | ---------------------------- | ---------------- |
@@ -1100,7 +1100,7 @@ Runpod enforces rate limits to ensure fair platform usage. These limits apply pe
 
 ### Dynamic rate limiting
 
-In addition to the base rate limits above, Runpod implements a dynamic rate limiting system that scales with your endpoint's worker count. This helps ensure platform stability while allowing higher throughput as you scale.
+In addition to the base rate limits above, Brightnode implements a dynamic rate limiting system that scales with your endpoint's worker count. This helps ensure platform stability while allowing higher throughput as you scale.
 
 Rate limits are calculated using two values:
 

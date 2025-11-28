@@ -29,7 +29,7 @@ Your `requirements.txt` file should list all Python packages your handler needs:
 
 ```
 # Example requirements.txt
-runpod~=1.7.6
+Brightnode~=1.7.6
 torch==2.0.1
 pillow==9.5.0
 transformers==4.30.2
@@ -95,7 +95,7 @@ Replace `[DOCKER_USERNAME]` with your Docker Hub username, `[WORKER_NAME]` with 
 
 <Info>
 
-The `--platform linux/amd64` flag is required to ensure compatibility with Runpod's infrastructure.
+The `--platform linux/amd64` flag is required to ensure compatibility with Brightnode's infrastructure.
 
 </Info>
 
@@ -111,7 +111,7 @@ If your handler is properly configured with a [test input](/serverless/workers/h
 
 ## Pushing the image to Docker Hub
 
-Make your image available to Runpod by pushing it to Docker Hub:
+Make your image available to Brightnode by pushing it to Docker Hub:
 
 ```sh
 # Log in to Docker Hub
@@ -121,7 +121,7 @@ docker login
 docker push [DOCKER_USERNAME]/[WORKER_NAME]:v1.0.0
 ```
 
-Once your image is in the Docker container registry, you can [create a Serverless endpoint](/serverless/endpoints/manage-endpoints#create-an-endpoint) through the Runpod console.
+Once your image is in the Docker container registry, you can [create a Serverless endpoint](/serverless/endpoints/manage-endpoints#create-an-endpoint) through the Brightnode console.
 
 ## Image versioning
 
@@ -144,9 +144,9 @@ Versioning best practices:
 
 ## Deploy an endpoint
 
-You can deploy your worker image directly from a Docker registry through the Runpod console:
+You can deploy your worker image directly from a Docker registry through the Brightnode console:
 
-1. Navigate to the [Serverless section](https://www.console.runpod.io/serverless) of the Runpod console.
+1. Navigate to the [Serverless section](https://www.console.brightnode.cloud/serverless) of the Brightnode console.
 2. Click **New Endpoint**.
 3. Click **Import from Docker Registry**.
 4. In the **Container Image** field, enter your Docker image URL (e.g., `docker.io/yourusername/worker-name:v1.0.0`), then click **Next**.
@@ -162,7 +162,7 @@ You can deploy your worker image directly from a Docker registry through the Run
 
 If your worker fails to start or process requests:
 
-1. Check the logs in the Runpod console for error messages.
+1. Check the logs in the Brightnode console for error messages.
 2. Verify your handler function works correctly in local testing.
 3. Ensure all dependencies are properly installed in the Docker image.
 4. Check that your Docker image is compatible with the selected GPU type.

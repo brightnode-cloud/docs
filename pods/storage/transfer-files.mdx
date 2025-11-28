@@ -5,20 +5,20 @@ description: "Move files between your local machine and Pods with a variety of s
 
 ## Choose your transfer method
 
-Runpod supports four different file transfer methods, each optimized for specific use cases:
+Brightnode supports four different file transfer methods, each optimized for specific use cases:
 
 | Method | Best for | Setup required | File size limit |
 |--------|----------|----------------|-----------------|
-| **runpodctl** | Quick, occasional transfers | Preinstalled on Pods | Small to medium files |
+| **brightnodectl** | Quick, occasional transfers | Preinstalled on Pods | Small to medium files |
 | **SCP** | Standard file operations | SSH configuration | Any size |
 | **rsync** | Large datasets, syncing | SSH + rsync installation | Any size |
 | **Cloud sync** | Backup, multi-environment sharing | Cloud provider setup | Provider dependent |
 
-### runpodctl
+### brightnodectl
 
 The simplest option for occasional transfers. Uses secure one-time codes and requires no setup since it's pre-installed on all Pods. Perfect for quick file exchanges.
 
-To install `runpodctl` on your local machine, see the [installation guide](/runpodctl/overview).
+To install `brightnodectl` on your local machine, see the [installation guide](/brightnodectl/overview).
 
 ### SCP
 
@@ -41,16 +41,16 @@ Direct synchronization with cloud storage providers like AWS S3, Google Cloud St
 
 To learn more, see the [cloud sync configuration guide](/pods/storage/cloud-sync).
 
-## Transfer with runpodctl
+## Transfer with brightnodectl
 
-The [Runpod CLI](/runpodctl/overview) offers the most straightforward approach to file transfer using secure one-time codes. This method works great for occasional transfers but consider other options for large files.
+The [Brightnode CLI](/brightnodectl/overview) offers the most straightforward approach to file transfer using secure one-time codes. This method works great for occasional transfers but consider other options for large files.
 
 ### Send a file
 
 From the source machine (your local computer or a Pod), run:
 
 ```bash
-runpodctl send YOUR_FILE
+brightnodectl send YOUR_FILE
 ```
 
 You'll see output like this:
@@ -60,7 +60,7 @@ Sending 'YOUR_FILE' (5 B)
 Code is: 8338-galileo-collect-fidel
 On the other computer run
 
-runpodctl receive 8338-galileo-collect-fidel
+brightnodectl receive 8338-galileo-collect-fidel
 ```
 
 The code `8338-galileo-collect-fidel` is your unique, one-time transfer code.
@@ -70,7 +70,7 @@ The code `8338-galileo-collect-fidel` is your unique, one-time transfer code.
 On the destination machine, use the code provided by the send command:
 
 ```bash
-runpodctl receive 8338-galileo-collect-fidel
+brightnodectl receive 8338-galileo-collect-fidel
 ```
 
 You'll see confirmation of the transfer:

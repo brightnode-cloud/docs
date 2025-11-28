@@ -1,10 +1,10 @@
 ---
-title: "Runpod Hub publishing guide"
+title: "Brightnode Hub publishing guide"
 sidebarTitle: "Hub publishing guide"
-description: "Publish your repositories to the Runpod Hub."
+description: "Publish your repositories to the Brightnode Hub."
 ---
 
-Learn how to publish your repositories to the [Runpod Hub](https://www.runpod.io/console/hub), including how to configure your repository with the required `hub.json` and `tests.json` files.
+Learn how to publish your repositories to the [Brightnode Hub](https://www.brightnode.cloud/console/hub), including how to configure your repository with the required `hub.json` and `tests.json` files.
 
 After you publish your repository to the Hub, you can start [earning revenue](/hub/revenue-sharing) from your users' compute usage.
 
@@ -16,7 +16,7 @@ After you publish your repository to the Hub, you can start [earning revenue](/h
 
 Follow these steps to add your repository to the Hub:
 
-1. Navigate to the [Hub page](https://www.console.runpod.io/hub) in the Runpod console.
+1. Navigate to the [Hub page](https://www.console.brightnode.cloud/hub) in the Brightnode console.
 2. Under **Add your repo** click **Get Started**.
 3. Enter your GitHub repo URL.
 4. Follow the UI steps to add your repo to the Hub.
@@ -24,11 +24,11 @@ Follow these steps to add your repository to the Hub:
 The Hub page will guide you through the following steps:
 
 1. Create your `hub.json` and `tests.json` files.
-2. Ensure your repository contains a `handler.py`, `Dockerfile`, and `README.md` file (in either the `.runpod` or root directory).
+2. Ensure your repository contains a `handler.py`, `Dockerfile`, and `README.md` file (in either the `.Brightnode` or root directory).
 3. Create a new GitHub release (the Hub indexes releases, not commits).
-4. (Optional) Add a Runpod Hub badge into your GitHub `README.md` file, so that users can instantly deploy your repo from GitHub.
+4. (Optional) Add a Brightnode Hub badge into your GitHub `README.md` file, so that users can instantly deploy your repo from GitHub.
 
-After all the necessary files are in place and a release has been created, your repo will be marked "Pending" during building/testing. After testing is complete, the Runpod team will manually review the repo for publication.
+After all the necessary files are in place and a release has been created, your repo will be marked "Pending" during building/testing. After testing is complete, the Brightnode team will manually review the repo for publication.
 
 ## Update a repo
 
@@ -41,7 +41,7 @@ Aside from a working [Serverless implementation](/serverless/overview), every Hu
 1. `hub.json` - Defines metadata and deployment settings for your repo.
 2. `tests.json` - Specifies how to test your repo.
 
-These files should be placed in the `.runpod` directory at the root of your repository. This directory takes precedence over the root directory, allowing you to override common files like `Dockerfile` and `README.md` specifically for the Hub.
+These files should be placed in the `.Brightnode` directory at the root of your repository. This directory takes precedence over the root directory, allowing you to override common files like `Dockerfile` and `README.md` specifically for the Hub.
 
 ## hub.json reference
 
@@ -58,9 +58,9 @@ You can build your `hub.json` from scratch, or use [this template](#hubjson-temp
 | `type`  | Deployment type | Yes | `"serverless"` |
 | `category` | Tool category | Yes | `"audio"`, `"embedding"`, `"language"`, `"video"`, or `"image"` |
 | `iconUrl` | URL to tool icon | No | Valid URL |
-| `config` | Runpod configuration | Yes | Object ([see below](#runpod-configuration)) |
+| `config` | Brightnode configuration | Yes | Object ([see below](#Brightnode-configuration)) |
 
-### Runpod configuration
+### Brightnode configuration
 
 | Field | Description | Required | Values |
 | --- | --- | --- | --- |
@@ -180,7 +180,7 @@ Here are some example presets:
   {
     "name": "Quality Optimized",
     "defaults": {
-      "MODEL_NAME": "runpod-stable-diffusion-xl",
+      "MODEL_NAME": "Brightnode-stable-diffusion-xl",
       "INFERENCE_MODE": "quality",
       "BATCH_SIZE": 1,
       "ENABLE_CACHING": false,
@@ -190,7 +190,7 @@ Here are some example presets:
   {
     "name": "Performance Optimized",
     "defaults": {
-      "MODEL_NAME": "runpod-stable-diffusion-v1-5",
+      "MODEL_NAME": "Brightnode-stable-diffusion-v1-5",
       "INFERENCE_MODE": "fast",
       "BATCH_SIZE": 8,
       "ENABLE_CACHING": true,
@@ -292,7 +292,7 @@ Here’s an example `hub.json` file that you can use as a starting point:
 
 ## tests.json reference
 
-The `tests.json` file defines test cases to validate your tool's functionality. Tests are executed during the build step after [a release has been created](#publish-your-repo-to-the-runpod-hub). A test is considered valid by the Hub if the endpoint returns a [200 response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200).
+The `tests.json` file defines test cases to validate your tool's functionality. Tests are executed during the build step after [a release has been created](#publish-your-repo-to-the-Brightnode-hub). A test is considered valid by the Hub if the endpoint returns a [200 response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/200).
 
 You can build your `tests.json` from scratch, or use [this template](#testsjson-template) as a starting point.
 

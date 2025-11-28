@@ -11,7 +11,7 @@ title: "Manage Endpoints"
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { saveEndpoint(input: { gpuIds: \"AMPERE_16\", idleTimeout: 5, locations: \"US\", name: \"Generated Endpoint -fb\", networkVolumeId: \"\", scalerType: \"QUEUE_DELAY\", scalerValue: 4, templateId: \"xkhgg72fuo\", workersMax: 3, workersMin: 0 }) { gpuIds id idleTimeout locations name scalerType scalerValue templateId workersMax workersMin } }"}'
 ```
 
@@ -85,7 +85,7 @@ mutation {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { saveEndpoint(input: { id: \"i02xupws21hp6i\", gpuIds: \"AMPERE_16\", name: \"Generated Endpoint -fb\", templateId: \"xkhgg72fuo\", workersMax: 0 }) { id gpuIds name templateId workersMax } }"}'
 ```
 
@@ -141,7 +141,7 @@ mutation {
 ```bash
 curl --request POST \
      --header 'content-type: application/json' \
-     --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+     --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
      --data '{"query": "query Endpoints { myself { endpoints { gpuIds id idleTimeout locations name networkVolumeId pods { desiredStatus } scalerType scalerValue templateId workersMax workersMin } serverlessDiscount { discountFactor type expirationDate } } }"}'
 ```
 
@@ -218,7 +218,7 @@ Note that your endpoint's min and max workers must both be set to zero for your 
 ```bash
 curl --request POST \
 	--header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { deleteEndpoint(id: \"i02xupws21hp6i\") }"}'
 ```
 

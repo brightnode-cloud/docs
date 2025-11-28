@@ -1,14 +1,14 @@
 ---
 title: "Send requests to vLLM workers"
 sidebarTitle: "Send vLLM requests"
-description: "Use Runpod's native API to send requests to vLLM workers."
+description: "Use Brightnode's native API to send requests to vLLM workers."
 ---
 
-vLLM workers use the same request operations as any other Runpod Serverless endpoint, with specialized input parameters for LLM inference.
+vLLM workers use the same request operations as any other Brightnode Serverless endpoint, with specialized input parameters for LLM inference.
 
 ## How vLLM requests work
 
-vLLM workers are queue-based Serverless endpoints. They use the same `/run` and `/runsync` operations as other Runpod endpoints, following the standard [Serverless request structure](/serverless/endpoints/send-requests).
+vLLM workers are queue-based Serverless endpoints. They use the same `/run` and `/runsync` operations as other Brightnode endpoints, following the standard [Serverless request structure](/serverless/endpoints/send-requests).
 
 The key difference is the input format. vLLM workers expect specific parameters for language model inference, such as prompts, messages, and sampling parameters. The worker's handler processes these inputs using the vLLM engine and returns generated text.
 
@@ -24,10 +24,10 @@ Use `/run` to submit a job that processes in the background. You'll receive a jo
 
 import requests
 
-# Replace ENDPOINT_ID and RUNPOD_API_KEY with your actual values
-url = "https://api.runpod.ai/v2/ENDPOINT_ID/run"
+# Replace ENDPOINT_ID and BRIGHTNODE_API_KEY with your actual values
+url = "https://api.brightnode.ai/v2/ENDPOINT_ID/run"
 headers = {
-    "Authorization": "Bearer RUNPOD_API_KEY",
+    "Authorization": "Bearer BRIGHTNODE_API_KEY",
     "Content-Type": "application/json"
 }
 
@@ -53,10 +53,10 @@ Use `/runsync` to wait for the complete response in a single request. The client
 ```python
 import requests
 
-# Replace ENDPOINT_ID and RUNPOD_API_KEY with your actual values
-url = "https://api.runpod.ai/v2/ENDPOINT_ID/runsync"
+# Replace ENDPOINT_ID and BRIGHTNODE_API_KEY with your actual values
+url = "https://api.brightnode.ai/v2/ENDPOINT_ID/runsync"
 headers = {
-    "Authorization": "Bearer RUNPOD_API_KEY",
+    "Authorization": "Bearer BRIGHTNODE_API_KEY",
     "Content-Type": "application/json"
 }
 
@@ -182,10 +182,10 @@ Enable streaming to receive tokens as they're generated instead of waiting for t
 import requests
 import json
 
-# Replace ENDPOINT_ID and RUNPOD_API_KEY with your actual values
-url = "https://api.runpod.ai/v2/ENDPOINT_ID/run"
+# Replace ENDPOINT_ID and BRIGHTNODE_API_KEY with your actual values
+url = "https://api.brightnode.ai/v2/ENDPOINT_ID/run"
 headers = {
-    "Authorization": "Bearer RUNPOD_API_KEY",
+    "Authorization": "Bearer BRIGHTNODE_API_KEY",
     "Content-Type": "application/json"
 }
 
@@ -204,7 +204,7 @@ response = requests.post(url, headers=headers, json=data)
 job_id = response.json()["id"]
 
 # Stream the results
-stream_url = f"https://api.runpod.ai/v2/ENDPOINT_ID/stream/{job_id}"
+stream_url = f"https://api.brightnode.ai/v2/ENDPOINT_ID/stream/{job_id}"
 with requests.get(stream_url, headers=headers, stream=True) as r:
     for line in r.iter_lines():
         if line:

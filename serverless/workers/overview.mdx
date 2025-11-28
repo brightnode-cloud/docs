@@ -4,7 +4,7 @@ sidebarTitle: "Overview"
 description: "Learn the basics of Serverless workers, including their types, states, and configuration options."
 ---
 
-Workers are container instances that execute your code when a [request](/serverless/endpoints/send-requests) is made to your Serverless [endpoint](/serverless/endpoints/overview). Workers process request inputs using a [handler function](/serverless/workers/handler-functions) and store results for retrieval. Runpod automatically manages the worker lifecycle, starting them when needed and stopping them when idle to optimize resource usage.
+Workers are container instances that execute your code when a [request](/serverless/endpoints/send-requests) is made to your Serverless [endpoint](/serverless/endpoints/overview). Workers process request inputs using a [handler function](/serverless/workers/handler-functions) and store results for retrieval. Brightnode automatically manages the worker lifecycle, starting them when needed and stopping them when idle to optimize resource usage.
 
 <Frame>
   <img src="/images/07a6575d-serverless-workers-tab.png" />
@@ -17,7 +17,7 @@ Workers are container instances that execute your code when a [request](/serverl
 1. Creating a [handler function](/serverless/workers/handler-functions) to process your inputs.
 2. Packaging your worker in a Docker container.
 3. Deploying your worker to a Serverless endpoint.
-4. Testing your worker locally and on the Runpod console.
+4. Testing your worker locally and on the Brightnode console.
 
 ## Worker configurations
 
@@ -56,7 +56,7 @@ To debug issues in production, you can access [worker logs](/serverless/developm
 
 ## Max worker limit
 
-By default, each Runpod account can allocate a maximum of 5 workers (flex + active combined) across all endpoints. If your account balance exceeds a certain threshold, you can increase this limit:
+By default, each Brightnode account can allocate a maximum of 5 workers (flex + active combined) across all endpoints. If your account balance exceeds a certain threshold, you can increase this limit:
 
 - \$100 balance: 10 max workers
 - \$200 balance: 20 max workers
@@ -65,7 +65,7 @@ By default, each Runpod account can allocate a maximum of 5 workers (flex + acti
 - \$700 balance: 50 max workers
 - \$900 balance: 60 max workers
 
-If your workload requires additional capacity beyond 60 workers, [contact our support team](https://www.runpod.io/contact).
+If your workload requires additional capacity beyond 60 workers, [contact our support team](https://www.brightnode.cloud/contact).
 
 ## Next steps
 

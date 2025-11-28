@@ -1,15 +1,15 @@
 ---
-title: "Manage Pods with dstack on Runpod"
+title: "Manage Pods with dstack on Brightnode"
 sidebarTitle: "dstack"
 ---
 
-[dstack](https://dstack.ai/) is an open-source tool that simplifies the orchestration of Pods for AI and ML workloads. By defining your application and resource requirements in YAML configuration files, it automates the provisioning and management of cloud resources on Runpod, allowing you to focus on your application logic rather than the infrastructure.
+[dstack](https://dstack.ai/) is an open-source tool that simplifies the orchestration of Pods for AI and ML workloads. By defining your application and resource requirements in YAML configuration files, it automates the provisioning and management of cloud resources on Brightnode, allowing you to focus on your application logic rather than the infrastructure.
 
-In this guide, we'll walk through setting up [dstack](https://dstack.ai/) with Runpod to deploy [vLLM](https://github.com/vllm-project/vllm). We'll serve the `meta-llama/Llama-3.1-8B-Instruct` model from Hugging Face using a Python environment.
+In this guide, we'll walk through setting up [dstack](https://dstack.ai/) with Brightnode to deploy [vLLM](https://github.com/vllm-project/vllm). We'll serve the `meta-llama/Llama-3.1-8B-Instruct` model from Hugging Face using a Python environment.
 
 ## Prerequisites
 
-* [A Runpod account with an API key](/get-started/api-keys)
+* [A Brightnode account with an API key](/get-started/api-keys)
 
 * On your local machine:
 
@@ -37,8 +37,8 @@ In this guide, we'll walk through setting up [dstack](https://dstack.ai/) with R
    Open a terminal or command prompt and create a new directory for this tutorial:
 
    ```bash
-   mkdir runpod-dstack-tutorial
-   cd runpod-dstack-tutorial
+   mkdir Brightnode-dstack-tutorial
+   cd Brightnode-dstack-tutorial
    ```
 
 2. **Set Up a Python Virtual Environment**
@@ -109,7 +109,7 @@ In this guide, we'll walk through setting up [dstack](https://dstack.ai/) with R
 
    </Tabs>
 
-### Configuring dstack for Runpod
+### Configuring dstack for Brightnode
 
 1. **Create the Global Configuration File**
 
@@ -177,13 +177,13 @@ In this guide, we'll walk through setting up [dstack](https://dstack.ai/) with R
      projects:
        - name: main
          backends:
-           - type: runpod
+           - type: Brightnode
              creds:
                type: api_key
-               api_key: YOUR_RUNPOD_API_KEY
+               api_key: YOUR_BRIGHTNODE_API_KEY
      ```
 
-     Replace `YOUR_RUNPOD_API_KEY` with the API key you obtained from Runpod.
+     Replace `YOUR_BRIGHTNODE_API_KEY` with the API key you obtained from Brightnode.
 
 2. **Start the dstack Server**
 
@@ -228,7 +228,7 @@ The `ADMIN-TOKEN` displayed is important for accessing the dstack web UI.
 * Navigate to your tutorial directory:
 
   ```bash
-  cd runpod-dstack-tutorial
+  cd Brightnode-dstack-tutorial
   ```
 
 * **Activate the Python Virtual Environment**
@@ -341,7 +341,7 @@ dstack apply
 
 * After executing `dstack apply`, you'll see all the steps that dstack performs:
 
-  * Provisioning the pod on Runpod.
+  * Provisioning the pod on Brightnode.
   * Downloading the Docker image.
   * Installing required packages.
   * Downloading the model from Hugging Face.
@@ -490,7 +490,7 @@ dstack stop vllm-llama-3.1-8b-instruct
 
 3. **Verify Termination**
 
-Check your Runpod dashboard or the [dstack](https://dstack.ai/) web UI to ensure that the instance has been terminated.
+Check your Brightnode dashboard or the [dstack](https://dstack.ai/) web UI to ensure that the instance has been terminated.
 
 ## Additional Tips: Using Volumes for Persistent Storage
 
@@ -504,7 +504,7 @@ Create a separate [dstack](https://dstack.ai/) file named `volume.dstack.yml` wi
 type: volume
 name: llama31-volume
 
-backend: runpod
+backend: Brightnode
 region: EUR-IS-1
 
 # Required size
@@ -539,10 +539,10 @@ This configuration will mount the volume to the `/data` directory inside your co
 
 By doing this, you can store models and data persistently, which can be especially useful for large models that take time to download.
 
-For more information on using volumes with Runpod, refer to the [dstack blog on volumes](https://dstack.ai/blog/volumes-on-runpod/).
+For more information on using volumes with Brightnode, refer to the [dstack blog on volumes](https://dstack.ai/blog/volumes-on-Brightnode/).
 
 ***
 
 ## Conclusion
 
-By leveraging [dstack](https://dstack.ai/) on Runpod, you can efficiently deploy and manage Pods, accelerating your development workflow and reducing operational overhead.
+By leveraging [dstack](https://dstack.ai/) on Brightnode, you can efficiently deploy and manage Pods, accelerating your development workflow and reducing operational overhead.

@@ -1,30 +1,30 @@
 ---
 title: "Manage Pods"
-description: "Create, start, stop, and terminate Pods using the Runpod console or CLI."
+description: "Create, start, stop, and terminate Pods using the Brightnode console or CLI."
 ---
 
 ## Before you begin
 
-If you want to manage Pods using the Runpod CLI, you'll need to [install Runpod CLI](/runpodctl/overview), and set your [API key](/get-started/api-keys) in the configuration.
+If you want to manage Pods using the Brightnode CLI, you'll need to [install Brightnode CLI](/brightnodectl/overview), and set your [API key](/get-started/api-keys) in the configuration.
 
-Run the following command, replacing `RUNPOD_API_KEY` with your API key:
+Run the following command, replacing `BRIGHTNODE_API_KEY` with your API key:
 
 ```sh
-runpodctl config --apiKey RUNPOD_API_KEY
+brightnodectl config --apiKey BRIGHTNODE_API_KEY
 ```
 
 ## Deploy a Pod
 
 <Tip>
-You can deploy preconfigured Pods from the repos listed in the [Runpod Hub](/hub/overview). For more info, see the [Hub deployment guide](/hub/overview#deploy-as-a-pod).
+You can deploy preconfigured Pods from the repos listed in the [Brightnode Hub](/hub/overview). For more info, see the [Hub deployment guide](/hub/overview#deploy-as-a-pod).
 </Tip>
 
 
 <Tabs>
 <Tab title="Web">
-To create a Pod using the Runpod console:
+To create a Pod using the Brightnode console:
 
-1. Open the [Pods page](https://www.console.runpod.io/pods) in the Runpod console and click the **Deploy** button.
+1. Open the [Pods page](https://www.console.brightnode.cloud/pods) in the Brightnode console and click the **Deploy** button.
 2. (Optional) Specify a [network volume](/storage/network-volumes) if you need to share data between multiple Pods, or to save data for later use.
 3. Select **GPU** or **CPU** using the buttons in the top-left corner of the window, and follow the configuration steps below.
 
@@ -32,14 +32,14 @@ GPU configuration:
 
 1. Select a graphics card (e.g., A40, RTX 4090, H100 SXM).
 2. Give your Pod a name using the **Pod Name** field.
-3. (Optional) Choose a **Pod Template** such as **Runpod Pytorch 2.1** or **Runpod Stable Diffusion**.
+3. (Optional) Choose a **Pod Template** such as **Brightnode Pytorch 2.1** or **Brightnode Stable Diffusion**.
 4. Specify your **GPU count** if you need multiple GPUs.
 5. Click **Deploy On-Demand** to deploy and start your Pod.
 
 <Warning>
 **CUDA Version Compatibility**
 
-When using templates (especially community templates like `runpod/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04`), ensure the host machine's CUDA driver version matches or exceeds the template's requirements.
+When using templates (especially community templates like `Brightnode/pytorch:2.8.0-py3.11-cuda12.8.1-cudnn-devel-ubuntu22.04`), ensure the host machine's CUDA driver version matches or exceeds the template's requirements.
 
 If you encounter errors like "OCI runtime create failed" or "unsatisfied condition: cuda>=X.X", you need to filter for compatible machines:
 
@@ -64,13 +64,13 @@ CPU configuration:
 </Tab>
 
 <Tab title="Command line">
-To create a Pod using the CLI, use the `runpodctl create pods` command:
+To create a Pod using the CLI, use the `brightnodectl create pods` command:
 
 ```sh
-runpodctl create pods \
+brightnodectl create pods \
   --name hello-world \
   --gpuType "NVIDIA A40" \
-  --imageName "runpod/pytorch:3.10-2.0.0-117" \
+  --imageName "Brightnode/pytorch:3.10-2.0.0-117" \
   --containerDiskSize 10 \
   --volumeSize 100 \
   --args "bash -c 'mkdir /testdir1 && /start.sh'"
@@ -83,8 +83,8 @@ To create a Pod using the REST API, send a POST request to the `/pods` endpoint:
 
 ```bash
 curl --request POST \
-  --url https://rest.runpod.io/v1/pods \
-  --header 'Authorization: Bearer RUNPOD_API_KEY' \
+  --url https://rest.brightnode.cloud/v1/pods \
+  --header 'Authorization: Bearer BRIGHTNODE_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
   "allowedCudaVersions": [
@@ -117,7 +117,7 @@ curl --request POST \
     "NVIDIA GeForce RTX 4090"
   ],
   "gpuTypePriority": "availability",
-  "imageName": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+  "imageName": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
   "interruptible": false,
   "locked": false,
   "minDiskBandwidthMBps": 123,
@@ -143,7 +143,7 @@ For complete API documentation and parameter details, see the [Pod API reference
 
 ### Custom templates
 
-Runpod supports custom [Pod templates](/pods/templates/overview) that let you define your environment using a Dockerfile.
+Brightnode supports custom [Pod templates](/pods/templates/overview) that let you define your environment using a Dockerfile.
 
 With custom templates, you can:
 
@@ -170,7 +170,7 @@ After a Pod is stopped, you will still be charged for its [volume disk](/pods/st
 <Tab title="Web">
 To stop a Pod:
 
-1. Open the [Pods page](https://www.console.runpod.io/pods).
+1. Open the [Pods page](https://www.console.brightnode.cloud/pods).
 2. Find the Pod you want to stop and expand it.
 3. Click the **Stop button** (square icon).
 4. Confirm by clicking the **Stop Pod** button.
@@ -181,7 +181,7 @@ To stop a Pod:
 To stop a Pod, enter the following command.
 
 ```sh
-runpodctl stop pod $RUNPOD_POD_ID
+brightnodectl stop pod $BRIGHTNODE_POD_ID
 ```
 
 Example output:
@@ -204,10 +204,10 @@ You can also stop a Pod after a specified period of time. The examples below sho
 Use the following command to stop a Pod after 2 hours:
 
 ```sh
-sleep 2h; runpodctl stop pod $RUNPOD_POD_ID &
+sleep 2h; brightnodectl stop pod $BRIGHTNODE_POD_ID &
 ```
 
-This command uses sleep to wait for 2 hours before executing the `runpodctl stop pod` command to stop the Pod. The `&` at the end runs the command in the background, allowing you to continue using the SSH session.
+This command uses sleep to wait for 2 hours before executing the `brightnodectl stop pod` command to stop the Pod. The `&` at the end runs the command in the background, allowing you to continue using the SSH session.
 
 </Tab>
 
@@ -215,7 +215,7 @@ This command uses sleep to wait for 2 hours before executing the `runpodctl stop
 To stop a Pod after 2 hours using the web terminal, enter:
 
 ```sh
-nohup bash -c "sleep 2h; runpodctl stop pod $RUNPOD_POD_ID" &
+nohup bash -c "sleep 2h; brightnodectl stop pod $BRIGHTNODE_POD_ID" &
 ```
 
 `nohup` ensures the process continues running if you close the web terminal window.
@@ -232,17 +232,17 @@ Pods start as soon as they are created, but you can resume a Pod that has been s
 <Tab title="Web">
 To start a Pod:
 
-1. Open the [Pods page](https://www.console.runpod.io/pods).
+1. Open the [Pods page](https://www.console.brightnode.cloud/pods).
 2. Find the Pod you want to start and expand it.
 3. Click the **Start** button (play icon).
 
 </Tab>
 
 <Tab title="Command line">
-To start a single Pod, enter the command `runpodctl start pod`. You can pass the environment variable `RUNPOD_POD_ID` to identify each Pod.
+To start a single Pod, enter the command `brightnodectl start pod`. You can pass the environment variable `BRIGHTNODE_POD_ID` to identify each Pod.
 
 ```sh
-runpodctl start pod $RUNPOD_POD_ID
+brightnodectl start pod $BRIGHTNODE_POD_ID
 ```
 
 Example output:
@@ -269,7 +269,7 @@ Terminating a Pod permanently deletes all associated data that isn't stored in a
 <Tab title="Web">
 To terminate a Pod:
 
-1. Open the [Pods page](https://www.console.runpod.io/pods).
+1. Open the [Pods page](https://www.console.brightnode.cloud/pods).
 2. Find the Pod you want to terminate and expand it.
 3. [Stop the Pod](#stop-a-pod) if it's running.
 4. Click the **Terminate** button (trash icon).
@@ -281,7 +281,7 @@ To terminate a Pod:
 To remove a single Pod, enter the following command.
 
 ```sh
-runpodctl remove pod $RUNPOD_POD_ID
+brightnodectl remove pod $BRIGHTNODE_POD_ID
 ```
 
 Example output:
@@ -293,13 +293,13 @@ pod "wu5ekmn69oh1xr" removed
 You can also remove Pods in bulk. For example, the following command terminates up to 40 Pods with the name `my-bulk-task`.
 
 ```sh
-runpodctl remove pods my-bulk-task --podCount 40
+brightnodectl remove pods my-bulk-task --podCount 40
 ```
 
 You can also terminate a Pod by name:
 
 ```sh
-runpodctl remove pods [POD_NAME]
+brightnodectl remove pods [POD_NAME]
 ```
 
 </Tab>
@@ -308,18 +308,18 @@ runpodctl remove pods [POD_NAME]
 
 ## View Pod details
 
-You can find a list of all your Pods on the [Pods page](https://www.console.runpod.io/pods) of the web interface.
+You can find a list of all your Pods on the [Pods page](https://www.console.brightnode.cloud/pods) of the web interface.
 
 If you're using the CLI, use the following command to list your Pods:
 
 ```sh
-runpodctl get pod
+brightnodectl get pod
 ```
 
 Or use this command to get the details of a single Pod:
 
 ```sh
-runpodctl get pod [POD_ID]
+brightnodectl get pod [POD_ID]
 ```
 
 ## Access logs
@@ -329,7 +329,7 @@ Pods provide two types of logs to help you monitor and troubleshoot your workloa
 - **Container logs** capture all output sent to your console standard output, including application logs and print statements.
 - **System logs** provide detailed information about your Pod's lifecycle, such as container creation, image download, extraction, startup, and shutdown events.
 
-To view your logs, open the [Pods page](https://www.console.runpod.io/pods), expand your Pod, and click the **Logs** button. This gives you real-time access to both container and system logs, making it easy to diagnose issues or monitor your Pod's activity.
+To view your logs, open the [Pods page](https://www.console.brightnode.cloud/pods), expand your Pod, and click the **Logs** button. This gives you real-time access to both container and system logs, making it easy to diagnose issues or monitor your Pod's activity.
 
 ## Troubleshooting
 
@@ -346,11 +346,11 @@ If your Pod is stuck on initializing, check for these common issues:
 1. You're trying to SSH into the Pod but didn't provide an idle job like `sleep infinity` to keep it running.
 2. The Pod received a command it can't execute. Check your logs for syntax errors or invalid commands.
 
-If you need help, [contact support](https://www.runpod.io/contact).
+If you need help, [contact support](https://www.brightnode.cloud/contact).
 
 ### Docker daemon limitations
 
-Runpod manages the Docker daemon for you, which means you can't run your own Docker instance inside a Pod. This prevents you from building Docker containers or using tools like Docker Compose.
+Brightnode manages the Docker daemon for you, which means you can't run your own Docker instance inside a Pod. This prevents you from building Docker containers or using tools like Docker Compose.
 
 To work around this, create a [custom template](/pods/templates/overview) with the Docker image you need.
 

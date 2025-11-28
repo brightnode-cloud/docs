@@ -4,7 +4,7 @@ sidebarTitle: "Sync data with cloud storage"
 description: "Learn how to sync your Pod data with popular cloud storage providers."
 ---
 
-Runpod's Cloud Sync feature makes it easy to upload your Pod data to external cloud storage providers, or download data from cloud storage providers to your Pod. This guide walks you through setting up and using Cloud Sync with supported providers.
+Brightnode's Cloud Sync feature makes it easy to upload your Pod data to external cloud storage providers, or download data from cloud storage providers to your Pod. This guide walks you through setting up and using Cloud Sync with supported providers.
 
 Cloud Sync supports syncing data with these cloud storage providers:
 
@@ -26,7 +26,7 @@ When using Cloud Sync, follow these security guidelines to protect your data and
 
 ## Amazon S3
 
-Amazon S3 provides scalable object storage that integrates seamlessly with Runpod through Cloud Sync.
+Amazon S3 provides scalable object storage that integrates seamlessly with Brightnode through Cloud Sync.
 
 Follow the steps below to sync your data with Amazon S3:
 
@@ -45,19 +45,19 @@ Follow the steps below to sync your data with Amazon S3:
     Your Secret Access Key will be displayed only once during creation, so make sure to save it securely.
   </Step>
 
-   <Step title="Sync your data with Runpod">
-    In the Runpod console, navigate to the [Pods page](https://runpod.io/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **AWS S3** from the available providers.
+   <Step title="Sync your data with Brightnode">
+    In the Brightnode console, navigate to the [Pods page](https://brightnode.cloud/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **AWS S3** from the available providers.
 
     Enter your **AWS Access Key ID** and **Secret Access Key** in the provided fields. Specify the **AWS Region** where your bucket is located and provide the complete bucket path where you want to store your data. 
     
-    Click **Copy to/from AWS S3** to initiate the transfer. The transfer progress will be displayed in the Runpod interface. Large datasets may take time depending on your Pod's network connection.
+    Click **Copy to/from AWS S3** to initiate the transfer. The transfer progress will be displayed in the Brightnode interface. Large datasets may take time depending on your Pod's network connection.
   </Step>
 </Steps>
 
 ## Google Cloud Platform Storage
 
 <Note>
-Cloud Sync is compatible with Google Cloud Storage, but **not Google Drive**. However, you can transfer files between your Pods and Drive [using the Runpod CLI](/pods/storage/transfer-files#transfer-files-between-google-drive-and-runpod).
+Cloud Sync is compatible with Google Cloud Storage, but **not Google Drive**. However, you can transfer files between your Pods and Drive [using the Brightnode CLI](/pods/storage/transfer-files#transfer-files-between-google-drive-and-Brightnode).
 </Note>
 
 Google Cloud Storage offers high-performance object storage with global availability and strong consistency.
@@ -74,17 +74,17 @@ Follow the steps below to sync your data with Google Cloud Storage:
   </Step>
 
   <Step title="Set up a service account">
-   Create a service account specifically for Runpod access. This provides better security than using your primary account credentials.
+   Create a service account specifically for Brightnode access. This provides better security than using your primary account credentials.
 
    Follow [Google's guide on creating service account keys](https://cloud.google.com/iam/docs/keys-create-delete) to generate a JSON key file. This key contains all necessary authentication information.
   </Step>
 
-  <Step title="Sync your data with Runpod">
-    In the Runpod console, navigate to the [Pods page](https://runpod.io/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **Google Cloud Storage** from the available providers.
+  <Step title="Sync your data with Brightnode">
+    In the Brightnode console, navigate to the [Pods page](https://brightnode.cloud/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **Google Cloud Storage** from the available providers.
 
     Paste the entire contents of your Service Account JSON key into the provided field. Specify the source/destination path within your bucket and select which folders from your Pod to transfer.
 
-    Click **Copy to/from Google Cloud Storage** to initiate the transfer. The transfer progress will be displayed in the Runpod interface. Large datasets may take time depending on your Pod's network connection.
+    Click **Copy to/from Google Cloud Storage** to initiate the transfer. The transfer progress will be displayed in the Brightnode interface. Large datasets may take time depending on your Pod's network connection.
   </Step>
 </Steps>
 
@@ -112,12 +112,12 @@ Follow the steps below to sync your data with Microsoft Azure Blob Storage:
     Create a Blob Container by going to **Storage Browser → Blob Containers** and clicking **Add Container**. Consider creating folders within the container for better organization if you plan to sync data to/from multiple Pods.
   </Step>
 
-  <Step title="Sync your data with Runpod">
-    In the Runpod console, navigate to the [Pods page](https://runpod.io/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **Azure Blob Storage** from the available providers.
+  <Step title="Sync your data with Brightnode">
+    In the Brightnode console, navigate to the [Pods page](https://brightnode.cloud/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **Azure Blob Storage** from the available providers.
 
     Enter your **Azure Account Name** and **Account Key** in the provided fields. Specify the source/destination path in your blob storage where you want to store your data.
 
-    Click **Copy to/from Azure Blob Storage** to initiate the transfer. The transfer progress will be displayed in the Runpod interface. Large datasets may take time depending on your Pod's network connection.
+    Click **Copy to/from Azure Blob Storage** to initiate the transfer. The transfer progress will be displayed in the Brightnode interface. Large datasets may take time depending on your Pod's network connection.
   </Step>
 </Steps>
 
@@ -131,7 +131,7 @@ Follow the steps below to sync your data with Backblaze B2 Cloud Storage:
   <Step title="Create a B2 bucket">
     Navigate to [B2 Cloud Storage Buckets](https://secure.backblaze.com/b2_buckets.htm) and click **Create a Bucket**.
 
-   Set the bucket visibility to **Public** to allow Runpod access. You can restrict access later using application keys if needed.
+   Set the bucket visibility to **Public** to allow Brightnode access. You can restrict access later using application keys if needed.
   </Step>
 
   <Step title="Generate application credentials">
@@ -140,12 +140,12 @@ Follow the steps below to sync your data with Backblaze B2 Cloud Storage:
     Save both the KeyID and applicationKey securely—the applicationKey cannot be retrieved after creation.
   </Step>
 
-  <Step title="Sync your data with Runpod">
-    In the Runpod console, navigate to the [Pods page](https://runpod.io/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **Backblaze B2** from the available providers.
+  <Step title="Sync your data with Brightnode">
+    In the Brightnode console, navigate to the [Pods page](https://brightnode.cloud/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **Backblaze B2** from the available providers.
 
     Enter your **Backblaze B2 Account ID**, **Application Key**, and **bucket path** as shown in the Backblaze interface.
 
-    Click **Copy to/from Backblaze B2** to initiate the transfer. The transfer progress will be displayed in the Runpod interface.
+    Click **Copy to/from Backblaze B2** to initiate the transfer. The transfer progress will be displayed in the Brightnode interface.
   </Step>
 </Steps>
 
@@ -170,15 +170,15 @@ Follow the steps below to sync your data with Dropbox:
   <Step title="Generate access token">
     Return to the **Settings** tab of your app. In the OAuth2 section, click **Generate** under Generated Access Token.
 
-    Save this token immediately—it won't be shown again after you leave the page. This token authenticates Runpod's access to your Dropbox.
+    Save this token immediately—it won't be shown again after you leave the page. This token authenticates Brightnode's access to your Dropbox.
   </Step>
 
-  <Step title="Sync your data with Runpod">
-    In the Runpod console, navigate to the [Pods page](https://runpod.io/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **Dropbox** from the available providers.
+  <Step title="Sync your data with Brightnode">
+    In the Brightnode console, navigate to the [Pods page](https://brightnode.cloud/console/pods) and select the Pod containing your data. Click **Cloud Sync**, then select **Dropbox** from the available providers.
 
     Paste your **Dropbox Access Token** and specify the remote path where you want to store the data. Creating a dedicated folder in Dropbox beforehand helps with organization.
 
-    Click **Copy to/from Dropbox** to initiate the transfer. The transfer progress will be displayed in the Runpod interface.
+    Click **Copy to/from Dropbox** to initiate the transfer. The transfer progress will be displayed in the Brightnode interface.
   </Step>
 </Steps>
 
@@ -186,7 +186,7 @@ Follow the steps below to sync your data with Dropbox:
 
 While Cloud Sync provides the easiest way to sync data with cloud providers, you can also transfer files between your Pod and other destinations using:
 
-- **runpodctl**: A built-in CLI tool for peer-to-peer transfers using one-time codes.
+- **brightnodectl**: A built-in CLI tool for peer-to-peer transfers using one-time codes.
 - **SSH-based tools**: Use SCP or rsync for direct transfers to your local machine.
 - **Network volumes**: For persistent storage across multiple Pods.
 
@@ -201,4 +201,4 @@ If you encounter issues during syncing:
 - **Permission denied errors**: Ensure your bucket or container has the correct access policies. Some providers require specific permission configurations for external access.
 - **Connection timeouts**: Check that your Pod has stable network connectivity. You may need to retry the transfer.
 
-For additional support, consult your cloud provider's documentation or contact Runpod support.
+For additional support, consult your cloud provider's documentation or contact Brightnode support.

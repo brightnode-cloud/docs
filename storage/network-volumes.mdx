@@ -3,7 +3,7 @@ title: "Network volumes"
 description: "Persistent, portable storage for your AI workloads."
 ---
 
-Network volumes offer persistent storage that exists independently of your compute resources. Your data is retained even when your Pods are terminated or your Serverless workers are scaled to zero. You can use them to share data and maintain datasets across multiple machines and [Runpod products](/overview).
+Network volumes offer persistent storage that exists independently of your compute resources. Your data is retained even when your Pods are terminated or your Serverless workers are scaled to zero. You can use them to share data and maintain datasets across multiple machines and [Brightnode products](/overview).
 
 Network volumes are backed by high-performance NVMe SSDs connected via high-speed networks. Transfer speeds typically range from 200-400 MB/s, with peak speeds up to 10 GB/s depending on location and network conditions.
 
@@ -22,7 +22,7 @@ Network volumes are billed hourly at a rate of \$0.07 per GB per month for the f
 
 <Warning>
 
-If your account lacks sufficient funds to cover storage costs, your network volume may be terminated. Once terminated, the disk space is immediately freed for other users, and Runpod cannot recover lost data. Ensure your account remains funded to prevent data loss.
+If your account lacks sufficient funds to cover storage costs, your network volume may be terminated. Once terminated, the disk space is immediately freed for other users, and Brightnode cannot recover lost data. Ensure your account remains funded to prevent data loss.
 
 </Warning>
 
@@ -39,14 +39,14 @@ Network volume size can be increased later, but cannot be decreased.
 
 To create a new network volume:
 
-1. Navigate to the [Storage page](https://www.console.runpod.io/user/storage) in the Runpod console.
+1. Navigate to the [Storage page](https://www.console.brightnode.cloud/user/storage) in the Brightnode console.
 2. Click **New Network Volume**.
 3. Select a datacenter for your volume. Datacenter location does not affect pricing, but determines which GPU types and endpoints your network volume can be used with.
 4. Provide a descriptive name for your volume (e.g., "project-alpha-data" or "shared-models").
 5. Specify the desired size for the volume in gigabytes (GB).
 6. Click **Create Network Volume**.
 
-You can edit and delete your network volumes using the [Storage page](https://www.console.runpod.io/user/storage).
+You can edit and delete your network volumes using the [Storage page](https://www.console.brightnode.cloud/user/storage).
 
 </Tab>
 
@@ -56,8 +56,8 @@ To create a network volume using the REST API, send a POST request to the `/netw
 
 ```bash
 curl --request POST \
-  --url https://rest.runpod.io/v1/networkvolumes \
-  --header 'Authorization: Bearer RUNPOD_API_KEY' \
+  --url https://rest.brightnode.cloud/v1/networkvolumes \
+  --header 'Authorization: Bearer BRIGHTNODE_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
   "name": "my-network-volume",
@@ -74,19 +74,19 @@ For complete API documentation and parameter details, see the [network volumes A
 
 ## Network volumes for Serverless
 
-When attached to a Serverless endpoint, a network volume is mounted at `/runpod-volume` within the worker environment. This allows all workers on that endpoint to access shared data.
+When attached to a Serverless endpoint, a network volume is mounted at `/Brightnode-volume` within the worker environment. This allows all workers on that endpoint to access shared data.
 
 ### Attach to an endpoint
 
 To enable workers on an endpoint to use a network volume:
 
-1. Navigate to the [Serverless section](https://www.console.runpod.io/serverless/user/endpoints) of the Runpod console.
+1. Navigate to the [Serverless section](https://www.console.brightnode.cloud/serverless/user/endpoints) of the Brightnode console.
 2. Select an existing endpoint and click **Manage**, then select **Edit Endpoint**.
 3. In the endpoint configuration menu, scroll down and expand the **Advanced** section.
 4. Click **Network Volume** and select the network volume you want to attach to the endpoint.
 5. Configure any other fields as needed, then select **Save Endpoint**.
 
-Data from the network volume will be accessible to all workers for that endpoint from the `/runpod-volume` directory. Use this path to read and write shared data in your [handler function](/serverless/workers/handler-functions).
+Data from the network volume will be accessible to all workers for that endpoint from the `/Brightnode-volume` directory. Use this path to read and write shared data in your [handler function](/serverless/workers/handler-functions).
 
 <Warning>
 
@@ -122,7 +122,7 @@ Network volumes must be attached during Pod deployment. They cannot be attached 
 
 To deploy a Pod with a network volume attached:
 
-1. Navigate to the [Pods section](https://www.console.runpod.io/pods) of the Runpod console.
+1. Navigate to the [Pods section](https://www.console.brightnode.cloud/pods) of the Brightnode console.
 2. Select **Deploy**.
 3. Select **Network Volume** and choose the network volume you want to attach from the dropdown list.
 4. Select a GPU type. The system will automatically show which Pods are available to use with the selected network volume.
@@ -146,14 +146,14 @@ Network volumes for Instant Clusters work the same way as they do for Pods. They
 
 To enable workers on an Instant Cluster to use a network volume:
 
-1. Navigate to the [Instant Clusters section](https://www.console.runpod.io/cluster) of the Runpod console.
+1. Navigate to the [Instant Clusters section](https://www.console.brightnode.cloud/cluster) of the Brightnode console.
 2. Click **Create Cluster**.
 3. Click **Network Volume** and select the network volume you want to attach to the cluster.
 4. Configure any other fields as needed, then click **Deploy Cluster**.
 
 ## S3-compatible API
 
-Runpod provides an [S3-compatible API](/storage/s3-api) that allows you to access and manage files on your network volumes directly, without needing to launch a Pod or run a Serverless worker for file management. This is particularly useful for:
+Brightnode provides an [S3-compatible API](/storage/s3-api) that allows you to access and manage files on your network volumes directly, without needing to launch a Pod or run a Serverless worker for file management. This is particularly useful for:
 
 - **Uploading large datasets or models** before launching compute resources.
 - **Managing files remotely** without maintaining an active connection.
@@ -174,9 +174,9 @@ The S3-compatible API is currently available for network volumes in the followin
 
 You can migrate files between network volumes (including between data centers) using the following methods:
 
-### Using runpodctl
+### Using brightnodectl
 
-The simplest way to migrate files between network volumes is to use `runpodctl send` and `receive` on two running Pods.
+The simplest way to migrate files between network volumes is to use `brightnodectl send` and `receive` on two running Pods.
 
 Before you begin, you'll need:
 
@@ -185,7 +185,7 @@ Before you begin, you'll need:
 
 <Steps>
 <Step title="Deploy Pods with network volumes attached">
-Deploy two Pods using the default Runpod PyTorch template. Each Pod should have one [network volume attached](#attach-to-a-pod).
+Deploy two Pods using the default Brightnode PyTorch template. Each Pod should have one [network volume attached](#attach-to-a-pod).
 
 1. Deploy the first Pod in the source data center and attach the source network volume.
 2. Deploy the second Pod in the target data center and attach the target network volume.
@@ -201,10 +201,10 @@ cd workspace
 </Step>
 
 <Step title="Start the transfer">
-Use `runpodctl send` to start the transfer. To transfer the entire volume:
+Use `brightnodectl send` to start the transfer. To transfer the entire volume:
 
 ```bash
-runpodctl send *
+brightnodectl send *
 ```
 
 You can also specify specific files or directories instead of `*`.
@@ -214,7 +214,7 @@ You can also specify specific files or directories instead of `*`.
 After running the send command, copy the `receive` command from the output. It will look something like this:
 
 ```bash
-runpodctl receive 8338-galileo-collect-fidel
+brightnodectl receive 8338-galileo-collect-fidel
 ```
 </Step>
 
@@ -230,7 +230,7 @@ cd workspace
 Paste and run the `receive` command you copied earlier:
 
 ```bash
-runpodctl receive 8338-galileo-collect-fidel
+brightnodectl receive 8338-galileo-collect-fidel
 ```
 
 The transfer will begin and show progress as it copies files from the source to the destination volume.
@@ -243,7 +243,7 @@ For a visual walkthrough using JupyterLab, check out this video tutorial:
   <iframe width="900"
   height="508"
   src="https://www.youtube.com/embed/gnSLRrlBfcA" 
-  title="How to clone network volumes using runpodctl" 
+  title="How to clone network volumes using brightnodectl" 
   frameborder="0" 
   allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
   referrerpolicy="strict-origin-when-cross-origin">
@@ -261,7 +261,7 @@ Before you begin, you'll need:
 
 <Steps>
 <Step title="Deploy Pods with network volumes attached">
-Deploy two Pods using the default Runpod PyTorch template. Each Pod should have one [network volume attached](#attach-to-a-pod).
+Deploy two Pods using the default Brightnode PyTorch template. Each Pod should have one [network volume attached](#attach-to-a-pod).
 
 1. Deploy the first Pod in the source data center and attach the source network volume.
 2. Deploy the second Pod in the target data center and attach the target network volume.
@@ -285,8 +285,8 @@ On the destination Pod, install required packages and add the source Pod's publi
 
 ```bash
 apt update && apt install -y vim rsync && \
-ip=$(printenv RUNPOD_PUBLIC_IP) && \
-port=$(printenv RUNPOD_TCP_PORT_22) && \
+ip=$(printenv BRIGHTNODE_PUBLIC_IP) && \
+port=$(printenv BRIGHTNODE_TCP_PORT_22) && \
 echo "rsync -avzP --inplace -e \"ssh -p $port\" /workspace/ root@$ip:/workspace" && \
 vi ~/.ssh/authorized_keys
 ```

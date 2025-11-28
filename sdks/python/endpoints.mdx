@@ -2,13 +2,13 @@
 title: "Endpoints"
 ---
 
-This documentation provides detailed instructions on how to use the Runpod Python SDK to interact with various endpoints. You can perform synchronous and asynchronous operations, stream data, and check the health status of endpoints.
+This documentation provides detailed instructions on how to use the Brightnode Python SDK to interact with various endpoints. You can perform synchronous and asynchronous operations, stream data, and check the health status of endpoints.
 
 ## Prerequisites
 
-Before using the Runpod Python, ensure that you have:
+Before using the Brightnode Python, ensure that you have:
 
-* Installed the Runpod Python SDK.
+* Installed the Brightnode Python SDK.
 * Configured your API key.
 
 ## Set your Endpoint Id
@@ -16,12 +16,12 @@ Before using the Runpod Python, ensure that you have:
 Pass your Endpoint Id on the `Endpoint` class.
 
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
-endpoint = runpod.Endpoint("YOUR_ENDPOINT_ID")
+endpoint = brightnode.Endpoint("YOUR_ENDPOINT_ID")
 ```
 
 This allows all calls to pass through your Endpoint Id with a valid API key.
@@ -56,12 +56,12 @@ Choosing between asynchronous and synchronous execution hinges on your task's ne
 To execute an endpoint synchronously and wait for the result, use the `run_sync` method. This method blocks the execution until the endpoint run is complete or until it times out.
 
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
-endpoint = runpod.Endpoint("YOUR_ENDPOINT_ID")
+endpoint = brightnode.Endpoint("YOUR_ENDPOINT_ID")
 
 try:
     run_request = endpoint.run_sync(
@@ -78,7 +78,7 @@ except TimeoutError:
 
 ### Run asynchronously
 
-Asynchronous execution allows for non-blocking operations, enabling your code to perform other tasks while waiting for an operation to complete. Runpod supports both standard asynchronous execution and advanced asynchronous programming with Python's [asyncio](https://docs.python.org/3/library/asyncio.html) framework.
+Asynchronous execution allows for non-blocking operations, enabling your code to perform other tasks while waiting for an operation to complete. Brightnode supports both standard asynchronous execution and advanced asynchronous programming with Python's [asyncio](https://docs.python.org/3/library/asyncio.html) framework.
 
 Depending on your application's needs, you can choose the approach that best suits your scenario.
 
@@ -91,14 +91,14 @@ This executes a standard Python environment without requiring an asynchronous ev
 <Tabs>
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
 input_payload = {"prompt": "Hello, World!"}
 
-endpoint = runpod.Endpoint("YOUR_ENDPOINT_ID")
+endpoint = brightnode.Endpoint("YOUR_ENDPOINT_ID")
 run_request = endpoint.run(input_payload)
 
 # Initial check without blocking, useful for quick tasks
@@ -135,13 +135,13 @@ Use Python's `asyncio` library for handling concurrent Endpoint calls efficientl
 import asyncio
 import aiohttp
 import os
-import runpod
-from runpod import AsyncioEndpoint, AsyncioJob
+import brightnode
+from brightnode import AsyncioEndpoint, AsyncioJob
 
 # asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())  # For Windows users.
 
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
 
 async def main():
@@ -192,13 +192,13 @@ Monitor the health of an endpoint by checking its status, including jobs complet
 <Tabs>
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 import json
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
-endpoint = runpod.Endpoint("gwp4kx5yd3nur1")
+endpoint = brightnode.Endpoint("gwp4kx5yd3nur1")
 
 endpoint_health = endpoint.health()
 
@@ -238,11 +238,11 @@ To enable streaming, your handler must support the `"return_aggregate_stream": T
 <Tabs>
 <Tab title="Endpoint">
 ```python
-import runpod
+import brightnode
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
-endpoint = runpod.Endpoint("YOUR_ENDPOINT_ID")
+endpoint = brightnode.Endpoint("YOUR_ENDPOINT_ID")
 
 run_request = endpoint.run(
     {
@@ -261,7 +261,7 @@ for output in run_request.stream():
 <Tab title="Handler">
 ```python
 from time import sleep
-import runpod
+import brightnode
 
 
 def handler(job):
@@ -272,7 +272,7 @@ def handler(job):
         yield i
 
 
-runpod.serverless.start(
+brightnode.serverless.start(
     {
         "handler": handler,
         "return_aggregate_stream": True,  # Ensures aggregated results are streamed back
@@ -297,13 +297,13 @@ Returns the status of the Job request. Set the `status()` function on the run re
 <Tabs>
 <Tab title="Python">
 ```python
-import runpod
+import brightnode
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
 input_payload = {"input": {"prompt": "Hello, World!"}}
 
-endpoint = runpod.Endpoint("YOUR_ENDPOINT_ID")
+endpoint = brightnode.Endpoint("YOUR_ENDPOINT_ID")
 run_request = endpoint.run(input_payload)
 
 # Initial check without blocking, useful for quick tasks
@@ -343,9 +343,9 @@ This sends a `SIGINT` signal to the running Job by catching the `KeyboardInterru
 <Tab title="Python">
 ```python
 import time
-import runpod
+import brightnode
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
 input_payload = {
     "messages": [{"role": "user", "content": f"Hello, World"}],
@@ -354,7 +354,7 @@ input_payload = {
 }
 
 try:
-    endpoint = runpod.Endpoint("YOUR_ENDPOINT_ID")
+    endpoint = brightnode.Endpoint("YOUR_ENDPOINT_ID")
     run_request = rp_endpoint.run(input_payload)
 
     while True:
@@ -406,14 +406,14 @@ In the previous `cancel()` example, the Job is canceled due to an external condi
 <Tab title="Python">
 ```python
 from time import sleep
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
 input_payload = {"input": {"prompt": "Hello, World!"}}
 
-endpoint = runpod.Endpoint("YOUR_ENDPOINT_ID")
+endpoint = brightnode.Endpoint("YOUR_ENDPOINT_ID")
 
 
 # Submit the job request
@@ -457,12 +457,12 @@ You can purge all jobs from a queue by using the `purge_queue()` function. You c
 `purge_queue()` doesn't affect Jobs in progress.
 
 ```python
-import runpod
+import brightnode
 import os
 
-runpod.api_key = os.getenv("RUNPOD_API_KEY")
+brightnode.api_key = os.getenv("BRIGHTNODE_API_KEY")
 
-endpoint = runpod.Endpoint("YOUR_ENDPOINT_ID")
+endpoint = brightnode.Endpoint("YOUR_ENDPOINT_ID")
 
 endpoint.purge_queue(timeout=3)
 ```

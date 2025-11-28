@@ -3,7 +3,7 @@ title: "Expose ports"
 description: "Learn how to make your Pod services accessible from the internet using HTTP proxy and TCP port forwarding"
 ---
 
-Runpod provides flexible options for exposing your Pod services to the internet. This guide explains how to configure port exposure for different use cases and requirements.
+Brightnode provides flexible options for exposing your Pod services to the internet. This guide explains how to configure port exposure for different use cases and requirements.
 
 ## Understanding port mapping
 
@@ -17,37 +17,37 @@ uvicorn main:app --host 0.0.0.0 --port 4000
 
 The external port users connect to will be different, depending on your chosen exposure method.
 
-## HTTP access via Runpod proxy
+## HTTP access via Brightnode proxy
 
-Runpod's HTTP proxy provides the easiest way to expose web services from your Pod. This method works well for REST APIs, web applications, and any HTTP-based service.
+Brightnode's HTTP proxy provides the easiest way to expose web services from your Pod. This method works well for REST APIs, web applications, and any HTTP-based service.
 
 ### Configure external HTTP ports
 
 To configure HTTP ports during Pod deployment, click **Edit Template** and add a comma-separated list of ports to the **Expose HTTP Ports (Max 10)** field.
 
-To configure HTTP ports for an existing Pod, navigate to the [Pod page](https://www.console.runpod.io/pods), expand your Pod, click the hamburger menu on the bottom-left, select **Edit Pod**, then add your port(s) to the **Expose HTTP Ports (Max 10)** field.
+To configure HTTP ports for an existing Pod, navigate to the [Pod page](https://www.console.brightnode.cloud/pods), expand your Pod, click the hamburger menu on the bottom-left, select **Edit Pod**, then add your port(s) to the **Expose HTTP Ports (Max 10)** field.
 
-You can also configure HTTP ports for a Pod template in the [My Templates](https://www.console.runpod.io/user/templates) section of the console.
+You can also configure HTTP ports for a Pod template in the [My Templates](https://www.console.brightnode.cloud/user/templates) section of the console.
 
 ### Access your service
 
 Once your Pod is running and your service is active, access it using the proxy URL format:
 
 ```
-https://[POD_ID]-[INTERNAL_PORT].proxy.runpod.net
+https://[POD_ID]-[INTERNAL_PORT].proxy.brightnode.net
 ```
 
 Replace `[POD_ID]` with your Pod's unique identifier and `[INTERNAL_PORT]` with your service's internal port. For example:
 - Pod ID: `abc123xyz`
 - Internal port: `4000`
-- Access URL: `https://abc123xyz-4000.proxy.runpod.net`
+- Access URL: `https://abc123xyz-4000.proxy.brightnode.net`
 
 ### Proxy limitations and behavior
 
 The HTTP proxy route includes several intermediaries that affect connection behavior:
 
 ```
-User → Cloudflare → Runpod Load Balancer → Your Pod
+User → Cloudflare → Brightnode Load Balancer → Your Pod
 ```
 
 This architecture introduces important limitations:
@@ -90,11 +90,11 @@ External port mappings change whenever your Pod resets.
 
 ## Symmetrical port mapping
 
-Some applications require the external port to match the internal port. Runpod supports this through a special configuration syntax.
+Some applications require the external port to match the internal port. Brightnode supports this through a special configuration syntax.
 
 ### Requesting symmetrical ports
 
-To request symmetrical mapping, specify port numbers above 70000 in your TCP configuration. These aren't valid port numbers, but signal Runpod to allocate matching internal and external ports.
+To request symmetrical mapping, specify port numbers above 70000 in your TCP configuration. These aren't valid port numbers, but signal Brightnode to allocate matching internal and external ports.
 
 After Pod creation, check the **Connect** menu to see which symmetrical ports were assigned under **Direct TCP Ports**.
 
@@ -103,8 +103,8 @@ After Pod creation, check the **Connect** menu to see which symmetrical ports we
 Your application can discover assigned ports through environment variables. For example, if you specify `70000` and `70001` in your Pod configuration, you could use the following commands to retrieve the assigned ports:
 
 ```bash
-echo $RUNPOD_TCP_PORT_70000
-echo $RUNPOD_TCP_PORT_70001
+echo $BRIGHTNODE_TCP_PORT_70000
+echo $BRIGHTNODE_TCP_PORT_70001
 ```
 
 You can use these environment variables in your application configuration to automatically adapt to assigned ports:
@@ -114,7 +114,7 @@ You can use these environment variables in your application configuration to aut
 import os
 
 # Get the assigned port or use a default
-port = os.environ.get('RUNPOD_TCP_PORT_70000', '8000')
+port = os.environ.get('BRIGHTNODE_TCP_PORT_70000', '8000')
 app.run(host='0.0.0.0', port=int(port))
 ```
 
@@ -122,7 +122,7 @@ app.run(host='0.0.0.0', port=int(port))
 ```yaml
 server:
   host: 0.0.0.0
-  port: ${RUNPOD_TCP_PORT_70000}
+  port: ${BRIGHTNODE_TCP_PORT_70000}
 ```
 
 ## Best practices
@@ -153,7 +153,7 @@ Different types of applications benefit from different exposure methods:
 
 - **Web APIs and REST services**: Use HTTP proxy for automatic HTTPS and simple configuration.
 - **WebSocket applications**: TCP exposure often works better for persistent connections that might exceed timeout limits.
-- **Database connections**: Use TCP with proper security measures. Consider using Runpod's global networking for internal-only databases.
+- **Database connections**: Use TCP with proper security measures. Consider using Brightnode's global networking for internal-only databases.
 - **Development environments**: HTTP proxy works well for web-based IDEs and development servers.
 
 ## Troubleshooting

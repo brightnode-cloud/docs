@@ -13,7 +13,7 @@ Required arguments:
 
 All other arguments are optional.
 
-If your container image is private, you can also specify Docker login credentials with a `containerRegistryAuthId` argument, which takes the ID (*not* the name) of the container registry credentials you saved in your Runpod user settings as a string.
+If your container image is private, you can also specify Docker login credentials with a `containerRegistryAuthId` argument, which takes the ID (*not* the name) of the container registry credentials you saved in your Brightnode user settings as a string.
 
 <Info>
 
@@ -30,7 +30,7 @@ Template names must be unique as well; if you try to create a new template with 
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { saveTemplate(input: { containerDiskInGb: 5, dockerArgs: \"sleep infinity\", env: [ { key: \"key1\", value: \"value1\" }, { key: \"key2\", value: \"value2\" } ], imageName: \"ubuntu:latest\", name: \"Generated Template\", ports: \"8888/http,22/tcp\", readme: \"## Hello, World!\", volumeInGb: 15, volumeMountPath: \"/workspace\" }) { containerDiskInGb dockerArgs env { key value } id imageName name ports readme volumeInGb volumeMountPath } }"}'
 ```
 
@@ -120,8 +120,8 @@ For Serverless templates, always pass `0` for `volumeInGb`, since Serverless wor
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
-  --data '{"query": "mutation { saveTemplate(input: { containerDiskInGb: 5, dockerArgs: \"python handler.py\", env: [ { key: \"key1\", value: \"value1\" }, { key: \"key2\", value: \"value2\" } ], imageName: \"runpod/serverless-hello-world:latest\", isServerless: true, name: \"Generated Serverless Template\", readme: \"## Hello, World!\", volumeInGb: 0 }) { containerDiskInGb dockerArgs env { key value } id imageName isServerless name readme } }"}'
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
+  --data '{"query": "mutation { saveTemplate(input: { containerDiskInGb: 5, dockerArgs: \"python handler.py\", env: [ { key: \"key1\", value: \"value1\" }, { key: \"key2\", value: \"value2\" } ], imageName: \"Brightnode/serverless-hello-world:latest\", isServerless: true, name: \"Generated Serverless Template\", readme: \"## Hello, World!\", volumeInGb: 0 }) { containerDiskInGb dockerArgs env { key value } id imageName isServerless name readme } }"}'
 ```
 
 </Tab>
@@ -142,7 +142,7 @@ mutation {
         value: "value2"
       }
     ],
-    imageName: "runpod/serverless-hello-world:latest",
+    imageName: "Brightnode/serverless-hello-world:latest",
     isServerless: true,
     name: "Generated Serverless Template",
     readme: "## Hello, World!",
@@ -183,7 +183,7 @@ mutation {
         }
       ],
       "id": "xkhgg72fuo",
-      "imageName": "runpod/serverless-hello-world:latest",
+      "imageName": "Brightnode/serverless-hello-world:latest",
       "isServerless": true,
       "name": "Generated Serverless Template",
       "readme": "## Hello, World!"
@@ -205,7 +205,7 @@ mutation {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { saveTemplate(input: { id: \"wphkv67a0p\", containerDiskInGb: 5, dockerArgs: \"sleep infinity\", env: [ { key: \"key1\", value: \"value1\" }, { key: \"key2\", value: \"value2\" } ], imageName: \"ubuntu:latest\", name: \"Generated Template\", volumeInGb: 15, readme: \"## Goodbye, World!\" }) { id containerDiskInGb dockerArgs env { key value } imageName name volumeInGb readme } }"}'
 ```
 
@@ -288,10 +288,10 @@ mutation {
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { saveTemplate(input: { id: \"xkhgg72fuo\", containerDisk
 
-InGb: 5, dockerArgs: \"python handler.py\", env: [ { key: \"key1\", value: \"value1\" }, { key: \"key2\", value: \"value2\" } ], imageName: \"runpod/serverless-hello-world:latest\", name: \"Generated Serverless Template\", volumeInGb: 0, readme: \"## Goodbye, World!\" }) { id containerDiskInGb dockerArgs env { key value } imageName name readme } }"}'
+InGb: 5, dockerArgs: \"python handler.py\", env: [ { key: \"key1\", value: \"value1\" }, { key: \"key2\", value: \"value2\" } ], imageName: \"Brightnode/serverless-hello-world:latest\", name: \"Generated Serverless Template\", volumeInGb: 0, readme: \"## Goodbye, World!\" }) { id containerDiskInGb dockerArgs env { key value } imageName name readme } }"}'
 ```
 
 </Tab>
@@ -313,7 +313,7 @@ mutation {
         value: "value2"
       }
     ],
-    imageName: "runpod/serverless-hello-world:latest",
+    imageName: "Brightnode/serverless-hello-world:latest",
     name: "Generated Serverless Template",
     volumeInGb: 0,
     readme: "## Goodbye, World!"
@@ -352,7 +352,7 @@ mutation {
           "value": "value2"
         }
       ],
-      "imageName": "runpod/serverless-hello-world:latest",
+      "imageName": "Brightnode/serverless-hello-world:latest",
       "name": "Generated Serverless Template",
       "readme": "## Goodbye, World!"
     }
@@ -375,7 +375,7 @@ The same mutation is used for deleting both Pod and Serverless templates.
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { deleteTemplate(templateName: \"Generated Template\") }"}'
 ```
 
@@ -412,7 +412,7 @@ To create a secret, you need to send a GraphQL mutation request. This request wi
 ```bash
 curl --request POST \
   --header 'content-type: application/json' \
-  --url 'https://api.runpod.io/graphql?api_key=${YOUR_API_KEY}' \
+  --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
   --data '{"query": "mutation { secretCreate(input: { value: \"i am a test secret\", name: \"i-am-a-secret\" }) { id name description } }"}'
 ```
 

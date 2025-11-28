@@ -2,18 +2,18 @@
 title: "Endpoints"
 ---
 
-Interacting with Runpod's Endpoints is a core feature of the SDK, enabling the execution of tasks and the retrieval of results. This section covers the synchronous and asynchronous execution methods, along with checking the status of operations.
+Interacting with Brightnode's Endpoints is a core feature of the SDK, enabling the execution of tasks and the retrieval of results. This section covers the synchronous and asynchronous execution methods, along with checking the status of operations.
 
 ## Prerequisites
 
-Before using the Runpod Go SDK, ensure that you have:
+Before using the Brightnode Go SDK, ensure that you have:
 
-* [Installed the Runpod Go SDK](/sdks/go/overview#install).
+* [Installed the Brightnode Go SDK](/sdks/go/overview#install).
 * Configured your API key.
 
 ## Set your Endpoint Id
 
-Set your Runpod API key and your Endpoint Id as environment variables.
+Set your Brightnode API key and your Endpoint Id as environment variables.
 
 ```go
 package main
@@ -22,22 +22,22 @@ import (
 	"log"
 	"os"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com.runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com.Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
 	// Retrieve the API key and base URL from environment variables
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	// Check if environment variables are set
 	if apiKey == "" {
-		log.Fatalf("Environment variable RUNPOD_API_KEY is not set")
+		log.Fatalf("Environment variable BRIGHTNODE_API_KEY is not set")
 	}
 	if baseURL == "" {
-		log.Fatalf("Environment variable RUNPOD_BASE_URL is not set")
+		log.Fatalf("Environment variable BRIGHTNODE_BASE_URL is not set")
 	}
 
 
@@ -81,14 +81,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com.runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com.Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -159,14 +159,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -225,14 +225,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -321,14 +321,14 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
 
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -425,7 +425,7 @@ You must define your handler to support the `"return_aggregate_stream": True` op
 
 ```python
 from time import sleep
-import runpod
+import brightnode
 
 
 def handler(job):
@@ -436,7 +436,7 @@ def handler(job):
         yield i
 
 
-runpod.serverless.start(
+brightnode.serverless.start(
     {
         "handler": handler,
         "return_aggregate_stream": True,  # Ensures aggregated results are streamed back
@@ -467,15 +467,15 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
 
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -540,15 +540,15 @@ import (
 	"log"
 	"os"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
 
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -600,15 +600,15 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
 
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -661,14 +661,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -723,14 +723,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},
@@ -792,14 +792,14 @@ import (
 	"log"
 	"os"
 
-	"github.com/runpod/go-sdk/pkg/sdk"
-	"github.com/runpod/go-sdk/pkg/sdk/config"
-	rpEndpoint "github.com/runpod/go-sdk/pkg/sdk/endpoint"
+	"github.com/Brightnode/go-sdk/pkg/sdk"
+	"github.com/Brightnode/go-sdk/pkg/sdk/config"
+	rpEndpoint "github.com/Brightnode/go-sdk/pkg/sdk/endpoint"
 )
 
 func main() {
-	apiKey := os.Getenv("RUNPOD_API_KEY")
-	baseURL := os.Getenv("RUNPOD_BASE_URL")
+	apiKey := os.Getenv("BRIGHTNODE_API_KEY")
+	baseURL := os.Getenv("BRIGHTNODE_BASE_URL")
 
 	endpoint, err := rpEndpoint.New(
 		&config.Config{ApiKey: &apiKey},

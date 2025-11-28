@@ -1,18 +1,18 @@
 ---
-title: "Text To Image Generation with Stable Diffusion on Runpod"
+title: "Text To Image Generation with Stable Diffusion on Brightnode"
 sidebarTitle: "Stable Diffusion text to image"
 ---
 
-Text-to-image generation using advanced AI models offers a unique way to bring textual descriptions to life as images. Stable Diffusion is a powerful model capable of generating high-quality images from text inputs, and Runpod is a serverless computing platform that can manage resource-intensive tasks effectively. This tutorial will guide you through setting up a serverless application that utilizes Stable Diffusion for generating images from text prompts on Runpod.
+Text-to-image generation using advanced AI models offers a unique way to bring textual descriptions to life as images. Stable Diffusion is a powerful model capable of generating high-quality images from text inputs, and Brightnode is a serverless computing platform that can manage resource-intensive tasks effectively. This tutorial will guide you through setting up a serverless application that utilizes Stable Diffusion for generating images from text prompts on Brightnode.
 
-By the end of this guide, you will have a fully functional text-to-image generation system deployed on a Runpod serverless environment.
+By the end of this guide, you will have a fully functional text-to-image generation system deployed on a Brightnode serverless environment.
 
 ## Prerequisites
 
 Before diving into the setup, ensure you have the following:
 
-* Access to a Runpod account
-* A GPU instance configured on Runpod
+* Access to a Brightnode account
+* A GPU instance configured on Brightnode
 * Basic knowledge of Python programming
 
 ## Import required libraries
@@ -20,7 +20,7 @@ Before diving into the setup, ensure you have the following:
 To start, we need to import several essential libraries. These will provide the functionalities required for serverless operation and image generation.
 
 ```python stable_diffusion.py
-import runpod
+import brightnode
 import torch
 from diffusers import StableDiffusionPipeline
 from io import BytesIO
@@ -29,7 +29,7 @@ import base64
 
 Here’s a breakdown of the imports:
 
-* `runpod`: The SDK used to interact with Runpod's serverless environment.
+* `Brightnode`: The SDK used to interact with Brightnode's serverless environment.
 * `torch`: PyTorch library, necessary for running deep learning models and ensuring they utilize the GPU.
 * `diffusers`: Provides methods to work with diffusion models like Stable Diffusion.
 * `BytesIO` and `base64`: Used to handle image data conversions.
@@ -120,10 +120,10 @@ Key steps in the function:
 
 ## Start the Serverless Worker
 
-Now, we'll start the serverless worker using the Runpod SDK.
+Now, we'll start the serverless worker using the Brightnode SDK.
 
 ```python stable_diffusion.py
-runpod.serverless.start({"handler": stable_diffusion_handler})
+brightnode.serverless.start({"handler": stable_diffusion_handler})
 ```
 
 This command starts the serverless worker and specifies the `stable_diffusion_handler` function to handle incoming requests.
@@ -133,7 +133,7 @@ This command starts the serverless worker and specifies the `stable_diffusion_ha
 For your convenience, here is the entire code consolidated:
 
 ```python stable_diffusion.py
-import runpod
+import brightnode
 import torch
 from diffusers import StableDiffusionPipeline
 from io import BytesIO
@@ -179,12 +179,12 @@ def stable_diffusion_handler(event):
         return {"error": str(e)}
 
 
-runpod.serverless.start({"handler": stable_diffusion_handler})
+brightnode.serverless.start({"handler": stable_diffusion_handler})
 ```
 
 ## Testing Locally
 
-Before deploying on Runpod, you might want to test the script locally. Create a `test_input.json` file with the following content:
+Before deploying on Brightnode, you might want to test the script locally. Create a `test_input.json` file with the following content:
 
 ```json test_input.json
 {
@@ -200,11 +200,11 @@ Run the script with the following command:
 python stable_diffusion.py --rp_server_api
 ```
 
-Note: Local testing may not work optimally without a suitable GPU. If issues arise, proceed to deploy and test on Runpod.
+Note: Local testing may not work optimally without a suitable GPU. If issues arise, proceed to deploy and test on Brightnode.
 
 ## Important Notes:
 
-1. This example requires significant computational resources, particularly GPU memory. Ensure your Runpod configuration has sufficient GPU capabilities.
+1. This example requires significant computational resources, particularly GPU memory. Ensure your Brightnode configuration has sufficient GPU capabilities.
 2. The model is loaded only once when the worker starts, optimizing performance.
 3. We've used Stable Diffusion v1.5; you can replace it with other versions or models as required.
 4. The handler includes error handling for missing input and exceptions during processing.
@@ -213,4 +213,4 @@ Note: Local testing may not work optimally without a suitable GPU. If issues ari
 
 ### Conclusion
 
-In this tutorial, you learned how to use the Runpod serverless platform with Stable Diffusion to create a text-to-image generation system. This project showcases the potential for deploying resource-intensive AI models in a serverless architecture using the Runpod Python SDK. You now have the skills to create and deploy sophisticated AI applications on Runpod. What will you create next?
+In this tutorial, you learned how to use the Brightnode serverless platform with Stable Diffusion to create a text-to-image generation system. This project showcases the potential for deploying resource-intensive AI models in a serverless architecture using the Brightnode Python SDK. You now have the skills to create and deploy sophisticated AI applications on Brightnode. What will you create next?

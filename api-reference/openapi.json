@@ -1,22 +1,22 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Runpod API",
-    "description": "Public Rest API for managing Runpod programmatically.",
+    "title": "Brightnode API",
+    "description": "Public Rest API for managing Brightnode programmatically.",
     "version": "0.1.0",
     "contact": {
       "name": "help",
-      "url": "https://contact.runpod.io/hc/requests/new",
-      "email": "help@runpod.io"
+      "url": "https://contact.brightnode.cloud/hc/requests/new",
+      "email": "help@brightnode.cloud"
     }
   },
   "externalDocs": {
-    "description": "Find out more about Runpod.",
-    "url": "https://runpod.io"
+    "description": "Find out more about Brightnode.",
+    "url": "https://brightnode.cloud"
   },
   "servers": [
     {
-      "url": "https://rest.runpod.io/v1"
+      "url": "https://rest.brightnode.cloud/v1"
     }
   ],
   "tags": [
@@ -34,7 +34,7 @@
     },
     {
       "name": "network volumes",
-      "description": "Manage Runpod network volumes."
+      "description": "Manage Brightnode network volumes."
     },
     {
       "name": "templates",
@@ -46,7 +46,7 @@
     },
     {
       "name": "billing",
-      "description": "Retrieve billing history for your Runpod account."
+      "description": "Retrieve billing history for your Brightnode account."
     }
   ],
   "paths": {
@@ -182,7 +182,7 @@
               "example": [
                 "EU-RO-1"
               ],
-              "description": "Filter to Pods located in any of the provided Runpod data centers."
+              "description": "Filter to Pods located in any of the provided Brightnode data centers."
             }
           },
           {
@@ -239,7 +239,7 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "example": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+              "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
               "description": "Filter to Pods created with the provided image."
             },
             "required": false
@@ -1009,13 +1009,13 @@
             }
           },
           {
-            "name": "includeRunpodTemplates",
+            "name": "includeBrightnodeTemplates",
             "in": "query",
             "schema": {
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include official Runpod templates in the response."
+              "description": "Include official Brightnode templates in the response."
             }
           }
         ],
@@ -1069,13 +1069,13 @@
             }
           },
           {
-            "name": "includeRunpodTemplates",
+            "name": "includeBrightnodeTemplates",
             "in": "query",
             "schema": {
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include official Runpod templates in the response."
+              "description": "Include official Brightnode templates in the response."
             }
           },
           {
@@ -1808,7 +1808,7 @@
                   "US-GA-1"
                 ]
               },
-              "description": "Filter to endpoints located in any of the provided Runpod data centers. The data center IDs are listed in the response of the /pods endpoint."
+              "description": "Filter to endpoints located in any of the provided Brightnode data centers. The data center IDs are listed in the response of the /pods endpoint."
             }
           },
           {
@@ -1901,7 +1901,7 @@
             "in": "query",
             "schema": {
               "type": "string",
-              "example": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+              "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
               "description": "Filter to endpoints created with the provided image."
             }
           },
@@ -2030,7 +2030,7 @@
           "adjustedCostPerHr": {
             "type": "number",
             "example": 0.69,
-            "description": "The effective cost in Runpod credits per hour of running a Pod, adjusted by active Savings Plans."
+            "description": "The effective cost in Brightnode credits per hour of running a Pod, adjusted by active Savings Plans."
           },
           "aiApiId": {
             "type": "string",
@@ -2040,7 +2040,7 @@
           "consumerUserId": {
             "type": "string",
             "example": "user_2PyTJrLzeuwfZilRZ7JhCQDuSqo",
-            "description": "A unique string identifying the Runpod user who rents a Pod."
+            "description": "A unique string identifying the Brightnode user who rents a Pod."
           },
           "containerDiskInGb": {
             "type": "integer",
@@ -2056,7 +2056,7 @@
             "type": "number",
             "example": "0.74",
             "format": "currency",
-            "description": "The cost in Runpod credits per hour of running a Pod. Note that the actual cost may be lower if Savings Plans are applied."
+            "description": "The cost in Brightnode credits per hour of running a Pod. Note that the actual cost may be lower if Savings Plans are applied."
           },
           "cpuFlavorId": {
             "type": "string",
@@ -2148,7 +2148,7 @@
           },
           "image": {
             "type": "string",
-            "example": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+            "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
             "description": "The image tag for the container run on a Pod."
           },
           "interruptible": {
@@ -2330,7 +2330,7 @@
               "dataCenterId": {
                 "type": "string",
                 "example": "EU-RO-1",
-                "description": "The Runpod data center ID where a network volume is located."
+                "description": "The Brightnode data center ID where a network volume is located."
               }
             },
             "description": "If a network volume is attached to a Pod, information about the network volume (see [network volume schema](#/components/schemas/NetworkVolume))."
@@ -2467,7 +2467,7 @@
           },
           "imageName": {
             "type": "string",
-            "example": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+            "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
             "description": "The image tag for the container run on the created Pod."
           },
           "locked": {
@@ -2535,7 +2535,7 @@
               "SECURE",
               "COMMUNITY"
             ],
-            "description": "Set to SECURE to create the Pod in Secure Cloud. Set to COMMUNITY to create the Pod in Community Cloud. To determine which one suits your needs, see https://docs.runpod.io/pods/overview#pod-types."
+            "description": "Set to SECURE to create the Pod in Secure Cloud. Set to COMMUNITY to create the Pod in Community Cloud. To determine which one suits your needs, see https://docs.brightnode.cloud/pods/overview#pod-types."
           },
           "computeType": {
             "type": "string",
@@ -2577,7 +2577,7 @@
                 "cpu5m"
               ]
             },
-            "description": "If the created Pod is a CPU Pod, a list of Runpod CPU flavors which can be attached to the Pod. The order of the list determines the order to rent CPU flavors. See cpuFlavorPriority for how the order of the list affects Pod creation."
+            "description": "If the created Pod is a CPU Pod, a list of Brightnode CPU flavors which can be attached to the Pod. The order of the list determines the order to rent CPU flavors. See cpuFlavorPriority for how the order of the list affects Pod creation."
           },
           "cpuFlavorPriority": {
             "type": "string",
@@ -2653,7 +2653,7 @@
                 "US-GA-1"
               ]
             },
-            "description": "A list of Runpod data center IDs where the created Pod can be located. See `dataCenterPriority` for information on how the order of the list affects Pod creation."
+            "description": "A list of Brightnode data center IDs where the created Pod can be located. See `dataCenterPriority` for information on how the order of the list affects Pod creation."
           },
           "dataCenterPriority": {
             "type": "string",
@@ -2747,7 +2747,7 @@
                 "NVIDIA B200"
               ]
             },
-            "description": "If the created Pod is a GPU Pod, a list of Runpod GPU types which can be attached to the created Pod. The order of the list determines the order to rent GPU types. See `gpuTypePriority` for information on how the order of the list affects Pod creation."
+            "description": "If the created Pod is a GPU Pod, a list of Brightnode GPU types which can be attached to the created Pod. The order of the list determines the order to rent GPU types. See `gpuTypePriority` for information on how the order of the list affects Pod creation."
           },
           "gpuTypePriority": {
             "type": "string",
@@ -2760,7 +2760,7 @@
           },
           "imageName": {
             "type": "string",
-            "example": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+            "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
             "description": "The image tag for the container run on the created Pod."
           },
           "interruptible": {
@@ -2868,7 +2868,7 @@
             "dataCenterId": {
               "type": "string",
               "example": "EU-RO-1",
-              "description": "The Runpod data center ID where a network volume is located."
+              "description": "The Brightnode data center ID where a network volume is located."
             }
           }
         }
@@ -2879,7 +2879,7 @@
           "dataCenterId": {
             "type": "string",
             "example": "EU-RO-1",
-            "description": "The Runpod data center ID where a network volume is located."
+            "description": "The Brightnode data center ID where a network volume is located."
           },
           "id": {
             "type": "string",
@@ -2909,7 +2909,7 @@
           "dataCenterId": {
             "type": "string",
             "example": "EU-RO-1",
-            "description": "The Runpod data center ID where the created network volume is located."
+            "description": "The Brightnode data center ID where the created network volume is located."
           },
           "name": {
             "type": "string",
@@ -2954,7 +2954,7 @@
           "category": {
             "type": "string",
             "example": "NVIDIA",
-            "description": "The category of the template. The category can be used to filter templates in the Runpod UI. Current categories are NVIDIA, AMD, and CPU."
+            "description": "The category of the template. The category can be used to filter templates in the Brightnode UI. Current categories are NVIDIA, AMD, and CPU."
           },
           "containerDiskInGb": {
             "type": "integer",
@@ -2983,7 +2983,7 @@
           "earned": {
             "type": "number",
             "example": 100,
-            "description": "The amount of Runpod credits earned by the creator of a template by all Pods or workers created from the template."
+            "description": "The amount of Brightnode credits earned by the creator of a template by all Pods or workers created from the template."
           },
           "env": {
             "type": "object",
@@ -3002,18 +3002,18 @@
           },
           "imageName": {
             "type": "string",
-            "example": "runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
+            "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
             "description": "The image tag for the container run on Pods or workers created from a template."
           },
           "isPublic": {
             "type": "boolean",
             "example": false,
-            "description": "Set to true if a template is public and can be used by any Runpod user. Set to false if a template is private and can only be used by the creator."
+            "description": "Set to true if a template is public and can be used by any Brightnode user. Set to false if a template is private and can only be used by the creator."
           },
-          "isRunpod": {
+          "isBrightnode": {
             "type": "boolean",
             "example": true,
-            "description": "If true, a template is an official template managed by Runpod."
+            "description": "If true, a template is an official template managed by Brightnode."
           },
           "isServerless": {
             "type": "boolean",
@@ -3038,7 +3038,7 @@
           },
           "readme": {
             "type": "string",
-            "description": "A string of markdown-formatted text that describes a template. The readme is displayed in the Runpod UI when a user selects the template."
+            "description": "A string of markdown-formatted text that describes a template. The readme is displayed in the Brightnode UI when a user selects the template."
           },
           "runtimeInMin": {
             "type": "integer"
@@ -3114,7 +3114,7 @@
           "isPublic": {
             "type": "boolean",
             "default": false,
-            "description": "If this is a Pod template, specifies whether the template is visible to other Runpod users."
+            "description": "If this is a Pod template, specifies whether the template is visible to other Brightnode users."
           },
           "isServerless": {
             "type": "boolean",
@@ -3160,7 +3160,7 @@
           "isPublic": {
             "type": "boolean",
             "default": false,
-            "description": "If this is a Pod template, specifies whether the template is visible to other Runpod users."
+            "description": "If this is a Pod template, specifies whether the template is visible to other Brightnode users."
           },
           "name": {
             "type": "string",
@@ -3229,7 +3229,7 @@
           "isPublic": {
             "type": "boolean",
             "default": false,
-            "description": "If this is a Pod template, specifies whether the template is visible to other Runpod users."
+            "description": "If this is a Pod template, specifies whether the template is visible to other Brightnode users."
           },
           "name": {
             "type": "string",
@@ -3368,7 +3368,7 @@
                 "US-GA-1"
               ]
             },
-            "description": "A list of Runpod data center IDs where workers on a Serverless endpoint can be located."
+            "description": "A list of Brightnode data center IDs where workers on a Serverless endpoint can be located."
           },
           "env": {
             "type": "object",
@@ -3435,7 +3435,7 @@
                 "NVIDIA B200"
               ]
             },
-            "description": "A list of Runpod GPU types which can be attached to a Serverless endpoint."
+            "description": "A list of Brightnode GPU types which can be attached to a Serverless endpoint."
           },
           "id": {
             "type": "string",
@@ -3492,7 +3492,7 @@
           "userId": {
             "type": "string",
             "example": "user_2PyTJrLzeuwfZilRZ7JhCQDuSqo",
-            "description": "A unique string identifying the Runpod user who created a Serverless endpoint."
+            "description": "A unique string identifying the Brightnode user who created a Serverless endpoint."
           },
           "version": {
             "type": "integer",
@@ -3606,7 +3606,7 @@
                 "cpu5g"
               ]
             },
-            "description": "If the created Serverless endpoint is a CPU endpoint, a list of Runpod CPU flavors which can be attached to the created workers. The order of the list determines the order to rent CPU flavors."
+            "description": "If the created Serverless endpoint is a CPU endpoint, a list of Brightnode CPU flavors which can be attached to the created workers. The order of the list determines the order to rent CPU flavors."
           },
           "dataCenterIds": {
             "type": "array",
@@ -3673,7 +3673,7 @@
                 "US-GA-1"
               ]
             },
-            "description": "A list of Runpod data center IDs where workers on the created Serverless endpoint can be located."
+            "description": "A list of Brightnode data center IDs where workers on the created Serverless endpoint can be located."
           },
           "executionTimeoutMs": {
             "type": "integer",
@@ -3736,7 +3736,7 @@
                 "NVIDIA B200"
               ]
             },
-            "description": "If the created Serverless endpoint is a GPU endpoint, a list of Runpod GPU types which can be attached to the created workers. The order of the list determines the order to rent GPU types."
+            "description": "If the created Serverless endpoint is a GPU endpoint, a list of Brightnode GPU types which can be attached to the created workers. The order of the list determines the order to rent GPU types."
           },
           "idleTimeout": {
             "type": "integer",
@@ -3838,7 +3838,7 @@
                 "cpu5g"
               ]
             },
-            "description": "If the created Serverless endpoint is a CPU endpoint, a list of Runpod CPU flavors which can be attached to the created workers. The order of the list determines the order to rent CPU flavors."
+            "description": "If the created Serverless endpoint is a CPU endpoint, a list of Brightnode CPU flavors which can be attached to the created workers. The order of the list determines the order to rent CPU flavors."
           },
           "dataCenterIds": {
             "type": "array",
@@ -3905,7 +3905,7 @@
                 "US-GA-1"
               ]
             },
-            "description": "A list of Runpod data center IDs where workers on the created Serverless endpoint can be located."
+            "description": "A list of Brightnode data center IDs where workers on the created Serverless endpoint can be located."
           },
           "executionTimeoutMs": {
             "type": "integer",
@@ -3968,7 +3968,7 @@
                 "NVIDIA B200"
               ]
             },
-            "description": "If the created Serverless endpoint is a GPU endpoint, a list of Runpod GPU types which can be attached to the created workers. The order of the list determines the order to rent GPU types."
+            "description": "If the created Serverless endpoint is a GPU endpoint, a list of Brightnode GPU types which can be attached to the created workers. The order of the list determines the order to rent GPU types."
           },
           "idleTimeout": {
             "type": "integer",

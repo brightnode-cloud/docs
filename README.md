@@ -1,4 +1,4 @@
-# Runpod documentation site
+# Brightnode documentation site
 
 This website is built using [Mintlify](https://mintlify.com/).
 

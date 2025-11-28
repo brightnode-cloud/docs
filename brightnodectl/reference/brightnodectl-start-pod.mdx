@@ -7,7 +7,7 @@ Start a stopped Pod, resuming compute and billing. Use this to restart Pods that
 
 <RequestExample>
 ```sh Command
-runpodctl start pod <podId> [flags]
+brightnodectl start pod <podId> [flags]
 ```
 </RequestExample>
 
@@ -16,13 +16,13 @@ runpodctl start pod <podId> [flags]
 Start a stopped Pod with a custom bid price for spot instances:
 
 ```sh
-runpodctl start pod abc123xyz456 --bid 0.50
+brightnodectl start pod abc123xyz456 --bid 0.50
 ```
 
 ## Arguments
 
 <ResponseField name="<podId>" type="string" required>
-The ID of the Pod to start. You can find Pod IDs using the `runpodctl get pod` command.
+The ID of the Pod to start. You can find Pod IDs using the `brightnodectl get pod` command.
 </ResponseField>
 
 ## Flags
@@ -33,5 +33,5 @@ The bid price per GPU in dollars per hour for spot instance pricing. This only a
 
 ## Related commands
 
-- [`runpodctl stop pod`](/runpodctl/reference/runpodctl-stop-pod)
-- [`runpodctl get pod`](/runpodctl/reference/runpodctl-get-pod)
+- [`brightnodectl stop pod`](/brightnodectl/reference/brightnodectl-stop-pod)
+- [`brightnodectl get pod`](/brightnodectl/reference/brightnodectl-get-pod)

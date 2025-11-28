@@ -1,20 +1,20 @@
 ---
-title: "Creating and testing a Runpod serverless function with local server"
+title: "Creating and testing a Brightnode serverless function with local server"
 sidebarTitle: "Local server testing"
 ---
 
-This tutorial will guide you through creating a basic serverless function using Runpod's Python SDK. We'll build a function that reverses a given string, demonstrating the simplicity and flexibility of Runpod's serverless architecture.
+This tutorial will guide you through creating a basic serverless function using Brightnode's Python SDK. We'll build a function that reverses a given string, demonstrating the simplicity and flexibility of Brightnode's serverless architecture.
 
 ## Setting up your Serverless Function
 
 Let's break down the process of creating our string reversal function into steps.
 
-### Import Runpod Library
+### Import Brightnode Library
 
-First, import the Runpod library:
+First, import the Brightnode library:
 
 ```python
-import runpod
+import brightnode
 ```
 
 ### Define utility function
@@ -59,20 +59,20 @@ This handler:
 
 ### Start the Serverless Function
 
-Finally, start the Runpod serverless worker:
+Finally, start the Brightnode serverless worker:
 
 ```python
-runpod.serverless.start({"handler": handler})
+brightnode.serverless.start({"handler": handler})
 ```
 
-This line registers our handler function with Runpod's serverless infrastructure.
+This line registers our handler function with Brightnode's serverless infrastructure.
 
 ## Complete code example
 
 Here's the full code for our serverless string reversal function:
 
 ```python
-import runpod
+import brightnode
 
 
 def reverse_string(s):
@@ -95,19 +95,19 @@ def handler(job):
     return job_output
 
 
-runpod.serverless.start({"handler": handler})
+brightnode.serverless.start({"handler": handler})
 ```
 
 ## Testing Your Serverless Function
 
-Runpod provides multiple ways to test your serverless function locally before deployment. We'll explore two methods: using command-line arguments and running a local test server.
+Brightnode provides multiple ways to test your serverless function locally before deployment. We'll explore two methods: using command-line arguments and running a local test server.
 
 ### Method 1: Command-line Testing
 
 To quickly test your function using command-line arguments, use this command:
 
 ```bash
-python your_script.py --test_input '{"input": {"text": "Hello, Runpod!"}}'
+python your_script.py --test_input '{"input": {"text": "Hello, Brightnode!"}}'
 ```
 
 When you run this test, you'll see output similar to:
@@ -115,13 +115,13 @@ When you run this test, you'll see output similar to:
 ```bash
 --- Starting Serverless Worker |  Version 1.6.2 ---
 INFO   | test_input set, using test_input as job input.
-DEBUG  | Retrieved local job: {'input': {'text': 'Hello, Runpod!'}, 'id': 'local_test'}
+DEBUG  | Retrieved local job: {'input': {'text': 'Hello, Brightnode!'}, 'id': 'local_test'}
 INFO   | local_test | Started.
 string-reverser | Starting job local_test
-DEBUG  | local_test | Handler output: {'original_text': 'Hello, Runpod!', 'reversed_text': '!doPnuR ,olleH'}
-DEBUG  | local_test | run_job return: {'output': {'original_text': 'Hello, Runpod!', 'reversed_text': '!doPnuR ,olleH'}}
+DEBUG  | local_test | Handler output: {'original_text': 'Hello, Brightnode!', 'reversed_text': '!doPnuR ,olleH'}
+DEBUG  | local_test | run_job return: {'output': {'original_text': 'Hello, Brightnode!', 'reversed_text': '!doPnuR ,olleH'}}
 INFO   | Job local_test completed successfully.
-INFO   | Job result: {'output': {'original_text': 'Hello, Runpod!', 'reversed_text': '!doPnuR ,olleH'}}
+INFO   | Job result: {'output': {'original_text': 'Hello, Brightnode!', 'reversed_text': '!doPnuR ,olleH'}}
 INFO   | Local testing complete, exiting.
 ```
 
@@ -148,7 +148,7 @@ Example using `curl`:
 ```bash
 curl -X POST http://localhost:8000/run \
      -H "Content-Type: application/json" \
-     -d '{"input": {"text": "Hello, Runpod!"}}'
+     -d '{"input": {"text": "Hello, Brightnode!"}}'
 ```
 
 This will send a POST request to your local server with the input data, simulating how your function would be called in a production environment.
@@ -159,11 +159,11 @@ When you send a request to the local server, you'll see output in your terminal 
 
 ```bash
 INFO:     127.0.0.1:52686 - "POST /run HTTP/1.1" 200 OK
-DEBUG    | Retrieved local job: {'input': {'text': 'Hello, Runpod!'}, 'id': 'local_test'}
+DEBUG    | Retrieved local job: {'input': {'text': 'Hello, Brightnode!'}, 'id': 'local_test'}
 INFO     | local_test | Started.
 string-reverser | Starting job local_test
-DEBUG    | local_test | Handler output: {'original_text': 'Hello, Runpod!', 'reversed_text': '!doPnuR ,olleH'}
-DEBUG    | local_test | run_job return: {'output': {'original_text': 'Hello, Runpod!', 'reversed_text': '!doPnuR ,olleH'}}
+DEBUG    | local_test | Handler output: {'original_text': 'Hello, Brightnode!', 'reversed_text': '!doPnuR ,olleH'}
+DEBUG    | local_test | run_job return: {'output': {'original_text': 'Hello, Brightnode!', 'reversed_text': '!doPnuR ,olleH'}}
 INFO     | Job local_test completed successfully.
 ```
 
@@ -171,14 +171,14 @@ This output provides detailed information about how your function processes the 
 
 ## Conclusion
 
-You've now created a basic serverless function using Runpod's Python SDK that reverses input strings and learned how to test it using both command-line arguments and a local test server. This example demonstrates how easy it is to deploy and validate simple text processing tasks as serverless functions.
+You've now created a basic serverless function using Brightnode's Python SDK that reverses input strings and learned how to test it using both command-line arguments and a local test server. This example demonstrates how easy it is to deploy and validate simple text processing tasks as serverless functions.
 
-To further explore Runpod's serverless capabilities, consider:
+To further explore Brightnode's serverless capabilities, consider:
 
 * Adding more complex string manipulations
 * Implementing error handling for different input types
 * Writing automated test scripts to cover various input scenarios
 * Using the local server to integrate your function with other parts of your application during development
-* Exploring Runpod's documentation for advanced features like concurrent processing or GPU acceleration
+* Exploring Brightnode's documentation for advanced features like concurrent processing or GPU acceleration
 
-Runpod's serverless library provides a powerful foundation for building scalable, efficient text processing applications without the need to manage infrastructure.
+Brightnode's serverless library provides a powerful foundation for building scalable, efficient text processing applications without the need to manage infrastructure.

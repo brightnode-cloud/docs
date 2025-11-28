@@ -1,16 +1,16 @@
 ---
 title: "Manage Serverless endpoints"
 sidebarTitle: "Manage endpoints"
-description: "Deploy and manage your endpoints using the Runpod console or REST API."
+description: "Deploy and manage your endpoints using the Brightnode console or REST API."
 ---
 
 ## Create an endpoint
 
 <Tabs>
 <Tab title="Web">
-To create a new Serverless endpoint through the Runpod web interface:
+To create a new Serverless endpoint through the Brightnode web interface:
 
-1. Navigate to the [Serverless section](https://www.console.runpod.io/serverless) of the Runpod console.
+1. Navigate to the [Serverless section](https://www.console.brightnode.cloud/serverless) of the Brightnode console.
 2. Click **New Endpoint**.
 3. On the **Deploy a New Serverless Endpoint** screen, choose your deployment source:
    * **Import Git Repository** (if GitHub is connected) (see [Deploy from GitHub](/serverless/workers/github-integration) for details.
@@ -33,8 +33,8 @@ To create a Serverless endpoint using the REST API, send a POST request to the `
 
 ```bash
 curl --request POST \
-  --url https://rest.runpod.io/v1/endpoints \
-  --header 'Authorization: Bearer RUNPOD_API_KEY' \
+  --url https://rest.brightnode.cloud/v1/endpoints \
+  --header 'Authorization: Bearer BRIGHTNODE_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
   "allowedCudaVersions": [
@@ -73,13 +73,13 @@ For complete API documentation and parameter details, see the [Serverless endpoi
 
 <Tip>
 
-You can optimize cost and availability by specifying GPU preferences in order of priority. Runpod attempts to allocate your first choice GPU. If unavailable, it automatically uses the next GPU in your priority list, ensuring your workloads run on the best available resources.
+You can optimize cost and availability by specifying GPU preferences in order of priority. Brightnode attempts to allocate your first choice GPU. If unavailable, it automatically uses the next GPU in your priority list, ensuring your workloads run on the best available resources.
 
 You can enable or disable particular GPU types using the **Advanced > Enabled GPU Types** section.
 
 </Tip>
 
-After deployment, your endpoint takes time to initialize before it is ready to process requests. You can monitor the deployment status on the endpoint details page, which shows worker status and initialization progress. Once active, your endpoint displays a unique API URL (`https://api.runpod.ai/v2/{endpoint_id}/`) that you can use to send requests. For information on how to interact with your endpoint, see [Endpoint operations](/serverless/endpoints/operations).
+After deployment, your endpoint takes time to initialize before it is ready to process requests. You can monitor the deployment status on the endpoint details page, which shows worker status and initialization progress. Once active, your endpoint displays a unique API URL (`https://api.brightnode.ai/v2/{endpoint_id}/`) that you can use to send requests. For information on how to interact with your endpoint, see [Endpoint operations](/serverless/endpoints/operations).
 
 ## Edit an endpoint
 
@@ -89,7 +89,7 @@ After deployment, your endpoint takes time to initialize before it is ready to p
 
 You can modify your endpoint's configuration at any time:
 
-1. Navigate to the [Serverless section](https://www.console.runpod.io/serverless) in the Runpod console.
+1. Navigate to the [Serverless section](https://www.console.brightnode.cloud/serverless) in the Brightnode console.
 
 2. Click the three dots in the bottom right corner of the endpoint you want to modify.
 
@@ -117,7 +117,7 @@ To force an immediate configuration update, temporarily set **Max Workers** to 0
 
 When you no longer need an endpoint, you can remove it from your account:
 
-1. Navigate to the [Serverless section](https://www.console.runpod.io/serverless) in the Runpod console.
+1. Navigate to the [Serverless section](https://www.console.brightnode.cloud/serverless) in the Brightnode console.
 2. Click the three dots in the bottom right corner of the endpoint you want to delete.
 3. Click **Delete Endpoint**.
 4. Type the name of the endpoint, then click **Confirm**.
@@ -128,7 +128,7 @@ After confirmation, the endpoint will be removed from your account, and you'll n
 
 Attach persistent storage to share data across workers:
 
-1. Navigate to the [Serverless section](https://www.console.runpod.io/serverless) in the Runpod console.
+1. Navigate to the [Serverless section](https://www.console.brightnode.cloud/serverless) in the Brightnode console.
 2. Click the three dots in the bottom right corner of the endpoint you want to modify.
 3. Click **Edit Endpoint**.
 4. Expand the **Advanced** section.

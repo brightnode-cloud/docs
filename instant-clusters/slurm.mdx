@@ -9,21 +9,21 @@ This guide is for advanced users who want to configure and manage their own Slur
 
 </Tip>
 
-This tutorial demonstrates how to configure Runpod Instant Clusters with [Slurm](https://slurm.schedmd.com/) to manage and schedule distributed workloads across multiple nodes. Slurm is a popular open-source job scheduler that provides a framework for job management, scheduling, and resource allocation in high-performance computing environments. By leveraging Slurm on Runpod's high-speed networking infrastructure, you can efficiently manage complex workloads across multiple GPUs.
+This tutorial demonstrates how to configure Brightnode Instant Clusters with [Slurm](https://slurm.schedmd.com/) to manage and schedule distributed workloads across multiple nodes. Slurm is a popular open-source job scheduler that provides a framework for job management, scheduling, and resource allocation in high-performance computing environments. By leveraging Slurm on Brightnode's high-speed networking infrastructure, you can efficiently manage complex workloads across multiple GPUs.
 
 Follow the steps below to deploy a cluster and start running distributed Slurm workloads efficiently.
 
 ## Requirements
 
-* You've created a [Runpod account](https://www.console.runpod.io/home) and funded it with sufficient credits.
+* You've created a [Brightnode account](https://www.console.brightnode.cloud/home) and funded it with sufficient credits.
 * You have basic familiarity with Linux command line.
 * You're comfortable working with [Pods](/pods/overview) and understand the basics of [Slurm](https://slurm.schedmd.com/).
 
 ## Step 1: Deploy an Instant Cluster
 
-1. Open the [Instant Clusters page](https://www.console.runpod.io/cluster) on the Runpod web interface.
+1. Open the [Instant Clusters page](https://www.console.brightnode.cloud/cluster) on the Brightnode web interface.
 2. Click **Create Cluster**.
-3. Use the UI to name and configure your cluster. For this walkthrough, keep **Pod Count** at **2** and select the option for **16x H100 SXM** GPUs. Keep the **Pod Template** at its default setting (Runpod PyTorch).
+3. Use the UI to name and configure your cluster. For this walkthrough, keep **Pod Count** at **2** and select the option for **16x H100 SXM** GPUs. Keep the **Pod Template** at its default setting (Brightnode PyTorch).
 4. Click **Deploy Cluster**. You should be redirected to the Instant Clusters page after a few seconds.
 
 ## Step 2: Clone demo and install Slurm on each Pod
@@ -126,17 +126,17 @@ Check the output file created by the test (`test_simple_[JOBID].out`) and look f
 
 ## Step 8: Clean up
 
-If you no longer need your cluster, make sure you return to the [Instant Clusters page](https://www.console.runpod.io/cluster) and delete your cluster to avoid incurring extra charges.
+If you no longer need your cluster, make sure you return to the [Instant Clusters page](https://www.console.brightnode.cloud/cluster) and delete your cluster to avoid incurring extra charges.
 
 <Tip>
 
-You can monitor your cluster usage and spending using the **Billing Explorer** at the bottom of the [Billing page](https://www.console.runpod.io/user/billing) section under the **Cluster** tab.
+You can monitor your cluster usage and spending using the **Billing Explorer** at the bottom of the [Billing page](https://www.console.brightnode.cloud/user/billing) section under the **Cluster** tab.
 
 </Tip>
 
 ## Next steps
 
-Now that you've successfully deployed and tested a Slurm cluster on Runpod, you can:
+Now that you've successfully deployed and tested a Slurm cluster on Brightnode, you can:
 
 * **Adapt your own distributed workloads** to run using Slurm job scripts.
 * **Scale your cluster** by adjusting the number of Pods to handle larger models or datasets.

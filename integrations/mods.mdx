@@ -1,5 +1,5 @@
 ---
-title: "Running Runpod on Mods"
+title: "Running Brightnode on Mods"
 sidebarTitle: "Mods"
 ---
 
@@ -15,23 +15,23 @@ To start using Mods, follow these step-by-step instructions:
 
 1. **Obtain Your API Key**:
 
-   * Visit the [Runpod Settings](https://www.console.runpod.io/user/settings) page to retrieve your API key.
+   * Visit the [Brightnode Settings](https://www.console.brightnode.cloud/user/settings) page to retrieve your API key.
    * If you haven't created an account yet, you'll need to sign up before obtaining the key.
 
 2. **Install Mods**:
 
    * Refer to the different installation methods for [Mods](https://github.com/charmbracelet/mods) based on your preferred approach.
 
-3. **Configure Runpod**:
+3. **Configure Brightnode**:
 
-   * Update the `config_template.yml` file to use your Runpod configuration. Here's an example:
+   * Update the `config_template.yml` file to use your Brightnode configuration. Here's an example:
 
      ```yml
-     runpod:
-       # https://docs.runpod.io/serverless/vllm/openai-compatibility
-       base-url: https://api.runpod.ai/v2/${YOUR_ENDPOINT}/openai/v1
+     Brightnode:
+       # https://docs.brightnode.cloud/serverless/vllm/openai-compatibility
+       base-url: https://api.brightnode.ai/v2/${YOUR_ENDPOINT}/openai/v1
        api-key:
-       api-key-env: RUNPOD_API_KEY
+       api-key-env: BRIGHTNODE_API_KEY
        models:
          # Add your model name
          openchat/openchat-3.5-1210:
@@ -41,7 +41,7 @@ To start using Mods, follow these step-by-step instructions:
 
    * `base-url`: Update your base-url with your specific endpoint.
 
-   * `api-key-env`: Add your Runpod API key.
+   * `api-key-env`: Add your Brightnode API key.
 
    * `openchat/openchat-3.5-1210`: Replace with the name of the model you want to use.
 
@@ -53,10 +53,10 @@ To start using Mods, follow these step-by-step instructions:
 
    * To ensure everything is set up correctly, pipe any command line output and pass it to `mods`.
 
-   * Specify the Runpod API and model you want to use.
+   * Specify the Brightnode API and model you want to use.
 
      ```sh
-     ls ~/Downloads | mods --api runpod --model openchat -f "tell my fortune based on these files" | glow
+     ls ~/Downloads | mods --api Brightnode --model openchat -f "tell my fortune based on these files" | glow
      ```
 
-   * This command will list the files in your `~/Downloads` directory, pass them to Mods using the Runpod API and the specified model, and format the response as a fortune based on the files. The output will then be piped to `glow` for a visually appealing display.
+   * This command will list the files in your `~/Downloads` directory, pass them to Mods using the Brightnode API and the specified model, and format the response as a fortune based on the files. The output will then be piped to `glow` for a visually appealing display.

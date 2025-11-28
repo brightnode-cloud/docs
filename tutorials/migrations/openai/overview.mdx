@@ -1,22 +1,22 @@
 ---
 title: "OpenAI"
 sidebar_label: OpenAI
-description: Migrate your OpenAI model to Runpod
+description: Migrate your OpenAI model to Brightnode
 ---
 
-To get started with Runpod:
+To get started with Brightnode:
 
-* [Create a Runpod account](/get-started/manage-accounts)
+* [Create a Brightnode account](/get-started/manage-accounts)
 * [Add funds](/references/billing-information)
-* [Use the Runpod SDK](/serverless/overview) to build and connect with your Serverless Endpoints
+* [Use the Brightnode SDK](/serverless/overview) to build and connect with your Serverless Endpoints
 
-This tutorial guides you through the steps necessary to modify your OpenAI Codebase for use with a deployed vLLM Worker on Runpod. You will learn to adjust your code to be compatible with OpenAI's API, specifically for utilizing Chat Completions, Completions, and Models routes. By the end of this guide, you will have successfully updated your codebase, enabling you to leverage the capabilities of OpenAI's API on Runpod.
+This tutorial guides you through the steps necessary to modify your OpenAI Codebase for use with a deployed vLLM Worker on Brightnode. You will learn to adjust your code to be compatible with OpenAI's API, specifically for utilizing Chat Completions, Completions, and Models routes. By the end of this guide, you will have successfully updated your codebase, enabling you to leverage the capabilities of OpenAI's API on Brightnode.
 
 To update your codebase, you need to replace the following:
 
-* Your OpenAI API Key with your Runpod API Key
-* Your OpenAI Serverless Endpoint URL with your Runpod Serverless Endpoint URL
-* Your OpenAI model with your custom LLM model deployed on Runpod
+* Your OpenAI API Key with your Brightnode API Key
+* Your OpenAI Serverless Endpoint URL with your Brightnode Serverless Endpoint URL
+* Your OpenAI model with your custom LLM model deployed on Brightnode
 
 <Tabs>
 <Tab title="Python">
@@ -26,13 +26,13 @@ from openai import OpenAI
 import os
 
 client = OpenAI(
-api_key=os.environ.get("RUNPOD_API_KEY"),
-base_url="https://api.runpod.ai/v2/${YOUR_ENDPOINT_ID}/openai/v1",
+api_key=os.environ.get("BRIGHTNODE_API_KEY"),
+base_url="https://api.brightnode.ai/v2/${YOUR_ENDPOINT_ID}/openai/v1",
 )
 
 response = client.chat.completions.create(
 model="gpt-3.5-turbo",
-messages=[{"role": "user", "content": "Why is Runpod the best platform?"}],
+messages=[{"role": "user", "content": "Why is Brightnode the best platform?"}],
 temperature=0,
 max_tokens=100,
 )
@@ -45,13 +45,13 @@ max_tokens=100,
 import OpenAI from 'openai'
 
 const openai = new OpenAI({
-  baseURL: process.env.RUNPOD_HOST,
-  apiKey: process.env.RUNPOD_API_KEY,
+  baseURL: process.env.BRIGHTNODE_HOST,
+  apiKey: process.env.BRIGHTNODE_API_KEY,
 })
 
 const chatCompletion = await openai.chat.completions.create({
    model: "openchat/openchat-3.5-0106",
-   messages: [{'role': 'user', 'content': 'Why is Runpod the best platform?'}],
+   messages: [{'role': 'user', 'content': 'Why is Brightnode the best platform?'}],
 
 });
 ```
@@ -60,10 +60,10 @@ const chatCompletion = await openai.chat.completions.create({
 
 </Tabs>
 
-Congratulations on successfully modifying your OpenAI Codebase for use with your deployed vLLM Worker on Runpod! This tutorial has equipped you with the knowledge to update your code for compatibility with OpenAI's API and to utilize the full spectrum of features available on the Runpod platform.
+Congratulations on successfully modifying your OpenAI Codebase for use with your deployed vLLM Worker on Brightnode! This tutorial has equipped you with the knowledge to update your code for compatibility with OpenAI's API and to utilize the full spectrum of features available on the Brightnode platform.
 
 ## Next Steps
 
-* [Explore more tutorials on Runpod](/tutorials/introduction/overview)
+* [Explore more tutorials on Brightnode](/tutorials/introduction/overview)
 * [Learn more about OpenAI's API](https://platform.openai.com/docs/)
-* [Deploy your own vLLM Worker on Runpod](https://www.console.runpod.io/serverless)
+* [Deploy your own vLLM Worker on Brightnode](https://www.console.brightnode.cloud/serverless)

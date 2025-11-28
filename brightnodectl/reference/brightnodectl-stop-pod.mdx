@@ -7,7 +7,7 @@ Stop a running Pod to pause compute operations. The Pod's persistent storage wil
 
 <RequestExample>
 ```sh Command
-runpodctl stop pod <podId> [flags]
+brightnodectl stop pod <podId> [flags]
 ```
 </RequestExample>
 
@@ -16,16 +16,16 @@ runpodctl stop pod <podId> [flags]
 Stop a running Pod.
 
 ```sh
-runpodctl stop pod abc123xyz456
+brightnodectl stop pod abc123xyz456
 ```
 
 ## Arguments
 
 <ResponseField name="<podId>" type="string" required>
-The ID of the Pod to stop. You can find Pod IDs using the `runpodctl get pod` command.
+The ID of the Pod to stop. You can find Pod IDs using the `brightnodectl get pod` command.
 </ResponseField>
 
 ## Related commands
 
-- [`runpodctl start pod`](/runpodctl/reference/runpodctl-start-pod)
-- [`runpodctl get pod`](/runpodctl/reference/runpodctl-get-pod)
+- [`brightnodectl start pod`](/brightnodectl/reference/brightnodectl-start-pod)
+- [`brightnodectl get pod`](/brightnodectl/reference/brightnodectl-get-pod)

@@ -7,7 +7,7 @@ import requests
 from tabulate import tabulate
 
 response = requests.post(
-    "https://api.runpod.io/graphql", 
+    "https://api.brightnode.cloud/graphql", 
     headers={
         "content-type": "application/json"
     }, 
@@ -38,14 +38,14 @@ with open(file_path, "w") as file:
     file.write(
         f"""---
 title: "GPU types"
-description: "Explore the GPUs available on Runpod."
+description: "Explore the GPUs available on Brightnode."
 ---
 
-For information on pricing, see [GPU pricing](https://www.runpod.io/gpu-instance/pricing).
+For information on pricing, see [GPU pricing](https://www.brightnode.cloud/gpu-instance/pricing).
 
 ## GPU types
 
-This table lists all GPU types available on Runpod:
+This table lists all GPU types available on Brightnode:
 {{/* Table last generated: {date} */}}
 
 {table}

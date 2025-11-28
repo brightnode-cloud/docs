@@ -1,9 +1,9 @@
 ---
-title: "Implementing error handling and logging in Runpod serverless functions"
+title: "Implementing error handling and logging in Brightnode serverless functions"
 sidebarTitle: "Error handling"
 ---
 
-This tutorial will guide you through implementing effective error handling and logging in your Runpod serverless functions.
+This tutorial will guide you through implementing effective error handling and logging in your Brightnode serverless functions.
 
 Proper error handling ensures that your serverless functions can handle unexpected situations gracefully. This prevents crashes and ensures that your application can continue running smoothly, even if some parts encounter issues.
 
@@ -15,15 +15,15 @@ Let's break down the process of creating our error-aware image classifier into s
 
 ### Import required libraries and Set Up Logging
 
-First, import the necessary libraries and Set up the Runpod logger:
+First, import the necessary libraries and Set up the Brightnode logger:
 
 ```python
-import runpod
-from runpod import RunPodLogger
+import brightnode
+from brightnode import BrightnodeLogger
 import time
 import random
 
-log = RunPodLogger()
+log = BrightnodeLogger()
 ```
 
 ### Create Helper Functions
@@ -129,10 +129,10 @@ This handler:
 
 ### Start the Serverless Function
 
-Finally, start the Runpod serverless function:
+Finally, start the Brightnode serverless function:
 
 ```python
-runpod.serverless.start({"handler": handler})
+brightnode.serverless.start({"handler": handler})
 ```
 
 ## Complete code example
@@ -140,12 +140,12 @@ runpod.serverless.start({"handler": handler})
 Here's the full code for our error-aware image classification simulator:
 
 ```python
-import runpod
-from runpod import RunPodLogger
+import brightnode
+from brightnode import BrightnodeLogger
 import time
 import random
 
-log = RunPodLogger()
+log = BrightnodeLogger()
 
 
 def load_model():
@@ -226,7 +226,7 @@ def handler(job):
         return {"error": str(e)}
 
 
-runpod.serverless.start({"handler": handler})
+brightnode.serverless.start({"handler": handler})
 ```
 
 ## Testing Your Serverless Function
@@ -283,12 +283,12 @@ This output demonstrates:
 
 ## Conclusion
 
-You've now created a serverless function using Runpod's Python SDK that demonstrates effective error handling and logging practices. This approach ensures that your serverless functions are robust, maintainable, and easier to debug.
+You've now created a serverless function using Brightnode's Python SDK that demonstrates effective error handling and logging practices. This approach ensures that your serverless functions are robust, maintainable, and easier to debug.
 
 To further enhance this application, consider:
 
 * Implementing more specific error types and handling
 * Adding more detailed logging for each step of the process
-* Exploring Runpod's advanced logging features and integrations
+* Exploring Brightnode's advanced logging features and integrations
 
-Runpod's serverless library provides a powerful foundation for building reliable, scalable applications with comprehensive error management and logging capabilities.
+Brightnode's serverless library provides a powerful foundation for building reliable, scalable applications with comprehensive error management and logging capabilities.

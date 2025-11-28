@@ -1,19 +1,19 @@
 ---
 title: "Generate your first image with Serverless and SDXL"
 sidebarTitle: "Generate your first image with Serverless"
-description: "Learn how to deploy a Serverless endpoint running SDXL from the Runpod Hub and use it to generate images."
+description: "Learn how to deploy a Serverless endpoint running SDXL from the Brightnode Hub and use it to generate images."
 tag: "NEW"
 ---
 
-In this tutorial, you will learn how to deploy a Serverless endpoint running [Stable Diffusion XL](https://stablediffusionxl.com/) (SDXL) on Runpod, submit image generation jobs, monitor their progress, and decode the resulting images.
+In this tutorial, you will learn how to deploy a Serverless endpoint running [Stable Diffusion XL](https://stablediffusionxl.com/) (SDXL) on Brightnode, submit image generation jobs, monitor their progress, and decode the resulting images.
 
-[Runpod's Serverless platform](/serverless/overview) allows you to run AI/ML models in the cloud without managing infrastructure, automatically scaling resources as needed. SDXL is a powerful AI model that generates high-quality images from text prompts.
+[Brightnode's Serverless platform](/serverless/overview) allows you to run AI/ML models in the cloud without managing infrastructure, automatically scaling resources as needed. SDXL is a powerful AI model that generates high-quality images from text prompts.
 
 ## What you'll learn
 
 In this tutorial you'll learn:
 
-- How to deploy a Serverless endpoint using the [Runpod Hub](/hub/overview).
+- How to deploy a Serverless endpoint using the [Brightnode Hub](/hub/overview).
 - How to submit jobs, monitor their progress, and retrieve results.
 - How to generate an image using SDXL.
 - How to decode the base64 output to retrieve the image.
@@ -22,8 +22,8 @@ In this tutorial you'll learn:
 
 Before starting this tutorial you'll need:
 
-- A Runpod account with available credits.
-- A Runpod API key (available in your user settings).
+- A Brightnode account with available credits.
+- A Brightnode API key (available in your user settings).
 - Basic familiarity with command-line tools like `curl`.
 - Python installed on your system (for the image decoding step).
 - The `jq` command-line JSON processor (optional but recommended).
@@ -32,25 +32,25 @@ Before starting this tutorial you'll need:
 Keep your API key secure and never share it publicly. Remember to retrieve your results within 30 minutes, as inputs and outputs are not stored longer than this for privacy protection.
 </Warning>
 
-## Step 1: Deploy a Serverless endpoint using the Runpod Hub
+## Step 1: Deploy a Serverless endpoint using the Brightnode Hub
 
-1. Navigate to the [SDXL listing](https://console.runpod.io/hub/runpod-workers/worker-sdxl) in the Runpod Hub web interface.
+1. Navigate to the [SDXL listing](https://console.brightnode.cloud/hub/Brightnode-workers/worker-sdxl) in the Brightnode Hub web interface.
 2. Click **Deploy [VERSION_NUMBER]**, then click **Create Endpoint** to confirm. This creates a fully configured endpoint with appropriate GPU and worker settings for running SDXL.
 <Note>
-This tutorial uses version 2.1.0 of runpod-workers/worker-sdxl. Later versions may require different configurations or instructions.
+This tutorial uses version 2.1.0 of Brightnode-workers/worker-sdxl. Later versions may require different configurations or instructions.
 </Note>
 3. On the endpoint page, make a note of the **Endpoint ID** . You'll need this value to submit jobs and retrieve results.
 
-Once deployed, your endpoint will be assigned a unique ID (e.g. `32vgrms732dkwi`). Your endpoint URL will follow this pattern: `https://api.runpod.ai/v2/ENDPOINT_ID/run` for asynchronous requests.
+Once deployed, your endpoint will be assigned a unique ID (e.g. `32vgrms732dkwi`). Your endpoint URL will follow this pattern: `https://api.brightnode.ai/v2/ENDPOINT_ID/run` for asynchronous requests.
 
 ## Step 2: Submit your first job
 
 Use the `/run` endpoint to submit an asynchronous job that will generate an image based on your text prompt.
 
-Replace `ENDPOINT_ID` with your actual endpoint ID and `YOUR_API_KEY` with your Runpod API key in the following command:
+Replace `ENDPOINT_ID` with your actual endpoint ID and `YOUR_API_KEY` with your Brightnode API key in the following command:
 
 ```bash
-curl -X POST https://api.runpod.ai/v2/ENDPOINT_ID/run \
+curl -X POST https://api.brightnode.ai/v2/ENDPOINT_ID/run \
     -H 'Content-Type: application/json'                             \
     -H 'Authorization: Bearer YOUR_API_KEY' \
     -d '{"input": {"prompt": "A cute fluffy white dog in the style of a Pixar animation 3D drawing."}}'
@@ -74,7 +74,7 @@ Check your job's status using the `/status` endpoint with the job ID you receive
 Use the following command to check your job's progress, replacing the placeholders (`ENDPOINT_ID`, `JOB_ID`, and `YOUR_API_KEY`) with your actual values:
 
 ```bash
-curl https://api.runpod.ai/v2/ENDPOINT_ID/status/JOB_ID \
+curl https://api.brightnode.ai/v2/ENDPOINT_ID/status/JOB_ID \
 -H 'Content-Type: application/json' \
     -H 'Authorization: Bearer YOUR_API_KEY'
 ```
@@ -121,7 +121,7 @@ The `executionTime` field shows how long the actual image generation took, while
 To save the complete response for processing, use this command:
 
 ```bash
-curl https://api.runpod.ai/v2/ENDPOINT_ID/status/JOB_ID \
+curl https://api.brightnode.ai/v2/ENDPOINT_ID/status/JOB_ID \
     -H 'Content-Type: application/json' \
     -H 'Authorization: Bearer YOUR_API_KEY' | jq . > output.json
 ```
@@ -204,7 +204,7 @@ Image successfully saved as 'generated_image.png'
 Image path: /Users/path/to/your/project/generated_image.png
 ```
 
-Congratulations! You've successfully used Runpod's Serverless platform to generate an AI image using SDXL. You now understand the complete workflow of submitting asynchronous jobs, monitoring their progress, and retrieving results.
+Congratulations! You've successfully used Brightnode's Serverless platform to generate an AI image using SDXL. You now understand the complete workflow of submitting asynchronous jobs, monitoring their progress, and retrieving results.
 
 ## Next steps
 
