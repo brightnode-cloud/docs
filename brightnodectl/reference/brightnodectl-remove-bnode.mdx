@@ -1,0 +1,31 @@
+---
+title: "remove bnode"
+sidebarTitle: "remove bnode"
+---
+
+Permanently delete a Bnode and all its associated data. This action cannot be undone.
+
+<RequestExample>
+```sh Command
+brightnodectl remove bnode <bnodeId>
+```
+</RequestExample>
+
+## Example
+
+Terminate a Bnode by its ID.
+
+```sh
+brightnodectl remove bnode abc123xyz456
+```
+
+## Arguments
+
+<ResponseField name="<bnodeId>" type="string" required>
+The ID of the Bnode to terminate. You can find Bnode IDs using the `brightnodectl get bnode` command.
+</ResponseField>
+
+## Related commands
+
+- [`brightnodectl remove bnodes`](/brightnodectl/reference/brightnodectl-remove-bnodes)
+- [`brightnodectl get bnode`](/brightnodectl/reference/brightnodectl-get-bnode)

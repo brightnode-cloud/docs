@@ -36,24 +36,24 @@
             ]
           },
           {
-            "group": "Nodes",
+            "group": "Bnodes",
             "pages": [
-              "nodes/overview",
-              "nodes/pricing",
-              "nodes/choose-a-node",
-              "nodes/manage-nodes",
+              "bnodes/overview",
+              "bnodes/pricing",
+              "bnodes/choose-a-bnode",
+              "bnodes/manage-bnodes",
               {
-                "group": "Connect to Nodes",
+                "group": "Connect to Bnodes",
                 "pages": [
-                  "nodes/connect-to-a-node",
-                  "nodes/configuration/use-ssh"
+                  "bnodes/connect-to-a-bnode",
+                  "bnodes/configuration/use-ssh"
                 ]
               },
               {
                 "group": "Storage",
                 "pages": [
-                  "nodes/storage/types",
-                  "nodes/storage/transfer-files"
+                  "bnodes/storage/types",
+                  "bnodes/storage/transfer-files"
                 ]
               }
             ]
@@ -80,14 +80,14 @@
             "pages": ["tutorials/introduction/overview"]
           },
           {
-            "group": "Nodes",
+            "group": "Bnodes",
             "pages": [
-              "tutorials/nodes/run-your-first",
-              "tutorials/nodes/comfyui",
-              "tutorials/nodes/run-fooocus",
-              "tutorials/nodes/run-ollama",
-              "tutorials/nodes/build-docker-images",
-              "tutorials/nodes/fine-tune-llm-axolotl"
+              "tutorials/bnodes/run-your-first",
+              "tutorials/bnodes/comfyui",
+              "tutorials/bnodes/run-fooocus",
+              "tutorials/bnodes/run-ollama",
+              "tutorials/bnodes/build-docker-images",
+              "tutorials/bnodes/fine-tune-llm-axolotl"
             ]
           }
         ]

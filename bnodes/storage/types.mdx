@@ -1,0 +1,76 @@
+---
+title: "Storage options"
+description: "Choose the right type of storage for your Bnodes."
+---
+
+Choosing the right type of storage is crucial for optimizing your workloads, whether you need temporary storage for active computations, persistent storage for long-term data retention, or permanent, shareable storage across multiple Bnodes.
+
+This page describes the different types of storage options available for your Bnodes, and when to use each in your workflow.
+
+## Container disk
+
+A container disk houses the operating system and provides temporary storage for a Bnode. It's created when a Bnode is launched and is directly tied to the Bnode's lifecycle.
+
+## Volume disk
+
+A volume disk provides persistent storage that remains available for the duration of the Bnode's lease. It functions like a dedicated hard drive, allowing you to store data that needs to be retained even if the Bnode is stopped or rebooted.
+
+The volume disk is mounted at `/workspace` by default (this will be replaced by the network volume if one is attached). This can be changed by [editing your Bnode configuration](#modifying-storage-capacity).
+
+## Network volume
+
+[Network volumes](/storage/network-volumes) offer persistent storage similar to the volume disk, but with the added benefit that they can be attached to multiple Bnodes, and that they persist independently from the Bnode's lifecycle. This allows you to share and access data across multiple instances or transfer storage between machines, and retain data even after a Bnode is deleted.
+
+When attached to a Bnode, a network volume replaces the volume disk, and by default they are similarly mounted at `/workspace`.
+
+<Note>
+
+Network volumes must be attached during Bnode creation, and cannot be unattached later.
+
+</Note>
+
+## Storage type comparison
+
+This table provides a comparative overview of the storage types available for your Bnodes:
+| Feature           | Container Disk                                                                 | Volume Disk                                                                                       | Network Volume                                                                                                         |
+| :---------------- | :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------- |
+| **Data persistence**       | Volatile (lost on stop/restart)                                             | Persistent (retained until Bnode deletion)                                                       | Permanent (retained independently from Bnode lifecycles)                                                                               |
+| **Lifecycle**         | Tied directly to the Bnode's active session                                         | Tied to the Bnode's lease period                                                                     | Independent, can outlive Bnodes                                                                                          |
+| **Performance**       | Fastest (locally attached)                                                       | Reliable, generally slower than container                                                         | Performance can vary (network dependent)                                                                               |
+| **Capacity**          | Determined by Bnode configuration                                                  | Selectable at creation                                                                            | Selectable and often resizable                                                                                         |
+| **Cost**              | \$0.1/GB/month                                                             | \$0.1/GB/month                                                                      | \$0.07/GB/month                                                                                |
+| **Best for**          | Temporary session data, cache                                                   | Persistent application data, models, datasets                                                    | Shared data, portable storage, collaborative workflows                                                                |
+
+## Choosing the right storage
+
+Here's what you should consider when selecting storage for your Bnodes:
+
+*   **Data persistence needs:** Does your data need to survive Bnode restarts or deletions?
+*   **Performance requirements:** Do your applications require very high-speed I/O, or is standard performance sufficient?
+*   **Data sharing:** Do you need to share data between multiple Bnodes?
+
+## Modifying storage capacity
+
+To update the size of a Bnode's container or volume disk:
+
+1. Navigate to the [Bnode page](https://console.brightnode.cloud/bnode) in the Brightnode console.
+2. Click the three dots to the right of the Bnode you want to modify and select **Edit Bnode**.
+3. Adjust the storage capacity for the container or volume disk. Volume disk size can be increased, but not decreased.
+4. Click **Save** to apply the changes.
+
+<Warning>
+
+Editing a running Bnode will cause it to reset completely, erasing all data that isn't stored in your volume disk/network volume mount directory (`/workspace` by default). 
+
+</Warning>
+
+## Transferring data to another cloud provider
+
+You can upload data from your Bnode to AWS S3, Google Cloud Storage, Azure, Dropbox, and more by clicking the **Cloud Sync** button on the Bnode page. For detailed instructions on connecting to these services, see [Export data](/bnodes/storage/cloud-sync).
+
+## Next steps
+
+*   Learn how to [create a network volume](/storage/network-volumes).
+*   Learn how to [choose the right Bnode](/bnodes/choose-a-bnode) for your workload.
+*   Explore options for [managing your Bnodes](/bnodes/manage-bnodes).
+*   Understand how to create [Bnode templates](/bnodes/templates/overview) for pre-configured environments.

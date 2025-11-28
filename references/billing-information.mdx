@@ -1,23 +1,23 @@
 ---
 title: "Billing information"
-description: "Understand how billing works for Nodes, storage, network volumes, refunds, and spending limits."
+description: "Understand how billing works for Bnodes, storage, network volumes, refunds, and spending limits."
 ---
 
 All billing, including per-hour compute and storage billing, is charged per minute.
 
 ## How billing works
 
-Every Node has an hourly cost based on [GPU type](/references/gpu-types). Your Brightnode credits are charged every minute the Node is running. If you run out of credits, your Nodes are automatically stopped and you'll receive an email notification. Nodes are eventually terminated if you don't refill your credits.
+Every Bnode has an hourly cost based on [GPU type](/references/gpu-types). Your Brightnode credits are charged every minute the Bnode is running. If you run out of credits, your Bnodes are automatically stopped and you'll receive an email notification. Bnodes are eventually terminated if you don't refill your credits.
 
 <Important>
-Brightnode pre-emptively stops all your Nodes when your account balance is projected to cover less than 10 minutes of remaining runtime. This ensures your account retains a small balance to help preserve your data volumes. If your balance is completely drained, all Nodes are subject to deletion. Setting up [automatic payments](https://www.console.brightnode.cloud/user/billing) is recommended to avoid service interruptions.
+Brightnode pre-emptively stops all your Bnodes when your account balance is projected to cover less than 10 minutes of remaining runtime. This ensures your account retains a small balance to help preserve your data volumes. If your balance is completely drained, all Bnodes are subject to deletion. Setting up [automatic payments](https://www.console.brightnode.cloud/user/billing) is recommended to avoid service interruptions.
 </Important>
 
-You must have at least one hour's worth of runtime in your balance to rent a Node at your given spec. If your balance is insufficient, consider renting the Node on Spot, depositing additional funds, or lowering your GPU spec requirements.
+You must have at least one hour's worth of runtime in your balance to rent a Bnode at your given spec. If your balance is insufficient, consider renting the Bnode on Spot, depositing additional funds, or lowering your GPU spec requirements.
 
 ## Storage billing
 
-Storage billing varies depending on Node state. Running Nodes are charged \$0.10 per GB per month for all storage, while stopped Nodes are charged \$0.20 per GB per month for volume storage.
+Storage billing varies depending on Bnode state. Running Bnodes are charged \$0.10 per GB per month for all storage, while stopped Bnodes are charged \$0.20 per GB per month for volume storage.
 
 Storage is charged per minute. You are not charged for storage if the host machine is down or unavailable from the public internet.
 

@@ -15,7 +15,7 @@ Slurm Clusters eliminate the traditional complexity of cluster orchestration by 
 
 - **Zero configuration setup:** Slurm and munge are pre-installed and fully configured.
 - **Instant provisioning:** Clusters deploy rapidly with minimal setup.
-- **Automatic role assignment:** Brightnode automatically designates controller and agent nodes.
+- **Automatic role assignment:** Brightnode automatically designates controller and agent bnodes.
 - **Built-in optimizations:** Pre-configured for optimal NCCL performance.
 - **Full Slurm compatibility:** All standard Slurm commands work out-of-the-box.
 
@@ -32,11 +32,11 @@ If you prefer to manually configure your Slurm deployment, see [Deploy an Instan
 3. Select **Slurm Cluster** from the cluster type dropdown menu.
 4. Configure your cluster specifications:
    - **Cluster name**: Enter a descriptive name for your cluster.
-   - **Node count**: Choose the number of Nodes in your cluster.
+   - **Bnode count**: Choose the number of Bnodes in your cluster.
    - **GPU type**: Select your preferred [GPU type](/references/gpu-types).
    - **Region**: Choose your deployment region.
    - **Network volume** (optional): Add a [network volume](/storage/network-volumes) for persistent/shared storage. If using a network volume, ensure the region matches your cluster region.
-   - **Node template**: Select a [Node template](/nodes/templates/overview) or click **Edit Template** to customize start commands, environment variables, ports, or [container/volume disk](/nodes/storage/types) capacity. 
+   - **Bnode template**: Select a [Bnode template](/bnodes/templates/overview) or click **Edit Template** to customize start commands, environment variables, ports, or [container/volume disk](/bnodes/storage/types) capacity. 
       <Warning>
       Slurm Clusters currently only support official Brightnode Pytorch images. If you deploy using a different image, the Slurm process will not start.
       </Warning>
@@ -46,9 +46,9 @@ If you prefer to manually configure your Slurm deployment, see [Deploy an Instan
 
 Once deployment completes, you can access your cluster from the [Instant Clusters page](https://console.brightnode.cloud/cluster).
 
-From this page you can select a cluster to view it's component nodes, including a label indicating the **Slurm controller** (primary node) and **Slurm agents** (secondary nodes). Expand a node to view details like availability, GPU/storage utilization, and options for connection and management.
+From this page you can select a cluster to view it's component bnodes, including a label indicating the **Slurm controller** (primary bnode) and **Slurm agents** (secondary bnodes). Expand a bnode to view details like availability, GPU/storage utilization, and options for connection and management.
 
-Connect to a node using the **Connect** button, or using any of the [connection methods supported by Nodes](/nodes/connect-to-a-node).
+Connect to a bnode using the **Connect** button, or using any of the [connection methods supported by Bnodes](/bnodes/connect-to-a-bnode).
 
 ## Submit and manage jobs
 
@@ -60,7 +60,7 @@ Check cluster status and available resources:
 sinfo
 ```
 
-Submit a job to the cluster from the Slurm controller node:
+Submit a job to the cluster from the Slurm controller bnode:
 
 ```bash
 sbatch your-job-script.sh
@@ -72,7 +72,7 @@ Monitor job queue and status:
 squeue
 ```
 
-View detailed job information from the Slurm controller node:
+View detailed job information from the Slurm controller bnode:
 
 ```bash
 scontrol show job JOB_ID
@@ -82,7 +82,7 @@ You can find the output of Slurm agents in their individual container logs.
 
 ## Advanced configuration
 
-While Brightnode's Slurm Clusters work out-of-the-box, you can customize your configuration by connecting to the Slurm controller node using the [web terminal or SSH](/nodes/connect-to-a-node).
+While Brightnode's Slurm Clusters work out-of-the-box, you can customize your configuration by connecting to the Slurm controller bnode using the [web terminal or SSH](/bnodes/connect-to-a-bnode).
 
 Access Slurm configuration files in their standard locations:
 - `/etc/slurm/slurm.conf` - Main configuration file.
@@ -94,7 +94,7 @@ Modify these files as needed for your specific requirements.
 
 If you encounter issues with your Slurm Cluster, try the following:
 
-- **Jobs stuck in pending state:** Check resource availability with `sinfo` and ensure requested resources are available. If you need more resources, you can add more nodes to your cluster.
-- **Authentication errors:** Munge is pre-configured, but if issues arise, verify the munge service is running on all nodes.
+- **Jobs stuck in pending state:** Check resource availability with `sinfo` and ensure requested resources are available. If you need more resources, you can add more bnodes to your cluster.
+- **Authentication errors:** Munge is pre-configured, but if issues arise, verify the munge service is running on all bnodes.
 
 For additional support, contact [Brightnode support](https://contact.brightnode.cloud/) with your cluster ID and specific error messages.

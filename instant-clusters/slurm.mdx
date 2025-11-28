@@ -9,7 +9,7 @@ This guide is for advanced users who want to configure and manage their own Slur
 
 </Tip>
 
-This tutorial demonstrates how to configure Brightnode Instant Clusters with [Slurm](https://slurm.schedmd.com/) to manage and schedule distributed workloads across multiple nodes. Slurm is a popular open-source job scheduler that provides a framework for job management, scheduling, and resource allocation in high-performance computing environments. By leveraging Slurm on Brightnode's high-speed networking infrastructure, you can efficiently manage complex workloads across multiple GPUs.
+This tutorial demonstrates how to configure Brightnode Instant Clusters with [Slurm](https://slurm.schedmd.com/) to manage and schedule distributed workloads across multiple bnodes. Slurm is a popular open-source job scheduler that provides a framework for job management, scheduling, and resource allocation in high-performance computing environments. By leveraging Slurm on Brightnode's high-speed networking infrastructure, you can efficiently manage complex workloads across multiple GPUs.
 
 Follow the steps below to deploy a cluster and start running distributed Slurm workloads efficiently.
 
@@ -17,27 +17,27 @@ Follow the steps below to deploy a cluster and start running distributed Slurm w
 
 * You've created a [Brightnode account](https://www.console.brightnode.cloud/home) and funded it with sufficient credits.
 * You have basic familiarity with Linux command line.
-* You're comfortable working with [Nodes](/nodes/overview) and understand the basics of [Slurm](https://slurm.schedmd.com/).
+* You're comfortable working with [Bnodes](/bnodes/overview) and understand the basics of [Slurm](https://slurm.schedmd.com/).
 
 ## Step 1: Deploy an Instant Cluster
 
 1. Open the [Instant Clusters page](https://www.console.brightnode.cloud/cluster) on the Brightnode web interface.
 2. Click **Create Cluster**.
-3. Use the UI to name and configure your cluster. For this walkthrough, keep **Node Count** at **2** and select the option for **16x H100 SXM** GPUs. Keep the **Node Template** at its default setting (Brightnode PyTorch).
+3. Use the UI to name and configure your cluster. For this walkthrough, keep **Bnode Count** at **2** and select the option for **16x H100 SXM** GPUs. Keep the **Bnode Template** at its default setting (Brightnode PyTorch).
 4. Click **Deploy Cluster**. You should be redirected to the Instant Clusters page after a few seconds.
 
-## Step 2: Clone demo and install Slurm on each Node
+## Step 2: Clone demo and install Slurm on each Bnode
 
-To connect to a Node:
+To connect to a Bnode:
 
-1. On the Instant Clusters page, click on the cluster you created to expand the list of Nodes.
-2. Click on a Node, for example `CLUSTERNAME-node-0`, to expand the Node.
+1. On the Instant Clusters page, click on the cluster you created to expand the list of Bnodes.
+2. Click on a Bnode, for example `CLUSTERNAME-bnode-0`, to expand the Bnode.
 
-**On each Node:**
+**On each Bnode:**
 
 1. Click **Connect**, then click **Web Terminal**.
 
-2. In the terminal that opens, run this command to clone the Slurm demo files into the Node's main directory:
+2. In the terminal that opens, run this command to clone the Slurm demo files into the Bnode's main directory:
 
    ```bash
    git clone https://github.com/pandyamarut/slurm_example.git && cd slurm_example
@@ -53,42 +53,42 @@ To connect to a Node:
 
 The repository contains several essential scripts for setting up Slurm. Let's examine what each script does:
 
-* `create_gres_conf.sh`: Generates the Slurm Generic Resource (GRES) configuration file that defines GPU resources for each node.
-* `create_slurm_conf.sh`: Creates the main Slurm configuration file with cluster settings, node definitions, and partition setup.
+* `create_gres_conf.sh`: Generates the Slurm Generic Resource (GRES) configuration file that defines GPU resources for each bnode.
+* `create_slurm_conf.sh`: Creates the main Slurm configuration file with cluster settings, bnode definitions, and partition setup.
 * `install.sh`: The primary installation script that sets up MUNGE authentication, configures Slurm, and prepares the environment.
 * `test_batch.sh`: A sample Slurm job script for testing cluster functionality.
 
-## Step 4: Install Slurm on each Node
+## Step 4: Install Slurm on each Bnode
 
-Now run the installation script **on each Node**, replacing `[MUNGE_SECRET_KEY]` with any secure random string (like a password). The secret key is used for authentication between nodes, and must be identical across all Nodes in your cluster.
+Now run the installation script **on each Bnode**, replacing `[MUNGE_SECRET_KEY]` with any secure random string (like a password). The secret key is used for authentication between bnodes, and must be identical across all Bnodes in your cluster.
 
 ```bash
-./install.sh "[MUNGE_SECRET_KEY]" node-0 node-1 10.65.0.2 10.65.0.3
+./install.sh "[MUNGE_SECRET_KEY]" bnode-0 bnode-1 10.65.0.2 10.65.0.3
 ```
 
-This script automates the complex process of configuring a two-node Slurm cluster with GPU support, handling everything from system dependencies to authentication and resource configuration. It implements the necessary setup for both the primary (i.e. master/control) and secondary (i.e compute/worker) nodes.
+This script automates the complex process of configuring a two-bnode Slurm cluster with GPU support, handling everything from system dependencies to authentication and resource configuration. It implements the necessary setup for both the primary (i.e. master/control) and secondary (i.e compute/worker) bnodes.
 
 ## Step 5: Start Slurm services
 
 <Tip>
 
-If you're not sure which Node is the primary node, run the command `echo $HOSTNAME` on the web terminal of each Node and look for `node-0`.
+If you're not sure which Bnode is the primary bnode, run the command `echo $HOSTNAME` on the web terminal of each Bnode and look for `bnode-0`.
 
 </Tip>
 
-1. **On the primary node** (`node-0`), run both Slurm services:
+1. **On the primary bnode** (`bnode-0`), run both Slurm services:
 
    ```bash
    slurmctld -D
    ```
 
-2. Use the web interface to open a second terminal **on the primary node** and run:
+2. Use the web interface to open a second terminal **on the primary bnode** and run:
 
    ```bash
    slurmd -D
    ```
 
-3. **On the secondary node** (`node-1`), run:
+3. **On the secondary bnode** (`bnode-1`), run:
 
    ```bash
    slurmd -D
@@ -98,31 +98,31 @@ After running these commands, you should see output indicating that the services
 
 ## Step 6: Test your Slurm Cluster
 
-1. Run this command **on the primary node** (`node-0`) to check the status of your nodes:
+1. Run this command **on the primary bnode** (`bnode-0`) to check the status of your bnodes:
 
    ```bash
    sinfo
    ```
 
-   You should see output showing both nodes in your cluster, with a state of "idle" if everything is working correctly.
+   You should see output showing both bnodes in your cluster, with a state of "idle" if everything is working correctly.
 
-2. Run this command to test GPU availability across both nodes:
+2. Run this command to test GPU availability across both bnodes:
 
    ```bash
-   srun --nodes=2 --gres=gpu:1 nvidia-smi -L
+   srun --bnodes=2 --gres=gpu:1 nvidia-smi -L
    ```
 
-   This command should list all GPUs across both nodes.
+   This command should list all GPUs across both bnodes.
 
 ## Step 7: Submit the Slurm job script
 
-Run the following command **on the primary node** (`node-0`) to submit the test job script and confirm that your cluster is working properly:
+Run the following command **on the primary bnode** (`bnode-0`) to submit the test job script and confirm that your cluster is working properly:
 
 ```bash
 sbatch test_batch.sh
 ```
 
-Check the output file created by the test (`test_simple_[JOBID].out`) and look for the hostnames of both nodes. This confirms that the job ran successfully across the cluster.
+Check the output file created by the test (`test_simple_[JOBID].out`) and look for the hostnames of both bnodes. This confirms that the job ran successfully across the cluster.
 
 ## Step 8: Clean up
 
@@ -139,6 +139,6 @@ You can monitor your cluster usage and spending using the **Billing Explorer** a
 Now that you've successfully deployed and tested a Slurm cluster on Brightnode, you can:
 
 * **Adapt your own distributed workloads** to run using Slurm job scripts.
-* **Scale your cluster** by adjusting the number of Nodes to handle larger models or datasets.
+* **Scale your cluster** by adjusting the number of Bnodes to handle larger models or datasets.
 * **Try different frameworks** like [Axolotl](/instant-clusters/axolotl) for fine-tuning large language models.
 * **Optimize performance** by experimenting with different distributed training strategies.

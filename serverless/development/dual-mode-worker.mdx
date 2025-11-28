@@ -1,7 +1,7 @@
 ---
 title: "Build a dual-mode Serverless worker"
 sidebarTitle: "Build a dual-mode worker"
-description: "Create a flexible Serverless worker that supports a Node-first development workflow."
+description: "Create a flexible Serverless worker that supports a Bnode-first development workflow."
 ---
 
 Developing machine learning and AI applications often requires powerful GPUs, making local development of API endpoints challenging. A typical development workflow for [Serverless](/serverless/overview) would be to write your handler code, deploy it directly to a Serverless endpoint, send endpoint requests to test, debug using worker logs, and repeat.
@@ -12,11 +12,11 @@ This can have signifcant drawbacks, such as:
 *   **Limited visibility**: Logs and errors are not always easy to debug, especially when running in a remote environment.
 *   **Resource constraints**: Your local machine may not have the necessary resources to test your application.
 
-This tutorial shows how to build a "Node-first" development environment: creating a flexible, dual-mode Docker image that can be deployed as either a Node or a Serverless worker.
+This tutorial shows how to build a "Bnode-first" development environment: creating a flexible, dual-mode Docker image that can be deployed as either a Bnode or a Serverless worker.
 
-Using this method, you'll leverage a [Node](/nodes/overview)—a GPU instance ideal for interactive development, with tools like Jupyter Notebooks and direct IDE integration—as your cloud-based development machine. The Node will be deployed with a flexible Docker base, allowing the same container image to be seamlessly deployed to a Serverless endpoint.
+Using this method, you'll leverage a [Bnode](/bnodes/overview)—a GPU instance ideal for interactive development, with tools like Jupyter Notebooks and direct IDE integration—as your cloud-based development machine. The Bnode will be deployed with a flexible Docker base, allowing the same container image to be seamlessly deployed to a Serverless endpoint.
 
-This workflow lets you develop and thoroughly test your application using a containerized Node environment, ensuring it works correctly. Then, when you're ready to deploy to production, you can deploy it instantly to Serverless.
+This workflow lets you develop and thoroughly test your application using a containerized Bnode environment, ensuring it works correctly. Then, when you're ready to deploy to production, you can deploy it instantly to Serverless.
 
 Follow the steps below to create a worker image that leverages this flexibility, allowing for faster iteration and more robust deployments.
 
@@ -34,8 +34,8 @@ In this tutorial you'll learn how to:
 *   Create a handler file (`handler.py`) that adapts its behavior based on a user-specified environment variable.
 *   Write a startup script (`start.sh`) to manage different operational modes.
 *   Build a Docker image designed for flexibility.
-*   Understand and utilize the "Node-first" development workflow.
-*   Deploy and test your worker in both Node and Serverless environments.
+*   Understand and utilize the "Bnode-first" development workflow.
+*   Deploy and test your worker in both Bnode and Serverless environments.
 
 ## Requirements
 
@@ -64,7 +64,7 @@ This creates:
 
 ## Step 2: Create the `handler.py` file
 
-This Python script will contain your core logic. It will check for a user-specified environment variable `MODE_TO_RUN` to determine whether to run in Node or Serverless mode.
+This Python script will contain your core logic. It will check for a user-specified environment variable `MODE_TO_RUN` to determine whether to run in Bnode or Serverless mode.
 
 Add the following code to `handler.py`:
 
@@ -74,7 +74,7 @@ import asyncio
 import brightnode
 
 # Use the MODEL environment variable; fallback to a default if not set
-mode_to_run = os.getenv("MODE_TO_RUN", "node")
+mode_to_run = os.getenv("MODE_TO_RUN", "bnode")
 model_length_default = 25000
 
 print("------- ENVIRONMENT VARIABLES -------")
@@ -85,7 +85,7 @@ async def handler(event):
     inputReq = event.get("input", {})
     return inputReq
 
-if mode_to_run == "node":
+if mode_to_run == "bnode":
     async def main():
         prompt = "Hello World"
         requestObject = {"input": {"prompt": prompt}}
@@ -103,10 +103,10 @@ else:
 
 Key features:
 
-*   `MODE_TO_RUN = os.getenv("MODE_TO_RUN", "node")`: Reads the mode from an environment variable, defaulting to `node`.
+*   `MODE_TO_RUN = os.getenv("MODE_TO_RUN", "bnode")`: Reads the mode from an environment variable, defaulting to `bnode`.
 *   `async def handler(event)`: Your core logic.
-*   `if mode_to_run == "node" ... else`: This conditional controls what happens when the script is executed directly.
-    *   In `node` mode, it runs a sample test call to your `handler` function, allowing for quick iteration.
+*   `if mode_to_run == "bnode" ... else`: This conditional controls what happens when the script is executed directly.
+    *   In `bnode` mode, it runs a sample test call to your `handler` function, allowing for quick iteration.
     *   In `serverless`" mode, it starts the Brightnode Serverless worker.
 
 ## Step 3: Create the `start.sh` script
@@ -186,7 +186,7 @@ call_python_handler() {
 
 start_nginx
 
-echo "Node Started"
+echo "Bnode Started"
 
 setup_ssh
 
@@ -195,12 +195,12 @@ case $MODE_TO_RUN in
         echo "Running in serverless mode"
         call_python_handler
         ;;
-    node)
-        echo "Running in node mode"
+    bnode)
+        echo "Running in bnode mode"
         start_jupyter
         ;;
     *)
-        echo "Invalid MODE_TO_RUN value: $MODE_TO_RUN. Expected 'serverless', 'node', or 'both'."
+        echo "Invalid MODE_TO_RUN value: $MODE_TO_RUN. Expected 'serverless', 'bnode', or 'both'."
         exit 1
         ;;
 esac
@@ -215,7 +215,7 @@ sleep infinity
 Key features:
 *   `case $MODE_TO_RUN in ... esac`: This structure directs the startup based on the mode.
 *   `serverless` mode: Executes `handler.py`, which then starts the Brightnode Serverless worker. `exec` replaces the shell process with the Python process.
-*   `node` mode: Starts up the JupyterLab server for Node development, then runs `sleep infinity` to keep the container alive so you can connect to it (e.g., via SSH or `docker exec`). You would then manually run `python /app/handler.py` inside the Node to test your handler logic.
+*   `bnode` mode: Starts up the JupyterLab server for Bnode development, then runs `sleep infinity` to keep the container alive so you can connect to it (e.g., via SSH or `docker exec`). You would then manually run `python /app/handler.py` inside the Bnode to test your handler logic.
 
 ## Step 4: Create the `Dockerfile`
 
@@ -230,8 +230,8 @@ FROM Brightnode/pytorch:2.0.1-py3.10-cuda11.8.0-devel-ubuntu22.04
 # Environment variables
 ENV PYTHONUNBUFFERED=1 
 
-# Supported modes: node, serverless
-ARG MODE_TO_RUN=node
+# Supported modes: bnode, serverless
+ARG MODE_TO_RUN=bnode
 ENV MODE_TO_RUN=$MODE_TO_RUN
 
 # Set up the working directory
@@ -280,7 +280,7 @@ RUN chmod +x start.sh
 # Make sure that the start.sh is in the path
 RUN ls -la $WORKSPACE_DIR/start.sh
 
-# depot build -t justinBrightnode/node-server-base:1.0 . --push --platform linux/amd64
+# depot build -t justinBrightnode/bnode-server-base:1.0 . --push --platform linux/amd64
 CMD $WORKSPACE_DIR/start.sh
 ```
 Key features:
@@ -289,7 +289,7 @@ Key features:
 *   `WORKDIR $WORKSPACE_DIR`: Sets the working directory to the value of `WORKSPACE_DIR`.
 *   `COPY requirements.txt ./requirements.txt` and `RUN pip install ...`: Installs Python dependencies.
 *   `COPY . .`: Copies all application files into the workspace directory.
-*   `ENV MODE_TO_RUN="node"`: Sets the default operational mode to "node". This can be overridden at runtime.
+*   `ENV MODE_TO_RUN="bnode"`: Sets the default operational mode to "bnode". This can be overridden at runtime.
 *   `CMD ["$WORKSPACE_DIR/start.sh"]`: Specifies `start.sh` as the command to run when the container starts.
 
 ## Step 5: Build and push your Docker image
@@ -324,30 +324,30 @@ Now, build your Docker image and push it to a container registry like Docker Hub
   </Step>
 </Steps>
 
-## Step 6: Testing in Node mode
+## Step 6: Testing in Bnode mode
 
-Now that you've finished building our Docker image, let's explore how you would use the Node-first development workflow in practice.
+Now that you've finished building our Docker image, let's explore how you would use the Bnode-first development workflow in practice.
 
-Deploy the image to a Node by following these steps:
+Deploy the image to a Bnode by following these steps:
 
-1. Go to the [Nodes page](https://www.brightnode.cloud/console/nodes) in the Brightnode console and click **Create Node**.
-2. Select an appropriate GPU for your workload (see [Choose a Node](/nodes/choose-a-node) for guidance).
-3. Under **Node Template**, select **Edit Template**.
+1. Go to the [Bnodes page](https://www.brightnode.cloud/console/bnodes) in the Brightnode console and click **Create Bnode**.
+2. Select an appropriate GPU for your workload (see [Choose a Bnode](/bnodes/choose-a-bnode) for guidance).
+3. Under **Bnode Template**, select **Edit Template**.
 4. Under **Container Image**, enter `[YOUR_USERNAME]/dual-mode-worker:latest`.
-5. Under **Public Environment Variables**, select **Add environment variable**. Set variable key to **`MODE_TO_RUN`** and the value to **`node`**.
-6. Click **Set Overrides**, then deploy your Node.
+5. Under **Public Environment Variables**, select **Add environment variable**. Set variable key to **`MODE_TO_RUN`** and the value to **`bnode`**.
+6. Click **Set Overrides**, then deploy your Bnode.
 
-After [connecting to the Node](/nodes/connect-to-a-node), navigate to `/app` and run your handler directly:
+After [connecting to the Bnode](/bnodes/connect-to-a-bnode), navigate to `/app` and run your handler directly:
 
 ```sh
 python handler.py
 ```
 
-This will execute the Node-specific test harness in your `handler.py`, giving you immediate feedback. You can edit `handler.py` within the Node and re-run it for rapid iteration.
+This will execute the Bnode-specific test harness in your `handler.py`, giving you immediate feedback. You can edit `handler.py` within the Bnode and re-run it for rapid iteration.
 
 ## Step 7: Deploy to a Serverless endpoint
 
-Once you're confident with your `handler.py` logic tested in Node mode, you're ready to deploy your dual-mode worker to a Serverless endpoint.
+Once you're confident with your `handler.py` logic tested in Bnode mode, you're ready to deploy your dual-mode worker to a Serverless endpoint.
 
 1. Go to the [Serverless section](https://www.brightnode.cloud/console/serverless) of the Brightnode console.
 2. Click **New Endpoint**.
@@ -389,17 +389,17 @@ After a few moments for initialization and processing, you should see output sim
 }
 ```
 
-## Explore the Node-first development workflow
+## Explore the Bnode-first development workflow
 
-Congratulations! You've successfully built, deployed, and tested a dual-mode Serverless worker. Now, let's explore the recommended iteration process for a Node-first development workflow:
+Congratulations! You've successfully built, deployed, and tested a dual-mode Serverless worker. Now, let's explore the recommended iteration process for a Bnode-first development workflow:
 
 <Steps>
-  <Step title="Develop using Node mode">
-    1. Deploy your initial Docker image to a Brightnode Node, ensuring `MODE_TO_RUN` is set to `node` (or rely on the Dockerfile default).
-    2. [Connect to your Node](/nodes/connect-to-a-node) (via SSH or web terminal).
+  <Step title="Develop using Bnode mode">
+    1. Deploy your initial Docker image to a Brightnode Bnode, ensuring `MODE_TO_RUN` is set to `bnode` (or rely on the Dockerfile default).
+    2. [Connect to your Bnode](/bnodes/connect-to-a-bnode) (via SSH or web terminal).
     3. Navigate to the `/app` directory.
     4. As you develop, install any necessary Python packages (`pip install [PACKAGE_NAME]`) or system dependencies (`apt-get install [PACKAGE_NAME]`).
-    5. Iterate on your `handler.py` script. Test your changes frequently by running `python handler.py` directly in the Node's terminal. This will execute the test harness you defined in the `elif MODE_TO_RUN == "node":` block, giving you immediate feedback.
+    5. Iterate on your `handler.py` script. Test your changes frequently by running `python handler.py` directly in the Bnode's terminal. This will execute the test harness you defined in the `elif MODE_TO_RUN == "bnode":` block, giving you immediate feedback.
   </Step>
 
   <Step title="Update your Docker image">
@@ -425,7 +425,7 @@ Congratulations! You've successfully built, deployed, and tested a dual-mode Ser
   </Step>
 </Steps>
 
-This iterative loop—write your handler, update the Docker image, test in Node mode, then deploy to Serverless—allows for rapid development and debugging of your Serverless workers.
+This iterative loop—write your handler, update the Docker image, test in Bnode mode, then deploy to Serverless—allows for rapid development and debugging of your Serverless workers.
 
 ## Next steps
 

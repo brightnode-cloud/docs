@@ -1,9 +1,9 @@
 ---
-title: "Manage Nodes with dstack on Brightnode"
+title: "Manage Bnodes with dstack on Brightnode"
 sidebarTitle: "dstack"
 ---
 
-[dstack](https://dstack.ai/) is an open-source tool that simplifies the orchestration of Nodes for AI and ML workloads. By defining your application and resource requirements in YAML configuration files, it automates the provisioning and management of cloud resources on Brightnode, allowing you to focus on your application logic rather than the infrastructure.
+[dstack](https://dstack.ai/) is an open-source tool that simplifies the orchestration of Bnodes for AI and ML workloads. By defining your application and resource requirements in YAML configuration files, it automates the provisioning and management of cloud resources on Brightnode, allowing you to focus on your application logic rather than the infrastructure.
 
 In this guide, we'll walk through setting up [dstack](https://dstack.ai/) with Brightnode to deploy [vLLM](https://github.com/vllm-project/vllm). We'll serve the `meta-llama/Llama-3.1-8B-Instruct` model from Hugging Face using a Python environment.
 
@@ -335,13 +335,13 @@ dstack apply
 
   Type `y` and press `Enter` to confirm.
 
-* The `ports` configuration provides port forwarding from the deployed node to `localhost`, allowing you to access the deployed vLLM via `localhost:8000`.
+* The `ports` configuration provides port forwarding from the deployed bnode to `localhost`, allowing you to access the deployed vLLM via `localhost:8000`.
 
 3. **Monitor the Deployment**
 
 * After executing `dstack apply`, you'll see all the steps that dstack performs:
 
-  * Provisioning the node on Brightnode.
+  * Provisioning the bnode on Brightnode.
   * Downloading the Docker image.
   * Installing required packages.
   * Downloading the model from Hugging Face.
@@ -368,7 +368,7 @@ dstack apply
 
 1. **Access the Service**
 
-Since the `ports` configuration forwards port `8000` from the deployed node to `localhost`, you can access the vLLM server via `http://localhost:8000`.
+Since the `ports` configuration forwards port `8000` from the deployed bnode to `localhost`, you can access the vLLM server via `http://localhost:8000`.
 
 2. **Test the Service Using `curl`**
 
@@ -382,7 +382,7 @@ curl -X POST http://localhost:8000/v1/chat/completions \
      -d '{
           "model": "meta-llama/Llama-3.1-8B-Instruct",
           "messages": [
-             {"role": "system", "content": "You are Nodedy, a helpful assistant."},
+             {"role": "system", "content": "You are Bnodedy, a helpful assistant."},
              {"role": "user", "content": "What is your name?"}
           ],
           "temperature": 0,
@@ -399,7 +399,7 @@ curl -X POST http://localhost:8000/v1/chat/completions \
      -d '{
           "model": "meta-llama/Llama-3.1-8B-Instruct",
           "messages": [
-             {"role": "system", "content": "You are Nodedy, a helpful assistant."},
+             {"role": "system", "content": "You are Bnodedy, a helpful assistant."},
              {"role": "user", "content": "What is your name?"}
           ],
           "temperature": 0,
@@ -413,7 +413,7 @@ curl -X POST http://localhost:8000/v1/chat/completions \
 **Command Prompt:**
 
 ```bash
-curl -X POST http://localhost:8000/v1/chat/completions -H "Content-Type: application/json" -d "{ \"model\": \"meta-llama/Llama-3.1-8B-Instruct\", \"messages\": [ {\"role\": \"system\", \"content\": \"You are Nodedy, a helpful assistant.\"}, {\"role\": \"user\", \"content\": \"What is your name?\"} ], \"temperature\": 0, \"max_tokens\": 150 }"
+curl -X POST http://localhost:8000/v1/chat/completions -H "Content-Type: application/json" -d "{ \"model\": \"meta-llama/Llama-3.1-8B-Instruct\", \"messages\": [ {\"role\": \"system\", \"content\": \"You are Bnodedy, a helpful assistant.\"}, {\"role\": \"user\", \"content\": \"What is your name?\"} ], \"temperature\": 0, \"max_tokens\": 150 }"
 ```
 
 **PowerShell:**
@@ -421,7 +421,7 @@ curl -X POST http://localhost:8000/v1/chat/completions -H "Content-Type: applica
 ```bash
 curl.exe -Method Post http://localhost:8000/v1/chat/completions `
   -Headers @{ "Content-Type" = "application/json" } `
-  -Body '{ "model": "meta-llama/Llama-3.1-8B-Instruct", "messages": [ {"role": "system", "content": "You are Nodedy, a helpful assistant."}, {"role": "user", "content": "What is your name?"} ], "temperature": 0, "max_tokens": 150 }'
+  -Body '{ "model": "meta-llama/Llama-3.1-8B-Instruct", "messages": [ {"role": "system", "content": "You are Bnodedy, a helpful assistant."}, {"role": "user", "content": "What is your name?"} ], "temperature": 0, "max_tokens": 150 }'
 ```
 
 </Tab>
@@ -443,7 +443,7 @@ You should receive a JSON response similar to the following:
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "My name is Nodedy, and I'm here to assist you with any questions or information you may need.",
+        "content": "My name is Bnodedy, and I'm here to assist you with any questions or information you may need.",
         "tool_calls": []
       },
       "logprobs": null,
@@ -513,7 +513,7 @@ size: 100GB
 
 <Info>
 
-The `region` ties your volume to a specific region, which then also ties your Node to that same region.
+The `region` ties your volume to a specific region, which then also ties your Bnode to that same region.
 
 </Info>
 
@@ -545,4 +545,4 @@ For more information on using volumes with Brightnode, refer to the [dstack blog
 
 ## Conclusion
 
-By leveraging [dstack](https://dstack.ai/) on Brightnode, you can efficiently deploy and manage Nodes, accelerating your development workflow and reducing operational overhead.
+By leveraging [dstack](https://dstack.ai/) on Brightnode, you can efficiently deploy and manage Bnodes, accelerating your development workflow and reducing operational overhead.

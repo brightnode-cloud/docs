@@ -6,7 +6,7 @@ icon: "party-horn"
 
 # Setting up CopyParty on Brightnode
 
-CopyParty provides a webbased GUI that makes file management simple on Brightnode instances. With its intuitive interface, you can browse directories, upload/download files, preview images and videos, and manage your Node's filesystem without complex command-line operations.
+CopyParty provides a webbased GUI that makes file management simple on Brightnode instances. With its intuitive interface, you can browse directories, upload/download files, preview images and videos, and manage your Bnode's filesystem without complex command-line operations.
 
 ## About CopyParty
 
@@ -21,8 +21,8 @@ Check the repository for additional features, updates, and documentation: [githu
 ## Requirements
 
 To use CopyParty on Brightnode, you need:
-- **Terminal access to your Node** - Either through web terminal or Jupyter Labs terminal.
-- An available HTTP port on your Node.
+- **Terminal access to your Bnode** - Either through web terminal or Jupyter Labs terminal.
+- An available HTTP port on your Bnode.
 - A supported OS in the Docker base image.
 
 <Note>
@@ -34,24 +34,24 @@ CopyParty has been tested on Ubuntu-based Docker images and Brightnode Official 
 You can access the terminal in two ways:
 
 #### Option 1: Web terminal
-If you see this option when clicking "Connect" on your Node page, you have web terminal access:
+If you see this option when clicking "Connect" on your Bnode page, you have web terminal access:
 ![Web Terminal Access](webterminal.png)
 
 #### Option 2: JupyterLab terminal
-If you have JupyterLab installed on your Node, you can access the terminal there:
+If you have JupyterLab installed on your Bnode, you can access the terminal there:
 ![JupyterLab Terminal](labsterminal.png)
 
 ## Installation steps
 
-### Step 1: Access your Node settings
+### Step 1: Access your Bnode settings
 
-Navigate to your Node page and locate the settings:
-![Edit Node Settings](edit.png)
+Navigate to your Bnode page and locate the settings:
+![Edit Bnode Settings](edit.png)
 
 ### Step 2: Add an HTTP port
 
 <Warning>
-**Adding a new port will restart your Node and erase any data not stored in `/workspace`**
+**Adding a new port will restart your Bnode and erase any data not stored in `/workspace`**
 
 Before proceeding, ensure all important files are saved in `/workspace` or backed up elsewhere. Any installed libraries or files outside of `/workspace` will be lost.
 </Warning>
@@ -131,7 +131,7 @@ To download files:
 
 ## Tips and best practices
 
-1. **Data Persistence**: Always store important files in `/workspace` to survive node restarts
+1. **Data Persistence**: Always store important files in `/workspace` to survive bnode restarts
 2. **Port Selection**: Choose a port that doesn't conflict with other services (avoid 8888 if using Jupyter)
 3. **Large Files**: CopyParty handles large file transfers well, making it ideal for model weights and datasets
 
@@ -146,6 +146,6 @@ While CopyParty provides an excellent web-based solution, Brightnode also suppor
 - Direct SSH/SCP transfers (if SSH is enabled)
 - JupyterLab file browser
 - [Brightnode CLI](/brightnodectl/overview) tool
-- [Cloud storage integration](/nodes/storage/cloud-sync) (S3, Google Drive, etc.)
+- [Cloud storage integration](/bnodes/storage/cloud-sync) (S3, Google Drive, etc.)
 
 Choose the method that best fits your workflow and security requirements.

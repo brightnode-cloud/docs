@@ -142,7 +142,7 @@ mutation {
 curl --request POST \
      --header 'content-type: application/json' \
      --url 'https://api.brightnode.cloud/graphql?api_key=${YOUR_API_KEY}' \
-     --data '{"query": "query Endpoints { myself { endpoints { gpuIds id idleTimeout locations name networkVolumeId nodes { desiredStatus } scalerType scalerValue templateId workersMax workersMin } serverlessDiscount { discountFactor type expirationDate } } }"}'
+     --data '{"query": "query Endpoints { myself { endpoints { gpuIds id idleTimeout locations name networkVolumeId bnodes { desiredStatus } scalerType scalerValue templateId workersMax workersMin } serverlessDiscount { discountFactor type expirationDate } } }"}'
 ```
 
 </Tab>
@@ -158,7 +158,7 @@ query Endpoints {
       locations
       name
       networkVolumeId
-      nodes {
+      bnodes {
         desiredStatus
       }
       scalerType
@@ -191,7 +191,7 @@ query Endpoints {
           "locations": "US",
           "name": "Generated Endpoint -fb",
           "networkVolumeId": null,
-          "nodes": [],
+          "bnodes": [],
           "scalerType": "QUEUE_DELAY",
           "scalerValue": 4,
           "templateId": "xkhgg72fuo",

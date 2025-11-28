@@ -4,7 +4,7 @@ sidebarTitle: "Overview"
 description: "Discover, deploy, and share preconfigured AI repos using the Brightnode Hub."
 ---
 
-The [Brightnode Hub](https://console.brightnode.cloud/hub) is a centralized repository that enables users to discover, share, and deploy preconfigured AI repos optimized for Brightnode's [Serverless](/serverless/overview/) and [Node](/nodes/overview) infrastructure. It offers a catalog of vetted, open-source repositories that can be deployed with minimal setup, creating a collaborative ecosystem for AI developers and users.
+The [Brightnode Hub](https://console.brightnode.cloud/hub) is a centralized repository that enables users to discover, share, and deploy preconfigured AI repos optimized for Brightnode's [Serverless](/serverless/overview/) and [Bnode](/bnodes/overview) infrastructure. It offers a catalog of vetted, open-source repositories that can be deployed with minimal setup, creating a collaborative ecosystem for AI developers and users.
 
 Whether you're a developer looking to share your work or a user seeking preconfigured solutions, the Hub makes discovering and deploying AI projects seamless and efficient.
 
@@ -53,7 +53,7 @@ The Hub operates by integrating several key components:
 
 ## Deploy a repo from the Hub
 
-You can deploy a repo from the Hub in seconds, choosing between Serverless endpoints or Nodes based on your needs:
+You can deploy a repo from the Hub in seconds, choosing between Serverless endpoints or Bnodes based on your needs:
 
 ### Deploy as a Serverless endpoint
 
@@ -65,17 +65,17 @@ You can deploy a repo from the Hub in seconds, choosing between Serverless endpo
 
 Within minutes you'll have access to a new Serverless endpoint, ready for integration with your applications or experimentation.
 
-### Deploy as a Node
+### Deploy as a Bnode
 
 For users with consistent, predictable workloads who prioritize cost-effectiveness over automatic scaling:
 
 1. Navigate to the [Hub page](https://www.console.brightnode.cloud/hub) in the Brightnode console.
 2. Browse the collection and select a repo that matches your needs.
 3. Click the **Deploy** button in the top-right of the repo page.
-4. In the modal that opens, under **Deployment Type**, select **Node**.
-5. Click **Deploy Node**
+4. In the modal that opens, under **Deployment Type**, select **Bnode**.
+5. Click **Deploy Bnode**
 
-After the Node deploys, you can find a sample Python request for the Node in the Node details pane, which you can access from the [Nodes section](https://www.console.brightnode.cloud/nodes) of the Brightnode console. The API interface is identical to the Serverless implementation, using the same endpoints and authentication methods, but using the Node's internal IP address as a proxy. For example:
+After the Bnode deploys, you can find a sample Python request for the Bnode in the Bnode details pane, which you can access from the [Bnodes section](https://www.console.brightnode.cloud/bnodes) of the Brightnode console. The API interface is identical to the Serverless implementation, using the same endpoints and authentication methods, but using the Bnode's internal IP address as a proxy. For example:
 
 ```python
 import requests
@@ -92,7 +92,7 @@ data = {
 response = requests.post('https://POD_ID-80.proxy.brightnode.net/v2/LOCAL/run', headers=headers, json=data)
 ```
 
-Where `POD_ID` is your Node's actual ID.
+Where `POD_ID` is your Bnode's actual ID.
 
 ## Publish your own repo
 

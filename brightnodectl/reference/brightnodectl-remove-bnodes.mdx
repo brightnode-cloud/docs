@@ -1,0 +1,37 @@
+---
+title: "remove bnodes"
+sidebarTitle: "remove bnodes"
+---
+
+Terminate multiple Bnodes that share the same name. This is useful for cleaning up groups of Bnodes created with the `create bnodes` command.
+
+<RequestExample>
+```sh Command
+brightnodectl remove bnodes <name> [flags]
+```
+</RequestExample>
+
+## Example
+
+Terminate all Bnodes named "training-worker":
+
+```sh
+brightnodectl remove bnodes training-worker
+```
+
+## Arguments
+
+<ResponseField name="<name>" type="string" required>
+The name of the Bnodes to terminate. All Bnodes with this exact name will be removed.
+</ResponseField>
+
+## Flags
+
+<ResponseField name="--bnodeCount" type="integer">
+The number of Bnodes with the specified name to terminate. This limits the removal to a specific count rather than removing all matching Bnodes.
+</ResponseField>
+
+## Related commands
+
+- [`brightnodectl remove bnode`](/brightnodectl/reference/brightnodectl-remove-bnode)
+- [`brightnodectl get bnode`](/brightnodectl/reference/brightnodectl-get-bnode)

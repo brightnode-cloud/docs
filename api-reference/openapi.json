@@ -25,8 +25,8 @@
       "description": "This documentation page."
     },
     {
-      "name": "nodes",
-      "description": "Manage Nodes."
+      "name": "bnodes",
+      "description": "Manage Bnodes."
     },
     {
       "name": "endpoints",
@@ -38,7 +38,7 @@
     },
     {
       "name": "templates",
-      "description": "Manage Node and Serverless templates."
+      "description": "Manage Bnode and Serverless templates."
     },
     {
       "name": "container registry auths",
@@ -100,20 +100,20 @@
         "operationId": "GetDocs"
       }
     },
-    "/nodes": {
+    "/bnodes": {
       "post": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "Create a new Node",
-        "description": "Creates a new [Node](#/components/schemas/Node) and optionally deploys it.",
-        "operationId": "CreateNode",
+        "summary": "Create a new Bnode",
+        "description": "Creates a new [Bnode](#/components/schemas/Bnode) and optionally deploys it.",
+        "operationId": "CreateBnode",
         "requestBody": {
-          "description": "Input for Node creation.",
+          "description": "Input for Bnode creation.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NodeCreateInput"
+                "$ref": "#/components/schemas/BnodeCreateInput"
               }
             }
           },
@@ -121,11 +121,11 @@
         },
         "responses": {
           "201": {
-            "description": "Node successfully created.",
+            "description": "Bnode successfully created.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Node"
+                  "$ref": "#/components/schemas/Bnode"
                 }
               }
             }
@@ -137,11 +137,11 @@
       },
       "get": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "List Nodes",
-        "description": "Returns a list of Nodes.",
-        "operationId": "ListNodes",
+        "summary": "List Bnodes",
+        "description": "Returns a list of Bnodes.",
+        "operationId": "ListBnodes",
         "parameters": [
           {
             "name": "computeType",
@@ -153,7 +153,7 @@
                 "CPU"
               ],
               "example": "CPU",
-              "description": "Filter to only GPU or only CPU Nodes."
+              "description": "Filter to only GPU or only CPU Bnodes."
             }
           },
           {
@@ -168,7 +168,7 @@
                 "cpu3c",
                 "cpu5g"
               ],
-              "description": "Filter to CPU Nodes with any of the listed CPU flavors."
+              "description": "Filter to CPU Bnodes with any of the listed CPU flavors."
             }
           },
           {
@@ -182,7 +182,7 @@
               "example": [
                 "EU-RO-1"
               ],
-              "description": "Filter to Nodes located in any of the provided Brightnode data centers."
+              "description": "Filter to Bnodes located in any of the provided Brightnode data centers."
             }
           },
           {
@@ -196,7 +196,7 @@
                 "EXITED",
                 "TERMINATED"
               ],
-              "description": "Filter to Nodes currently in the provided state."
+              "description": "Filter to Bnodes currently in the provided state."
             }
           },
           {
@@ -221,7 +221,7 @@
                 "NVIDIA GeForce RTX 4090",
                 "NVIDIA RTX A5000"
               ],
-              "description": "Filter to Nodes with any of the listed GPU types attached."
+              "description": "Filter to Bnodes with any of the listed GPU types attached."
             }
           },
           {
@@ -230,7 +230,7 @@
             "schema": {
               "type": "string",
               "example": "xedezhzb9la3ye",
-              "description": "Filter to a specific Node."
+              "description": "Filter to a specific Bnode."
             },
             "required": false
           },
@@ -240,7 +240,7 @@
             "schema": {
               "type": "string",
               "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-              "description": "Filter to Nodes created with the provided image."
+              "description": "Filter to Bnodes created with the provided image."
             },
             "required": false
           },
@@ -251,7 +251,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the machine the Node is running on."
+              "description": "Include information about the machine the Bnode is running on."
             }
           },
           {
@@ -261,7 +261,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the network volume attached to the returned Node, if any."
+              "description": "Include information about the network volume attached to the returned Bnode, if any."
             }
           },
           {
@@ -271,7 +271,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the savings plans applied to the Node."
+              "description": "Include information about the savings plans applied to the Bnode."
             }
           },
           {
@@ -281,7 +281,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the template the Node uses, if any."
+              "description": "Include information about the template the Bnode uses, if any."
             }
           },
           {
@@ -291,7 +291,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Set to true to also list Nodes which are Serverless workers."
+              "description": "Set to true to also list Bnodes which are Serverless workers."
             }
           },
           {
@@ -300,7 +300,7 @@
             "schema": {
               "type": "string",
               "maxLength": 191,
-              "description": "Filter to Nodes with the provided name."
+              "description": "Filter to Bnodes with the provided name."
             },
             "required": false
           },
@@ -310,7 +310,7 @@
             "schema": {
               "type": "string",
               "example": "agv6w2qcg7",
-              "description": "Filter to Nodes with the provided network volume attached."
+              "description": "Filter to Bnodes with the provided network volume attached."
             }
           },
           {
@@ -319,7 +319,7 @@
             "schema": {
               "type": "string",
               "example": "30zmvf89kd",
-              "description": "Filter to Nodes created from the provided template."
+              "description": "Filter to Bnodes created from the provided template."
             },
             "required": false
           }
@@ -330,7 +330,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Nodes"
+                  "$ref": "#/components/schemas/Bnodes"
                 }
               }
             }
@@ -339,19 +339,19 @@
             "description": "Invalid ID supplied."
           },
           "404": {
-            "description": "Node not found."
+            "description": "Bnode not found."
           }
         }
       }
     },
-    "/nodes/{nodeId}": {
+    "/bnodes/{bnodeId}": {
       "get": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "Find a Node by ID",
-        "description": "Returns a single Node.",
-        "operationId": "GetNode",
+        "summary": "Find a Bnode by ID",
+        "description": "Returns a single Bnode.",
+        "operationId": "GetBnode",
         "parameters": [
           {
             "name": "includeMachine",
@@ -360,7 +360,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the machine the Node is running on."
+              "description": "Include information about the machine the Bnode is running on."
             }
           },
           {
@@ -370,7 +370,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the network volume attached to the returned Node, if any."
+              "description": "Include information about the network volume attached to the returned Bnode, if any."
             }
           },
           {
@@ -380,7 +380,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the savings plans applied to the Node."
+              "description": "Include information about the savings plans applied to the Bnode."
             }
           },
           {
@@ -390,7 +390,7 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Include information about the template the Node uses, if any."
+              "description": "Include information about the template the Bnode uses, if any."
             }
           },
           {
@@ -400,13 +400,13 @@
               "type": "boolean",
               "default": false,
               "example": true,
-              "description": "Set to true to also list Nodes which are Serverless workers."
+              "description": "Set to true to also list Bnodes which are Serverless workers."
             }
           },
           {
-            "name": "nodeId",
+            "name": "bnodeId",
             "in": "path",
-            "description": "ID of Node to return.",
+            "description": "ID of Bnode to return.",
             "required": true,
             "schema": {
               "type": "string"
@@ -419,7 +419,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Node"
+                  "$ref": "#/components/schemas/Bnode"
                 }
               }
             }
@@ -428,23 +428,23 @@
             "description": "Invalid ID supplied."
           },
           "404": {
-            "description": "Node not found."
+            "description": "Bnode not found."
           }
         }
       },
       "patch": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "Update a Node",
-        "description": "Update a Node, potentially triggering a reset.",
-        "operationId": "UpdateNode",
+        "summary": "Update a Bnode",
+        "description": "Update a Bnode, potentially triggering a reset.",
+        "operationId": "UpdateBnode",
         "requestBody": {
-          "description": "Form data to update a Node.",
+          "description": "Form data to update a Bnode.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NodeUpdateInput"
+                "$ref": "#/components/schemas/BnodeUpdateInput"
               }
             }
           },
@@ -452,9 +452,9 @@
         },
         "parameters": [
           {
-            "name": "nodeId",
+            "name": "bnodeId",
             "in": "path",
-            "description": "ID of Node that needs to be updated.",
+            "description": "ID of Bnode that needs to be updated.",
             "required": true,
             "schema": {
               "type": "string"
@@ -463,11 +463,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Node successfully updated.",
+            "description": "Bnode successfully updated.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Node"
+                  "$ref": "#/components/schemas/Bnode"
                 }
               }
             }
@@ -479,16 +479,16 @@
       },
       "delete": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "Delete a Node",
-        "description": "Delete a Node.",
-        "operationId": "DeleteNode",
+        "summary": "Delete a Bnode",
+        "description": "Delete a Bnode.",
+        "operationId": "DeleteBnode",
         "parameters": [
           {
-            "name": "nodeId",
+            "name": "bnodeId",
             "in": "path",
-            "description": "Node ID to delete.",
+            "description": "Bnode ID to delete.",
             "required": true,
             "schema": {
               "type": "string"
@@ -497,10 +497,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Node successfully deleted."
+            "description": "Bnode successfully deleted."
           },
           "400": {
-            "description": "Invalid Node ID."
+            "description": "Invalid Bnode ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -508,20 +508,20 @@
         }
       }
     },
-    "/nodes/{nodeId}/update": {
+    "/bnodes/{bnodeId}/update": {
       "post": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "Update a Node",
-        "description": "Update a Node - synonym for PATCH /nodes/{nodeId}.",
-        "operationId": "UpdateNode",
+        "summary": "Update a Bnode",
+        "description": "Update a Bnode - synonym for PATCH /bnodes/{bnodeId}.",
+        "operationId": "UpdateBnode",
         "requestBody": {
-          "description": "Form data to update a Node.",
+          "description": "Form data to update a Bnode.",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NodeUpdateInput"
+                "$ref": "#/components/schemas/BnodeUpdateInput"
               }
             }
           },
@@ -529,9 +529,9 @@
         },
         "parameters": [
           {
-            "name": "nodeId",
+            "name": "bnodeId",
             "in": "path",
-            "description": "ID of Node that needs to be updated.",
+            "description": "ID of Bnode that needs to be updated.",
             "required": true,
             "schema": {
               "type": "string"
@@ -540,11 +540,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Node successfully updated.",
+            "description": "Bnode successfully updated.",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Node"
+                  "$ref": "#/components/schemas/Bnode"
                 }
               }
             }
@@ -555,19 +555,19 @@
         }
       }
     },
-    "/nodes/{nodeId}/start": {
+    "/bnodes/{bnodeId}/start": {
       "post": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "Start or resume a Node",
-        "description": "Start or resume a Node.",
-        "operationId": "StartNode",
+        "summary": "Start or resume a Bnode",
+        "description": "Start or resume a Bnode.",
+        "operationId": "StartBnode",
         "parameters": [
           {
-            "name": "nodeId",
+            "name": "bnodeId",
             "in": "path",
-            "description": "Node ID to start.",
+            "description": "Bnode ID to start.",
             "required": true,
             "schema": {
               "type": "string"
@@ -576,10 +576,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Node successfully started."
+            "description": "Bnode successfully started."
           },
           "400": {
-            "description": "Invalid Node ID."
+            "description": "Invalid Bnode ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -587,19 +587,19 @@
         }
       }
     },
-    "/nodes/{nodeId}/stop": {
+    "/bnodes/{bnodeId}/stop": {
       "post": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "Stop a Node",
-        "description": "Stop a Node.",
-        "operationId": "StopNode",
+        "summary": "Stop a Bnode",
+        "description": "Stop a Bnode.",
+        "operationId": "StopBnode",
         "parameters": [
           {
-            "name": "nodeId",
+            "name": "bnodeId",
             "in": "path",
-            "description": "Node ID to stop.",
+            "description": "Bnode ID to stop.",
             "required": true,
             "schema": {
               "type": "string"
@@ -608,10 +608,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Node successfully stopped."
+            "description": "Bnode successfully stopped."
           },
           "400": {
-            "description": "Invalid Node ID."
+            "description": "Invalid Bnode ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -619,19 +619,19 @@
         }
       }
     },
-    "/nodes/{nodeId}/reset": {
+    "/bnodes/{bnodeId}/reset": {
       "post": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "Reset a Node",
-        "description": "Reset a Node.",
-        "operationId": "ResetNode",
+        "summary": "Reset a Bnode",
+        "description": "Reset a Bnode.",
+        "operationId": "ResetBnode",
         "parameters": [
           {
-            "name": "nodeId",
+            "name": "bnodeId",
             "in": "path",
-            "description": "Node ID to reset.",
+            "description": "Bnode ID to reset.",
             "required": true,
             "schema": {
               "type": "string"
@@ -640,10 +640,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Node successfully reset."
+            "description": "Bnode successfully reset."
           },
           "400": {
-            "description": "Invalid Node ID."
+            "description": "Invalid Bnode ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -651,19 +651,19 @@
         }
       }
     },
-    "/nodes/{nodeId}/restart": {
+    "/bnodes/{bnodeId}/restart": {
       "post": {
         "tags": [
-          "nodes"
+          "bnodes"
         ],
-        "summary": "Restart a Node",
-        "description": "Restart a Node.",
-        "operationId": "RestartNode",
+        "summary": "Restart a Bnode",
+        "description": "Restart a Bnode.",
+        "operationId": "RestartBnode",
         "parameters": [
           {
-            "name": "nodeId",
+            "name": "bnodeId",
             "in": "path",
-            "description": "Node ID to restart.",
+            "description": "Bnode ID to restart.",
             "required": true,
             "schema": {
               "type": "string"
@@ -672,7 +672,7 @@
         ],
         "responses": {
           "400": {
-            "description": "Invalid Node ID."
+            "description": "Invalid Bnode ID."
           },
           "401": {
             "description": "Unauthorized."
@@ -1584,14 +1584,14 @@
         }
       }
     },
-    "/billing/nodes": {
+    "/billing/bnodes": {
       "get": {
         "tags": [
           "billing"
         ],
-        "summary": "Node billing history",
-        "description": "Retrieve billing information about your Nodes.",
-        "operationId": "NodeBilling",
+        "summary": "Bnode billing history",
+        "description": "Retrieve billing information about your Bnodes.",
+        "operationId": "BnodeBilling",
         "parameters": [
           {
             "name": "bucketSize",
@@ -1665,7 +1665,7 @@
                 "NVIDIA B200"
               ],
               "example": "NVIDIA GeForce RTX 4090",
-              "description": "Filter to Nodes with the provided GPU type attached."
+              "description": "Filter to Bnodes with the provided GPU type attached."
             }
           },
           {
@@ -1674,7 +1674,7 @@
             "schema": {
               "type": "string",
               "enum": [
-                "nodeId",
+                "bnodeId",
                 "gpuTypeId"
               ],
               "default": "gpuTypeId",
@@ -1682,12 +1682,12 @@
             }
           },
           {
-            "name": "nodeId",
+            "name": "bnodeId",
             "in": "query",
             "schema": {
               "type": "string",
               "example": "xedezhzb9la3ye",
-              "description": "Filter to a specific Node."
+              "description": "Filter to a specific Bnode."
             }
           },
           {
@@ -1808,7 +1808,7 @@
                   "US-GA-1"
                 ]
               },
-              "description": "Filter to endpoints located in any of the provided Brightnode data centers. The data center IDs are listed in the response of the /nodes endpoint."
+              "description": "Filter to endpoints located in any of the provided Brightnode data centers. The data center IDs are listed in the response of the /bnodes endpoint."
             }
           },
           {
@@ -1889,7 +1889,7 @@
               "type": "string",
               "enum": [
                 "endpointId",
-                "nodeId",
+                "bnodeId",
                 "gpuTypeId"
               ],
               "default": "endpointId",
@@ -2018,19 +2018,19 @@
       }
     },
     "schemas": {
-      "Nodes": {
+      "Bnodes": {
         "type": "array",
         "items": {
-          "$ref": "#/components/schemas/Node"
+          "$ref": "#/components/schemas/Bnode"
         }
       },
-      "Node": {
+      "Bnode": {
         "type": "object",
         "properties": {
           "adjustedCostPerHr": {
             "type": "number",
             "example": 0.69,
-            "description": "The effective cost in Brightnode credits per hour of running a Node, adjusted by active Savings Plans."
+            "description": "The effective cost in Brightnode credits per hour of running a Bnode, adjusted by active Savings Plans."
           },
           "aiApiId": {
             "type": "string",
@@ -2040,28 +2040,28 @@
           "consumerUserId": {
             "type": "string",
             "example": "user_2PyTJrLzeuwfZilRZ7JhCQDuSqo",
-            "description": "A unique string identifying the Brightnode user who rents a Node."
+            "description": "A unique string identifying the Brightnode user who rents a Bnode."
           },
           "containerDiskInGb": {
             "type": "integer",
             "example": 50,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for a Node. The data on the container disk is wiped when the Node restarts. To persist data across Node restarts, set volumeInGb to configure the Node network volume."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for a Bnode. The data on the container disk is wiped when the Bnode restarts. To persist data across Bnode restarts, set volumeInGb to configure the Bnode network volume."
           },
           "containerRegistryAuthId": {
             "type": "string",
             "example": "clzdaifot0001l90809257ynb",
-            "description": "If a Node is created with a container registry auth, the unique string identifying that container registry auth."
+            "description": "If a Bnode is created with a container registry auth, the unique string identifying that container registry auth."
           },
           "costPerHr": {
             "type": "number",
             "example": "0.74",
             "format": "currency",
-            "description": "The cost in Brightnode credits per hour of running a Node. Note that the actual cost may be lower if Savings Plans are applied."
+            "description": "The cost in Brightnode credits per hour of running a Bnode. Note that the actual cost may be lower if Savings Plans are applied."
           },
           "cpuFlavorId": {
             "type": "string",
             "example": "cpu3c",
-            "description": "If the Node is a CPU Node, the unique string identifying the CPU flavor the Node is running on."
+            "description": "If the Bnode is a CPU Bnode, the unique string identifying the CPU flavor the Bnode is running on."
           },
           "desiredStatus": {
             "type": "string",
@@ -2070,26 +2070,26 @@
               "EXITED",
               "TERMINATED"
             ],
-            "description": "The current expected status of a Node."
+            "description": "The current expected status of a Bnode."
           },
           "dockerEntrypoint": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Node. If [], uses the ENTRYPOINT defined in the image."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Bnode. If [], uses the ENTRYPOINT defined in the image."
           },
           "dockerStartCmd": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "description": "If specified, overrides the start CMD for the Docker image run on the created Node. If [], uses the start CMD defined in the image."
+            "description": "If specified, overrides the start CMD for the Docker image run on the created Bnode. If [], uses the start CMD defined in the image."
           },
           "endpointId": {
             "type": "string",
             "example": null,
-            "description": "If the Node is a Serverless worker, a unique string identifying the associated endpoint."
+            "description": "If the Bnode is a Serverless worker, a unique string identifying the associated endpoint."
           },
           "env": {
             "type": "object",
@@ -2110,7 +2110,7 @@
               "count": {
                 "type": "integer",
                 "example": 1,
-                "description": "The number of GPUs attached to a Node."
+                "description": "The number of GPUs attached to a Bnode."
               },
               "displayName": {
                 "type": "string"
@@ -2144,37 +2144,37 @@
           "id": {
             "type": "string",
             "example": "xedezhzb9la3ye",
-            "description": "A unique string identifying a [Node](#/components/schema/Node)."
+            "description": "A unique string identifying a [Bnode](#/components/schema/Bnode)."
           },
           "image": {
             "type": "string",
             "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-            "description": "The image tag for the container run on a Node."
+            "description": "The image tag for the container run on a Bnode."
           },
           "interruptible": {
             "type": "boolean",
             "example": false,
-            "description": "Describes how a Node is rented. An interruptible Node can be rented at a lower cost but can be stopped at any time to free up resources for another Node. A reserved Node is rented at a higher cost but runs until it exits or is manually stopped."
+            "description": "Describes how a Bnode is rented. An interruptible Bnode can be rented at a lower cost but can be stopped at any time to free up resources for another Bnode. A reserved Bnode is rented at a higher cost but runs until it exits or is manually stopped."
           },
           "lastStartedAt": {
             "type": "string",
             "example": "2024-07-12T19:14:40.144Z",
-            "description": "The UTC timestamp when a Node was last started."
+            "description": "The UTC timestamp when a Bnode was last started."
           },
           "lastStatusChange": {
             "type": "string",
             "example": "Rented by User: Fri Jul 12 2024 15:14:40 GMT-0400 (Eastern Daylight Time)",
-            "description": "A string describing the last lifecycle event on a Node."
+            "description": "A string describing the last lifecycle event on a Bnode."
           },
           "locked": {
             "type": "boolean",
             "example": false,
-            "description": "Set to true to lock a Node. Locking a Node disables stopping or resetting the Node."
+            "description": "Set to true to lock a Bnode. Locking a Bnode disables stopping or resetting the Bnode."
           },
           "machine": {
             "type": "object",
             "properties": {
-              "minNodeGpuCount": {
+              "minBnodeGpuCount": {
                 "type": "integer"
               },
               "gpuTypeId": {
@@ -2189,7 +2189,7 @@
                   "count": {
                     "type": "integer",
                     "example": 1,
-                    "description": "The number of GPUs attached to a Node."
+                    "description": "The number of GPUs attached to a Bnode."
                   },
                   "displayName": {
                     "type": "string"
@@ -2292,22 +2292,22 @@
                 "type": "string"
               }
             },
-            "description": "Information about the machine a Node is running on (see [Machine](#/components/schemas/Machine))."
+            "description": "Information about the machine a Bnode is running on (see [Machine](#/components/schemas/Machine))."
           },
           "machineId": {
             "type": "string",
             "example": "s194cr8pls2z",
-            "description": "A unique string identifying the host machine a Node is running on."
+            "description": "A unique string identifying the host machine a Bnode is running on."
           },
           "memoryInGb": {
             "type": "number",
             "example": 62,
-            "description": "The amount of RAM, in gigabytes (GB), attached to a Node."
+            "description": "The amount of RAM, in gigabytes (GB), attached to a Bnode."
           },
           "name": {
             "type": "string",
             "maxLength": 191,
-            "description": "A user-defined name for the created Node. The name does not need to be unique."
+            "description": "A user-defined name for the created Bnode. The name does not need to be unique."
           },
           "networkVolume": {
             "type": "object",
@@ -2333,7 +2333,7 @@
                 "description": "The Brightnode data center ID where a network volume is located."
               }
             },
-            "description": "If a network volume is attached to a Node, information about the network volume (see [network volume schema](#/components/schemas/NetworkVolume))."
+            "description": "If a network volume is attached to a Bnode, information about the network volume (see [network volume schema](#/components/schemas/NetworkVolume))."
           },
           "portMappings": {
             "type": "object",
@@ -2343,7 +2343,7 @@
             "example": {
               "22": 10341
             },
-            "description": "A mapping of internal ports to public ports on a Node. For example, { \"22\": 10341 } means that port 22 on the Node is mapped to port 10341 and is publicly accessible at [public ip]:10341. If the Node is still initializing, this mapping is not yet determined and will be empty."
+            "description": "A mapping of internal ports to public ports on a Bnode. For example, { \"22\": 10341 } means that port 22 on the Bnode is mapped to port 10341 and is publicly accessible at [public ip]:10341. If the Bnode is still initializing, this mapping is not yet determined and will be empty."
           },
           "ports": {
             "type": "array",
@@ -2354,79 +2354,79 @@
               "8888/http",
               "22/tcp"
             ],
-            "description": "A list of ports exposed on a Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on a Bnode. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "publicIp": {
             "type": "string",
             "example": "100.65.0.119",
             "format": "ipv4",
             "nullable": true,
-            "description": "The public IP address of a Node. If the Node is still initializing, this IP is not yet determined and will be empty."
+            "description": "The public IP address of a Bnode. If the Bnode is still initializing, this IP is not yet determined and will be empty."
           },
           "savingsPlans": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SavingsPlan"
             },
-            "description": "The list of active Savings Plans applied to a Node (see [Savings Plans](#/components/schemas/SavingsPlan)). If none are applied, the list is empty."
+            "description": "The list of active Savings Plans applied to a Bnode (see [Savings Plans](#/components/schemas/SavingsPlan)). If none are applied, the list is empty."
           },
           "slsVersion": {
             "type": "integer",
             "example": 0,
-            "description": "If the Node is a Serverless worker, the version of the associated endpoint (see [Endpoint Version](#/components/schemas/Endpoint/version))."
+            "description": "If the Bnode is a Serverless worker, the version of the associated endpoint (see [Endpoint Version](#/components/schemas/Endpoint/version))."
           },
           "templateId": {
             "type": "string",
             "example": null,
-            "description": "If a Node is created with a template, the unique string identifying that template."
+            "description": "If a Bnode is created with a template, the unique string identifying that template."
           },
           "vcpuCount": {
             "type": "number",
             "example": 24,
-            "description": "The number of virtual CPUs attached to a Node."
+            "description": "The number of virtual CPUs attached to a Bnode."
           },
           "volumeEncrypted": {
             "type": "boolean",
             "example": false,
-            "description": "Set to true if the local network volume of a Node is encrypted. Can only be set when creating a Node."
+            "description": "Set to true if the local network volume of a Bnode is encrypted. Can only be set when creating a Bnode."
           },
           "volumeInGb": {
             "type": "integer",
             "example": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Node volume for a Node. The data on the Node volume is persisted across Node restarts. To persist data so that future Nodes can access it, create a network volume and set networkVolumeId to attach it to the Node."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Bnode volume for a Bnode. The data on the Bnode volume is persisted across Bnode restarts. To persist data so that future Bnodes can access it, create a network volume and set networkVolumeId to attach it to the Bnode."
           },
           "volumeMountPath": {
             "type": "string",
             "example": "/workspace",
-            "description": "If either a Node volume or a network volume is attached to a Node, the absolute path where the network volume is mounted in the filesystem."
+            "description": "If either a Bnode volume or a network volume is attached to a Bnode, the absolute path where the network volume is mounted in the filesystem."
           }
         }
       },
-      "NodeUpdateInPlaceInput": {
+      "BnodeUpdateInPlaceInput": {
         "type": "object",
         "properties": {
           "locked": {
             "type": "boolean",
             "default": false,
-            "description": "Set to true to lock a Node. Locking a Node disables stopping or resetting the Node."
+            "description": "Set to true to lock a Bnode. Locking a Bnode disables stopping or resetting the Bnode."
           },
           "name": {
             "type": "string",
-            "default": "my node",
-            "description": "A user-defined name for the created Node. The name does not need to be unique.",
+            "default": "my bnode",
+            "description": "A user-defined name for the created Bnode. The name does not need to be unique.",
             "maxLength": 191
           }
         }
       },
-      "NodeUpdateInput": {
+      "BnodeUpdateInput": {
         "type": "object",
-        "description": "Input for updating a Node which will trigger a reset.",
+        "description": "Input for updating a Bnode which will trigger a reset.",
         "properties": {
           "containerDiskInGb": {
             "type": "integer",
             "default": 50,
             "nullable": true,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for the created Node. The data on the container disk is wiped when the Node restarts. To persist data across Node restarts, set volumeInGb to configure the Node network volume."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for the created Bnode. The data on the container disk is wiped when the Bnode restarts. To persist data across Bnode restarts, set volumeInGb to configure the Bnode network volume."
           },
           "containerRegistryAuthId": {
             "type": "string",
@@ -2439,7 +2439,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Node. If [], uses the ENTRYPOINT defined in the image."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Bnode. If [], uses the ENTRYPOINT defined in the image."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -2447,7 +2447,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on the created Node. If [], uses the start CMD defined in the image."
+            "description": "If specified, overrides the start CMD for the Docker image run on the created Bnode. If [], uses the start CMD defined in the image."
           },
           "env": {
             "type": "object",
@@ -2463,22 +2463,22 @@
             "type": "boolean",
             "default": false,
             "example": true,
-            "description": "Set to true to enable global networking for the created Node. Currently only available for On-Demand GPU Nodes on some Secure Cloud data centers."
+            "description": "Set to true to enable global networking for the created Bnode. Currently only available for On-Demand GPU Bnodes on some Secure Cloud data centers."
           },
           "imageName": {
             "type": "string",
             "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-            "description": "The image tag for the container run on the created Node."
+            "description": "The image tag for the container run on the created Bnode."
           },
           "locked": {
             "type": "boolean",
             "default": false,
-            "description": "Set to true to lock a Node. Locking a Node disables stopping or resetting the Node."
+            "description": "Set to true to lock a Bnode. Locking a Bnode disables stopping or resetting the Bnode."
           },
           "name": {
             "type": "string",
-            "default": "my node",
-            "description": "A user-defined name for the created Node. The name does not need to be unique.",
+            "default": "my bnode",
+            "description": "A user-defined name for the created Bnode. The name does not need to be unique.",
             "maxLength": 191
           },
           "ports": {
@@ -2491,27 +2491,27 @@
               "22/tcp"
             ],
             "default": "8888/http,22/tcp",
-            "description": "A list of ports exposed on the created Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on the created Bnode. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "volumeInGb": {
             "type": "integer",
             "default": 20,
             "nullable": true,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Node volume for the created Node. The data on the Node volume is persisted across Node restarts. To persist data so that future Nodes can access it, create a network volume and set networkVolumeId to attach it to the Node."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Bnode volume for the created Bnode. The data on the Bnode volume is persisted across Bnode restarts. To persist data so that future Bnodes can access it, create a network volume and set networkVolumeId to attach it to the Bnode."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If either a Node volume or a network volume is attached to a Node, the absolute path where the network volume will be mounted in the filesystem."
+            "description": "If either a Bnode volume or a network volume is attached to a Bnode, the absolute path where the network volume will be mounted in the filesystem."
           }
         }
       },
-      "NodeCreateInput": {
+      "BnodeCreateInput": {
         "type": "object",
         "properties": {
           "allowedCudaVersions": {
             "type": "array",
-            "description": "If the created Node is a GPU Node, a list of acceptable CUDA versions on the [Node](#/components/schemas/Node). If not set, any CUDA version is acceptable.",
+            "description": "If the created Bnode is a GPU Bnode, a list of acceptable CUDA versions on the [Bnode](#/components/schemas/Bnode). If not set, any CUDA version is acceptable.",
             "items": {
               "type": "string",
               "enum": [
@@ -2535,7 +2535,7 @@
               "SECURE",
               "COMMUNITY"
             ],
-            "description": "Set to SECURE to create the Node in Secure Cloud. Set to COMMUNITY to create the Node in Community Cloud. To determine which one suits your needs, see https://docs.brightnode.cloud/nodes/overview#node-types."
+            "description": "Set to SECURE to create the Bnode in Secure Cloud. Set to COMMUNITY to create the Bnode in Community Cloud. To determine which one suits your needs, see https://docs.brightnode.cloud/bnodes/overview#bnode-types."
           },
           "computeType": {
             "type": "string",
@@ -2544,13 +2544,13 @@
               "GPU",
               "CPU"
             ],
-            "description": "Set to GPU to create a GPU Node. Set to CPU to create a CPU Node. If set to CPU, the Node will not have a GPU attached and properties related to GPUs such as gpuTypeIds will be ignored. If set to GPU, the Node will have a GPU attached and properties related to CPUs such as cpuFlavorIds will be ignored."
+            "description": "Set to GPU to create a GPU Bnode. Set to CPU to create a CPU Bnode. If set to CPU, the Bnode will not have a GPU attached and properties related to GPUs such as gpuTypeIds will be ignored. If set to GPU, the Bnode will have a GPU attached and properties related to CPUs such as cpuFlavorIds will be ignored."
           },
           "containerDiskInGb": {
             "type": "integer",
             "default": 50,
             "nullable": true,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for the created Node. The data on the container disk is wiped when the Node restarts. To persist data across Node restarts, set volumeInGb to configure the Node network volume."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for the created Bnode. The data on the container disk is wiped when the Bnode restarts. To persist data across Bnode restarts, set volumeInGb to configure the Bnode network volume."
           },
           "containerRegistryAuthId": {
             "type": "string",
@@ -2562,7 +2562,7 @@
             "items": {
               "type": "string"
             },
-            "description": "A list of country codes where the created Node can be located. If not set, the Node can be located in any country."
+            "description": "A list of country codes where the created Bnode can be located. If not set, the Bnode can be located in any country."
           },
           "cpuFlavorIds": {
             "type": "array",
@@ -2577,7 +2577,7 @@
                 "cpu5m"
               ]
             },
-            "description": "If the created Node is a CPU Node, a list of Brightnode CPU flavors which can be attached to the Node. The order of the list determines the order to rent CPU flavors. See cpuFlavorPriority for how the order of the list affects Node creation."
+            "description": "If the created Bnode is a CPU Bnode, a list of Brightnode CPU flavors which can be attached to the Bnode. The order of the list determines the order to rent CPU flavors. See cpuFlavorPriority for how the order of the list affects Bnode creation."
           },
           "cpuFlavorPriority": {
             "type": "string",
@@ -2586,7 +2586,7 @@
               "availability",
               "custom"
             ],
-            "description": "If the created Node is a CPU Node, set to availability to respond to current CPU flavor availability. Set to custom to always try to rent CPU flavors in the order specified in cpuFlavorIds."
+            "description": "If the created Bnode is a CPU Bnode, set to availability to respond to current CPU flavor availability. Set to custom to always try to rent CPU flavors in the order specified in cpuFlavorIds."
           },
           "dataCenterIds": {
             "type": "array",
@@ -2653,7 +2653,7 @@
                 "US-GA-1"
               ]
             },
-            "description": "A list of Brightnode data center IDs where the created Node can be located. See `dataCenterPriority` for information on how the order of the list affects Node creation."
+            "description": "A list of Brightnode data center IDs where the created Bnode can be located. See `dataCenterPriority` for information on how the order of the list affects Bnode creation."
           },
           "dataCenterPriority": {
             "type": "string",
@@ -2670,7 +2670,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Node. If [], uses the ENTRYPOINT defined in the image."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the created Bnode. If [], uses the ENTRYPOINT defined in the image."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -2678,7 +2678,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on the created Node. If [], uses the start CMD defined in the image."
+            "description": "If specified, overrides the start CMD for the Docker image run on the created Bnode. If [], uses the start CMD defined in the image."
           },
           "env": {
             "type": "object",
@@ -2694,12 +2694,12 @@
             "type": "boolean",
             "default": false,
             "example": true,
-            "description": "Set to true to enable global networking for the created Node. Currently only available for On-Demand GPU Nodes on some Secure Cloud data centers."
+            "description": "Set to true to enable global networking for the created Bnode. Currently only available for On-Demand GPU Bnodes on some Secure Cloud data centers."
           },
           "gpuCount": {
             "type": "integer",
             "default": 1,
-            "description": "If the created Node is a GPU Node, the number of GPUs attached to the created Node.",
+            "description": "If the created Bnode is a GPU Bnode, the number of GPUs attached to the created Bnode.",
             "minimum": 1
           },
           "gpuTypeIds": {
@@ -2747,7 +2747,7 @@
                 "NVIDIA B200"
               ]
             },
-            "description": "If the created Node is a GPU Node, a list of Brightnode GPU types which can be attached to the created Node. The order of the list determines the order to rent GPU types. See `gpuTypePriority` for information on how the order of the list affects Node creation."
+            "description": "If the created Bnode is a GPU Bnode, a list of Brightnode GPU types which can be attached to the created Bnode. The order of the list determines the order to rent GPU types. See `gpuTypePriority` for information on how the order of the list affects Bnode creation."
           },
           "gpuTypePriority": {
             "type": "string",
@@ -2756,54 +2756,54 @@
               "availability",
               "custom"
             ],
-            "description": "If the created Node is a GPU Node, set to availability to respond to current GPU type availability. Set to custom to always try to rent GPU types in the order specified in gpuTypeIds."
+            "description": "If the created Bnode is a GPU Bnode, set to availability to respond to current GPU type availability. Set to custom to always try to rent GPU types in the order specified in gpuTypeIds."
           },
           "imageName": {
             "type": "string",
             "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-            "description": "The image tag for the container run on the created Node."
+            "description": "The image tag for the container run on the created Bnode."
           },
           "interruptible": {
             "type": "boolean",
             "default": false,
-            "description": "Set to true to create an interruptible or spot Node. An interruptible Node can be rented at a lower cost but can be stopped at any time to free up resources for another Node. A reserved Node is rented at a higher cost but runs until it exits or is manually stopped."
+            "description": "Set to true to create an interruptible or spot Bnode. An interruptible Bnode can be rented at a lower cost but can be stopped at any time to free up resources for another Bnode. A reserved Bnode is rented at a higher cost but runs until it exits or is manually stopped."
           },
           "locked": {
             "type": "boolean",
             "default": false,
-            "description": "Set to true to lock a Node. Locking a Node disables stopping or resetting the Node."
+            "description": "Set to true to lock a Bnode. Locking a Bnode disables stopping or resetting the Bnode."
           },
           "minDiskBandwidthMBps": {
             "type": "number",
-            "description": "The minimum disk bandwidth, in megabytes per second (MBps), for the created Node."
+            "description": "The minimum disk bandwidth, in megabytes per second (MBps), for the created Bnode."
           },
           "minDownloadMbps": {
             "type": "number",
-            "description": "The minimum download speed, in megabits per second (Mbps), for the created Node."
+            "description": "The minimum download speed, in megabits per second (Mbps), for the created Bnode."
           },
           "minRAMPerGPU": {
             "type": "integer",
             "default": 8,
-            "description": "If the created Node is a GPU Node, the minimum amount of RAM, in gigabytes (GB), allocated to the created Node for each GPU attached to the Node."
+            "description": "If the created Bnode is a GPU Bnode, the minimum amount of RAM, in gigabytes (GB), allocated to the created Bnode for each GPU attached to the Bnode."
           },
           "minUploadMbps": {
             "type": "number",
-            "description": "The minimum upload speed, in megabits per second (Mbps), for the created Node."
+            "description": "The minimum upload speed, in megabits per second (Mbps), for the created Bnode."
           },
           "minVCPUPerGPU": {
             "type": "integer",
             "default": 2,
-            "description": "If the created Node is a GPU Node, the minimum number of virtual CPUs allocated to the created Node for each GPU attached to the Node."
+            "description": "If the created Bnode is a GPU Bnode, the minimum number of virtual CPUs allocated to the created Bnode for each GPU attached to the Bnode."
           },
           "name": {
             "type": "string",
-            "default": "my node",
-            "description": "A user-defined name for the created Node. The name does not need to be unique.",
+            "default": "my bnode",
+            "description": "A user-defined name for the created Bnode. The name does not need to be unique.",
             "maxLength": 191
           },
           "networkVolumeId": {
             "type": "string",
-            "description": "The unique string identifying the network volume to attach to the created Node. If attached, a network volume replaces the Node network volume."
+            "description": "The unique string identifying the network volume to attach to the created Bnode. If attached, a network volume replaces the Bnode network volume."
           },
           "ports": {
             "type": "array",
@@ -2815,33 +2815,33 @@
               "22/tcp"
             ],
             "default": "8888/http,22/tcp",
-            "description": "A list of ports exposed on the created Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on the created Bnode. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "supportPublicIp": {
             "type": "boolean",
             "example": true,
-            "description": "If the created Node is on Community Cloud, set to true if you need the Node to expose a public IP address. If null, the Node might not have a public IP address. On Secure Cloud, the Node will always have a public IP address."
+            "description": "If the created Bnode is on Community Cloud, set to true if you need the Bnode to expose a public IP address. If null, the Bnode might not have a public IP address. On Secure Cloud, the Bnode will always have a public IP address."
           },
           "templateId": {
             "type": "string",
             "example": null,
-            "description": "If the Node is created with a template, the unique string identifying that template."
+            "description": "If the Bnode is created with a template, the unique string identifying that template."
           },
           "vcpuCount": {
             "type": "integer",
             "default": 2,
-            "description": "If the created Node is a CPU Node, the number of vCPUs allocated to the Node."
+            "description": "If the created Bnode is a CPU Bnode, the number of vCPUs allocated to the Bnode."
           },
           "volumeInGb": {
             "type": "integer",
             "default": 20,
             "nullable": true,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Node volume for the created Node. The data on the Node volume is persisted across Node restarts. To persist data so that future Nodes can access it, create a network volume and set networkVolumeId to attach it to the Node."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Bnode volume for the created Bnode. The data on the Bnode volume is persisted across Bnode restarts. To persist data so that future Bnodes can access it, create a network volume and set networkVolumeId to attach it to the Bnode."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If either a Node volume or a network volume is attached to a Node, the absolute path where the network volume will be mounted in the filesystem."
+            "description": "If either a Bnode volume or a network volume is attached to a Bnode, the absolute path where the network volume will be mounted in the filesystem."
           }
         }
       },
@@ -2959,7 +2959,7 @@
           "containerDiskInGb": {
             "type": "integer",
             "example": 50,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for a Node or worker. The data on the container disk is wiped when the Node or worker restarts. To persist data across restarts, set volumeInGb to configure the local network volume."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the container disk for a Bnode or worker. The data on the container disk is wiped when the Bnode or worker restarts. To persist data across restarts, set volumeInGb to configure the local network volume."
           },
           "containerRegistryAuthId": {
             "type": "string"
@@ -2970,7 +2970,7 @@
               "type": "string"
             },
             "example": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on a Node or worker. If [], uses the ENTRYPOINT defined in the image."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on a Bnode or worker. If [], uses the ENTRYPOINT defined in the image."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -2978,12 +2978,12 @@
               "type": "string"
             },
             "example": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on a Node or worker. If [], uses the start CMD defined in the image."
+            "description": "If specified, overrides the start CMD for the Docker image run on a Bnode or worker. If [], uses the start CMD defined in the image."
           },
           "earned": {
             "type": "number",
             "example": 100,
-            "description": "The amount of Brightnode credits earned by the creator of a template by all Nodes or workers created from the template."
+            "description": "The amount of Brightnode credits earned by the creator of a template by all Bnodes or workers created from the template."
           },
           "env": {
             "type": "object",
@@ -3003,7 +3003,7 @@
           "imageName": {
             "type": "string",
             "example": "Brightnode/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04",
-            "description": "The image tag for the container run on Nodes or workers created from a template."
+            "description": "The image tag for the container run on Bnodes or workers created from a template."
           },
           "isPublic": {
             "type": "boolean",
@@ -3018,7 +3018,7 @@
           "isServerless": {
             "type": "boolean",
             "example": true,
-            "description": "If true, instances created from a template are Serverless workers. If false, instances created from a template are Nodes."
+            "description": "If true, instances created from a template are Serverless workers. If false, instances created from a template are Bnodes."
           },
           "name": {
             "type": "string",
@@ -3034,7 +3034,7 @@
               "8888/http",
               "22/tcp"
             ],
-            "description": "A list of ports exposed on a Node or worker. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on a Bnode or worker. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "readme": {
             "type": "string",
@@ -3046,12 +3046,12 @@
           "volumeInGb": {
             "type": "integer",
             "example": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the local network volume for a Node or worker. The data on the local network volume is persisted across restarts. To persist data so that future Nodes and workers can access it, create a network volume and set networkVolumeId to attach it to the Node or worker."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the local network volume for a Bnode or worker. The data on the local network volume is persisted across restarts. To persist data so that future Bnodes and workers can access it, create a network volume and set networkVolumeId to attach it to the Bnode or worker."
           },
           "volumeMountPath": {
             "type": "string",
             "example": "/workspace",
-            "description": "If a local network volume or network volume is attached to a Node or worker, the absolute path where the network volume is mounted in the filesystem."
+            "description": "If a local network volume or network volume is attached to a Bnode or worker, the absolute path where the network volume is mounted in the filesystem."
           }
         }
       },
@@ -3087,7 +3087,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the Nodes using this template. If [], uses the ENTRYPOINT defined in the DockerFile."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the Bnodes using this template. If [], uses the ENTRYPOINT defined in the DockerFile."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -3095,7 +3095,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on the Nodes using this template. If [], uses the start CMD defined in the DockerFile."
+            "description": "If specified, overrides the start CMD for the Docker image run on the Bnodes using this template. If [], uses the start CMD defined in the DockerFile."
           },
           "env": {
             "type": "object",
@@ -3114,12 +3114,12 @@
           "isPublic": {
             "type": "boolean",
             "default": false,
-            "description": "If this is a Node template, specifies whether the template is visible to other Brightnode users."
+            "description": "If this is a Bnode template, specifies whether the template is visible to other Brightnode users."
           },
           "isServerless": {
             "type": "boolean",
             "default": false,
-            "description": "Whether the template specifies a Serverless worker or a Node."
+            "description": "Whether the template specifies a Serverless worker or a Bnode."
           },
           "name": {
             "type": "string",
@@ -3135,7 +3135,7 @@
               "22/tcp"
             ],
             "default": "8888/http,22/tcp",
-            "description": "A list of ports exposed on the created Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on the created Bnode. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "readme": {
             "type": "string",
@@ -3145,12 +3145,12 @@
           "volumeInGb": {
             "type": "integer",
             "default": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Nodes deployed with this template."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Bnodes deployed with this template."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If a volume is attached to a Node deployed with this template, the absolute path where the volume will be mounted in the filesystem."
+            "description": "If a volume is attached to a Bnode deployed with this template, the absolute path where the volume will be mounted in the filesystem."
           }
         }
       },
@@ -3160,7 +3160,7 @@
           "isPublic": {
             "type": "boolean",
             "default": false,
-            "description": "If this is a Node template, specifies whether the template is visible to other Brightnode users."
+            "description": "If this is a Bnode template, specifies whether the template is visible to other Brightnode users."
           },
           "name": {
             "type": "string",
@@ -3174,12 +3174,12 @@
           "volumeInGb": {
             "type": "integer",
             "default": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Nodes deployed with this template."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Bnodes deployed with this template."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If a volume is attached to a Node deployed with this template, the absolute path where the volume will be mounted in the filesystem."
+            "description": "If a volume is attached to a Bnode deployed with this template, the absolute path where the volume will be mounted in the filesystem."
           }
         }
       },
@@ -3202,7 +3202,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the Nodes using this template. If [], uses the ENTRYPOINT defined in the DockerFile."
+            "description": "If specified, overrides the ENTRYPOINT for the Docker image run on the Bnodes using this template. If [], uses the ENTRYPOINT defined in the DockerFile."
           },
           "dockerStartCmd": {
             "type": "array",
@@ -3210,7 +3210,7 @@
               "type": "string"
             },
             "default": [],
-            "description": "If specified, overrides the start CMD for the Docker image run on the Nodes using this template. If [], uses the start CMD defined in the DockerFile."
+            "description": "If specified, overrides the start CMD for the Docker image run on the Bnodes using this template. If [], uses the start CMD defined in the DockerFile."
           },
           "env": {
             "type": "object",
@@ -3229,7 +3229,7 @@
           "isPublic": {
             "type": "boolean",
             "default": false,
-            "description": "If this is a Node template, specifies whether the template is visible to other Brightnode users."
+            "description": "If this is a Bnode template, specifies whether the template is visible to other Brightnode users."
           },
           "name": {
             "type": "string",
@@ -3245,7 +3245,7 @@
               "22/tcp"
             ],
             "default": "8888/http,22/tcp",
-            "description": "A list of ports exposed on the created Node. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
+            "description": "A list of ports exposed on the created Bnode. Each port is formatted as [port number]/[protocol]. Protocol can be either http or tcp."
           },
           "readme": {
             "type": "string",
@@ -3255,12 +3255,12 @@
           "volumeInGb": {
             "type": "integer",
             "default": 20,
-            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Nodes deployed with this template."
+            "description": "The amount of disk space, in gigabytes (GB), to allocate on the Bnodes deployed with this template."
           },
           "volumeMountPath": {
             "type": "string",
             "default": "/workspace",
-            "description": "If a volume is attached to a Node deployed with this template, the absolute path where the volume will be mounted in the filesystem."
+            "description": "If a volume is attached to a Bnode deployed with this template, the absolute path where the volume will be mounted in the filesystem."
           }
         }
       },
@@ -3502,7 +3502,7 @@
           "workers": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Node"
+              "$ref": "#/components/schemas/Bnode"
             },
             "description": "Information about current workers on a Serverless endpoint."
           },
@@ -4047,7 +4047,7 @@
             "type": "string",
             "example": "clkrb4qci0000mb09c7sualzo"
           },
-          "nodeId": {
+          "bnodeId": {
             "type": "string",
             "example": "xedezhzb9la3ye"
           },
@@ -4113,7 +4113,7 @@
               "count": {
                 "type": "integer",
                 "example": 1,
-                "description": "The number of GPUs attached to a Node."
+                "description": "The number of GPUs attached to a Bnode."
               },
               "displayName": {
                 "type": "string"
@@ -4165,7 +4165,7 @@
           "maxUploadSpeedMbps": {
             "type": "integer"
           },
-          "minNodeGpuCount": {
+          "minBnodeGpuCount": {
             "type": "integer"
           },
           "note": {
@@ -4312,9 +4312,9 @@
             "type": "string",
             "description": "If grouping by GPU type ID, the GPU type ID of the group."
           },
-          "nodeId": {
+          "bnodeId": {
             "type": "string",
-            "description": "If grouping by Node ID, the Node ID of the group."
+            "description": "If grouping by Bnode ID, the Bnode ID of the group."
           },
           "time": {
             "type": "string",
@@ -4352,9 +4352,9 @@
               "type": "string",
               "description": "If grouping by GPU type ID, the GPU type ID of the group."
             },
-            "nodeId": {
+            "bnodeId": {
               "type": "string",
-              "description": "If grouping by Node ID, the Node ID of the group."
+              "description": "If grouping by Bnode ID, the Bnode ID of the group."
             },
             "time": {
               "type": "string",

@@ -4,7 +4,7 @@ sidebarTitle: "S3-compatible API"
 description: "Use Brightnode's S3-compatible API to access and manage your network volumes."
 ---
 
-Brightnode provides an S3-protocol compatible API for direct access to your [network volumes](/storage/network-volumes). This allows you to manage files on your network volumes without launching a Node, reducing cost and operational friction.
+Brightnode provides an S3-protocol compatible API for direct access to your [network volumes](/storage/network-volumes). This allows you to manage files on your network volumes without launching a Bnode, reducing cost and operational friction.
 
 Using the S3-compatible API does not affect pricing. Network volumes are billed hourly at \$0.07/GB/month for the first 1TB, and \$0.05/GB/month for additional storage.
 
@@ -120,9 +120,9 @@ Standard AWS CLI operations such as `ls`, `cp`, `mv`, and `rm` work as expected 
 
 <Accordion title="Network volume path mapping">
 
-Network volumes are mounted to Serverless workers at `/Brightnode-volume` and to Nodes at `/workspace` by default. The S3-compatible API maps file paths as follows:
+Network volumes are mounted to Serverless workers at `/Brightnode-volume` and to Bnodes at `/workspace` by default. The S3-compatible API maps file paths as follows:
 
-- **Node filesystem path**: `/workspace/my-folder/file.txt`
+- **Bnode filesystem path**: `/workspace/my-folder/file.txt`
 - **Serverless worker path**: `/Brightnode-volume/my-folder/file.txt`
 - **S3 API path**: `s3://NETWORK_VOLUME_ID/my-folder/file.txt`
 

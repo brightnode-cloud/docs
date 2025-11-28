@@ -1,0 +1,203 @@
+---
+title: "Connect to a Bnode with VSCode or Cursor"
+sidebarTitle: "Connect with VSCode/Cursor"
+description: "Set up remote development on your Bnode using VSCode or Cursor."
+---
+
+This guide explains how to connect directly to your Bnode through VSCode or Cursor using the Remote-SSH extension, allowing you to work within your Bnode's volume directories as if the files were stored on your local machine.
+
+## Requirements
+
+Before you begin, you'll need:
+
+- A local development environment with VSCode or Cursor installed.
+  - [Download VSCode](https://code.visualstudio.com/download).
+  - [Download Cursor](https://cursor.sh/).
+- Familiarity with basic command-line operations and SSH.
+
+## Step 1: Install the Remote-SSH extension
+
+To connect to a Bnode, you'll need to install the Remote-SSH extension for your IDE:
+
+   1. Open VSCode or Cursor and navigate to the **Extensions** view (Ctrl+Shift+X or Cmd+Shift+X).
+
+   2. Search for and install the Remote-SSH extension:
+      - VSCode: **Remote - SSH** by **ms-vscode-remote**.
+      - Cursor: **Remote-SSH** by **Anysphere**.
+
+## Step 2: Generate an SSH key
+
+Before you can connect to a Bnode, you'll need an SSH key that is paired with your Brightnode account. If you don't have one, follow these steps:
+1. Generate an SSH key using this command on your local terminal:
+
+   ```sh
+   ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -C "YOUR_EMAIL@DOMAIN.COM"
+   ```
+
+2. To retrieve your public SSH key, run this command:
+
+    ```sh
+    cat ~/.ssh/id_ed25519.pub
+    ```
+    This will output something similar to this:
+
+    ```sh
+    ssh-ed25519 AAAAC4NzaC1lZDI1JTE5AAAAIGP+L8hnjIcBqUb8NRrDiC32FuJBvRA0m8jLShzgq6BQ YOUR_EMAIL@DOMAIN.COM
+    ```
+
+3.  Copy and paste the output into the **SSH Public Keys** field in your [Brightnode user account settings](https://www.brightnode.cloud/console/user/settings).
+
+<Warning>
+To enable SSH access, your public key must be present in the `~/.ssh/authorized_keys` file on your Bnode. If you upload your public key to the settings page before your Bnode starts, the system will automatically inject it into that file at startup.
+
+If your Bnode is already running when you upload the key, the system will not perform this injection. To enable SSH access, you'll need to either terminate/redeploy the Bnode, or open a [web terminal](/bnodes/connect-to-a-bnode#web-terminal-connection) on the running Bnode and run the following commands:
+
+```sh
+export PUBLIC_KEY="<the value you cat out locally>"
+echo "$PUBLIC_KEY" >> ~/.ssh/authorized_keys
+```
+</Warning>
+
+## Step 3: Deploy a Bnode
+
+Next, deploy the Bnode you want to connect to. For detailed deployment instructions, see [Manage Bnodes -> Create a Bnode](/bnodes/manage-bnodes#create-a-bnode).
+
+To connect with VSCode/Cursor, your Bnode template must support SSH over exposed TCP. To determine whether your Bnode template supports this, during deployment, after selecting a template, look for a checkbox under **Instance Pricing** labeled **SSH Terminal Access** and make sure it's checked.
+
+<Tip>
+All official Brightnode Pytorch templates support SSH over exposed TCP.
+</Tip>
+
+
+## Step 4: Configure SSH for your IDE
+
+Next, you'll configure SSH access to your Bnode using the Remote-SSH extension. The instructions are different for VSCode and Cursor:
+
+<Tabs>
+
+  <Tab title="VSCode">
+   1. From the [Bnodes](https://www.brightnode.cloud/console/bnodes) page, select the Bnode you deployed.
+   2. Select **Connect**, then select the **SSH** tab.
+   3. Copy the second command, under **SSH over exposed TCP**. It will look similar to this:
+   
+      ```bash
+      ssh root@123.456.789.80 -p 12345 -i ~/.ssh/id_ed25519
+      ```
+
+      <Warning>
+      If you only see one command under SSH, then SSH over exposed TCP is not supported by your selected Bnode template. This means you won't be able to connect to your Bnode directly through VSCode/Cursor, but you can still connect using [basic SSH](/bnodes/connect-to-a-bnode#basic-ssh-connection) via the terminal.
+      </Warning>
+
+   4. In VSCode, open the **Command Palette** (Ctrl+Shift+P or Cmd+Shift+P) and choose **Remote-SSH: Connect to Host**, then select **Add New SSH Host**.
+   5. Enter the copied SSH command from step 3 (`ssh root@***.***.***.** -p ***** -i ~/.ssh/id_ed25519`) and press **Enter**. This will add a new entry to your SSH config file.
+
+  </Tab>
+
+  <Tab title="Cursor">
+
+1. From the [Bnodes](https://www.brightnode.cloud/console/bnodes) page, select the Bnode you deployed.
+
+2. Select **Connect**.
+3. Under **Direct TCP Ports**, look for a line similar to:
+
+   ```
+   TCP port ->  69.48.159.6:25634 -> :22
+   ```
+
+   <Warning>
+   If you don't see a **Direct TCP Ports** section, then SSH over exposed TCP is not supported by your selected Bnode template. This means you won't be able to connect to your Bnode directly through VSCode/Cursor, but you can still connect using [basic SSH](/bnodes/configuration/use-ssh#basic-ssh-connection) via the terminal.
+   </Warning>
+
+   Here's what these values mean:
+   - `69.48.159.6` is the IP address of your Bnode.
+   - `25634` is the port number for the Bnode's SSH service.
+
+   Make a note of these values (they will likely be different for your Bnode), as you'll need them for the following steps.
+
+4. In Cursor, open the **Command Palette** (Ctrl+Shift+P or Cmd+Shift+P) and choose **Remote-SSH: Connect to Host**, then select **Add New SSH Host**. This opens the SSH config file in Cursor.
+
+5. Add the following to the SSH config file:
+
+   ```
+   Host POD_NAME
+       HostName POD_IP
+       User root
+       Port POD_PORT
+       IdentityFile ~/.ssh/id_ed25519
+   ```
+
+   Replace:
+   - `POD_NAME` with a descriptive name for your Bnode. This will be used to identify your Bnode in the SSH config file, and does not need to match the name you gave your Bnode in the Brightnode console.
+   - `POD_IP` with the IP address of your Bnode from step 3.
+   - `POD_PORT` with the port number of your Bnode from step 3.
+
+   So, for the example Bnode, the SSH config file will look like:
+
+   ```
+   Host my-bnode
+       HostName 69.48.159.6
+       User root
+       Port 25634
+       IdentityFile ~/.ssh/id_ed25519
+   ```
+
+   <Note>
+   If you are using a custom SSH key, replace `~/.ssh/id_ed25519` with the path to your SSH key.
+   </Note>
+
+6. Save and close the file.
+
+  </Tab>
+
+</Tabs>
+
+## Step 5: Connect to your Bnode
+
+Now you can connect to your Bnode with the Remote-SSH extension.
+
+1. Open the Command Palette (Ctrl+Shift+P or Cmd+Shift+P).
+2. Select **Remote-SSH: Connect to Host**.
+3. Choose your Bnode from the list (either by IP or custom name if you configured one).
+4. VSCode/Cursor will open a new window and connect to your Bnode.
+5. When prompted, select the platform (Linux).
+6. Once connected, click **Open Folder** and navigate to your workspace directory (typically `/workspace`).
+
+You should now be connected to your Bnode instance, where you can edit files in your volume directories as if they were local.
+
+<Warning >
+If you stop and then resume your Bnode, the port numbers may change. If so, you'll need to go back to the previous step and update your SSH config file using the new port numbers before reconnecting.
+</Warning>
+
+## Working with your Bnode
+
+Once connected through Remote-SSH, you can:
+
+- Edit files with full IntelliSense and language support.
+- Run and debug applications with access to GPU resources.
+- Use integrated terminal for command execution.
+- Install extensions that run on the remote host.
+- Forward ports to access services locally.
+- Commit and push code using integrated Git support.
+
+Here are some important directories to be aware of:
+
+- `/workspace`: Default [persistent storage](/bnodes/storage/types) directory.
+- `/tmp`: Temporary files (cleared when Bnode stops).
+- `/root`: Home directory for the root user.
+
+## Troubleshooting
+
+If you can't connect to your Bnode:
+
+1. Verify your Bnode is running and fully initialized.
+2. Check that your SSH key is properly configured in Brightnode settings.
+3. Ensure the Bnode has SSH enabled in its template.
+
+If the VSCode/Cursor server fails to install:
+
+1. Check that your Bnode has sufficient disk space.
+2. Ensure your Bnode has internet connectivity.
+3. Try manually removing the `.vscode-server` or `.cursor-server` directory and reconnecting:
+   ```sh
+   rm -rf ~/.vscode-server
+   ```
