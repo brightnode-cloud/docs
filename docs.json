@@ -12,7 +12,7 @@
   "icons": {
     "library": "fontawesome"
   },
-  "favicon": "/logo/Color.svg",
+  "favicon": "/logo/icon_square.png",
   "seo": {
     "metatags": {
       "og:image": "https://cdn.prod.website-files.com/67d20fb9f56ff2ec6a7a657d/685c2309d69beb2a7b987512_documentation-preview-image.jpg"
@@ -95,8 +95,8 @@
     ]
   },
   "logo": {
-    "dark": "/logo/Brightnode-logo-white.svg",
-    "light": "/logo/Brightnode-logo-black.svg"
+    "dark": "/logo/LogoLight.png",
+    "light": "/logo/LogoLight.png"
   },
 
   "navbar": {
@@ -116,7 +116,7 @@
 
   "footer": {
     "socials": {
-      "discord": "https://discord.gg/xxx",
+      "discord": "https://discord.gg/xUsSaY2B",
       "x": "https://twitter.com/brightnode_cloud",
       "instagram": "https://www.instagram.com/brightnode.cloud"
     }
