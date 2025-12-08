@@ -80,28 +80,6 @@
             ]
           }
         ]
-      },
-      {
-        "tab": "Examples",
-        "groups": [
-          {
-            "group": "Introduction",
-            "pages": [
-              "tutorials/introduction/overview"
-            ]
-          },
-          {
-            "group": "Bnodes",
-            "pages": [
-              "tutorials/bnodes/run-your-first",
-              "tutorials/bnodes/comfyui",
-              "tutorials/bnodes/run-fooocus",
-              "tutorials/bnodes/run-ollama",
-              "tutorials/bnodes/build-docker-images",
-              "tutorials/bnodes/fine-tune-llm-axolotl"
-            ]
-          }
-        ]
       }
     ]
   },
@@ -115,11 +93,6 @@
         "label": "Brightnode console",
         "href": "https://console.brightnode.cloud",
         "icon": "square-terminal"
-      },
-      {
-        "label": "brightnode/docs",
-        "href": "https://github.com/brightnode-cloud/docs",
-        "icon": "github"
       }
     ]
   },
