@@ -85,7 +85,8 @@
   },
   "logo": {
     "dark": "/logo/LogoDark.png",
-    "light": "/logo/LogoLight.png"
+    "light": "/logo/LogoLight.png",
+    "href": "https://brightnode.cloud"
   },
   "navbar": {
     "links": [
