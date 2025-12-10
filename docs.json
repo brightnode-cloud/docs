@@ -2,6 +2,9 @@
   "$schema": "https://mintlify.com/docs.json",
   "theme": "almond",
   "name": "Brightnode Documentation",
+  "appearance": {
+    "default": "dark"
+  },
   "colors": {
     "primary": "#009689"
   },
@@ -19,7 +22,12 @@
     }
   },
   "contextual": {
-    "options": ["copy", "view", "chatgpt", "claude"]
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude"
+    ]
   },
   "navigation": {
     "tabs": [
@@ -31,8 +39,7 @@
             "pages": [
               "overview",
               "get-started",
-              "get-started/concepts",
-              "get-started/manage-accounts"
+              "get-started/concepts"
             ]
           },
           {
@@ -60,7 +67,9 @@
           },
           {
             "group": "Storage",
-            "pages": ["storage/network-volumes"]
+            "pages": [
+              "storage/network-volumes"
+            ]
           },
           {
             "group": "Reference",
@@ -71,49 +80,23 @@
             ]
           }
         ]
-      },
-      {
-        "tab": "Examples",
-        "groups": [
-          {
-            "group": "Introduction",
-            "pages": ["tutorials/introduction/overview"]
-          },
-          {
-            "group": "Bnodes",
-            "pages": [
-              "tutorials/bnodes/run-your-first",
-              "tutorials/bnodes/comfyui",
-              "tutorials/bnodes/run-fooocus",
-              "tutorials/bnodes/run-ollama",
-              "tutorials/bnodes/build-docker-images",
-              "tutorials/bnodes/fine-tune-llm-axolotl"
-            ]
-          }
-        ]
-      }  
+      }
     ]
   },
   "logo": {
-    "dark": "/logo/LogoLight.png",
-    "light": "/logo/LogoLight.png"
+    "dark": "/logo/LogoDark.png",
+    "light": "/logo/LogoLight.png",
+    "href": "https://brightnode.cloud"
   },
-
   "navbar": {
     "links": [
       {
         "label": "Brightnode console",
         "href": "https://console.brightnode.cloud",
         "icon": "square-terminal"
-      },
-      {
-        "label": "brightnode/docs",
-        "href": "https://github.com/brightnode-cloud/docs",
-        "icon": "github"
       }
     ]
   },
-
   "footer": {
     "socials": {
       "discord": "https://discord.gg/xUsSaY2B",

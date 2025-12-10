@@ -3,10 +3,6 @@ title: "Connection options"
 sidebarTitle: "Connection options"
 description: "Explore our Bnode connection options, including the web terminal, SSH, JupyterLab, and VSCode/Cursor."
 ---
- 
-<Frame alt="Bnode connection options">
-  <img src="/images/bnode-connection-options.png" />
-</Frame>
 
 ## Web terminal connection
 
@@ -16,13 +12,14 @@ The availability of the web terminal depends on the [Bnode's template](/bnodes/t
 
 To connect using the web terminal:
 
-1.  Navigate to the [Bnodes page](https://console.brightnode.cloud/bnodes) in the Brightnode console.
-2.  Expand the desired Bnode and select **Connect**.
+1. Navigate to the [Bnodes page](https://console.brightnode.cloud/bnodes) in the Brightnode console.
+2. Expand the desired Bnode and select **Connect**.
 3. If your web terminal is **Stopped**, click **Start**.
-    <Tip>
-    If clicking **Start** does nothing, try refreshing the page.
-    </Tip>
-4.  Click **Open Web Terminal** to open a new tab in your browser with a web terminal session.
+
+   <Tip>
+     If clicking **Start** does nothing, try refreshing the page.
+   </Tip>
+4. Click **Open Web Terminal** to open a new tab in your browser with a web terminal session.
 
 ## JupyterLab connection
 
@@ -30,14 +27,15 @@ JupyterLab provides an interactive, web-based environment for running code, mana
 
 To connect to JupyterLab (if it's available on your Bnode):
 
-1.  Deploy your Bnode, ensuring that the template is configured to run JupyterLab. Official Brightnode templates like "Brightnode Pytorch" are usually compatible.
-2.  Once the Bnode is running, navigate to the [Bnodes page](https://console.brightnode.cloud/bnodes) in the Brightnode console.
-3.  Find the Bnode you created and click the **Connect** button. If it's grayed out, your Bnode hasn't finished starting up yet.
-4.  In the window that opens, under **HTTP Services**, look for a link to **Jupyter Lab** (or a similarly named service on the configured HTTP port, often 8888). Click this link to open the JupyterLab workspace in your browser.
-    <Tip>
-    If the JupyterLab tab displays a blank page for more than a minute or two, try restarting the Bnode and opening it again.
-    </Tip>
-5.  Once in JupyterLab, you can create new notebooks (e.g., under **Notebook**, select **Python 3 (ipykernel)**), upload files, and run code interactively.
+1. Deploy your Bnode, ensuring that the template is configured to run JupyterLab. Official Brightnode templates like "Brightnode Pytorch" are usually compatible.
+2. Once the Bnode is running, navigate to the [Bnodes page](https://console.brightnode.cloud/bnodes) in the Brightnode console.
+3. Find the Bnode you created and click the **Connect** button. If it's grayed out, your Bnode hasn't finished starting up yet.
+4. In the window that opens, under **HTTP Services**, look for a link to **Jupyter Lab** (or a similarly named service on the configured HTTP port, often 8888). Click this link to open the JupyterLab workspace in your browser.
+
+   <Tip>
+     If the JupyterLab tab displays a blank page for more than a minute or two, try restarting the Bnode and opening it again.
+   </Tip>
+5. Once in JupyterLab, you can create new notebooks (e.g., under **Notebook**, select **Python 3 (ipykernel)**), upload files, and run code interactively.
 
 ## SSH terminal connection
 

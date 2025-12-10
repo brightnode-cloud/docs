@@ -1,13 +1,15 @@
 ---
-title: Overview
+title: "Overview"
 description: "Get on-demand access to powerful computing resources."
 ---
 
-<Frame alt="Bnodes deployment options">
-  <img src="/images/bnodes-deploy.png" />
+<Frame>
+  
 </Frame>
 
 Bnodes provide instant access to powerful GPU and CPU resources for AI development, machine learning, rendering, and other compute-intensive workloads.
+
+We have pre-configured GPU environments that are developer friendly in our beta, with options around workloads and storage, but soon you will have full control over your computing environment allowing you to customise you GPU, network and compute environment more comprehensively.
 
 You have full control over your computing environment, allowing you to customize software, storage, and networking to match your exact requirements.
 
@@ -18,11 +20,11 @@ When you're ready to get started, [follow this tutorial](/get-started) to create
 Each Bnode consists of these core components:
 
 - **Container environment**: An Ubuntu Linux-based container that can run almost any compatible software.
-- **Unique identifier**: Each Bnode receives a dynamic ID (e.g., `2s56cp0pof1rmt`) for management and access.
+- **Unique identifier**: Each Bnode receives a dynamic ID (e.g., `pytorch-research-x0453ds`) for management and access.
 - [Storage](#storage-options):
-    - **Container volume**: Houses the operating system and temporary storage.
-    - **Disk volume**: Persistent storage that is preserved between Bnode starts and stops.
-    - **Network volume (optional)**: Permanent, portable storage that can be moved between machines and persists even after Bnode deletion.
+  - **Container volume**: Houses the operating system and temporary storage.
+  - **Disk volume**: Persistent storage that is preserved between Bnode starts and stops.
+  - **Network volume (optional)**: Permanent, portable storage that can be moved between machines and persists even after Bnode deletion.
 - **Hardware resources**: Allocated vCPU, system RAM, and multiple GPUs (based on your selection).
 - **Network connectivity**: A proxy connection enabling web access to any [exposed port](/bnodes/configuration/expose-ports) on your container.
 
@@ -38,9 +40,9 @@ Bnodes offer three types of storage to match different use cases:
 
 Every Bnode comes with a resizable **container disk** that houses the operating system and stores temporary files, which are cleared after the Bnode stops.
 
-**Volume disks** provide persistent storage that is preserved throughout the Bnode's lease, functioning like a dedicated hard drive. Data stored in the volume disk directory (`/workspace` by default) persists when you stop the Bnode, but is erased when the Bnode is deleted. 
+**Volume disks** provide persistent storage that is preserved throughout the Bnode's lease, functioning like a dedicated hard drive. Data stored in the volume disk directory (`/data` by default) persists when you stop the Bnode, but is erased when the Bnode is deleted.
 
-Optional [network volumes](/bnodes/storage/network-volumes) provide more flexible permanent storage that can be transferred between Bnodes, replacing the volume disk when attached. When using a Bnode with network volume attached, you can safely delete your Bnode without losing the data stored in your network volume directory (`/workspace` by default).
+Optional [network volumes](/bnodes/storage/network-volumes) provide more flexible permanent storage that can be transferred between Bnodes, replacing the volume disk when attached. When using a Bnode with network volume attached, you can safely delete your Bnode without losing the data stored in your network volume directory (`/data` by default).
 
 To learn more, see [Storage options](/bnodes/storage/types).
 
@@ -49,14 +51,11 @@ To learn more, see [Storage options](/bnodes/storage/types).
 You can deploy Bnodes in several ways:
 
 - [From a template](https://docs.brightnode.cloud/bnodes/templates/overview): Pre-configured environments for quick setup of common workflows.
-- **Custom containers**: Pull from any compatible container registry such as Docker Hub, GitHub Container Registry, or Amazon ECR.
-- **Custom images**: Build and deploy your own container images.
-- **From Serverless repos**: Deploy any Serverless-compatible repository from the [Brightnode Hub](/hub/overview#deploy-as-a-bnode) directly as a Bnode, providing a cost-effective option for consistent workloads.
+- **Custom containers**: _Coming soon_ Pull from any compatible container registry such as Docker Hub, GitHub Container Registry, or Google Artifact Registry.
+- **Custom images**: \_Coming soon \_Build and deploy your own container images.
 
 <Note>
-
-When building a container image for Brightnode on a Mac (Apple Silicon), use the flag `--platform linux/amd64` to ensure your image is compatible with the platform.
-
+  When building a container image for Brightnode on a Mac (Apple Silicon), use the flag `--platform linux/amd64` to ensure your image is compatible with the platform.
 </Note>
 
 ## Connecting to your Bnode
@@ -65,7 +64,6 @@ Once deployed, you can [connect to your Bnode](/bnodes/connect-to-a-bnode) throu
 
 - **SSH**: Direct [command-line access](/bnodes/configuration/use-ssh) for development and management.
 - **Web proxy**: HTTP access to [exposed web services](/bnodes/configuration/expose-ports) via URLs in the format `https://[bnode-id]-[port].proxy.brightnode.net`.
-- **API**: Programmatic access and control through the [Brightnode API](/api-reference/bnodes/POST/bnodes).
 - **JupyterLab**: A web-based IDE for data science and machine learning.
 - **VSCode/Cursor**: [Connect to your Bnode with VSCode or Cursor](/bnodes/configuration/connect-to-ide), working within your volume directory as if the files were stored on your local machine.
 
@@ -85,10 +83,7 @@ Additionally, you can configure custom start commands, set [environment variable
 
 ## Bnode types
 
-Brightnode offers two types of Bnode:
-
-- **Secure Cloud:** Operates in T3/T4 data centers, providing high reliability and security for enterprise and production workloads.
-- **Community Cloud:** Connects individual compute providers to users through a vetted, secure peer-to-peer system, with competitive pricing options.
+Brightnode offers \*\*Secure Cloud \*\*connections: these operates in T3/T4 data centers, providing high reliability and security for enterprise and production workloads.
 
 ## Deploy a Bnode
 
@@ -102,7 +97,7 @@ Follow these steps to deploy a Bnode:
 
 ## Pricing
 
-Bnodes are billed by the minute with no fees for ingress/egress. Brightnode also offers long-term [savings plans](/bnodes/pricing#savings-plans) for extended usage patterns. See [Bnode pricing](/bnodes/pricing) for details.
+Bnodes are billed by the minute with no fees for ingress. Egress is charged and any outbound data transfers will be billed to your account. Brightnode will soon offer long-term [savings plans](/bnodes/pricing#savings-plans) for extended usage patterns. [Contact us](mailto:help@brightnode.cloud) if you are interested. See [Bnode pricing](/bnodes/pricing) for details.
 
 ## Limitations
 
@@ -116,9 +111,9 @@ Bnodes are billed by the minute with no fees for ingress/egress. Brightnode also
 
 Ready to get started? Explore these pages to learn more:
 
-* [Deploy your first Bnode](/get-started) using this tutorial.
-* [Choose a Bnode](/bnodes/choose-a-bnode) based on your requirements.
-* Learn how to [connect to your Bnode](/bnodes/connect-to-a-bnode) after deployment.
-* Learn how to [manage your Bnodes](/bnodes/manage-bnodes) using the console and CLI.
-* Set up [persistent storage](/bnodes/storage/types) for your data.
-* Configure [global networking](/bnodes/networking) for your applications.
+- [Deploy your first Bnode](/get-started) using this tutorial.
+- [Choose a Bnode](/bnodes/choose-a-bnode) based on your requirements.
+- Learn how to [connect to your Bnode](/bnodes/connect-to-a-bnode) after deployment.
+- Learn how to [manage your Bnodes](/bnodes/manage-bnodes) using the console and CLI.
+- Set up [persistent storage](/bnodes/storage/types) for your data.
+- Configure [global networking](/bnodes/networking) for your applications.

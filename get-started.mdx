@@ -15,42 +15,36 @@ Start by creating a Brightnode account:
 3. Set up two-factor authentication (recommended for security).
 
 <Tip>
-
-Planning to share compute resources with your team? You can convert your personal account to a team account later. See [Manage accounts](/get-started/manage-accounts) for details.
-
+  Planning to share compute resources with your team? You can convert your personal account to a team account later.
 </Tip>
 
 ## Step 2: Deploy a Bnode
 
 Now that you've created your account, you're ready to deploy your first Bnode:
 
-1. Open the [Bnodes page](https://www.console.brightnode.cloud/bnodes) in the web interface.
-2. Click the **Deploy** button.
-3. Select **A40** from the list of graphics cards.
-4. In the field under **Bnode Name**, enter the name **quickstart-bnode**.
-5. Keep all other fields (Bnode Template, GPU Count, and Instance Pricing) on their default settings.
-6. Click **Deploy On-Demand** to deploy and start your Bnode. You'll be redirected back to the Bnodes page after a few seconds.
+1. Open the [Deploy Bnode](https://www.console.brightnode.cloud/deploy) in the web interface.
+2. Step through the options on the page and choose a GPU option
+3. Review your Bnode summary and attach storage if necessary.
+4. In the field under **Bnode Name**, keep the default provided or change the name.
+6. Click **Deploy Bnode** to deploy and start your Bnode. You'll be redirected to the Bnode Management page after a few seconds.
 
 <Note>
-
-If you haven't set up payments yet, you'll be prompted to add a payment method and purchase credits for your account.
-
+  If you haven't set up payments yet, you'll be prompted to add a payment method and purchase credits for your account.
 </Note>
 
 ## Step 3: Explore the Bnode detail pane
 
-On the [Bnodes page](https://www.console.brightnode.cloud/bnodes), click the Bnode you just created to open the Bnode detail pane. The pane opens onto the **Connect** tab, where you'll find options for connecting to your Bnode so you can execute code on your GPU (after it's done initializing which can take 5-6 minutes, hit refresh to check if it is running).
+On the [My Bnodes](https://www.console.brightnode.cloud/my-bnodes) page you can click on the Bnode card to explore Metrics and Logs. You also have action buttons on the card which provide options for connecting to your Bnode so you can execute code on your GPU (after it's done initializing which can take 5-6 minutes, hit refresh to check if it is running). You can connect via web terminal, SSH or Jupyter.
 
-Take a minute to explore the other tabs: 
+Take a minute to explore the other tabs:
 
 - **Details**: Information about your Bnode, such as hardware specs, pricing, and storage.
-- **Telemetry**: Realtime utilization metrics for your Bnode's CPU, memory, and storage.
+- **Metrics**: Realtime utilization metrics for your Bnode's CPU, memory, and storage.
 - **Logs**: Logs streamed from your container (including stdout from any applications inside) and the Bnode management system.
-- **Template Readme**: Details about the template your Bnode is running. Your Bnode is configured with the latest official Brightnode PyTorch template.
 
 ## Step 4: Execute code on your Bnode with JupyterLab
 
-1. Go back to the **Connect** tab, and under **HTTP Services**, click **Jupyter Lab** to open a JupyterLab workspace on your Bnode.
+1. Click on the JupyterLab button to open a JupyterLab workspace on your Bnode.
 2. Under **Notebook**, select **Python 3 (ipykernel)**.
 3. Type `print("Hello, world!")` in the first line of the notebook.
 4. Click the play button to run your code.
@@ -73,26 +67,22 @@ To terminate your Bnode:
 2. Click **Terminate Bnode** to confirm.
 
 <Warning>
+  Terminating a Bnode permanently deletes all data that isn't stored in a [network volume](/storage/network-volumes). Be sure that you've saved any data you might need to access again.
 
-Terminating a Bnode permanently deletes all data that isn't stored in a [network volume](/storage/network-volumes). Be sure that you've saved any data you might need to access again.
-
-To learn more about how storage works, see the [Bnode storage overview](/bnodes/storage/types).
-
+  To learn more about how storage works, see the [Bnode storage overview](/bnodes/storage/types).
 </Warning>
 
 ## Next steps
 
 Now that you've learned the basics, you're ready to:
 
-* [Generate API keys](/get-started/api-keys) for programmatic resource management.
-* Experiment with various options for [accessing and managing Brightnode resources](/get-started/connect-to-Brightnode).
-* Learn how to [choose the right Bnode](/bnodes/choose-a-bnode) for your workload.
-* Review options for [Bnode pricing](/bnodes/pricing).
-* [Explore our tutorials](/tutorials/introduction/overview) for specific AI/ML use cases.
-* Start building production-ready applications with [Brightnode Serverless](/serverless/overview).
+- Experiment with various options for [accessing and managing Brightnode resources](/get-started/connect-to-Brightnode).
+- Learn how to [choose the right Bnode](/bnodes/choose-a-bnode) for your workload.
+- Review options for [Bnode pricing](/bnodes/pricing).
+- [Explore our tutorials](/tutorials/introduction/overview) for specific AI/ML use cases.
 
 ## Need help?
 
-* Join the Brightnode community [on Discord](https://discord.gg/cUpRmau42V).
-* Submit a support request using our [contact page](https://contact.brightnode.cloud/hc/requests/new).
-* Reach out to us via [email](mailto:help@brightnode.cloud).
+- Join the Brightnode community [on Discord](https://discord.gg/cUpRmau42V).
+- Submit a support request using our [contact page](https://contact.brightnode.cloud/hc/requests/new).
+- Reach out to us via [email](mailto:help@brightnode.cloud).

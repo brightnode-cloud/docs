@@ -10,7 +10,7 @@ All billing, including per-hour compute and storage billing, is charged per minu
 Every Bnode has an hourly cost based on [GPU type](/references/gpu-types). Your Brightnode credits are charged every minute the Bnode is running. If you run out of credits, your Bnodes are automatically stopped and you'll receive an email notification. Bnodes are eventually terminated if you don't refill your credits.
 
 <Important>
-Brightnode pre-emptively stops all your Bnodes when your account balance is projected to cover less than 10 minutes of remaining runtime. This ensures your account retains a small balance to help preserve your data volumes. If your balance is completely drained, all Bnodes are subject to deletion. Setting up [automatic payments](https://www.console.brightnode.cloud/user/billing) is recommended to avoid service interruptions.
+  Brightnode pre-emptively stops all your Bnodes when your account balance is projected to cover less than 10 minutes of remaining runtime. This ensures your account retains a small balance to help preserve your data volumes. If your balance is completely drained, all Bnodes are subject to deletion. Setting up [automatic payments](https://www.console.brightnode.cloud/user/billing) is recommended to avoid service interruptions.
 </Important>
 
 You must have at least one hour's worth of runtime in your balance to rent a Bnode at your given spec. If your balance is insufficient, consider renting the Bnode on Spot, depositing additional funds, or lowering your GPU spec requirements.
@@ -28,7 +28,7 @@ Network volumes are billed hourly based on storage size. For storage below 1TB, 
 Network volumes are hosted on storage servers located in the same datacenters where you rent GPU servers. These servers are connected via a high-speed local network (25Gbps to 200Gbps depending on location) and use NVME SSDs for storage.
 
 <Warning>
-If your machine-based storage or network volume is terminated due to lack of funds, that disk space is immediately freed up for use by other clients. Brightnode cannot assist in recovering lost storage. Brightnode is not designed as a cloud storage system—storage is provided to support running tasks on GPUs. Back up critical data regularly to your local machine or a dedicated cloud storage provider.
+  If your machine-based storage or network volume is terminated due to lack of funds, that disk space is immediately freed up for use by other clients. Brightnode cannot assist in recovering lost storage. Brightnode is not designed as a cloud storage system—storage is provided to support running tasks on GPUs. Back up critical data regularly to your local machine or a dedicated cloud storage provider.
 </Warning>
 
 ## Refunds and withdrawals
@@ -48,9 +48,6 @@ Spending limits are implemented for newer accounts to prevent fraud. These limit
 Brightnode accepts several payment methods for funding your account:
 
 1. **Credit Card**: You can use your credit card to fund your Brightnode account. However, be aware that card declines are more common than you might think, and the reasons for them might not always be clear. If you're using a prepaid card, it's recommended to deposit in transactions of at least \$100 to avoid unexpected blocks due to Stripe's minimums for prepaid cards. For more information, review [cards accepted by Stripe](https://stripe.com/docs/payments/cards/supported-card-brands?ref=blog.brightnode.cloud).
-
-2) **Crypto Payments**: Brightnode also accepts crypto payments. It's recommended to set up a [crypto.com](https://crypto.com/?ref=blog.brightnode.cloud) account and go through any KYC checks they may require ahead of time. This provides an alternate way of funding your account in case you run into issues with card payment.
-
 3. **Business Invoicing**: For large transactions (over \$5,000), Brightnode offers business invoicing through ACH, credit card, Coinbase, and local and international wire transfers.
 
 If you're having trouble with your card payments, you can contact [Brightnode support](https://www.brightnode.cloud/contact) for assistance.
