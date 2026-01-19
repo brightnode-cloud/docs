@@ -88,8 +88,8 @@ To list the local models available in Ollama, you can use the following GET requ
 <Tabs>
 <Tab title="cURl">
 ```bash
-curl https://{POD_ID}-11434.proxy.brightnode.net/api/tags
-# curl https://cmko4ns22b84xo-11434.proxy.brightnode.net/api/tags
+curl https://{POD_ID}-11434.brightnode.cloud/api/tags
+# curl https://cmko4ns22b84xo-11434.brightnode.cloud/api/tags
 ```
 
 Replace `[your-bnode-id]` with your actual Bnode Id.
@@ -132,7 +132,7 @@ Getting a list of available models is great, but how do you send an HTTP request
 To make an HTTP request against your Bnode, you can use the Ollama interface with your Bnode Id.
 
 ```javascript
-curl -X POST https://{POD_ID}-11434.proxy.brightnode.net/api/generate -d '{
+curl -X POST https://{POD_ID}-11434.brightnode.cloud/api/generate -d '{
   "model": "mistral",
   "prompt":"Here is a story about llamas eating grass"
  }'

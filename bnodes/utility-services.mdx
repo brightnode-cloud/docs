@@ -4,9 +4,9 @@ sidebarTitle: "Utility services"
 description: "Access development tools, monitoring, and ML services included with every Pod."
 ---
 
-Every Runpod Pod comes with a suite of pre-configured utility services that provide web-based development environments, system monitoring, and machine learning tools. These services run automatically when your Pod starts and are accessible via secure HTTPS URLs.
+Every Brightnode Pod comes with a suite of pre-configured utility services that provide web-based development environments, system monitoring, and machine learning tools. These services run automatically when your Pod starts and are accessible via secure HTTPS URLs.
 
-All utility services are accessed through your browser using unique hostnames in the format `https://[service]-[pod-id].proxy.runpod.net`. No additional configuration or installation is required—everything works out of the box.
+All utility services are accessed through your browser using unique hostnames in the format `https://[service]-[pod-id].brightnode.cloud`. No additional configuration or installation is required—everything works out of the box.
 
 ## Available services
 
@@ -222,7 +222,7 @@ After starting a vLLM server with your model, you can send requests using the Op
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api-[your-pod-id].proxy.runpod.net/v1",
+    base_url="https://api-[your-pod-id].brightnode.cloud/v1",
     api_key="your-api-key"  # Optional
 )
 
@@ -301,13 +301,13 @@ The gallery automatically serves images from `/workspace/ComfyUI/output/`, makin
 
 All HTTP services follow a consistent URL pattern based on your Pod ID. When you open the **Connect** tab in your Pod detail pane, you'll see all available services with clickable links.
 
-**URL format:** `https://[service]-[pod-id].proxy.runpod.net`
+**URL format:** `https://[service]-[pod-id].brightnode.cloud`
 
 For example, if your Pod ID is `2s56cp0pof1rmt`:
-- JupyterLab: `https://jupyter-2s56cp0pof1rmt.proxy.runpod.net`
-- VS Code: `https://vscode-2s56cp0pof1rmt.proxy.runpod.net`
-- Monitor: `https://monitor-2s56cp0pof1rmt.proxy.runpod.net`
-- Files: `https://files-2s56cp0pof1rmt.proxy.runpod.net`
+- JupyterLab: `https://jupyter-2s56cp0pof1rmt.brightnode.cloud`
+- VS Code: `https://vscode-2s56cp0pof1rmt.brightnode.cloud`
+- Monitor: `https://monitor-2s56cp0pof1rmt.brightnode.cloud`
+- Files: `https://files-2s56cp0pof1rmt.brightnode.cloud`
 
 <Tip>
 All service URLs use HTTPS with automatic TLS certificates, ensuring your data is encrypted in transit.
@@ -321,7 +321,7 @@ Some services require authentication. You can set credentials when creating your
 
 When deploying a Pod through the web console:
 
-1. Navigate to the [Pod creation page](https://console.runpod.io/pod/create).
+1. Navigate to the [Pod creation page](https://console.brightnode.cloud/pod/create).
 2. Scroll to **Environment Variables**.
 3. Click **Add Environment Variable**.
 4. Add your desired variables:
@@ -337,13 +337,13 @@ When deploying a Pod through the web console:
 When creating a Pod via the API, include environment variables in your request:
 
 ```bash
-curl -X POST https://api.runpod.io/v2/pods \
+curl -X POST https://api.brightnode.io/v2/pods \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "cloudType": "SECURE",
     "gpuTypeId": "NVIDIA RTX A4000",
-    "templateId": "runpod-pytorch",
+    "templateId": "brightnode-pytorch",
     "env": {
       "JUPYTER_PASSWORD": "my-secure-password",
       "CODE_SERVER_PASSWORD": "another-password",
@@ -395,8 +395,8 @@ This workflow provides a complete remote development environment.
 4. Use SSH from your local terminal for additional access or file transfers:
 
 ```bash
-ssh root@[pod-id].proxy.runpod.net
-scp local-file.py root@[pod-id].proxy.runpod.net:/workspace/
+ssh root@[pod-id].brightnode.cloud
+scp local-file.py root@[pod-id].brightnode.cloud:/workspace/
 ```
 
 ### ComfyUI + Gallery workflow
@@ -443,13 +443,13 @@ For SSH access, use key-based authentication instead of passwords:
 1. Generate an SSH key pair on your local machine:
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_runpod
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_brightnode
 ```
 
 2. Copy your public key:
 
 ```bash
-cat ~/.ssh/id_ed25519_runpod.pub
+cat ~/.ssh/id_ed25519_brightnode.pub
 ```
 
 3. Add the public key to your Pod's `PUBLIC_KEY` environment variable when deploying.
@@ -475,7 +475,7 @@ If a service loads but shows a blank page:
 4. Verify the service is running by SSHing into your Pod and checking processes:
 
 ```bash
-ssh root@[pod-id].proxy.runpod.net
+ssh root@[pod-id].brightnode.cloud
 ps aux | grep jupyter  # Or code-server, glances, etc.
 ```
 
@@ -505,7 +505,7 @@ If a service has crashed, you can restart it manually via SSH:
 
 ```bash
 # SSH into your Pod
-ssh root@[pod-id].proxy.runpod.net
+ssh root@[pod-id].brightnode.cloud
 
 # Check if service is running
 ps aux | grep jupyter

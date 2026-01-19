@@ -30,7 +30,7 @@ Each Pod consists of these core components:
 
 [Pod templates](/pods/templates/overview) are pre-configured Docker image setups that let you quickly spin up Pods without manual environment configuration. They're essentially deployment configurations that include specific models, frameworks, or workflows bundled together.
 
-Templates eliminate the need to manually set up environments, saving time and reducing configuration errors. For example, instead of installing PyTorch, configuring JupyterLab, and setting up all dependencies yourself, you can select an official Runpod PyTorch template and have everything ready to go instantly.
+Templates eliminate the need to manually set up environments, saving time and reducing configuration errors. For example, instead of installing PyTorch, configuring JupyterLab, and setting up all dependencies yourself, you can select an official Brightnode PyTorch template and have everything ready to go instantly.
 
 ## Storage
 
@@ -48,14 +48,14 @@ To learn more, see [Storage options](/pods/storage/types).
 
 You can deploy Pods in several ways:
 
-- [From a template](https://docs.runpod.io/pods/templates/overview): Pre-configured environments for quick setup of common workflows.
+- [From a template](https://docs.brightnode.io/pods/templates/overview): Pre-configured environments for quick setup of common workflows.
 - **Custom containers**: Pull from any compatible container registry such as Docker Hub, GitHub Container Registry, or Amazon ECR.
 - **Custom images**: Build and deploy your own container images.
-- **From Serverless repos**: Deploy any Serverless-compatible repository from the [Runpod Hub](/hub/overview#deploy-as-a-pod) directly as a Pod, providing a cost-effective option for consistent workloads.
+- **From Serverless repos**: Deploy any Serverless-compatible repository from the [Brightnode Hub](/hub/overview#deploy-as-a-pod) directly as a Pod, providing a cost-effective option for consistent workloads.
 
 <Note>
 
-When building a container image for Runpod on a Mac (Apple Silicon), use the flag `--platform linux/amd64` to ensure your image is compatible with the platform.
+When building a container image for Brightnode on a Mac (Apple Silicon), use the flag `--platform linux/amd64` to ensure your image is compatible with the platform.
 
 </Note>
 
@@ -78,14 +78,14 @@ To learn more about all available services and how to use them, see [Built-in ut
 Once deployed, you can [connect to your Pod](/pods/connect-to-a-pod) through:
 
 - **SSH**: Direct [command-line access](/pods/configuration/use-ssh) for development and management.
-- **Web proxy**: HTTP access to [exposed web services](/pods/configuration/expose-ports) via URLs in the format `https://[pod-id]-[port].proxy.runpod.net`.
-- **API**: Programmatic access and control through the [Runpod API](/api-reference/pods/POST/pods).
+- **Web proxy**: HTTP access to [exposed web services](/pods/configuration/expose-ports) via URLs in the format `https://[pod-id]-[port].brightnode.cloud`.
+- **API**: Programmatic access and control through the [Brightnode API](/api-reference/pods/POST/pods).
 - **Built-in services**: Pre-configured [utility services](/pods/utility-services) like JupyterLab, VS Code, and monitoring tools.
 - **VSCode/Cursor**: [Connect to your Pod with VSCode or Cursor](/pods/configuration/connect-to-ide), working within your volume directory as if the files were stored on your local machine.
 
 ## Data transfer
 
-You can transfer data from your Pod to [most major cloud providers](/pods/storage/cloud-sync), and to your local machine using the [Runpod CLI](/runpodctl/overview).
+You can transfer data from your Pod to [most major cloud providers](/pods/storage/cloud-sync), and to your local machine using the [Brightnode CLI](/brightnodectl/overview).
 
 To learn more about all available options, see [Transfer files](/pods/storage/transfer-files).
 
@@ -99,7 +99,7 @@ Additionally, you can configure custom start commands, set [environment variable
 
 ## Pod types
 
-Runpod offers two types of Pod:
+Brightnode offers two types of Pod:
 
 - **Secure Cloud:** Operates in T3/T4 data centers, providing high reliability and security for enterprise and production workloads.
 - **Community Cloud:** Connects individual compute providers to users through a vetted, secure peer-to-peer system, with competitive pricing options.
@@ -109,18 +109,18 @@ Runpod offers two types of Pod:
 Follow these steps to deploy a Pod:
 
 1. [Choose a Pod](/pods/choose-a-pod) based on your computing needs and budget.
-2. Navigate to the [Pod creation page](https://console.runpod.io/pod/create).
+2. Navigate to the [Pod creation page](https://console.brightnode.cloud/pod/create).
 3. Configure your Pod settings, including GPU type, storage, and networking options.
 4. Launch your Pod and connect using SSH, JupyterLab, or your preferred remote access method.
-5. [Manage your Pod](/pods/manage-pods) through the Runpod console.
+5. [Manage your Pod](/pods/manage-pods) through the Brightnode console.
 
 ## Pricing
 
-Pods are billed by the minute with no fees for ingress/egress. Runpod also offers long-term [savings plans](/pods/pricing#savings-plans) for extended usage patterns. See [Pod pricing](/pods/pricing) for details.
+Pods are billed by the minute with no fees for ingress/egress. Brightnode also offers long-term [savings plans](/pods/pricing#savings-plans) for extended usage patterns. See [Pod pricing](/pods/pricing) for details.
 
 ## Limitations
 
-**Docker Compose is not supported:** Runpod runs Docker for you, so you cannot spin up your own Docker instance or use Docker Compose on Pods. If your workflow requires Docker Compose, create a custom template with a pre-built Docker image that contains all necessary components.
+**Docker Compose is not supported:** Brightnode runs Docker for you, so you cannot spin up your own Docker instance or use Docker Compose on Pods. If your workflow requires Docker Compose, create a custom template with a pre-built Docker image that contains all necessary components.
 
 **UDP connections are not supported:** Pods only support TCP and HTTP connections. If your application relies on UDP, you'll need to modify your application to use TCP-based communication instead.
 
