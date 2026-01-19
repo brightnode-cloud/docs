@@ -31,3 +31,12 @@ helpers/__pycache__/** */
 
 CLAUDE.md
 /.mintlify-last
+
+# Runpod template files (not needed for Brightnode)
+logo/Black.svg
+logo/White.svg
+logo/Color.svg
+logo/IconDefault.svg
+logo/*square*.svg
+images/browse-pod-templates.png
+helpers/requirements.txt
