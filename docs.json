@@ -49,6 +49,7 @@
               "bnodes/pricing",
               "bnodes/choose-a-bnode",
               "bnodes/manage-bnodes",
+              "bnodes/utility-services",
               {
                 "group": "Connect to Bnodes",
                 "pages": [

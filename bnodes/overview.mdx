@@ -1,119 +1,138 @@
 ---
-title: "Overview"
+title: Overview
 description: "Get on-demand access to powerful computing resources."
 ---
 
-<Frame>
-  
+<Frame alt="Pods deployment options">
+  <img src="/images/pods-deploy.png" />
 </Frame>
 
-Bnodes provide instant access to powerful GPU and CPU resources for AI development, machine learning, rendering, and other compute-intensive workloads.
-
-We have pre-configured GPU environments that are developer friendly in our beta, with options around workloads and storage, but soon you will have full control over your computing environment allowing you to customise you GPU, network and compute environment more comprehensively.
+Pods provide instant access to powerful GPU and CPU resources for AI development, machine learning, rendering, and other compute-intensive workloads.
 
 You have full control over your computing environment, allowing you to customize software, storage, and networking to match your exact requirements.
 
-When you're ready to get started, [follow this tutorial](/get-started) to create an account and deploy your first Bnode.
+When you're ready to get started, [follow this tutorial](/get-started) to create an account and deploy your first Pod.
 
 ## Key components
 
-Each Bnode consists of these core components:
+Each Pod consists of these core components:
 
 - **Container environment**: An Ubuntu Linux-based container that can run almost any compatible software.
-- **Unique identifier**: Each Bnode receives a dynamic ID (e.g., `pytorch-research-x0453ds`) for management and access.
+- **Unique identifier**: Each Pod receives a dynamic ID (e.g., `2s56cp0pof1rmt`) for management and access.
 - [Storage](#storage-options):
-  - **Container volume**: Houses the operating system and temporary storage.
-  - **Disk volume**: Persistent storage that is preserved between Bnode starts and stops.
-  - **Network volume (optional)**: Permanent, portable storage that can be moved between machines and persists even after Bnode deletion.
+    - **Container volume**: Houses the operating system and temporary storage.
+    - **Disk volume**: Persistent storage that is preserved between Pod starts and stops.
+    - **Network volume (optional)**: Permanent, portable storage that can be moved between machines and persists even after Pod deletion.
 - **Hardware resources**: Allocated vCPU, system RAM, and multiple GPUs (based on your selection).
-- **Network connectivity**: A proxy connection enabling web access to any [exposed port](/bnodes/configuration/expose-ports) on your container.
+- **Network connectivity**: A proxy connection enabling web access to any [exposed port](/pods/configuration/expose-ports) on your container.
 
-## Bnode templates
+## Pod templates
 
-[Bnode templates](/bnodes/templates/overview) are pre-configured Docker image setups that let you quickly spin up Bnodes without manual environment configuration. They're essentially deployment configurations that include specific models, frameworks, or workflows bundled together.
+[Pod templates](/pods/templates/overview) are pre-configured Docker image setups that let you quickly spin up Pods without manual environment configuration. They're essentially deployment configurations that include specific models, frameworks, or workflows bundled together.
 
-Templates eliminate the need to manually set up environments, saving time and reducing configuration errors. For example, instead of installing PyTorch, configuring JupyterLab, and setting up all dependencies yourself, you can select an official Brightnode PyTorch template and have everything ready to go instantly.
+Templates eliminate the need to manually set up environments, saving time and reducing configuration errors. For example, instead of installing PyTorch, configuring JupyterLab, and setting up all dependencies yourself, you can select an official Runpod PyTorch template and have everything ready to go instantly.
 
 ## Storage
 
-Bnodes offer three types of storage to match different use cases:
+Pods offer three types of storage to match different use cases:
 
-Every Bnode comes with a resizable **container disk** that houses the operating system and stores temporary files, which are cleared after the Bnode stops.
+Every Pod comes with a resizable **container disk** that houses the operating system and stores temporary files, which are cleared after the Pod stops.
 
-**Volume disks** provide persistent storage that is preserved throughout the Bnode's lease, functioning like a dedicated hard drive. Data stored in the volume disk directory (`/data` by default) persists when you stop the Bnode, but is erased when the Bnode is deleted.
+**Volume disks** provide persistent storage that is preserved throughout the Pod's lease, functioning like a dedicated hard drive. Data stored in the volume disk directory (`/workspace` by default) persists when you stop the Pod, but is erased when the Pod is deleted. 
 
-Optional [network volumes](/bnodes/storage/network-volumes) provide more flexible permanent storage that can be transferred between Bnodes, replacing the volume disk when attached. When using a Bnode with network volume attached, you can safely delete your Bnode without losing the data stored in your network volume directory (`/data` by default).
+Optional [network volumes](/pods/storage/network-volumes) provide more flexible permanent storage that can be transferred between Pods, replacing the volume disk when attached. When using a Pod with network volume attached, you can safely delete your Pod without losing the data stored in your network volume directory (`/workspace` by default).
 
-To learn more, see [Storage options](/bnodes/storage/types).
+To learn more, see [Storage options](/pods/storage/types).
 
 ## Deployment options
 
-You can deploy Bnodes in several ways:
+You can deploy Pods in several ways:
 
-- [From a template](https://docs.brightnode.cloud/bnodes/templates/overview): Pre-configured environments for quick setup of common workflows.
-- **Custom containers**: _Coming soon_ Pull from any compatible container registry such as Docker Hub, GitHub Container Registry, or Google Artifact Registry.
-- **Custom images**: \_Coming soon \_Build and deploy your own container images.
+- [From a template](https://docs.runpod.io/pods/templates/overview): Pre-configured environments for quick setup of common workflows.
+- **Custom containers**: Pull from any compatible container registry such as Docker Hub, GitHub Container Registry, or Amazon ECR.
+- **Custom images**: Build and deploy your own container images.
+- **From Serverless repos**: Deploy any Serverless-compatible repository from the [Runpod Hub](/hub/overview#deploy-as-a-pod) directly as a Pod, providing a cost-effective option for consistent workloads.
 
 <Note>
-  When building a container image for Brightnode on a Mac (Apple Silicon), use the flag `--platform linux/amd64` to ensure your image is compatible with the platform.
+
+When building a container image for Runpod on a Mac (Apple Silicon), use the flag `--platform linux/amd64` to ensure your image is compatible with the platform.
+
 </Note>
 
-## Connecting to your Bnode
+## Built-in utility services
 
-Once deployed, you can [connect to your Bnode](/bnodes/connect-to-a-bnode) through:
+Every Pod comes with pre-configured utility services for development, monitoring, and ML workflows. These services run automatically and are accessible via your browser with no additional setup required.
 
-- **SSH**: Direct [command-line access](/bnodes/configuration/use-ssh) for development and management.
-- **Web proxy**: HTTP access to [exposed web services](/bnodes/configuration/expose-ports) via URLs in the format `https://[bnode-id]-[port].proxy.brightnode.net`.
-- **JupyterLab**: A web-based IDE for data science and machine learning.
-- **VSCode/Cursor**: [Connect to your Bnode with VSCode or Cursor](/bnodes/configuration/connect-to-ide), working within your volume directory as if the files were stored on your local machine.
+**All templates include:**
+- **JupyterLab**: Interactive notebooks with Python and GPU support.
+- **VS Code Server**: Full IDE running in your browser.
+- **System Monitor**: Real-time CPU, GPU, and memory statistics.
+- **File Browser**: Web-based file upload and download interface.
+
+Specialized templates include additional tools like TensorBoard for PyTorch/TensorFlow, vLLM API server for LLM inference, Open WebUI for chat interfaces, and ComfyUI for Stable Diffusion workflows.
+
+To learn more about all available services and how to use them, see [Built-in utility services](/pods/utility-services).
+
+## Connecting to your Pod
+
+Once deployed, you can [connect to your Pod](/pods/connect-to-a-pod) through:
+
+- **SSH**: Direct [command-line access](/pods/configuration/use-ssh) for development and management.
+- **Web proxy**: HTTP access to [exposed web services](/pods/configuration/expose-ports) via URLs in the format `https://[pod-id]-[port].proxy.runpod.net`.
+- **API**: Programmatic access and control through the [Runpod API](/api-reference/pods/POST/pods).
+- **Built-in services**: Pre-configured [utility services](/pods/utility-services) like JupyterLab, VS Code, and monitoring tools.
+- **VSCode/Cursor**: [Connect to your Pod with VSCode or Cursor](/pods/configuration/connect-to-ide), working within your volume directory as if the files were stored on your local machine.
 
 ## Data transfer
 
-You can transfer data from your Bnode to [most major cloud providers](/bnodes/storage/cloud-sync), and to your local machine using the [Brightnode CLI](/brightnodectl/overview).
+You can transfer data from your Pod to [most major cloud providers](/pods/storage/cloud-sync), and to your local machine using the [Runpod CLI](/runpodctl/overview).
 
-To learn more about all available options, see [Transfer files](/bnodes/storage/transfer-files).
+To learn more about all available options, see [Transfer files](/pods/storage/transfer-files).
 
 ## Customization options
 
-Bnodes offer extensive customization to match your specific requirements.
+Pods offer extensive customization to match your specific requirements.
 
 You can select your preferred [GPU type](/references/gpu-types) and quantity, adjust system disk size, and specify your container image.
 
-Additionally, you can configure custom start commands, set [environment variables](/bnodes/references/environment-variables), define [exposed HTTP/TCP ports](/bnodes/configuration/expose-ports), and implement various [storage configurations](bnodes/storage/types) to optimize your Bnode for your specific workload.
+Additionally, you can configure custom start commands, set [environment variables](/pods/references/environment-variables), define [exposed HTTP/TCP ports](/pods/configuration/expose-ports), and implement various [storage configurations](pods/storage/types) to optimize your Pod for your specific workload.
 
-## Bnode types
+## Pod types
 
-Brightnode offers \*\*Secure Cloud \*\*connections: these operates in T3/T4 data centers, providing high reliability and security for enterprise and production workloads.
+Runpod offers two types of Pod:
 
-## Deploy a Bnode
+- **Secure Cloud:** Operates in T3/T4 data centers, providing high reliability and security for enterprise and production workloads.
+- **Community Cloud:** Connects individual compute providers to users through a vetted, secure peer-to-peer system, with competitive pricing options.
 
-Follow these steps to deploy a Bnode:
+## Deploy a Pod
 
-1. [Choose a Bnode](/bnodes/choose-a-bnode) based on your computing needs and budget.
-2. Navigate to the [Bnode creation page](https://console.brightnode.cloud/bnode/create).
-3. Configure your Bnode settings, including GPU type, storage, and networking options.
-4. Launch your Bnode and connect using SSH, JupyterLab, or your preferred remote access method.
-5. [Manage your Bnode](/bnodes/manage-bnodes) through the Brightnode console.
+Follow these steps to deploy a Pod:
+
+1. [Choose a Pod](/pods/choose-a-pod) based on your computing needs and budget.
+2. Navigate to the [Pod creation page](https://console.runpod.io/pod/create).
+3. Configure your Pod settings, including GPU type, storage, and networking options.
+4. Launch your Pod and connect using SSH, JupyterLab, or your preferred remote access method.
+5. [Manage your Pod](/pods/manage-pods) through the Runpod console.
 
 ## Pricing
 
-Bnodes are billed by the minute with no fees for ingress. Egress is charged and any outbound data transfers will be billed to your account. Brightnode will soon offer long-term [savings plans](/bnodes/pricing#savings-plans) for extended usage patterns. [Contact us](mailto:help@brightnode.cloud) if you are interested. See [Bnode pricing](/bnodes/pricing) for details.
+Pods are billed by the minute with no fees for ingress/egress. Runpod also offers long-term [savings plans](/pods/pricing#savings-plans) for extended usage patterns. See [Pod pricing](/pods/pricing) for details.
 
 ## Limitations
 
-**Docker Compose is not supported:** Brightnode runs Docker for you, so you cannot spin up your own Docker instance or use Docker Compose on Bnodes. If your workflow requires Docker Compose, create a custom template with a pre-built Docker image that contains all necessary components.
+**Docker Compose is not supported:** Runpod runs Docker for you, so you cannot spin up your own Docker instance or use Docker Compose on Pods. If your workflow requires Docker Compose, create a custom template with a pre-built Docker image that contains all necessary components.
 
-**UDP connections are not supported:** Bnodes only support TCP and HTTP connections. If your application relies on UDP, you'll need to modify your application to use TCP-based communication instead.
+**UDP connections are not supported:** Pods only support TCP and HTTP connections. If your application relies on UDP, you'll need to modify your application to use TCP-based communication instead.
 
-**Windows support:** Bnodes do not currently support Windows.
+**Windows support:** Pods do not currently support Windows.
 
 ## Next steps
 
 Ready to get started? Explore these pages to learn more:
 
-- [Deploy your first Bnode](/get-started) using this tutorial.
-- [Choose a Bnode](/bnodes/choose-a-bnode) based on your requirements.
-- Learn how to [connect to your Bnode](/bnodes/connect-to-a-bnode) after deployment.
-- Learn how to [manage your Bnodes](/bnodes/manage-bnodes) using the console and CLI.
-- Set up [persistent storage](/bnodes/storage/types) for your data.
-- Configure [global networking](/bnodes/networking) for your applications.
+* [Deploy your first Pod](/get-started) using this tutorial.
+* [Choose a Pod](/pods/choose-a-pod) based on your requirements.
+* Learn how to [connect to your Pod](/pods/connect-to-a-pod) after deployment.
+* Learn how to [manage your Pods](/pods/manage-pods) using the console and CLI.
+* Set up [persistent storage](/pods/storage/types) for your data.
+* Configure [global networking](/pods/networking) for your applications.

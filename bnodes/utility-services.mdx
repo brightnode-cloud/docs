@@ -1,0 +1,525 @@
+---
+title: "Built-in utility services"
+sidebarTitle: "Utility services"
+description: "Access development tools, monitoring, and ML services included with every Pod."
+---
+
+Every Runpod Pod comes with a suite of pre-configured utility services that provide web-based development environments, system monitoring, and machine learning tools. These services run automatically when your Pod starts and are accessible via secure HTTPS URLs.
+
+All utility services are accessed through your browser using unique hostnames in the format `https://[service]-[pod-id].proxy.runpod.net`. No additional configuration or installation is required—everything works out of the box.
+
+## Available services
+
+The specific services available depend on which template you're using. All Pods include base services, while specialized templates include additional tools.
+
+### Base services
+
+These services are available in all Pod templates.
+
+#### JupyterLab
+
+An interactive development environment with support for Python notebooks, web terminal access, and file management. JupyterLab is ideal for data science work, prototyping ML models, and running experiments with full GPU access.
+
+**Access:** Find the **Jupyter Lab** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** Password-protected. Set your password using the `JUPYTER_PASSWORD` environment variable when deploying your Pod, or use the default password shown in your Pod's logs.
+
+**Key features:**
+- Python notebooks with ipykernel.
+- Integrated web terminal.
+- File browser and editor.
+- Extensions for widgets and archiving.
+
+#### VS Code Server
+
+A full-featured Visual Studio Code IDE running entirely in your browser. VS Code Server provides the complete desktop VS Code experience with extensions, integrated terminal, Git integration, and IntelliSense.
+
+**Access:** Find the **VS Code** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** Password-protected. The system auto-generates a password (visible in your Pod logs), or you can set your own using the `CODE_SERVER_PASSWORD` environment variable.
+
+**Key features:**
+- Complete VS Code interface.
+- Extension marketplace support.
+- Integrated terminal with full shell access.
+- Git operations and version control.
+- IntelliSense for code completion.
+- Debugging support.
+
+<Tip>
+VS Code Server is perfect for larger projects where you need a full IDE experience without installing remote development extensions on your local machine.
+</Tip>
+
+#### System Monitor
+
+A real-time system monitoring dashboard powered by Glances that displays CPU, GPU, memory, disk, and network statistics. Monitor your Pod's resource utilization at a glance to optimize performance and troubleshoot issues.
+
+**Access:** Find the **Monitor** or **Glances** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** None (read-only access).
+
+**Key features:**
+- GPU utilization and temperature.
+- Per-core CPU usage.
+- Memory and swap usage.
+- Disk I/O statistics.
+- Network traffic monitoring.
+- Process list with resource usage.
+
+#### File Browser
+
+A web-based file manager that lets you upload, download, and manage files on your Pod without using command-line tools. File Browser provides a simple interface for transferring data and organizing your workspace.
+
+**Access:** Find the **Files** or **File Browser** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** None (per-user instance).
+
+**Key features:**
+- Drag-and-drop file uploads.
+- Download files and folders.
+- Create and delete directories.
+- File preview for common formats.
+- Archive creation and extraction.
+
+<Note>
+File Browser operates on your entire Pod filesystem. Your persistent data is typically stored in `/workspace`.
+</Note>
+
+### PyTorch template services
+
+These additional services are available when using PyTorch templates.
+
+#### TensorBoard
+
+A visualization toolkit for machine learning experiments that helps you track metrics, visualize model graphs, and analyze training performance. TensorBoard reads log files from your training runs and presents them in an intuitive dashboard.
+
+**Access:** Find the **TensorBoard** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** None.
+
+**Key features:**
+- Training metrics visualization (loss, accuracy, etc.).
+- Model graph visualization.
+- Embedding projector for high-dimensional data.
+- Profiler for performance analysis.
+
+**Example usage:**
+
+To log metrics from your PyTorch training script:
+
+```python
+from torch.utils.tensorboard import SummaryWriter
+
+writer = SummaryWriter('/workspace/logs')
+
+for epoch in range(num_epochs):
+    # Training code here
+    writer.add_scalar('Loss/train', loss, epoch)
+    writer.add_scalar('Accuracy/train', accuracy, epoch)
+
+writer.close()
+```
+
+Then access TensorBoard via the provided HTTP service link. TensorBoard will automatically read logs from `/workspace/logs`.
+
+#### Gradio Demo
+
+A pre-configured Gradio application that provides a starting point for creating ML demos and interactive interfaces. The demo app includes GPU information and a simple image processing example that you can customize for your own models.
+
+**Access:** Find the **Gradio** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** None.
+
+**Key features:**
+- GPU information display.
+- Sample image processing demo.
+- Easy customization for your models.
+- Shareable web interface.
+
+**Customizing the demo:**
+
+The demo app is located at `/workspace/gradio_demo.py`. You can edit this file to create interfaces for your own models:
+
+```python
+import gradio as gr
+import torch
+
+def my_model_inference(image):
+    # Your model code here
+    return processed_image
+
+demo = gr.Interface(
+    fn=my_model_inference,
+    inputs=gr.Image(type="pil"),
+    outputs=gr.Image(type="pil"),
+    title="My Custom Model"
+)
+
+demo.launch(server_name="0.0.0.0", server_port=7860)
+```
+
+After editing, restart the Gradio service or restart your Pod to see your changes.
+
+#### Streamlit Demo
+
+A pre-configured Streamlit application for building interactive data science dashboards and ML visualizations. The demo includes PyTorch version information, GPU statistics, and an example of interactive tensor generation.
+
+**Access:** Find the **Streamlit** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** None.
+
+**Key features:**
+- PyTorch and CUDA version info.
+- Real-time GPU statistics.
+- Interactive tensor generation examples.
+- Easy customization for your apps.
+
+**Customizing the demo:**
+
+The demo app is located at `/workspace/streamlit_demo.py`. Modify it to create your own dashboards:
+
+```python
+import streamlit as st
+import torch
+
+st.title("My ML Dashboard")
+
+if st.button("Run Inference"):
+    # Your model code here
+    result = model.predict(input_data)
+    st.write(result)
+```
+
+After editing, restart the Streamlit service or restart your Pod to see your changes.
+
+### TensorFlow template services
+
+TensorFlow templates include the same ML tools as PyTorch templates (TensorBoard, Gradio, and Streamlit), but with TensorFlow-specific examples and configurations.
+
+### vLLM template services
+
+These specialized services are available when using vLLM templates for large language model inference.
+
+#### vLLM API Server
+
+An OpenAI-compatible API server for high-throughput LLM inference using PagedAttention and continuous batching. The vLLM API server provides a drop-in replacement for OpenAI's API with significantly better performance for self-hosted models.
+
+**Access:** Find the **API** or **vLLM** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** Optional API key (recommended for production).
+
+**Key features:**
+- OpenAI API compatibility.
+- High-throughput inference with PagedAttention.
+- Continuous batching for multiple requests.
+- Quantization support (4-bit, 8-bit, GPTQ, AWQ).
+
+**Example usage:**
+
+After starting a vLLM server with your model, you can send requests using the OpenAI Python client:
+
+```python
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://api-[your-pod-id].proxy.runpod.net/v1",
+    api_key="your-api-key"  # Optional
+)
+
+response = client.chat.completions.create(
+    model="meta-llama/Llama-3.2-8B-Instruct",
+    messages=[
+        {"role": "user", "content": "Hello!"}
+    ]
+)
+
+print(response.choices[0].message.content)
+```
+
+#### Open WebUI
+
+A ChatGPT-style web interface for interacting with your LLMs. Open WebUI connects to your vLLM API server and provides a user-friendly chat interface with conversation history, markdown rendering, and code syntax highlighting.
+
+**Access:** Find the **Chat** or **Open WebUI** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** Built-in user management system.
+
+**Key features:**
+- ChatGPT-style chat interface.
+- Conversation history.
+- Multiple model support.
+- Markdown and code rendering.
+- File uploads (for vision models).
+
+**Configuration:**
+
+On first access, Open WebUI will prompt you to create an admin account. After logging in, configure the connection to your vLLM API server:
+
+1. Click **Settings** (gear icon).
+2. Navigate to **Connections** → **OpenAI API**.
+3. Set **Base URL** to `http://localhost:8000/v1`.
+4. Save your settings.
+
+Now you can chat with your model through a familiar interface.
+
+### ComfyUI template services
+
+These services are available when using ComfyUI templates for Stable Diffusion image generation.
+
+#### ComfyUI
+
+A node-based interface for Stable Diffusion workflows. ComfyUI lets you build complex image generation pipelines using a visual workflow editor with support for custom nodes, LoRAs, ControlNet, and more.
+
+**Access:** Find the **ComfyUI** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** None.
+
+**Key features:**
+- Visual workflow builder with node graphs.
+- ComfyUI Manager pre-installed for easy extension management.
+- Custom nodes support.
+- Civitai integration for model downloads.
+- LoRA and ControlNet support.
+
+#### Image Gallery
+
+A simple web-based gallery for viewing images generated by ComfyUI. The gallery provides directory listings and thumbnails for all images in your ComfyUI output folder.
+
+**Access:** Find the **Gallery** link under **HTTP Services** in the **Connect** tab of your Pod detail pane.
+
+**Authentication:** None.
+
+**Key features:**
+- Automatic display of ComfyUI outputs.
+- Thumbnail generation.
+- Direct image viewing.
+- No configuration required.
+
+The gallery automatically serves images from `/workspace/ComfyUI/output/`, making it easy to review and share your generated images.
+
+## Service URLs
+
+All HTTP services follow a consistent URL pattern based on your Pod ID. When you open the **Connect** tab in your Pod detail pane, you'll see all available services with clickable links.
+
+**URL format:** `https://[service]-[pod-id].proxy.runpod.net`
+
+For example, if your Pod ID is `2s56cp0pof1rmt`:
+- JupyterLab: `https://jupyter-2s56cp0pof1rmt.proxy.runpod.net`
+- VS Code: `https://vscode-2s56cp0pof1rmt.proxy.runpod.net`
+- Monitor: `https://monitor-2s56cp0pof1rmt.proxy.runpod.net`
+- Files: `https://files-2s56cp0pof1rmt.proxy.runpod.net`
+
+<Tip>
+All service URLs use HTTPS with automatic TLS certificates, ensuring your data is encrypted in transit.
+</Tip>
+
+## Setting passwords and credentials
+
+Some services require authentication. You can set credentials when creating your Pod using environment variables.
+
+### During Pod creation
+
+When deploying a Pod through the web console:
+
+1. Navigate to the [Pod creation page](https://console.runpod.io/pod/create).
+2. Scroll to **Environment Variables**.
+3. Click **Add Environment Variable**.
+4. Add your desired variables:
+
+| Variable | Service | Example Value |
+|----------|---------|---------------|
+| `JUPYTER_PASSWORD` | JupyterLab | `my-secure-password-123` |
+| `CODE_SERVER_PASSWORD` | VS Code Server | `another-secure-password` |
+| `PUBLIC_KEY` | SSH access | `ssh-rsa AAAAB3NzaC1...` |
+
+### Using the API
+
+When creating a Pod via the API, include environment variables in your request:
+
+```bash
+curl -X POST https://api.runpod.io/v2/pods \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "cloudType": "SECURE",
+    "gpuTypeId": "NVIDIA RTX A4000",
+    "templateId": "runpod-pytorch",
+    "env": {
+      "JUPYTER_PASSWORD": "my-secure-password",
+      "CODE_SERVER_PASSWORD": "another-password",
+      "PUBLIC_KEY": "ssh-rsa AAAAB3NzaC1..."
+    }
+  }'
+```
+
+<Warning>
+If you don't set a password for password-protected services, the system will auto-generate one. You can find auto-generated passwords in your Pod's logs (accessible via the **Logs** tab in the Pod detail pane).
+</Warning>
+
+## Common workflows
+
+### Jupyter + TensorBoard workflow
+
+This workflow is ideal for training ML models while monitoring metrics in real-time.
+
+1. Open **JupyterLab** from the **Connect** tab.
+2. Create a new Python notebook.
+3. Write your training code with TensorBoard logging:
+
+```python
+from torch.utils.tensorboard import SummaryWriter
+import torch
+
+writer = SummaryWriter('/workspace/logs')
+
+for epoch in range(100):
+    # Your training loop
+    loss = train_one_epoch()
+    writer.add_scalar('Loss/train', loss, epoch)
+
+writer.close()
+```
+
+4. Open **TensorBoard** in a separate browser tab to watch your metrics update in real-time.
+
+### VS Code + SSH workflow
+
+This workflow provides a complete remote development environment.
+
+1. Open **VS Code Server** from the **Connect** tab.
+2. Open the `/workspace` folder (File → Open Folder).
+3. Use the integrated terminal for command-line operations:
+   - Install packages: `pip install transformers`
+   - Run scripts: `python train.py`
+   - Monitor GPU: `nvidia-smi`
+4. Use SSH from your local terminal for additional access or file transfers:
+
+```bash
+ssh root@[pod-id].proxy.runpod.net
+scp local-file.py root@[pod-id].proxy.runpod.net:/workspace/
+```
+
+### ComfyUI + Gallery workflow
+
+This workflow is perfect for generating and reviewing images.
+
+1. Open **ComfyUI** from the **Connect** tab.
+2. Load a workflow or create your own node graph.
+3. Queue your prompts and generate images.
+4. Open **Image Gallery** in a separate tab to review all generated images.
+5. Use **File Browser** to download specific images or organize your outputs.
+
+## Security considerations
+
+All utility services follow security best practices to protect your work.
+
+### Encrypted connections
+
+All HTTP services use HTTPS with automatic TLS certificates. Your data is encrypted in transit between your browser and the Pod.
+
+### Password-protected services
+
+JupyterLab, VS Code Server, and SSH require authentication. Always use strong passwords or SSH keys.
+
+**Generate secure passwords:**
+
+```bash
+# Generate a random 32-character password
+openssl rand -base64 32
+```
+
+### Unprotected services
+
+Some services like Glances (system monitor), File Browser, TensorBoard, and demo apps don't require authentication. These services are isolated per user—only you can access your Pod's services using your unique Pod ID in the URL.
+
+<Warning>
+Never share your Pod's service URLs publicly if they contain sensitive data. Each URL includes your unique Pod ID and provides direct access to your services.
+</Warning>
+
+### SSH key authentication
+
+For SSH access, use key-based authentication instead of passwords:
+
+1. Generate an SSH key pair on your local machine:
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_runpod
+```
+
+2. Copy your public key:
+
+```bash
+cat ~/.ssh/id_ed25519_runpod.pub
+```
+
+3. Add the public key to your Pod's `PUBLIC_KEY` environment variable when deploying.
+
+## Troubleshooting
+
+### Service not accessible
+
+If you can't access a service:
+
+1. Verify your Pod is in the **Running** state (not starting, stopping, or error).
+2. Check the **Connect** tab for the correct service URL.
+3. Wait 30-60 seconds after Pod startup for all services to initialize.
+4. Check the **Logs** tab for any service startup errors.
+
+### Blank page or connection timeout
+
+If a service loads but shows a blank page:
+
+1. Try refreshing your browser (Ctrl+F5 or Cmd+Shift+R).
+2. Clear your browser cache.
+3. Try accessing the service from an incognito/private browser window.
+4. Verify the service is running by SSHing into your Pod and checking processes:
+
+```bash
+ssh root@[pod-id].proxy.runpod.net
+ps aux | grep jupyter  # Or code-server, glances, etc.
+```
+
+### Forgot password
+
+If you forgot your password for JupyterLab or VS Code:
+
+1. Check the **Logs** tab in your Pod detail pane—auto-generated passwords appear in the logs.
+2. Alternatively, SSH into your Pod and restart the service with a new password:
+
+```bash
+# For JupyterLab
+export JUPYTER_PASSWORD="new-password"
+pkill jupyter
+jupyter lab --allow-root --port=8888 --ip=* \
+  --ServerApp.token=$JUPYTER_PASSWORD &
+
+# For VS Code
+export CODE_SERVER_PASSWORD="new-password"
+pkill code-server
+code-server --auth password --bind-addr 0.0.0.0:8080 /workspace &
+```
+
+### Service crashed
+
+If a service has crashed, you can restart it manually via SSH:
+
+```bash
+# SSH into your Pod
+ssh root@[pod-id].proxy.runpod.net
+
+# Check if service is running
+ps aux | grep jupyter
+
+# Restart service (example for JupyterLab)
+nohup jupyter lab --allow-root --port=8888 --ip=* \
+  --ServerApp.token=$JUPYTER_PASSWORD &
+```
+
+## Next steps
+
+Now that you understand the utility services available with your Pods, you might want to:
+
+- Learn how to [connect to your Pod](/pods/connect-to-a-pod) using different methods.
+- Explore [Pod templates](/pods/templates/overview) to find the right pre-configured environment.
+- Set up [persistent storage](/pods/storage/types) for your projects.
+- Review [environment variables](/pods/templates/environment-variables) for customizing your Pod.

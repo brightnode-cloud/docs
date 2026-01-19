@@ -1,50 +1,58 @@
 ---
 title: "Connection options"
 sidebarTitle: "Connection options"
-description: "Explore our Bnode connection options, including the web terminal, SSH, JupyterLab, and VSCode/Cursor."
+description: "Explore our Pod connection options, including the web terminal, SSH, JupyterLab, and VSCode/Cursor."
 ---
+ 
+<Frame alt="Pod connection options">
+  <img src="/images/pod-connection-options.png" />
+</Frame>
+
+This page covers the primary methods for connecting to your Pod. Every Pod also includes [built-in utility services](/pods/utility-services) like VS Code Server, system monitoring, file browser, and ML tools (TensorBoard, Gradio, etc.) that are accessible via your browser with no additional setup.
 
 ## Web terminal connection
 
-The web terminal offers a convenient, browser-based method to quickly connect to your Bnode and run commands. However, it's not recommended for long-running processes, such as training an LLM, as the connection might not be as stable or persistent as a direct [SSH connection](#ssh-terminal-connection).
+The web terminal offers a convenient, browser-based method to quickly connect to your Pod and run commands. However, it's not recommended for long-running processes, such as training an LLM, as the connection might not be as stable or persistent as a direct [SSH connection](#ssh-terminal-connection).
 
-The availability of the web terminal depends on the [Bnode's template](/bnodes/templates/overview).
+The availability of the web terminal depends on the [Pod's template](/pods/templates/overview).
 
 To connect using the web terminal:
 
-1. Navigate to the [Bnodes page](https://console.brightnode.cloud/bnodes) in the Brightnode console.
-2. Expand the desired Bnode and select **Connect**.
+1.  Navigate to the [Pods page](https://console.runpod.io/pods) in the Runpod console.
+2.  Expand the desired Pod and select **Connect**.
 3. If your web terminal is **Stopped**, click **Start**.
-
-   <Tip>
-     If clicking **Start** does nothing, try refreshing the page.
-   </Tip>
-4. Click **Open Web Terminal** to open a new tab in your browser with a web terminal session.
+    <Tip>
+    If clicking **Start** does nothing, try refreshing the page.
+    </Tip>
+4.  Click **Open Web Terminal** to open a new tab in your browser with a web terminal session.
 
 ## JupyterLab connection
 
-JupyterLab provides an interactive, web-based environment for running code, managing files, and performing data analysis. Many Brightnode templates, especially those geared towards machine learning and data science, come with JupyterLab pre-configured and accessible via HTTP.
+JupyterLab provides an interactive, web-based environment for running code, managing files, and performing data analysis. Many Runpod templates, especially those geared towards machine learning and data science, come with JupyterLab pre-configured and accessible via HTTP.
 
-To connect to JupyterLab (if it's available on your Bnode):
+JupyterLab is one of several [built-in utility services](/pods/utility-services) included with every Pod. Other services like VS Code Server, system monitoring, and ML tools are also available.
 
-1. Deploy your Bnode, ensuring that the template is configured to run JupyterLab. Official Brightnode templates like "Brightnode Pytorch" are usually compatible.
-2. Once the Bnode is running, navigate to the [Bnodes page](https://console.brightnode.cloud/bnodes) in the Brightnode console.
-3. Find the Bnode you created and click the **Connect** button. If it's grayed out, your Bnode hasn't finished starting up yet.
-4. In the window that opens, under **HTTP Services**, look for a link to **Jupyter Lab** (or a similarly named service on the configured HTTP port, often 8888). Click this link to open the JupyterLab workspace in your browser.
+To connect to JupyterLab (if it's available on your Pod):
 
-   <Tip>
-     If the JupyterLab tab displays a blank page for more than a minute or two, try restarting the Bnode and opening it again.
-   </Tip>
-5. Once in JupyterLab, you can create new notebooks (e.g., under **Notebook**, select **Python 3 (ipykernel)**), upload files, and run code interactively.
+1.  Deploy your Pod, ensuring that the template is configured to run JupyterLab. Official Runpod templates like "Runpod Pytorch" are usually compatible.
+2.  Once the Pod is running, navigate to the [Pods page](https://console.runpod.io/pods) in the Runpod console.
+3.  Find the Pod you created and click the **Connect** button. If it's grayed out, your Pod hasn't finished starting up yet.
+4.  In the window that opens, under **HTTP Services**, look for a link to **Jupyter Lab** (or a similarly named service on the configured HTTP port, often 8888). Click this link to open the JupyterLab workspace in your browser.
+    <Tip>
+    If the JupyterLab tab displays a blank page for more than a minute or two, try restarting the Pod and opening it again.
+    </Tip>
+5.  Once in JupyterLab, you can create new notebooks (e.g., under **Notebook**, select **Python 3 (ipykernel)**), upload files, and run code interactively.
+
+For more details about JupyterLab features and configuration, see [Built-in utility services](/pods/utility-services).
 
 ## SSH terminal connection
 
-Connecting to a Bnode via an SSH (Secure Shell) terminal provides a secure and reliable method for interacting with your instance. To establish an SSH connection, you'll need an SSH client installed on your local machine. The exact command will vary slightly depending on whether you're using the basic proxy connection or a direct connection to a public IP.
+Connecting to a Pod via an SSH (Secure Shell) terminal provides a secure and reliable method for interacting with your instance. To establish an SSH connection, you'll need an SSH client installed on your local machine. The exact command will vary slightly depending on whether you're using the basic proxy connection or a direct connection to a public IP.
 
-To learn more, see [Connect to a Bnode with SSH](/bnodes/configuration/use-ssh).
+To learn more, see [Connect to a Pod with SSH](/pods/configuration/use-ssh).
 
 ## Connect to VSCode or Cursor
 
-For a more integrated development experience, you can connect directly to your Bnode instance through Visual Studio Code (VSCode) or Cursor. This allows you to work within your Bnode's volume directory as if the files were stored on your local machine, leveraging VSCode's or Cursor's powerful editing and debugging features.
+For a more integrated development experience, you can connect directly to your Pod instance through Visual Studio Code (VSCode) or Cursor. This allows you to work within your Pod's volume directory as if the files were stored on your local machine, leveraging VSCode's or Cursor's powerful editing and debugging features.
 
-For a step-by-step guide, see [Connect to a Bnode with VSCode or Cursor](/bnodes/configuration/connect-to-ide).
+For a step-by-step guide, see [Connect to a Pod with VSCode or Cursor](/pods/configuration/connect-to-ide).
