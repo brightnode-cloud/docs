@@ -1,31 +1,31 @@
 ---
 title: "Overview"
-description: "Streamline your Pod deployments with templates, bundling prebuilt container images with hardware specs and network settings."
+description: "Streamline your Bnode deployments with templates, bundling prebuilt container images with hardware specs and network settings."
 ---
 
-Pod templates are pre-configured Docker image setups that let you quickly spin up Pods without manual environment configuration. They're essentially deployment configurations that include specific models, frameworks, or workflows bundled together.
+Bnode templates are pre-configured Docker image setups that let you quickly spin up Bnodes without manual environment configuration. They're essentially deployment configurations that include specific models, frameworks, or workflows bundled together.
 
 Templates eliminate the need to manually set up environments, saving time and reducing configuration errors. For example, instead of installing PyTorch, configuring JupyterLab, and setting up all dependencies yourself, you can select a pre-configured template and have everything ready to go instantly.
 
 <iframe
   className="w-full aspect-video rounded-xl"
   src="https://www.youtube.com/embed/PwsTMASN7ac?si=noDNxOzehmjjvjnL"
-  title="Deploying Pods from templates"
+  title="Deploying Bnodes from templates"
   frameBorder="0"
   allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowFullScreen
 ></iframe>
 
-## What Pod templates include
+## What Bnode templates include
 
-Pod templates contain all the necessary components to launch a fully configured Pod:
+Bnode templates contain all the necessary components to launch a fully configured Bnode:
 
 - **Container image:** The Docker image with all necessary software packages and dependencies. This is where the core functionality of the template is stored, i.e., the software package and any files associated with it.
-- **Built-in utility services:** Pre-configured web-based tools for development, monitoring, and ML workflows that run automatically. All templates include JupyterLab, VS Code Server, system monitoring, and file browser. Specialized templates include additional services like TensorBoard, vLLM API, or ComfyUI. See [Built-in utility services](/pods/utility-services) for details.
-- **Hardware specifications:** Container disk size, volume size, and mount paths that define the storage requirements for your Pod.
+- **Built-in utility services:** Pre-configured web-based tools for development, monitoring, and ML workflows that run automatically. All templates include JupyterLab, VS Code Server, system monitoring, and file browser. Specialized templates include additional services like TensorBoard, vLLM API, or ComfyUI. See [Built-in utility services](/bnodes/utility-services) for details.
+- **Hardware specifications:** Container disk size, volume size, and mount paths that define the storage requirements for your Bnode.
 - **Network settings:** Exposed ports for services like web UIs or APIs. If the image has a server associated with it, you'll want to ensure that the HTTP and TCP ports are exposed as necessary.
 - **Environment variables:** Pre-configured settings specific to the template that customize the behavior of the containerized application.
-- **Startup commands:** Instructions that run when the Pod launches, allowing you to customize the initialization process.
+- **Startup commands:** Instructions that run when the Bnode launches, allowing you to customize the initialization process.
 
 ## Types of templates
 
@@ -49,8 +49,8 @@ You can create custom templates for your own specialized workloads. These can be
 
 ## Explore templates
 
- <Frame alt="Browse Pod templates">
-  <img src="/images/browse-pod-templates.png" />
+ <Frame alt="Browse Bnode templates">
+  <img src="/images/browse-bnode-templates.png" />
  </Frame>
 
 
@@ -60,11 +60,11 @@ You can discover and use existing templates through the Brightnode console:
 
 **Manage your templates:** Access templates you've created or that are shared within your team in the **[My Templates](https://www.console.brightnode.cloud/user/templates)** section.
 
-## Why use Pod templates
+## Why use Bnode templates
 
-Templates provide significant advantages over manual Pod configuration:
+Templates provide significant advantages over manual Bnode configuration:
 
-- **Time savings:** Popular templates include options for machine learning frameworks like PyTorch, image generation tools like Stable Diffusion, and development environments with Jupyter notebooks pre-installed. This eliminates hours of manual setup and dependency management. Every template also includes [built-in utility services](/pods/utility-services) like VS Code Server, system monitoring, and file management tools that work out of the box.
+- **Time savings:** Popular templates include options for machine learning frameworks like PyTorch, image generation tools like Stable Diffusion, and development environments with Jupyter notebooks pre-installed. This eliminates hours of manual setup and dependency management. Every template also includes [built-in utility services](/bnodes/utility-services) like VS Code Server, system monitoring, and file management tools that work out of the box.
 - **Consistency:** Templates ensure that your development and production environments are identical, reducing "it works on my machine" issues.
 - **Best practices:** Official and popular community templates incorporate industry best practices for security, performance, and configuration.
-- **Reduced errors:** Pre-configured templates minimize the risk of configuration mistakes that can lead to Pod startup failures or performance issues.
+- **Reduced errors:** Pre-configured templates minimize the risk of configuration mistakes that can lead to Bnode startup failures or performance issues.

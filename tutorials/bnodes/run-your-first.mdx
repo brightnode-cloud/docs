@@ -5,7 +5,7 @@ description: "Learn how to run inference on the SmolLM3 model in JupyterLab usin
 tag: "NEW"
 ---
 
-This tutorial shows how to deploy a Pod and use JupyterLab to generate text with the SmolLM3 model using the Python `transformers` library.
+This tutorial shows how to deploy a Bnode and use JupyterLab to generate text with the SmolLM3 model using the Python `transformers` library.
 
 [SmolLM3](https://huggingface.co/docs/transformers/en/model_doc/smollm3) is a family of small language models developed by Hugging Face that provides strong performance while being efficient enough to run on modest hardware. 
 The 3B parameter model we'll use in this tutorial requires only 24 GB of VRAM, making it accessible for experimentation and development.
@@ -14,7 +14,7 @@ The 3B parameter model we'll use in this tutorial requires only 24 GB of VRAM, m
 
 In this tutorial, you'll learn how to:
 
-- Deploy a Pod with the PyTorch template.
+- Deploy a Bnode with the PyTorch template.
 - Access the web terminal and JupyterLab services.
 - Install the transformers and accelerate libraries.
 - Use SmolLM3 for text generation in a Python notebook.
@@ -28,27 +28,27 @@ Before you begin, you'll need:
 - At least $5 in Brightnode credits.
 - Basic familiarity with Python and Jupyter notebooks.
 
-## Step 1: Deploy a Pod with PyTorch template
+## Step 1: Deploy a Bnode with PyTorch template
 
-First, you'll deploy a Pod using the official Brightnode PyTorch template:
+First, you'll deploy a Bnode using the official Brightnode PyTorch template:
 
-1. Navigate to the [Pods page](https://console.brightnode.cloud/pods) in the Brightnode console.
-2. Click **Deploy** to create a new Pod.
+1. Navigate to the [Bnodes page](https://console.brightnode.cloud/bnodes) in the Brightnode console.
+2. Click **Deploy** to create a new Bnode.
 3. In the template selection, choose latest the **Brightnode PyTorch** template (this should be the default setting).
 4. For GPU selection, choose any GPU with 24 GB or more VRAM. Good options include:
    - RTX 4090 (24 GB VRAM)
    - RTX A5000 (24 GB VRAM) 
    - L40 (48 GB VRAM)
 5. Keep all the other settings on their defaults.
-6. Click **Deploy On-Demand** to create your Pod.
+6. Click **Deploy On-Demand** to create your Bnode.
 
-Wait for your Pod to initialize. This typically takes 2-5 minutes.
+Wait for your Bnode to initialize. This typically takes 2-5 minutes.
 
 ## Step 2: Install required packages
 
-Once your Pod is running, you'll need to install the `transformers` and `accelerate` Python libraries:
+Once your Bnode is running, you'll need to install the `transformers` and `accelerate` Python libraries:
 
-1. In the Brightnode console, find and expand your deployed Pod and click **Connect**.
+1. In the Brightnode console, find and expand your deployed Bnode and click **Connect**.
 2. Under **Web Terminal**, click **Start** to start the terminal service.
 2. Click **Open Web Terminal** to open a terminal session in your browser.
 3. In the terminal, install the required packages by running:
@@ -61,14 +61,14 @@ pip install transformers accelerate
 
 Next we'll prepare our JupyterLab coding environment:
 
-1. Go back to the Brightnode console and click **Connect** on your Pod again.
+1. Go back to the Brightnode console and click **Connect** on your Bnode again.
 2. Under **HTTP Services**, click **Connect to HTTP Service [Port 8888]** to open JupyterLab.
 3. If the JupyterLab service shows as "Not Ready", wait a moment and refresh the page.
 
 JupyterLab will open in a new browser tab, providing you with an interactive Python environment.
 
 <Tip>
-JupyterLab is one of several [built-in utility services](/pods/utility-services) included with every Pod. You'll also find VS Code Server, system monitoring, file browser, and other tools pre-configured and ready to use.
+JupyterLab is one of several [built-in utility services](/bnodes/utility-services) included with every Bnode. You'll also find VS Code Server, system monitoring, file browser, and other tools pre-configured and ready to use.
 </Tip>
 
 ## Step 4: Create and run your SmolLM3 notebook
@@ -106,7 +106,7 @@ print(outputs[0]["generated_text"][-1]['content'])
 
 4. Run the cell by pressing <kbd>Cmd</kbd> + <kbd>Enter</kbd> (Mac) or <kbd>Ctrl</kbd> + <kbd>Enter</kbd> (Windows) or clicking the **Run** button.
 
-The first time you run this code, it will download the SmolLM3 model (approximately 6 GB), which may take a minute or two depending on your Pod's internet connection. Subsequent runs will be much faster, as the model will be cached locally.
+The first time you run this code, it will download the SmolLM3 model (approximately 6 GB), which may take a minute or two depending on your Bnode's internet connection. Subsequent runs will be much faster, as the model will be cached locally.
 
 Most likely the response will be truncated—you can increase `max_new_tokens` and run the cell again to get a longer response (it will just take longer to run).
 
@@ -176,7 +176,7 @@ Here are solutions to common issues:
 
 - **Out of memory errors**: Ensure you're using a GPU with at least 24 GB VRAM, or try reducing the batch size.
 - **Model download fails**: Check your internet connection and try running the cell again.
-- **JupyterLab not accessible**: Wait a few minutes after Pod deployment for services to fully start. If the JupyterLab tab is blank when you open it, try stopping and then restarting the Pod.
+- **JupyterLab not accessible**: Wait a few minutes after Bnode deployment for services to fully start. If the JupyterLab tab is blank when you open it, try stopping and then restarting the Bnode.
 - **Import errors**: Make sure you installed the packages in step 2 using the web terminal.
 
 ## Next steps
@@ -185,4 +185,4 @@ Now that you have SmolLM3 running, you can explore more advanced use cases:
 
 - **Integration with applications**: Use SmolLM3 as part of larger applications by integrating it with web frameworks or APIs.
 - **Model comparison**: Try other models in the SmolLM3 family or compare with other small language models to find the best fit for your use case.
-- **Persistent storage**: If you plan to work with SmolLM3 regularly, consider using a [network volume](/storage/network-volumes) to persist your models and notebooks across Pod sessions.
+- **Persistent storage**: If you plan to work with SmolLM3 regularly, consider using a [network volume](/storage/network-volumes) to persist your models and notebooks across Bnode sessions.
