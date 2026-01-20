@@ -4,108 +4,147 @@ sidebarTitle: "Utility services"
 description: "Access development tools, monitoring, and ML services included with every Bnode."
 ---
 
-Every Brightnode Bnode comes with a suite of pre-configured utility services that provide web-based development environments, system monitoring, and machine learning tools. These services run automatically when your Bnode starts and are accessible via secure HTTPS URLs.
+Every Brightnode Bnode comes with pre-configured utility services that run automatically in your container. These services are accessible via HTTPS URLs that are created when your Bnode deploys.
 
-All utility services are accessed through your browser using unique hostnames in the format `https://[service]-[bnode-id].brightnode.cloud`. No additional configuration or installation is required—everything works out of the box.
+## How to access services
+
+All services are accessed through unique HTTPS URLs in this format:
+
+```
+https://{service}-{bnode-name}.{region}.brightnode.cloud
+```
+
+For example, if your Bnode is named `workload-abc123` in the `singapore` region:
+- JupyterLab: `https://jupyter-workload-abc123.singapore.brightnode.cloud`
+- VS Code: `https://vscode-workload-abc123.singapore.brightnode.cloud`
+- System Monitor: `https://monitor-workload-abc123.singapore.brightnode.cloud`
+
+You can find your Bnode's service URLs in the Bnode management interface after your Bnode is running.
 
 ## Available services
 
-The specific services available depend on which template you're using. All Bnodes include base services, while specialized templates include additional tools.
+The services available depend on which template you're using.
 
-### Base services
+### Base services (all templates)
 
-These services are available in all Bnode templates.
+These services are included in every Bnode regardless of template.
 
 #### JupyterLab
 
-An interactive development environment with support for Python notebooks, web terminal access, and file management. JupyterLab is ideal for data science work, prototyping ML models, and running experiments with full GPU access.
+Web-based interactive development environment with Python notebooks, web terminal, and file management.
 
-**Access:** Find the **Jupyter Lab** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
+**URL format:** `https://jupyter-{bnode-name}.{region}.brightnode.cloud`
 
-**Authentication:** Password-protected. Set your password using the `JUPYTER_PASSWORD` environment variable when deploying your Bnode, or use the default password shown in your Bnode's logs.
+**Authentication:** Password-protected (password is your user ID)
 
-**Key features:**
-- Python notebooks with ipykernel.
-- Integrated web terminal.
-- File browser and editor.
-- Extensions for widgets and archiving.
+**Access from UI:** Click the Jupyter button (BookOpen icon) on your Bnode card
 
-#### VS Code Server
-
-A full-featured Visual Studio Code IDE running entirely in your browser. VS Code Server provides the complete desktop VS Code experience with extensions, integrated terminal, Git integration, and IntelliSense.
-
-**Access:** Find the **VS Code** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
-
-**Authentication:** Password-protected. The system auto-generates a password (visible in your Bnode logs), or you can set your own using the `CODE_SERVER_PASSWORD` environment variable.
-
-**Key features:**
-- Complete VS Code interface.
-- Extension marketplace support.
-- Integrated terminal with full shell access.
-- Git operations and version control.
-- IntelliSense for code completion.
-- Debugging support.
-
-<Tip>
-VS Code Server is perfect for larger projects where you need a full IDE experience without installing remote development extensions on your local machine.
-</Tip>
-
-#### System Monitor
-
-A real-time system monitoring dashboard powered by Glances that displays CPU, GPU, memory, disk, and network statistics. Monitor your Bnode's resource utilization at a glance to optimize performance and troubleshoot issues.
-
-**Access:** Find the **Monitor** or **Glances** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
-
-**Authentication:** None (read-only access).
-
-**Key features:**
-- GPU utilization and temperature.
-- Per-core CPU usage.
-- Memory and swap usage.
-- Disk I/O statistics.
-- Network traffic monitoring.
-- Process list with resource usage.
-
-#### File Browser
-
-A web-based file manager that lets you upload, download, and manage files on your Bnode without using command-line tools. File Browser provides a simple interface for transferring data and organizing your workspace.
-
-**Access:** Find the **Files** or **File Browser** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
-
-**Authentication:** None (per-user instance).
-
-**Key features:**
-- Drag-and-drop file uploads.
-- Download files and folders.
-- Create and delete directories.
-- File preview for common formats.
-- Archive creation and extraction.
-
-<Note>
-File Browser operates on your entire Bnode filesystem. Your persistent data is typically stored in `/workspace`.
-</Note>
-
-### PyTorch template services
-
-These additional services are available when using PyTorch templates.
-
-#### TensorBoard
-
-A visualization toolkit for machine learning experiments that helps you track metrics, visualize model graphs, and analyze training performance. TensorBoard reads log files from your training runs and presents them in an intuitive dashboard.
-
-**Access:** Find the **TensorBoard** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
-
-**Authentication:** None.
-
-**Key features:**
-- Training metrics visualization (loss, accuracy, etc.).
-- Model graph visualization.
-- Embedding projector for high-dimensional data.
-- Profiler for performance analysis.
+**Features:**
+- Python notebooks with GPU support
+- Integrated web terminal
+- File browser and editor
+- Extensions for widgets and archiving
 
 **Example usage:**
 
-To log metrics from your PyTorch training script:
+```python
+# In a Jupyter notebook
+import torch
+print(f"CUDA available: {torch.cuda.is_available()}")
+print(f"GPUs: {torch.cuda.device_count()}")
+```
+
+#### VS Code Server
+
+Full-featured Visual Studio Code IDE running in your browser.
+
+**URL format:** `https://vscode-{bnode-name}.{region}.brightnode.cloud`
+
+**Authentication:** Password-protected (set via environment variable or auto-generated)
+
+**Features:**
+- Complete VS Code experience
+- Extension marketplace
+- Integrated terminal
+- Git integration
+- IntelliSense and debugging
+
+**Set custom password:**
+
+When deploying your Bnode, add this environment variable:
+
+```
+CODE_SERVER_PASSWORD=your-secure-password
+```
+
+#### System Monitor (Glances)
+
+Real-time system monitoring dashboard showing CPU, GPU, memory, and network stats.
+
+**URL format:** `https://monitor-{bnode-name}.{region}.brightnode.cloud`
+
+**Authentication:** None (read-only)
+
+**Features:**
+- GPU utilization and temperature
+- Per-core CPU usage
+- Memory and swap monitoring
+- Disk I/O statistics
+- Network traffic
+- Process list with resource usage
+
+#### File Browser
+
+Web-based file manager for uploading and downloading files.
+
+**URL format:** `https://files-{bnode-name}.{region}.brightnode.cloud`
+
+**Authentication:** None (isolated per user)
+
+**Features:**
+- Drag-and-drop file uploads
+- Download files and folders
+- Create/delete directories
+- File preview
+- Archive support
+
+Your persistent data is in `/workspace` directory.
+
+#### SSH Access
+
+Terminal access via SSH gateway for command-line operations.
+
+**Connection format:** `ssh {bnode-name}@{bnode-name}.{region}.brightnode.cloud`
+
+**Authentication:** SSH key (add your public key when deploying)
+
+**Access from UI:** Click the SSH button on your Bnode card to get connection details
+
+**Example:**
+
+```bash
+ssh workload-abc123@workload-abc123.singapore.brightnode.cloud -i ~/.ssh/id_ed25519
+```
+
+### PyTorch template services
+
+Additional services when using PyTorch templates.
+
+#### TensorBoard
+
+Visualization toolkit for machine learning experiments.
+
+**URL format:** `https://tensorboard-{bnode-name}.{region}.brightnode.cloud`
+
+**Authentication:** None
+
+**Features:**
+- Training metrics visualization
+- Model graph visualization
+- Embedding projector
+- Profiler for performance analysis
+
+**Usage example:**
 
 ```python
 from torch.utils.tensorboard import SummaryWriter
@@ -113,70 +152,54 @@ from torch.utils.tensorboard import SummaryWriter
 writer = SummaryWriter('/workspace/logs')
 
 for epoch in range(num_epochs):
-    # Training code here
+    loss = train_one_epoch()
     writer.add_scalar('Loss/train', loss, epoch)
-    writer.add_scalar('Accuracy/train', accuracy, epoch)
 
 writer.close()
 ```
 
-Then access TensorBoard via the provided HTTP service link. TensorBoard will automatically read logs from `/workspace/logs`.
+Then visit the TensorBoard URL to see your metrics in real-time.
 
 #### Gradio Demo
 
-A pre-configured Gradio application that provides a starting point for creating ML demos and interactive interfaces. The demo app includes GPU information and a simple image processing example that you can customize for your own models.
+Pre-configured Gradio app for creating ML demos.
 
-**Access:** Find the **Gradio** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
+**URL format:** `https://gradio-{bnode-name}.{region}.brightnode.cloud`
 
-**Authentication:** None.
+**Authentication:** None
 
-**Key features:**
-- GPU information display.
-- Sample image processing demo.
-- Easy customization for your models.
-- Shareable web interface.
+**Demo location:** `/workspace/gradio_demo.py`
 
-**Customizing the demo:**
-
-The demo app is located at `/workspace/gradio_demo.py`. You can edit this file to create interfaces for your own models:
+**Customize:**
 
 ```python
 import gradio as gr
 import torch
 
-def my_model_inference(image):
+def my_model(image):
     # Your model code here
     return processed_image
 
 demo = gr.Interface(
-    fn=my_model_inference,
+    fn=my_model,
     inputs=gr.Image(type="pil"),
-    outputs=gr.Image(type="pil"),
-    title="My Custom Model"
+    outputs=gr.Image(type="pil")
 )
 
 demo.launch(server_name="0.0.0.0", server_port=7860)
 ```
 
-After editing, restart the Gradio service or restart your Bnode to see your changes.
-
 #### Streamlit Demo
 
-A pre-configured Streamlit application for building interactive data science dashboards and ML visualizations. The demo includes PyTorch version information, GPU statistics, and an example of interactive tensor generation.
+Pre-configured Streamlit app for data dashboards.
 
-**Access:** Find the **Streamlit** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
+**URL format:** `https://streamlit-{bnode-name}.{region}.brightnode.cloud`
 
-**Authentication:** None.
+**Authentication:** None
 
-**Key features:**
-- PyTorch and CUDA version info.
-- Real-time GPU statistics.
-- Interactive tensor generation examples.
-- Easy customization for your apps.
+**Demo location:** `/workspace/streamlit_demo.py`
 
-**Customizing the demo:**
-
-The demo app is located at `/workspace/streamlit_demo.py`. Modify it to create your own dashboards:
+**Customize:**
 
 ```python
 import streamlit as st
@@ -185,52 +208,45 @@ import torch
 st.title("My ML Dashboard")
 
 if st.button("Run Inference"):
-    # Your model code here
     result = model.predict(input_data)
     st.write(result)
 ```
 
-After editing, restart the Streamlit service or restart your Bnode to see your changes.
-
 ### TensorFlow template services
 
-TensorFlow templates include the same ML tools as PyTorch templates (TensorBoard, Gradio, and Streamlit), but with TensorFlow-specific examples and configurations.
+TensorFlow templates include the same ML tools as PyTorch (TensorBoard, Gradio, Streamlit) but with TensorFlow-specific examples.
 
 ### vLLM template services
 
-These specialized services are available when using vLLM templates for large language model inference.
+Specialized services for large language model inference.
 
 #### vLLM API Server
 
-An OpenAI-compatible API server for high-throughput LLM inference using PagedAttention and continuous batching. The vLLM API server provides a drop-in replacement for OpenAI's API with significantly better performance for self-hosted models.
+OpenAI-compatible API server for high-throughput LLM inference.
 
-**Access:** Find the **API** or **vLLM** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
+**URL format:** `https://api-{bnode-name}.{region}.brightnode.cloud`
 
-**Authentication:** Optional API key (recommended for production).
+**Authentication:** API key recommended
 
-**Key features:**
-- OpenAI API compatibility.
-- High-throughput inference with PagedAttention.
-- Continuous batching for multiple requests.
-- Quantization support (4-bit, 8-bit, GPTQ, AWQ).
+**Features:**
+- OpenAI API compatibility
+- PagedAttention for efficient memory use
+- Continuous batching
+- Quantization support (4-bit, 8-bit, GPTQ, AWQ)
 
-**Example usage:**
-
-After starting a vLLM server with your model, you can send requests using the OpenAI Python client:
+**Usage example:**
 
 ```python
 from openai import OpenAI
 
 client = OpenAI(
-    base_url="https://api-[your-bnode-id].brightnode.cloud/v1",
+    base_url="https://api-workload-abc123.singapore.brightnode.cloud/v1",
     api_key="your-api-key"  # Optional
 )
 
 response = client.chat.completions.create(
     model="meta-llama/Llama-3.2-8B-Instruct",
-    messages=[
-        {"role": "user", "content": "Hello!"}
-    ]
+    messages=[{"role": "user", "content": "Hello!"}]
 )
 
 print(response.choices[0].message.content)
@@ -238,114 +254,109 @@ print(response.choices[0].message.content)
 
 #### Open WebUI
 
-A ChatGPT-style web interface for interacting with your LLMs. Open WebUI connects to your vLLM API server and provides a user-friendly chat interface with conversation history, markdown rendering, and code syntax highlighting.
+ChatGPT-style interface for interacting with your LLMs.
 
-**Access:** Find the **Chat** or **Open WebUI** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
+**URL format:** `https://chat-{bnode-name}.{region}.brightnode.cloud`
 
-**Authentication:** Built-in user management system.
+**Authentication:** Built-in user management
 
-**Key features:**
-- ChatGPT-style chat interface.
-- Conversation history.
-- Multiple model support.
-- Markdown and code rendering.
-- File uploads (for vision models).
+**Features:**
+- ChatGPT-style chat interface
+- Conversation history
+- Markdown and code rendering
+- File uploads (for vision models)
 
-**Configuration:**
+**Setup:**
 
-On first access, Open WebUI will prompt you to create an admin account. After logging in, configure the connection to your vLLM API server:
-
-1. Click **Settings** (gear icon).
-2. Navigate to **Connections** → **OpenAI API**.
-3. Set **Base URL** to `http://localhost:8000/v1`.
-4. Save your settings.
-
-Now you can chat with your model through a familiar interface.
+1. Visit the URL and create an admin account
+2. Go to Settings → Connections → OpenAI API
+3. Set Base URL to `http://localhost:8000/v1`
+4. Start chatting with your model
 
 ### ComfyUI template services
 
-These services are available when using ComfyUI templates for Stable Diffusion image generation.
+Services for Stable Diffusion image generation.
 
 #### ComfyUI
 
-A node-based interface for Stable Diffusion workflows. ComfyUI lets you build complex image generation pipelines using a visual workflow editor with support for custom nodes, LoRAs, ControlNet, and more.
+Node-based interface for Stable Diffusion workflows.
 
-**Access:** Find the **ComfyUI** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
+**URL format:** `https://comfyui-{bnode-name}.{region}.brightnode.cloud`
 
-**Authentication:** None.
+**Authentication:** None
 
-**Key features:**
-- Visual workflow builder with node graphs.
-- ComfyUI Manager pre-installed for easy extension management.
-- Custom nodes support.
-- Civitai integration for model downloads.
-- LoRA and ControlNet support.
+**Features:**
+- Visual workflow builder
+- ComfyUI Manager pre-installed
+- Custom nodes support
+- Civitai integration
+
+#### Automatic1111 Web UI
+
+Classic Stable Diffusion web interface.
+
+**URL format:** `https://webui-{bnode-name}.{region}.brightnode.cloud`
+
+**Authentication:** None
+
+**Features:**
+- Simple image generation
+- LoRA support
+- ControlNet support
+- Shared models with ComfyUI
 
 #### Image Gallery
 
-A simple web-based gallery for viewing images generated by ComfyUI. The gallery provides directory listings and thumbnails for all images in your ComfyUI output folder.
+Web gallery for viewing generated images.
 
-**Access:** Find the **Gallery** link under **HTTP Services** in the **Connect** tab of your Bnode detail pane.
+**URL format:** `https://gallery-{bnode-name}.{region}.brightnode.cloud`
 
-**Authentication:** None.
+**Authentication:** None
 
-**Key features:**
-- Automatic display of ComfyUI outputs.
-- Thumbnail generation.
-- Direct image viewing.
-- No configuration required.
+Automatically displays images from `/workspace/ComfyUI/output/`.
 
-The gallery automatically serves images from `/workspace/ComfyUI/output/`, making it easy to review and share your generated images.
+## Quick reference
 
-## Service URLs
+| Service | Port | URL Prefix | Authentication | Available In |
+|---------|------|------------|----------------|--------------|
+| **JupyterLab** | 8888 | `jupyter-` | Password | All templates |
+| **VS Code** | 8080 | `vscode-` | Password | All templates |
+| **System Monitor** | 61208 | `monitor-` | None | All templates |
+| **File Browser** | 4040 | `files-` | None | All templates |
+| **SSH** | 22 | N/A (special) | SSH key | All templates |
+| **TensorBoard** | 6006 | `tensorboard-` | None | PyTorch, TensorFlow |
+| **Gradio** | 7860 | `gradio-` | None | PyTorch, TensorFlow |
+| **Streamlit** | 8501 | `streamlit-` | None | PyTorch, TensorFlow |
+| **vLLM API** | 8000 | `api-` | Optional | vLLM |
+| **Open WebUI** | 3000 | `chat-` | Built-in | vLLM |
+| **ComfyUI** | 8188 | `comfyui-` | None | ComfyUI |
+| **Automatic1111** | 7860 | `webui-` | None | ComfyUI |
+| **Image Gallery** | 8765 | `gallery-` | None | ComfyUI |
 
-All HTTP services follow a consistent URL pattern based on your Bnode ID. When you open the **Connect** tab in your Bnode detail pane, you'll see all available services with clickable links.
+## Setting passwords
 
-**URL format:** `https://[service]-[bnode-id].brightnode.cloud`
+Some services require authentication. Set passwords using environment variables when deploying your Bnode.
 
-For example, if your Bnode ID is `2s56cp0pof1rmt`:
-- JupyterLab: `https://jupyter-2s56cp0pof1rmt.brightnode.cloud`
-- VS Code: `https://vscode-2s56cp0pof1rmt.brightnode.cloud`
-- Monitor: `https://monitor-2s56cp0pof1rmt.brightnode.cloud`
-- Files: `https://files-2s56cp0pof1rmt.brightnode.cloud`
+### During deployment
 
-<Tip>
-All service URLs use HTTPS with automatic TLS certificates, ensuring your data is encrypted in transit.
-</Tip>
+In the deployment form, add environment variables:
 
-## Setting passwords and credentials
+| Variable | Service | Example |
+|----------|---------|---------|
+| `JUPYTER_PASSWORD` | JupyterLab | `my-secure-password` |
+| `CODE_SERVER_PASSWORD` | VS Code | `another-password` |
+| `PUBLIC_KEY` | SSH | `ssh-rsa AAAAB3NzaC1...` |
 
-Some services require authentication. You can set credentials when creating your Bnode using environment variables.
-
-### During Bnode creation
-
-When deploying a Bnode through the web console:
-
-1. Navigate to the [Bnode creation page](https://console.brightnode.cloud/deploy).
-2. Scroll to **Environment Variables**.
-3. Click **Add Environment Variable**.
-4. Add your desired variables:
-
-| Variable | Service | Example Value |
-|----------|---------|---------------|
-| `JUPYTER_PASSWORD` | JupyterLab | `my-secure-password-123` |
-| `CODE_SERVER_PASSWORD` | VS Code Server | `another-secure-password` |
-| `PUBLIC_KEY` | SSH access | `ssh-rsa AAAAB3NzaC1...` |
-
-### Using the API
-
-When creating a Bnode via the API, include environment variables in your request:
+### Via API
 
 ```bash
-curl -X POST https://api.brightnode.io/v2/bnodes \
+curl -X POST https://api.brightnode.cloud/v1/instances/provision \
   -H "Authorization: Bearer YOUR_API_KEY" \
-  -H "Content-Type: application/json" \
   -d '{
-    "cloudType": "SECURE",
-    "gpuTypeId": "NVIDIA RTX A4000",
-    "templateId": "brightnode-pytorch",
-    "env": {
-      "JUPYTER_PASSWORD": "my-secure-password",
+    "template_id": "pytorch",
+    "gpu_option": "A100-1x",
+    "environment": {
+      "JUPYTER_PASSWORD": "secure-password",
       "CODE_SERVER_PASSWORD": "another-password",
       "PUBLIC_KEY": "ssh-rsa AAAAB3NzaC1..."
     }
@@ -353,106 +364,70 @@ curl -X POST https://api.brightnode.io/v2/bnodes \
 ```
 
 <Warning>
-If you don't set a password for password-protected services, the system will auto-generate one. You can find auto-generated passwords in your Bnode's logs (accessible via the **Logs** tab in the Bnode detail pane).
+If you don't set passwords for JupyterLab or VS Code, they will auto-generate passwords. Check your Bnode logs to find them.
 </Warning>
 
 ## Common workflows
 
-### Jupyter + TensorBoard workflow
-
-This workflow is ideal for training ML models while monitoring metrics in real-time.
-
-1. Open **JupyterLab** from the **Connect** tab.
-2. Create a new Python notebook.
-3. Write your training code with TensorBoard logging:
+### ML Training with TensorBoard
 
 ```python
+# In JupyterLab notebook
 from torch.utils.tensorboard import SummaryWriter
 import torch
 
 writer = SummaryWriter('/workspace/logs')
 
 for epoch in range(100):
-    # Your training loop
     loss = train_one_epoch()
     writer.add_scalar('Loss/train', loss, epoch)
 
 writer.close()
 ```
 
-4. Open **TensorBoard** in a separate browser tab to watch your metrics update in real-time.
+Then open your TensorBoard URL (`https://tensorboard-{bnode}.{region}.brightnode.cloud`) to watch metrics in real-time.
 
-### VS Code + SSH workflow
+### LLM Inference with vLLM
 
-This workflow provides a complete remote development environment.
+1. Your vLLM Bnode automatically starts the API server
+2. Access the API at `https://api-{bnode}.{region}.brightnode.cloud`
+3. Use OpenAI client library to interact
+4. Or use Open WebUI at `https://chat-{bnode}.{region}.brightnode.cloud` for a chat interface
 
-1. Open **VS Code Server** from the **Connect** tab.
-2. Open the `/workspace` folder (File → Open Folder).
-3. Use the integrated terminal for command-line operations:
-   - Install packages: `pip install transformers`
-   - Run scripts: `python train.py`
-   - Monitor GPU: `nvidia-smi`
-4. Use SSH from your local terminal for additional access or file transfers:
+### Image Generation with ComfyUI
 
-```bash
-ssh root@[bnode-id].brightnode.cloud
-scp local-file.py root@[bnode-id].brightnode.cloud:/workspace/
-```
+1. Open ComfyUI at `https://comfyui-{bnode}.{region}.brightnode.cloud`
+2. Load a workflow and generate images
+3. View outputs at `https://gallery-{bnode}.{region}.brightnode.cloud`
+4. Or use File Browser to download specific images
 
-### ComfyUI + Gallery workflow
-
-This workflow is perfect for generating and reviewing images.
-
-1. Open **ComfyUI** from the **Connect** tab.
-2. Load a workflow or create your own node graph.
-3. Queue your prompts and generate images.
-4. Open **Image Gallery** in a separate tab to review all generated images.
-5. Use **File Browser** to download specific images or organize your outputs.
-
-## Security considerations
-
-All utility services follow security best practices to protect your work.
+## Security
 
 ### Encrypted connections
 
-All HTTP services use HTTPS with automatic TLS certificates. Your data is encrypted in transit between your browser and the Bnode.
+All services use HTTPS with automatic TLS certificates via Let's Encrypt.
 
-### Password-protected services
+### Service isolation
 
-JupyterLab, VS Code Server, and SSH require authentication. Always use strong passwords or SSH keys.
+Each Bnode's services are isolated - only you can access your Bnode using your unique deployment name in the URL.
 
-**Generate secure passwords:**
+### SSH keys
+
+For SSH access, always use key-based authentication instead of passwords:
 
 ```bash
-# Generate a random 32-character password
-openssl rand -base64 32
+# Generate SSH key
+ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_brightnode
+
+# Copy public key
+cat ~/.ssh/id_ed25519_brightnode.pub
+
+# Add to PUBLIC_KEY environment variable when deploying
 ```
-
-### Unprotected services
-
-Some services like Glances (system monitor), File Browser, TensorBoard, and demo apps don't require authentication. These services are isolated per user—only you can access your Bnode's services using your unique Bnode ID in the URL.
 
 <Warning>
-Never share your Bnode's service URLs publicly if they contain sensitive data. Each URL includes your unique Bnode ID and provides direct access to your services.
+Never share your Bnode service URLs publicly if they contain sensitive data. Each URL includes your unique Bnode name and provides direct access.
 </Warning>
-
-### SSH key authentication
-
-For SSH access, use key-based authentication instead of passwords:
-
-1. Generate an SSH key pair on your local machine:
-
-```bash
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_brightnode
-```
-
-2. Copy your public key:
-
-```bash
-cat ~/.ssh/id_ed25519_brightnode.pub
-```
-
-3. Add the public key to your Bnode's `PUBLIC_KEY` environment variable when deploying.
 
 ## Troubleshooting
 
@@ -460,66 +435,55 @@ cat ~/.ssh/id_ed25519_brightnode.pub
 
 If you can't access a service:
 
-1. Verify your Bnode is in the **Running** state (not starting, stopping, or error).
-2. Check the **Connect** tab for the correct service URL.
-3. Wait 30-60 seconds after Bnode startup for all services to initialize.
-4. Check the **Logs** tab for any service startup errors.
+1. Verify your Bnode is in **Running** state
+2. Wait 1-2 minutes after deployment for all services to initialize
+3. Check that the URL format is correct: `https://{service}-{bnode-name}.{region}.brightnode.cloud`
+4. Try accessing from an incognito/private browser window
 
-### Blank page or connection timeout
+### Finding your service URLs
 
-If a service loads but shows a blank page:
+Your service URLs are automatically generated when your Bnode deploys. The format is always:
 
-1. Try refreshing your browser (Ctrl+F5 or Cmd+Shift+R).
-2. Clear your browser cache.
-3. Try accessing the service from an incognito/private browser window.
-4. Verify the service is running by SSHing into your Bnode and checking processes:
+```
+https://{service-prefix}-{your-bnode-name}.{your-region}.brightnode.cloud
+```
+
+Where:
+- `{service-prefix}` = `jupyter`, `vscode`, `monitor`, `files`, etc.
+- `{your-bnode-name}` = The name shown in your Bnode list
+- `{your-region}` = The region where you deployed
+
+### Service shows blank page
+
+1. Wait another minute - services may still be starting
+2. Hard refresh your browser (Ctrl+F5 or Cmd+Shift+R)
+3. Check your browser console for errors
+4. SSH into your Bnode and check if the service is running:
 
 ```bash
-ssh root@[bnode-id].brightnode.cloud
-ps aux | grep jupyter  # Or code-server, glances, etc.
+# Check if service is running
+ps aux | grep jupyter  # or code-server, glances, etc.
+
+# Check service logs
+tail -f /jupyter.log
+tail -f /code-server.log
 ```
 
 ### Forgot password
 
-If you forgot your password for JupyterLab or VS Code:
+JupyterLab and VS Code passwords are auto-generated if not set. To find them:
 
-1. Check the **Logs** tab in your Bnode detail pane—auto-generated passwords appear in the logs.
-2. Alternatively, SSH into your Bnode and restart the service with a new password:
-
-```bash
-# For JupyterLab
-export JUPYTER_PASSWORD="new-password"
-pkill jupyter
-jupyter lab --allow-root --port=8888 --ip=* \
-  --ServerApp.token=$JUPYTER_PASSWORD &
-
-# For VS Code
-export CODE_SERVER_PASSWORD="new-password"
-pkill code-server
-code-server --auth password --bind-addr 0.0.0.0:8080 /workspace &
-```
-
-### Service crashed
-
-If a service has crashed, you can restart it manually via SSH:
+1. SSH into your Bnode
+2. Check the logs:
 
 ```bash
-# SSH into your Bnode
-ssh root@[bnode-id].brightnode.cloud
-
-# Check if service is running
-ps aux | grep jupyter
-
-# Restart service (example for JupyterLab)
-nohup jupyter lab --allow-root --port=8888 --ip=* \
-  --ServerApp.token=$JUPYTER_PASSWORD &
+grep -i password /jupyter.log
+grep -i password /code-server.log
 ```
 
 ## Next steps
 
-Now that you understand the utility services available with your Bnodes, you might want to:
-
-- Learn how to [connect to your Bnode](/bnodes/connect-to-a-bnode) using different methods.
-- Explore [Bnode templates](/bnodes/templates/overview) to find the right pre-configured environment.
-- Set up [persistent storage](/bnodes/storage/types) for your projects.
-- Review [environment variables](/bnodes/templates/environment-variables) for customizing your Bnode.
+- Learn how to [configure your Bnode](/bnodes/manage-bnodes)
+- Set up [persistent storage](/bnodes/storage/types) for your data
+- Explore [templates](/bnodes/templates/overview) to find the right one for your workflow
+- Connect via [SSH](/bnodes/configuration/use-ssh) for command-line access
