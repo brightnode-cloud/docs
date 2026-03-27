@@ -1,0 +1,34 @@
+---
+title: "Beams"
+description: "Understand how Brightnode's preview managed deployment workflow fits into the inference stack."
+sidebarTitle: "Beams"
+---
+
+Beams is Brightnode's preview workflow for managed inference deployments. It is intended for teams that want more deployment-level control than the shared Router path provides.
+
+<Warning>
+Beams is currently a preview capability. Product behavior, availability, and supported workflows may change as the feature matures.
+</Warning>
+
+## Where Beams fits
+
+Use [Router](/router/overview) when you want the simplest hosted inference experience with one shared OpenAI-compatible endpoint.
+
+Consider Beams when you need a deployment-oriented workflow for a specific model and are comfortable using a preview feature.
+
+## What to expect today
+
+At a high level, Beams is designed around managed model deployments rather than the shared hosted model catalog. That makes it the better fit for advanced rollout or deployment control scenarios, while Router remains the default path for most integrations.
+
+## Access and authentication
+
+Beams-related workflows use the same Brightnode API key system as the rest of the platform. Keep deployment access isolated by using a key with the `Deployments` scope instead of reusing broad credentials.
+
+## Recommended approach
+
+For most production integrations, start with:
+
+1. [API keys](/get-started/api-keys) for scoped access.
+2. [Models](/models/overview) to choose a compatible hosted model.
+3. [Router](/router/overview) for the first implementation.
+4. Beams only when you specifically need deployment-level behavior and are ready to work with a preview feature.

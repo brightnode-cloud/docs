@@ -3,324 +3,62 @@ title: "Network volumes"
 description: "Persistent, portable storage for your AI workloads."
 ---
 
-Network volumes offer persistent storage that exists independently of your compute resources. Your data is retained even when your Bnodes are terminated or your Serverless workers are scaled to zero. You can use them to share data and maintain datasets across multiple machines and [Brightnode products](/overview).
-
-Network volumes are backed by high-performance NVMe SSDs connected via high-speed networks. Transfer speeds typically range from 200-400 MB/s, with peak speeds up to 10 GB/s depending on location and network conditions.
+Network volumes are Brightnode's persistent storage layer. They live independently of individual machines, so your datasets, checkpoints, and shared assets remain available even when a Bnode is stopped or deleted.
 
 ## When to use network volumes
 
-Consider using network volumes when you need:
+Use a network volume when you need:
 
-- **Persistent data that outlives compute resources**: Your data remains accessible even after Bnodes are terminated or Serverless workers stop.
-- **Shareable storage**: Share data across multiple Bnodes or Serverless endpoints by attaching the same network volume.
-- **Portable storage**: Move your working environment and data between different compute resources.
-- **Efficient data management**: Store frequently used models or large datasets to avoid re-downloading them for each new Bnode or worker, saving time, bandwidth, and reducing cold start times.
+- Persistent data that should outlive a single Bnode.
+- Shared storage for datasets, model weights, or generated artifacts.
+- A portable workspace that you can attach to new compute as needed.
+- Direct file management through the [S3-compatible API](/storage/s3-api).
 
 ## Pricing
 
-Network volumes are billed hourly at a rate of \$0.07 per GB per month for the first 1TB, and \$0.05 per GB per month for additional storage beyond that.
+Network volumes are billed monthly by storage size:
+
+- \$0.07 per GB for the first 1 TB.
+- \$0.05 per GB above 1 TB.
 
 <Warning>
-
-If your account lacks sufficient funds to cover storage costs, your network volume may be terminated. Once terminated, the disk space is immediately freed for other users, and Brightnode cannot recover lost data. Ensure your account remains funded to prevent data loss.
-
+If your account balance cannot cover storage costs, the volume may be terminated and Brightnode cannot recover the lost data. Back up critical information regularly.
 </Warning>
 
 ## Create a network volume
 
-<Warning>
-
-Network volume size can be increased later, but cannot be decreased.
-
-</Warning>
-
-<Tabs>
-<Tab title="Web console">
-
-To create a new network volume:
-
-1. Navigate to the [Storage page](https://www.console.brightnode.cloud/user/storage) in the Brightnode console.
-2. Click **New Network Volume**.
-3. Select a datacenter for your volume. Datacenter location does not affect pricing, but determines which GPU types and endpoints your network volume can be used with.
-4. Provide a descriptive name for your volume (e.g., "project-alpha-data" or "shared-models").
-5. Specify the desired size for the volume in gigabytes (GB).
-6. Click **Create Network Volume**.
-
-You can edit and delete your network volumes using the [Storage page](https://www.console.brightnode.cloud/user/storage).
-
-</Tab>
-
-<Tab title="REST API">
-
-To create a network volume using the REST API, send a POST request to the `/networkvolumes` endpoint:
-
-```bash
-curl --request POST \
-  --url https://rest.brightnode.cloud/v1/networkvolumes \
-  --header 'Authorization: Bearer BRIGHTNODE_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "name": "my-network-volume",
-  "size": 100,
-  "dataCenterId": "US-KS-2"
-}'
-```
-
-For complete API documentation and parameter details, see the [network volumes API reference](/api-reference/network-volumes/POST/networkvolumes).
-
-</Tab>
-
-</Tabs>
-
-## Network volumes for Serverless
-
-When attached to a Serverless endpoint, a network volume is mounted at `/Brightnode-volume` within the worker environment. This allows all workers on that endpoint to access shared data.
-
-### Attach to an endpoint
-
-To enable workers on an endpoint to use a network volume:
-
-1. Navigate to the [Serverless section](https://www.console.brightnode.cloud/serverless/user/endpoints) of the Brightnode console.
-2. Select an existing endpoint and click **Manage**, then select **Edit Endpoint**.
-3. In the endpoint configuration menu, scroll down and expand the **Advanced** section.
-4. Click **Network Volume** and select the network volume you want to attach to the endpoint.
-5. Configure any other fields as needed, then select **Save Endpoint**.
-
-Data from the network volume will be accessible to all workers for that endpoint from the `/Brightnode-volume` directory. Use this path to read and write shared data in your [handler function](/serverless/workers/handler-functions).
-
-<Warning>
-
-Writing to the same network volume from multiple endpoints or workers simultaneously may result in conflicts or data corruption. Ensure your application logic handles concurrent access appropriately for write operations.
-
-</Warning>
-
-### Benefits for Serverless
-
-Using network volumes with Serverless provides several advantages:
-
-- **Reduced cold starts**: Store large models or datasets on a network volume so workers can access them quickly without downloading on each cold start.
-- **Cost efficiency**: Network volume storage costs less than frequently re-downloading large files.
-- **Simplified data management**: Centralize your datasets and models for easier updates and management across multiple workers and endpoints.
+1. Open the [Storage page](https://console.brightnode.cloud/volumes) in the Brightnode console.
+2. Select **New Network Volume**.
+3. Choose the datacenter where the volume should live.
+4. Give the volume a descriptive name.
+5. Choose the size in GB.
+6. Select **Create Network Volume**.
 
 <Note>
-
-If you use network volumes with your Serverless endpoint, your deployments will be constrained to the datacenter where the volume is located. This may impact GPU availability and failover options.
-
+You can increase network volume size later, but you cannot decrease it.
 </Note>
 
-## Network volumes for Bnodes
+## Use a network volume with Bnodes
 
-When attached to a Bnode, a network volume replaces the Bnode's default volume disk and is typically mounted at `/workspace`.
+Attach the volume during Bnode creation so your machine starts with shared persistent storage available.
 
-<Note>
-Network volumes are only available for Bnodes in the Secure Cloud. For more information, see [Bnode types](/bnodes/overview#bnode-types).
-</Note>
+1. Go to the [Bnodes page](https://console.brightnode.cloud/bnodes).
+2. Start a new Bnode deployment.
+3. Select the network volume you want to attach.
+4. Finish the rest of the deployment flow.
 
-### Attach to a Bnode
+When attached to a Bnode, the volume is typically available at `/workspace`.
 
-Network volumes must be attached during Bnode deployment. They cannot be attached to a previously-deployed Bnode, nor can they be detached later without deleting the Bnode.
+## Access a network volume without a machine
 
-To deploy a Bnode with a network volume attached:
+Brightnode also provides an [S3-compatible API](/storage/s3-api) for network volumes. This is useful when you want to upload datasets, download artifacts, or automate file management without starting a Bnode first.
 
-1. Navigate to the [Bnodes section](https://www.console.brightnode.cloud/bnodes) of the Brightnode console.
-2. Select **Deploy**.
-3. Select **Network Volume** and choose the network volume you want to attach from the dropdown list.
-4. Select a GPU type. The system will automatically show which Bnodes are available to use with the selected network volume.
-5. Select a **Bnode Template**.
-6. If you wish to change where the volume mounts, select **Edit Template** and adjust the **Volume Mount Path**.
-7. Configure any other fields as needed, then select **Deploy On-Demand**.
+Use the S3-compatible API when you want to:
 
-Data from the network volume will be accessible to the Bnode from the volume mount path (default: `/workspace`). Use this directory to upload, download, and manipulate data that you want to share with other Bnodes.
+- Preload large datasets before attaching the volume to compute.
+- Sync files from CI or local development environments.
+- Manage files with standard S3 tools such as AWS CLI or Boto3.
 
-### Share data between Bnodes
+## Share data safely
 
-You can attach a network volume to multiple Bnodes, allowing them to share data seamlessly. Multiple Bnodes can read files from the same volume concurrently, but you should avoid writing to the same file simultaneously to prevent conflicts or data corruption.
-
-
-
-## Network volumes for Instant Clusters
-
-Network volumes for Instant Clusters work the same way as they do for Bnodes. They must be attached during cluster creation, and by default are mounted at `/workspace` within each bnode in the cluster.
-
-### Attach to an Instant Cluster
-
-To enable workers on an Instant Cluster to use a network volume:
-
-1. Navigate to the [Instant Clusters section](https://www.console.brightnode.cloud/cluster) of the Brightnode console.
-2. Click **Create Cluster**.
-3. Click **Network Volume** and select the network volume you want to attach to the cluster.
-4. Configure any other fields as needed, then click **Deploy Cluster**.
-
-## S3-compatible API
-
-Brightnode provides an [S3-compatible API](/storage/s3-api) that allows you to access and manage files on your network volumes directly, without needing to launch a Bnode or run a Serverless worker for file management. This is particularly useful for:
-
-- **Uploading large datasets or models** before launching compute resources.
-- **Managing files remotely** without maintaining an active connection.
-- **Automating data workflows** using standard S3 tools and libraries.
-- **Reducing costs** by avoiding the need to keep compute resources running for file management.
-- **Pre-populating volumes** to reduce worker initialization time and improve cold start performance.
-
-The S3-compatible API supports standard S3 operations including file uploads, downloads, listing, and deletion. You can use it with popular tools like the AWS CLI and Boto3 (Python).
-
-<Note>
-
-The S3-compatible API is currently available for network volumes in the following datacenters: `EUR-IS-1`, `EU-RO-1`, `EU-CZ-1`, `US-KS-2`, `US-CA-2`.
-
-</Note>
-
-
-## Migrate files
-
-You can migrate files between network volumes (including between data centers) using the following methods:
-
-### Using brightnodectl
-
-The simplest way to migrate files between network volumes is to use `brightnodectl send` and `receive` on two running Bnodes.
-
-Before you begin, you'll need:
-
-- A source network volume containing the data you want to migrate.
-- A destination network volume (which can be empty or contain existing data).
-
-<Steps>
-<Step title="Deploy Bnodes with network volumes attached">
-Deploy two Bnodes using the default Brightnode PyTorch template. Each Bnode should have one [network volume attached](#attach-to-a-bnode).
-
-1. Deploy the first Bnode in the source data center and attach the source network volume.
-2. Deploy the second Bnode in the target data center and attach the target network volume.
-3. Start the [web terminal](/bnodes/connect-to-a-bnode#web-terminal) in both Bnodes.
-</Step>
-
-<Step title="Open the source volume">
-Using your source Bnode's web terminal, navigate to the network volume directory (usually `/workspace`):
-
-```bash
-cd workspace
-```
-</Step>
-
-<Step title="Start the transfer">
-Use `brightnodectl send` to start the transfer. To transfer the entire volume:
-
-```bash
-brightnodectl send *
-```
-
-You can also specify specific files or directories instead of `*`.
-</Step>
-
-<Step title="Copy the receive command">
-After running the send command, copy the `receive` command from the output. It will look something like this:
-
-```bash
-brightnodectl receive 8338-galileo-collect-fidel
-```
-</Step>
-
-<Step title="Open the destination volume">
-Using your destination Bnode's web terminal, navigate to the network volume directory (usually `/workspace`):
-
-```bash
-cd workspace
-```
-</Step>
-
-<Step title="Receive your files">
-Paste and run the `receive` command you copied earlier:
-
-```bash
-brightnodectl receive 8338-galileo-collect-fidel
-```
-
-The transfer will begin and show progress as it copies files from the source to the destination volume.
-</Step>
-</Steps>
-
-For a visual walkthrough using JupyterLab, check out this video tutorial:
-
-<Frame>
-  <iframe width="900"
-  height="508"
-  src="https://www.youtube.com/embed/gnSLRrlBfcA" 
-  title="How to clone network volumes using brightnodectl" 
-  frameborder="0" 
-  allow="fullscreen; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-  referrerpolicy="strict-origin-when-cross-origin">
-  </iframe>
-</Frame>
-
-### Using rsync over SSH
-
-For faster migration speed and more reliability for large transfers, you can use `rsync` over SSH on two running Bnodes.
-
-Before you begin, you'll need:
-
-- A network volume in the source data center containing the data you want to migrate.
-- A network volume in the target data center (which can be empty or contain existing data).
-
-<Steps>
-<Step title="Deploy Bnodes with network volumes attached">
-Deploy two Bnodes using the default Brightnode PyTorch template. Each Bnode should have one [network volume attached](#attach-to-a-bnode).
-
-1. Deploy the first Bnode in the source data center and attach the source network volume.
-2. Deploy the second Bnode in the target data center and attach the target network volume.
-3. Start the [web terminal](/bnodes/connect-to-a-bnode#web-terminal) in both Bnodes.
-</Step>
-
-<Step title="Set up SSH keys on the source Bnode">
-On the source Bnode, install required packages and generate an SSH key pair:
-
-```bash
-apt update && apt install -y vim rsync && \
-ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N "" -q && \
-cat ~/.ssh/id_ed25519.pub
-```
-
-Copy the public key that appears in the terminal output.
-</Step>
-
-<Step title="Configure the destination Bnode">
-On the destination Bnode, install required packages and add the source Bnode's public key to `authorized_keys`:
-
-```bash
-apt update && apt install -y vim rsync && \
-ip=$(printenv BRIGHTNODE_PUBLIC_IP) && \
-port=$(printenv BRIGHTNODE_TCP_PORT_22) && \
-echo "rsync -avzP --inplace -e \"ssh -p $port\" /workspace/ root@$ip:/workspace" && \
-vi ~/.ssh/authorized_keys
-```
-
-In the editor that opens, paste the public key you copied from the source Bnode, then save and exit (press `Esc`, type `:wq`, and press `Enter`).
-
-The command above also displays the `rsync` command you'll need to run on the source Bnode. Copy this command for the next step.
-</Step>
-
-<Step title="Run the rsync command">
-On the source Bnode, run the `rsync` command from the previous step. If you didn't copy it, you can construct it manually using the destination Bnode's IP address and port number.
-
-```bash
-# Replace DESTINATION_PORT and DESTINATION_IP with values from the destination Bnode
-rsync -avzP --inplace -e "ssh -p DESTINATION_PORT" /workspace/ root@DESTINATION_IP:/workspace
-
-# Example:
-rsync -avzP --inplace -e "ssh -p 18598" /workspace/ root@157.66.254.13:/workspace
-```
-
-The `rsync` command displays progress as it transfers files. Depending on the size of your data, this may take some time.
-</Step>
-
-<Step title="Verify the transfer">
-After the `rsync` command completes, verify the data transfer by checking disk usage on both Bnodes:
-
-```bash
-du -sh /workspace
-```
-
-The destination Bnode should show similar disk usage to the source Bnode if all files transferred successfully.
-
-<Tip>
-You can run the `rsync` command multiple times if the transfer is interrupted. The `--inplace` flag ensures that `rsync` resumes from where it left off rather than starting over.
-</Tip>
-</Step>
-</Steps>
+Multiple Bnodes can read from the same volume, but concurrent writes to the same files can still cause conflicts. If your workflow writes to shared paths, add your own locking or job coordination.

@@ -1,0 +1,71 @@
+---
+title: "Models"
+description: "Browse model IDs, metadata, pricing, and compatibility for Brightnode hosted inference."
+sidebarTitle: "Models"
+---
+
+The Models catalog shows what you can call through Brightnode Router. Each model entry includes the model ID, modality, context length, pricing, and provider or hosting details you need before sending traffic.
+
+## Find model IDs
+
+Use the [Models page](https://console.brightnode.cloud/models) in the console, or query the API directly:
+
+```bash
+curl https://api.brightnode.cloud/v1/models \
+  -H "Authorization: Bearer $BRIGHTNODE_API_KEY"
+```
+
+Model IDs are passed directly in the `model` field of your request. They may include slashes, for example:
+
+- `meta-llama/Llama-3.3-70B-Instruct`
+- `mistralai/Devstral-Small-2507`
+- `Qwen/Qwen3-Embedding-8B`
+
+## Inspect a single model
+
+Use the model detail endpoint when you want richer metadata for one model:
+
+```bash
+curl https://api.brightnode.cloud/v1/models/meta-llama/Llama-3.3-70B-Instruct \
+  -H "Authorization: Bearer $BRIGHTNODE_API_KEY"
+```
+
+The detail response includes fields such as:
+
+- `modality` for the workload type, such as text or embedding.
+- `context_length` for the maximum supported context window.
+- `pricing_input` and `pricing_output` for token-based pricing.
+- `providers` for the backing provider or hosting source.
+- `license_class`, `self_hostable`, and residency metadata where available.
+
+## Choose the right model
+
+When comparing models, start with these questions:
+
+- Do you need chat generation, embeddings, or another modality?
+- What context length does your workload require?
+- Do latency or provider availability matter for this use case?
+- Do compliance or residency constraints limit your options?
+
+The console model detail pages surface this metadata directly and include copy-paste quickstarts for `curl`, Python, and TypeScript.
+
+## Use a model with Router
+
+```python
+from openai import OpenAI
+import os
+
+client = OpenAI(
+    base_url="https://api.brightnode.cloud/v1",
+    api_key=os.environ["BRIGHTNODE_API_KEY"],
+)
+
+response = client.chat.completions.create(
+    model="meta-llama/Llama-3.3-70B-Instruct",
+    messages=[{"role": "user", "content": "Summarize the latest deployment notes."}],
+)
+
+print(response.choices[0].message.content)
+```
+
+For the full request flow, see [Router](/router/overview).

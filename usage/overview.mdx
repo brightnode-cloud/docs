@@ -1,0 +1,36 @@
+---
+title: "Usage analytics"
+description: "Track requests, tokens, latency, and cost for Brightnode hosted inference."
+sidebarTitle: "Usage"
+---
+
+Use the [Usage page](https://console.brightnode.cloud/usage) in the Brightnode console to monitor hosted inference activity across your organization.
+
+## What you can track
+
+Usage analytics is focused on inference traffic and includes:
+
+- Request volume over time.
+- Input and output token usage.
+- Cost trends.
+- Latency percentiles.
+- Top models by traffic and spend.
+
+The console currently supports `24h`, `7d`, and `30d` views so you can inspect recent spikes or look at broader trends.
+
+## Why it matters
+
+Usage analytics helps you answer practical questions such as:
+
+- Which models are driving most of your spend?
+- Are latency patterns changing after a model switch?
+- Is traffic growing in a predictable way?
+- Which integrations should move to a different model or budget tier?
+
+## Recommended workflow
+
+1. Create separate [API keys](/get-started/api-keys) for each environment or service.
+2. Route traffic through [Router](/router/overview) with explicit model IDs.
+3. Review usage regularly to spot cost, performance, or adoption changes.
+
+If you need dedicated managed inference instead of the shared router path, see [Beams](/beams/overview).

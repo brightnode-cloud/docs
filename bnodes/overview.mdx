@@ -40,7 +40,7 @@ Every Bnode comes with a resizable **container disk** that houses the operating 
 
 **Volume disks** provide persistent storage that is preserved throughout the Bnode's lease, functioning like a dedicated hard drive. Data stored in the volume disk directory (`/workspace` by default) persists when you stop the Bnode, but is erased when the Bnode is deleted. 
 
-Optional [network volumes](/bnodes/storage/network-volumes) provide more flexible permanent storage that can be transferred between Bnodes, replacing the volume disk when attached. When using a Bnode with network volume attached, you can safely delete your Bnode without losing the data stored in your network volume directory (`/workspace` by default).
+Optional [network volumes](/storage/network-volumes) provide more flexible permanent storage that can be transferred between Bnodes, replacing the volume disk when attached. When using a Bnode with a network volume attached, you can safely delete your Bnode without losing the data stored in your network volume directory (`/workspace` by default).
 
 To learn more, see [Storage options](/bnodes/storage/types).
 
@@ -51,7 +51,6 @@ You can deploy Bnodes in several ways:
 - [From a template](https://docs.brightnode.io/bnodes/templates/overview): Pre-configured environments for quick setup of common workflows.
 - **Custom containers**: Pull from any compatible container registry such as Docker Hub, GitHub Container Registry, or Amazon ECR.
 - **Custom images**: Build and deploy your own container images.
-- **From Serverless repos**: Deploy any Serverless-compatible repository from the [Brightnode Hub](/hub/overview#deploy-as-a-bnode) directly as a Bnode, providing a cost-effective option for consistent workloads.
 
 <Note>
 
@@ -79,13 +78,13 @@ Once deployed, you can [connect to your Bnode](/bnodes/connect-to-a-bnode) throu
 
 - **SSH**: Direct [command-line access](/bnodes/configuration/use-ssh) for development and management.
 - **Web proxy**: HTTP access to [exposed web services](/bnodes/configuration/expose-ports) via URLs in the format `https://[bnode-id]-[port].brightnode.cloud`.
-- **API**: Programmatic access and control through the [Brightnode API](/api-reference/bnodes/POST/bnodes).
+- **Console and API keys**: Manage access from the Brightnode console and use scoped credentials where your workflow requires automation.
 - **Built-in services**: Pre-configured [utility services](/bnodes/utility-services) like JupyterLab, VS Code, and monitoring tools.
 - **VSCode/Cursor**: [Connect to your Bnode with VSCode or Cursor](/bnodes/configuration/connect-to-ide), working within your volume directory as if the files were stored on your local machine.
 
 ## Data transfer
 
-You can transfer data from your Bnode to [most major cloud providers](/bnodes/storage/cloud-sync), and to your local machine using the [Brightnode CLI](/brightnodectl/overview).
+You can transfer data from your Bnode to [most major cloud providers](/bnodes/storage/cloud-sync), and to your local machine with built-in tools such as SSH, SCP, rsync, and the browser-based file tools included in many templates.
 
 To learn more about all available options, see [Transfer files](/bnodes/storage/transfer-files).
 
@@ -95,7 +94,7 @@ Bnodes offer extensive customization to match your specific requirements.
 
 You can select your preferred [GPU type](/references/gpu-types) and quantity, adjust system disk size, and specify your container image.
 
-Additionally, you can configure custom start commands, set [environment variables](/bnodes/references/environment-variables), define [exposed HTTP/TCP ports](/bnodes/configuration/expose-ports), and implement various [storage configurations](bnodes/storage/types) to optimize your Bnode for your specific workload.
+Additionally, you can configure custom start commands, set environment variables, define [exposed HTTP/TCP ports](/bnodes/configuration/expose-ports), and implement various [storage configurations](/bnodes/storage/types) to optimize your Bnode for your specific workload.
 
 ## Bnode types
 

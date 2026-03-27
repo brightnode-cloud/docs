@@ -47,7 +47,18 @@
             "pages": [
               "overview",
               "get-started",
-              "get-started/concepts"
+              "get-started/products",
+              "get-started/concepts",
+              "get-started/api-keys"
+            ]
+          },
+          {
+            "group": "Inference",
+            "pages": [
+              "router/overview",
+              "models/overview",
+              "usage/overview",
+              "beams/overview"
             ]
           },
           {
@@ -77,7 +88,8 @@
           {
             "group": "Storage",
             "pages": [
-              "storage/network-volumes"
+              "storage/network-volumes",
+              "storage/s3-api"
             ]
           },
           {

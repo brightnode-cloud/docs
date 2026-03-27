@@ -1,0 +1,113 @@
+---
+title: "Router"
+description: "Use Brightnode's OpenAI-compatible inference endpoint with one API key and one base URL."
+sidebarTitle: "Router"
+---
+
+Router is Brightnode's hosted inference entrypoint. It gives you a single OpenAI-compatible API for the models Brightnode exposes through the shared catalog, so you can swap models without changing SDKs or reworking your application.
+
+<Note>
+Use `https://api.brightnode.cloud/v1` as the base URL for Router requests.
+</Note>
+
+## Quickstart
+
+Before you send traffic, create an [API key](/get-started/api-keys) with the `Inference` scope.
+
+### List available models
+
+```bash
+curl https://api.brightnode.cloud/v1/models \
+  -H "Authorization: Bearer $BRIGHTNODE_API_KEY"
+```
+
+### Send a chat completion
+
+```bash
+curl https://api.brightnode.cloud/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $BRIGHTNODE_API_KEY" \
+  -d '{
+    "model": "meta-llama/Llama-3.3-70B-Instruct",
+    "messages": [
+      { "role": "user", "content": "Give me three ideas for a launch email." }
+    ],
+    "max_tokens": 256
+  }'
+```
+
+### Generate embeddings
+
+```bash
+curl https://api.brightnode.cloud/v1/embeddings \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $BRIGHTNODE_API_KEY" \
+  -d '{
+    "model": "Qwen/Qwen3-Embedding-8B",
+    "input": "Brightnode hosted inference"
+  }'
+```
+
+## Use Router with OpenAI SDKs
+
+Router is designed to be drop-in compatible with OpenAI SDKs when you set the base URL to `https://api.brightnode.cloud/v1`.
+
+<CodeGroup>
+```python Python
+from openai import OpenAI
+import os
+
+client = OpenAI(
+    base_url="https://api.brightnode.cloud/v1",
+    api_key=os.environ["BRIGHTNODE_API_KEY"],
+)
+
+response = client.chat.completions.create(
+    model="meta-llama/Llama-3.3-70B-Instruct",
+    messages=[{"role": "user", "content": "Hello from Brightnode"}],
+    max_tokens=128,
+)
+
+print(response.choices[0].message.content)
+```
+
+```typescript TypeScript
+import OpenAI from "openai";
+
+const client = new OpenAI({
+  baseURL: "https://api.brightnode.cloud/v1",
+  apiKey: process.env.BRIGHTNODE_API_KEY,
+});
+
+const response = await client.chat.completions.create({
+  model: "meta-llama/Llama-3.3-70B-Instruct",
+  messages: [{ role: "user", content: "Hello from Brightnode" }],
+  max_tokens: 128,
+});
+
+console.log(response.choices[0].message.content);
+```
+</CodeGroup>
+
+## Request behavior
+
+Router supports the standard hosted inference paths:
+
+- `GET /v1/models` to list available models.
+- `GET /v1/models/{model_id}` to inspect a single model.
+- `POST /v1/chat/completions` for chat-style generation.
+- `POST /v1/completions` for legacy text completion clients.
+- `POST /v1/embeddings` for embedding workloads.
+
+If a requested model is still waking up, Router may respond with `503` and a `Retry-After` header. In that case, retry after the suggested delay.
+
+## When to use Router
+
+Use Router when you want:
+
+- One endpoint across multiple hosted models.
+- Standard OpenAI SDK compatibility.
+- Centralized API key management.
+- Inference analytics in the Brightnode console.
+
+If you need deployment-level control instead of the shared hosted endpoint, see [Beams](/beams/overview).

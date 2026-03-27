@@ -5,7 +5,19 @@ description: "Key concepts and terminology for understanding Brightnode's platfo
 
 ## [Brightnode console](https://console.brightnode.cloud)
 
-The web interface for managing your compute resources, account, teams, and billing.
+The web interface for managing inference, compute, storage, API keys, usage, billing, and team resources.
+
+## [Router](/router/overview)
+
+Brightnode's hosted inference entrypoint. Router gives you one OpenAI-compatible base URL for the models Brightnode makes available through the shared catalog.
+
+## [Model](/models/overview)
+
+A model is an inference target you can call through Router or deploy through Beams. Model IDs are passed directly in your API request, and may include slashes such as `meta-llama/Llama-3.3-70B-Instruct`.
+
+## [API key](/get-started/api-keys)
+
+A Brightnode API key is a scoped credential for programmatic access. Current key scopes are centered on `Inference` and `Deployments`.
 
 ## [Bnode](/bnodes/overview)
 
@@ -13,11 +25,15 @@ A dedicated GPU or CPU instance for containerized AI/ML workloads, such as train
 
 ## [Network volume](/storage/network-volumes)
 
-Persistent storage that exists independently of your other compute resources and can be attached to multiple Bnodes or Serverless endpoints to share data between machines.
+Persistent storage that exists independently of your other compute resources. Network volumes are designed for durable datasets, checkpoints, and shared assets across Brightnode workflows.
 
-## [Brightnode Hub](/hub/overview)
+## [Beams](/beams/overview)
 
-A repository for discovering, deploying, and sharing preconfigured AI projects optimized for Brightnode.
+The preview deployment workflow for managed inference models. Beams is intended for cases where you need deployment-level control instead of the shared hosted inference router.
+
+## [Usage analytics](/usage/overview)
+
+The console views for request count, token usage, latency, and cost across your inference traffic.
 
 ## Container
 

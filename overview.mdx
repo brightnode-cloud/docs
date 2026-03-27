@@ -1,45 +1,66 @@
 ---
 title: "Welcome to Brightnode"
-description: "Explore our guides and examples to deploy your AI/ML application on Brightnode."
+description: "Learn how to run dedicated compute, hosted inference, and shared storage on Brightnode."
 sidebarTitle: "Introduction"
 ---
 
-Brightnode is a cloud computing platform built for AI, machine learning, and general compute needs. Whether you're running deep learning models, training AI, or deploying cloud-based applications, Brightnode provides scalable, high-performance GPU and CPU resources to power your workloads.
+Brightnode gives you dedicated compute, hosted inference, and shared storage for AI workloads. Use Bnodes when you want full control over the machine, and use the hosted inference stack when you want a single OpenAI-compatible endpoint for model access.
 
 ## Get started
 
-If you're new to Brightnode, start here to learn the essentials and deploy your first GPU.
+If you're new to Brightnode, start here for the core product concepts and account setup flow.
 
 <CardGroup>
   <Card title="Quickstart" icon="bolt" iconType="solid" href="/get-started">
-    Create an account, deploy your first GPU Bnode, and use it to execute code.
+    Create an account, deploy your first Bnode, and connect to it.
+  </Card>
+  <Card title="Product overview" icon="layer-group" iconType="solid" href="/get-started/products">
+    Compare Router, Models, Beams, Bnodes, and storage.
   </Card>
   <Card title="Concepts" icon="book" iconType="solid" href="/get-started/concepts">
-    Learn about the key concepts and terminology for the Brightnode platform.
+    Learn the key platform terms used throughout the docs and console.
   </Card>
-  <Card title="Create an API key" icon="key" iconType="solid">
-    Create API keys to manage your access to Brightnode resources. _Coming soon_
-  </Card>
-  <Card title="Choose a workflow" icon="wrench" iconType="solid">
-    Explore various methods for accessing and managing Brightnode resources. _Coming soon_
+  <Card title="API keys" icon="key" iconType="solid" href="/get-started/api-keys">
+    Create scoped API keys for inference and deployment workflows.
   </Card>
 </CardGroup>
 
-## Bnodes
+## Inference
 
-Bnodes give you dedicated GPU or CPU instances for containerised AI/ML workloads. Bnodes are billed by the minute and stay available as long as you keep them running, making them perfect for development, training, and workloads that need continuous access.
+Brightnode's hosted inference experience is built around a shared router, a model catalog, scoped API keys, and usage analytics.
 
 <CardGroup>
-  <Card title="Introduction" icon="microchip" iconType="solid" href="/bnodes/overview">
-    Understand the components of a Bnode and options for configuration.
+  <Card title="Router" icon="globe" iconType="solid" href="/router/overview">
+    Use one OpenAI-compatible endpoint across the Brightnode model catalog.
   </Card>
-  <Card title="Pricing" icon="dollar-sign" iconType="solid" href="/bnodes/pricing">
-    Learn about Bnode pricing options and how to optimise your costs.
+  <Card title="Models" icon="brain" iconType="solid" href="/models/overview">
+    Browse available model IDs, metadata, pricing, and quickstarts.
   </Card>
-  <Card title="Choose a Bnode" icon="server" iconType="solid" href="/bnodes/choose-a-bnode">
-    Learn how to choose the right Bnode for your workload.
+  <Card title="Usage" icon="chart-line" iconType="solid" href="/usage/overview">
+    Track requests, tokens, latency, and cost in the console.
   </Card>
-  ## 
+  <Card title="Beams preview" icon="wand-magic-sparkles" iconType="solid" href="/beams/overview">
+    Learn how preview model deployments fit into the inference stack.
+  </Card>
+</CardGroup>
+
+## Compute and storage
+
+Use Bnodes when you need full environment control, persistent sessions, and custom containers. Use network volumes when you want portable storage that survives machine lifecycles.
+
+<CardGroup>
+  <Card title="Bnodes" icon="server" iconType="solid" href="/bnodes/overview">
+    Launch dedicated GPU or CPU machines for training, experimentation, and long-running services.
+  </Card>
+  <Card title="Network volumes" icon="hard-drive" iconType="solid" href="/storage/network-volumes">
+    Keep data persistent across Bnodes and shared workflows.
+  </Card>
+  <Card title="S3-compatible API" icon="database" iconType="solid" href="/storage/s3-api">
+    Upload and manage network volume data without starting a machine.
+  </Card>
+  <Card title="Utility services" icon="toolbox" iconType="solid" href="/bnodes/utility-services">
+    Use built-in tools such as JupyterLab, VS Code Server, and vLLM.
+  </Card>
 </CardGroup>
 
 ## Support

@@ -1,55 +1,47 @@
 ---
 title: "Manage API keys"
-description: "Learn how to create, edit, and disable Brightnode API keys."
+description: "Create scoped Brightnode API keys for inference and deployment workflows."
 ---
 
-<Note>
-
-Legacy API keys generated before November 11, 2024 have either Read/Write or Read Only access to GraphQL based on what was set for that key. All legacy keys have full access to AI API. To improve security, generate a new key with **Restricted** permission and select the minimum permission needed for your use case.
-
-</Note>
+Brightnode API keys are used for programmatic access to hosted inference and deployment workflows. Keys are created in the console, start with the `bn-` prefix, and should be treated like passwords.
 
 ## Create an API key
 
 Follow these steps to create a new Brightnode API key:
 
-1. In the Brightnode console, navigate to the [Settings page](https://www.console.brightnode.cloud/user/settings).
-
-2. Expand the **API Keys** section and select **Create API Key**.
-
-3. Give your key a name and set its permissions (**All**, **Restricted**, or **Read Only**). If you choose **Restricted**, you can customize access for each Brightnode API:
-
-   * **None**: No access
-   * **Restricted**: Customize access for each of your [Serverless endpoints](/serverless/overview). (Default: None.)
-   * **Read/Write**: Full access to your endpoints.
-   * **Read Only**: Read access without write access.
-
-4. Select **Create**, then select your newly-generated key to copy it to your clipboard.
+1. In the Brightnode console, open the [API Keys page](https://console.brightnode.cloud/api-keys).
+2. Select **Create Key**.
+3. Give the key a descriptive name such as `production-router` or `staging-deployments`.
+4. Select one or both available scopes:
+   - `Inference` for Router and model API calls.
+   - `Deployments` for deployment-oriented workflows.
+5. Optionally set an expiry date.
+6. Select **Create Key**, then copy the secret value immediately.
 
 <Warning>
-
-Brightnode does not store your API key, so you may wish to save it elsewhere (e.g., in your password manager, or in a GitHub secret). Treat your API key like a password and don't share it with anyone.
-
+Brightnode only shows the full API key once. Store it in your secret manager or environment configuration before closing the dialog.
 </Warning>
 
-## Edit API key permissions
+## Scopes
 
-To edit an API key:
+Use the smallest scope that fits your integration:
 
-1. Navigate to the [Settings page](https://www.console.brightnode.cloud/user/settings).
-2. Under **API Keys**, select the pencil icon for the key you wish to update
-3. Update the key with your desired permissions, then select **Update**.
+- `Inference`: Call the hosted inference API, including `/v1/models`, `/v1/chat/completions`, and `/v1/embeddings`.
+- `Deployments`: Manage deployment workflows intended for model deployment use cases.
 
-## Enable/disable an API key
+If you only need hosted inference, create an inference-only key and keep deployment access separate.
 
-To enable/disable an API key:
+## Use your API key
 
-1. Navigate to the [Settings page](https://www.console.brightnode.cloud/user/settings).
-2. Under **API Keys**, select the toggle for the API key you wish to enable/disable, then select **Yes** in the confirmation modal.
+Use the key as a bearer token:
 
-## Delete an API key
+```bash
+curl https://api.brightnode.cloud/v1/models \
+  -H "Authorization: Bearer $BRIGHTNODE_API_KEY"
+```
 
-To delete an API key:
+You can also use the same key with OpenAI SDKs by setting `base_url` to `https://api.brightnode.cloud/v1`. For end-to-end examples, see [Router](/router/overview) and [Models](/models/overview).
 
-1. From the console, select **Settings**.
-2. Under **API Keys**, select the trash can icon and select **Revoke Key** in the confirmation modal.
+## Rotate or revoke keys
+
+Review your keys regularly and revoke unused credentials from the [API Keys page](https://console.brightnode.cloud/api-keys). For production systems, prefer separate keys per environment or service so that rotation and incident response stay simple.

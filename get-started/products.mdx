@@ -1,36 +1,43 @@
 ---
-title: "Brightnode product overview"
+title: "Product overview"
 sidebarTitle: "Product overview"
-description: "Explore Brightnode's major offerings and find the right solution for your workload."
+description: "Choose the right Brightnode product for inference, compute, and storage."
 ---
 
-Brightnode offers cloud computing resources for AI and machine learning workloads. You can choose from instant GPUs for development, auto-scaling Serverless computing, pre-deployed AI models, or multi-bnode clusters for distributed training.
+Brightnode offers dedicated compute, hosted inference, and shared storage for AI workloads. The current public product surface is built around `Router`, `Models`, `Beams`, `Bnodes`, and `Network volumes`.
 
-## [Serverless](/serverless/overview)
+<Note>
+Some older docs and examples may still mention `Serverless`, `Hub`, or `Public Endpoints`. In the current product, those ideas map most closely to `Router`, `Models`, and `Beams`.
+</Note>
 
-Serverless provides pay-per-second computing with automatic scaling for production AI workloads. You only pay for actual compute time when your code runs, with no idle costs, making Serverless ideal for variable workloads and cost-efficient production deployments.
+## [Router](/router/overview)
+
+Router gives you a single OpenAI-compatible endpoint for Brightnode-hosted inference. You authenticate with a Brightnode API key, choose a model ID, and use standard OpenAI SDKs or raw HTTP calls.
+
+## [Models](/models/overview)
+
+Models is the catalog of model IDs available through the hosted inference API. It helps you discover pricing, context length, modality, provider health, and quickstart examples before you send traffic.
+
+## [Beams](/beams/overview)
+
+Beams is the preview path for managed model deployments. It is intended for cases where you want dedicated inference capacity and more control over deployment behavior than the shared router provides.
 
 ## [Bnodes](/bnodes/overview)
 
-Bnodes give you dedicated GPU or CPU instances for containerized workloads. Bnodes are billed by the minute and stay available as long as you keep them running, making them perfect for development, training, and workloads that need continuous access.
+Bnodes give you dedicated GPU or CPU machines with full control over the environment. They are the right fit for training, experiments, notebooks, custom containers, and long-running workloads.
 
-## [Public Endpoints](/hub/public-endpoints)
+## [Network volumes](/storage/network-volumes)
 
-Public Endpoints provide instant API access to pre-deployed AI models for image, video, and text generation without any setup. You only pay for what you generate, making it easy to integrate AI into your applications without managing infrastructure.
-
-## [Instant Clusters](/instant-clusters)
-
-Instant Clusters deliver fully managed multi-bnode compute clusters for large-scale distributed workloads. With high-speed networking between bnodes, you can run multi-bnode training, fine-tune large language models, and handle other tasks that require multiple GPUs working in parallel.
-
+Network volumes provide portable persistent storage for datasets, checkpoints, and shared assets. They work especially well with Bnodes and can also be managed directly through the S3-compatible API.
 
 ## Choosing the right option
 
-Choose **Serverless** when you need auto-scaling for inference workloads with variable traffic. Pay-per-second billing minimizes costs, and automatic worker management handles unpredictable workloads and API services efficiently.
+Choose **Router** when you want the fastest path to production inference with a single API surface and minimal operational work.
 
-Choose **Bnodes** when you need full control for development and experimentation. They work best for training models, iterative development, and custom workflows that require persistent storage and long-running processes.
+Choose **Models** when you are deciding which hosted model to call through Router and need to compare metadata, context length, pricing, or modality.
 
-Choose **Public Endpoints** when you want to quickly integrate AI capabilities without managing infrastructure. They're ideal for prototyping and production applications that use popular AI models with simple pay-per-use pricing.
+Choose **Beams** when you need managed model deployments and are comfortable working with a preview product.
 
-Choose **Instant Clusters** when your workload requires multiple GPUs across multiple bnodes. They provide the infrastructure for training or fine-tuning large language models and other distributed computing tasks with high-speed networking.
+Choose **Bnodes** when you need full machine control, custom images, or persistent interactive environments.
 
-You can combine these products as well. For example, use Bnodes for development and experimentation, Serverless for production inference, and Instant Clusters for large-scale training runs.
+Choose **Network volumes** when you need portable shared storage that survives the lifecycle of individual machines.
