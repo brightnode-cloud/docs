@@ -1,0 +1,101 @@
+---
+title: "Auto Routing"
+description: "Let Brightnode pick the best model for your request automatically."
+sidebarTitle: "Auto Routing"
+---
+
+Instead of choosing a specific model, you can use a **virtual model ID** and let the platform select the optimal model for each request. This is useful when you want the best result without needing to track which models are available.
+
+## Virtual model IDs
+
+Pass one of these as the `model` field in your request:
+
+| Model ID    | What it does                                                                 |
+| ----------- | ---------------------------------------------------------------------------- |
+| `auto`      | Classifies your request complexity and picks the best model for that tier    |
+| `cheapest`  | Picks the lowest-cost model that can handle your request                     |
+| `fastest`   | Picks the smallest (fastest) model that can handle your request              |
+| `best`      | Always picks the most capable model available                                |
+
+## Quickstart
+
+```bash
+curl https://api.brightnode.cloud/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $BRIGHTNODE_API_KEY" \
+  -d '{
+    "model": "auto",
+    "messages": [
+      { "role": "user", "content": "Explain recursion in one sentence." }
+    ]
+  }'
+```
+
+The platform will select the best model for this request and route it transparently. The response is identical to a normal chat completion.
+
+## How `auto` works
+
+The `auto` strategy classifies your request into one of three quality tiers based on signals like:
+
+- **Message length** — longer prompts suggest more complex tasks
+- **Multi-turn depth** — conversations with many messages benefit from stronger models
+- **Code blocks** — presence of code suggests technical tasks
+- **System prompt complexity** — detailed instructions indicate sophisticated use
+- **Keywords** — terms like "analyze", "compare", "step by step", and "critique" signal complex reasoning
+
+| Tier      | When it's used                          | Example models                        |
+| --------- | --------------------------------------- | ------------------------------------- |
+| Economy   | Short, simple requests                  | Llama 3.1 8B, Claude Haiku, Gemma 4B |
+| Standard  | Moderate complexity, basic code tasks   | Llama 70B, Claude Sonnet, Qwen 32B   |
+| Premium   | Complex reasoning, long context, analysis | Claude Opus, DeepSeek R1, Llama 405B |
+
+## Combining with provider hints
+
+You can combine virtual model IDs with the `provider` field to restrict which backends are considered:
+
+```bash
+curl https://api.brightnode.cloud/v1/chat/completions \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $BRIGHTNODE_API_KEY" \
+  -d '{
+    "model": "cheapest",
+    "provider": "brightnode",
+    "messages": [
+      { "role": "user", "content": "Hello" }
+    ]
+  }'
+```
+
+This picks the cheapest model from Brightnode's self-hosted infrastructure only.
+
+## Response headers
+
+When auto-routing is used, two additional headers are included in the response:
+
+| Header                          | Description                              |
+| ------------------------------- | ---------------------------------------- |
+| `x-brightnode-requested-model`  | The virtual model ID you sent (e.g., `auto`) |
+| `x-brightnode-routed-model`     | The concrete model that was selected     |
+
+The response body's `model` field also reflects the concrete model that served the request.
+
+## Pricing
+
+You are charged at the rate of whichever concrete model is selected. There is no additional fee for using auto-routing. Pricing for each model is listed on the [Models](/models/overview) page.
+
+## Discovery
+
+Virtual model IDs appear in the `GET /v1/models` response with `is_virtual: true` in their metadata, so your application can discover them programmatically:
+
+```bash
+curl https://api.brightnode.cloud/v1/models \
+  -H "Authorization: Bearer $BRIGHTNODE_API_KEY" \
+  | jq '.data[] | select(.metadata.is_virtual == true) | .id'
+```
+
+```
+"auto"
+"cheapest"
+"fastest"
+"best"
+```
