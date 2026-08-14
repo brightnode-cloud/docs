@@ -1,47 +1,41 @@
-!(function (t, e) {
-				var o, n, p, r;
-				e.__SV ||
-					((window.posthog = e),
-					(e._i = []),
-					(e.init = function (i, s, a) {
-						function g(t, e) {
-							var o = e.split(".");
-							2 == o.length && ((t = t[o[0]]), (e = o[1])),
-								(t[e] = function () {
-									t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
-								});
-						}
-						((p = t.createElement("script")).type = "text/javascript"),
-							(p.crossOrigin = "anonymous"),
-							(p.async = !0),
-							(p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js"),
-							(r = t.getElementsByTagName("script")[0]).parentBnode.insertBefore(p, r);
-						var u = e;
-						for (
-							void 0 !== a ? (u = e[a] = []) : (a = "posthog"),
-								u.people = u.people || [],
-								u.toString = function (t) {
-									var e = "posthog";
-									return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e;
-								},
-								u.people.toString = function () {
-									return u.toString(1) + ".people (stub)";
-								},
-								o =
-									"init Ie Ts Ms Ee Es Rs capture Ge calculateEventProperties Os register register_once register_for_session unregister unregister_for_session js getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey canRenderSurveyAsync identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty Ds Fs createPersonProfile Ls Ps opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing Cs debug I As getPageViewId captureTraceFeedback captureTraceMetric".split(
-										" ",
-									),
-								n = 0;
-							n < o.length;
-							n++
-						)
-							g(u, o[n]);
-						e._i.push([i, s, a]);
-					}),
-					(e.__SV = 1));
-			})(document, window.posthog || []);
-			posthog.init("phc_1ku7R949l2D5wsXgMCBNSRIVRMiAn8FyKFNoJWDCcOb", {
-				api_host: "https://us.i.posthog.com",
-				defaults: "2025-05-24",
-				person_profiles: "identified_only", // or 'always' to create profiles for anonymous users as well
-			});
+/**
+ * Registers the shared Nexel taxonomy on the docs site's PostHog instance.
+ *
+ * This file does NOT load or init PostHog. Two things already do:
+ *   - Mintlify's native integration (integrations.posthog in docs.json)
+ *   - the PostHog custom HTML tag in GTM-5TC97QSW
+ * Both carry the brightnode project key. A third init here is what previously
+ * broke the docs site: this file used to run its own loader snippet against a
+ * foreign project key, and a find-and-replace had corrupted `parentNode` into
+ * `parentBnode` inside it. That threw before the real library could load, but
+ * only after claiming `window.posthog` and setting `__SV`, so every later
+ * init — Mintlify's and GTM's — short-circuited onto the broken stub and threw
+ * too. docs.brightnode.cloud was sending nothing to PostHog at all.
+ *
+ * `brand` is required on every event by the portfolio taxonomy so one PostHog
+ * org stays separable per brand. register() makes it a super-property, so it
+ * rides on autocapture and pageviews alike.
+ */
+(function () {
+  var BRAND = "brightnode";
+  var SITE_AREA = "docs";
+  var POLL_MS = 100;
+  var MAX_ATTEMPTS = 50; // give the loader 5s, then stop
+
+  function register() {
+    var ph = window.posthog;
+    if (!ph || typeof ph.register !== "function") return false;
+    ph.register({ brand: BRAND, site_area: SITE_AREA });
+    return true;
+  }
+
+  // register() is safe to call on PostHog's pre-load stub — it queues — so the
+  // only thing worth waiting for is the stub existing.
+  if (register()) return;
+
+  var attempts = 0;
+  var timer = setInterval(function () {
+    attempts += 1;
+    if (register() || attempts >= MAX_ATTEMPTS) clearInterval(timer);
+  }, POLL_MS);
+})();
